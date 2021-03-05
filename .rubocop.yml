@@ -38,7 +38,7 @@ Style/HashTransformValues:
 Style/Documentation:
   Enabled: false
 
-# コントローラのメソッド名に「set_」「get_」を許可
+# コントローラのみメソッド名に「set_」「get_」を許可
 Naming/AccessorMethodName:
   Exclude:
     - "app/controllers/**/*"
