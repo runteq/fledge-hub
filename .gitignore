@@ -14,6 +14,9 @@
 !/log/.keep
 !/tmp/.keep
 
+# Ignore development files
+/config/environments/development.local.rb
+
 # Ignore pidfiles, but keep the directory.
 /tmp/pids/*
 !/tmp/pids/
