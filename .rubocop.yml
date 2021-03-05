@@ -1,0 +1,58 @@
+# This file overrides https://github.com/bbatsov/rubocop/blob/master/config/default.yml
+
+require:
+  - rubocop-performance
+  - rubocop-rails
+
+AllCops:
+  Exclude:
+    - "tmp/**/*"
+    - "vendor/**/*"
+    - "db/**/*"
+    - "bin/**/*"
+    - "spec/**/*"
+    - "node_modules/**/*"
+  DisplayCopNames: true
+
+# 日本語でのコメントを許可
+Style/AsciiComments:
+  Enabled: false
+
+# Admin::BaseControllerのような書き方を許可
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+# frozen_string_literal: trueはなくていい
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+# each_key, value, transform_keys, valueを使用する
+Style/HashEachMethods:
+  Enabled: true
+Style/HashTransformKeys:
+  Enabled: true
+Style/HashTransformValues:
+  Enabled: true
+
+# クラスにコメントを残さない
+Style/Documentation:
+  Enabled: false
+
+# コントローラのメソッド名に「set_」「get_」を許可
+Naming/AccessorMethodName:
+  Exclude:
+    - "app/controllers/**/*"
+
+# 一行の長さは100字まで。コメントは制限しない
+Metrics/LineLength:
+  Max: 100
+  IgnoredPatterns: ['\A#']
+
+# メソッドの行数を20行までにする
+Metrics/MethodLength:
+  CountComments: false
+  Max: 20
+
+# ABC sizeは緩めにする
+Metrics/AbcSize:
+  Max: 30 # default 15
