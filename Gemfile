@@ -21,6 +21,7 @@ gem 'jbuilder', '~> 2.7'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 gem 'rails-i18n'
+gem 'slim-rails'
 
 group :development, :test do
   gem 'bullet'
