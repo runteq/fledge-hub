@@ -39,6 +39,8 @@ group :development do
   gem 'rubocop-rails', require: false
   gem 'spring'
   gem 'web-console', '>= 4.1.0'
+  gem 'rspec-rails'
+  gem 'factory_bot_rails'
 end
 
 group :test do
