@@ -13,6 +13,12 @@ AllCops:
     - "spec/**/*"
     - "node_modules/**/*"
   DisplayCopNames: true
+  DisplayStyleGuide: true
+  NewCops: enable
+
+# Gemの並び順は任意にする
+Bundler/OrderedGems:
+  Enabled: false
 
 # 日本語でのコメントを許可
 Style/AsciiComments:
@@ -44,15 +50,15 @@ Naming/AccessorMethodName:
     - "app/controllers/**/*"
 
 # 一行の長さは100字まで。コメントは制限しない
-Metrics/LineLength:
+Layout/LineLength:
   Max: 100
   IgnoredPatterns: ['\A#']
+
+# ABC sizeは緩めにする
+Metrics/AbcSize:
+  Max: 30 # default 15
 
 # メソッドの行数を20行までにする
 Metrics/MethodLength:
   CountComments: false
   Max: 20
-
-# ABC sizeは緩めにする
-Metrics/AbcSize:
-  Max: 30 # default 15
