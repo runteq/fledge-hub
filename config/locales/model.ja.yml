@@ -1,0 +1,12 @@
+ja:
+  activerecord:
+    # User.model_name.human
+    models:
+      user: ユーザー
+    # User.human_attributes_name(:name)
+    attributes:
+      id: ID
+      created_at: 作成日時
+      updated_at: 更新日時
+      user:
+        name: 名前
