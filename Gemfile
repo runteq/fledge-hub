@@ -42,6 +42,7 @@ end
 
 group :test do
   gem 'capybara', '>= 3.26'
+  gem 'rspec_junit_formatter'
   gem 'selenium-webdriver'
   gem 'webdrivers'
 end
