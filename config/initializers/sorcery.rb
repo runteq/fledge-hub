@@ -136,8 +136,8 @@ Rails.application.config.sorcery.configure do |config|
   # config.instagram.user_info_mapping = {:email => "username"}
   # config.instagram.access_permissions = ["basic", "public_content", "follower_list", "comments", "relationships", "likes"]
   #
-  config.github.key = ""
-  config.github.secret = ""
+  config.github.key = Rails.application.credentials.config[:sorcery][:github][:client_id]
+  config.github.secret = Rails.application.credentials.config[:sorcery][:github][:client_secret]
   config.github.callback_url = "http://127.0.0.1:3000/oauth/callback?provider=github"
   config.github.user_info_mapping = { display_name: 'name', email: 'email', screen_name: 'login' }
   config.github.scope = "user:email"
