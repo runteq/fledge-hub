@@ -41,3 +41,9 @@ yarn-debug.log*
 
 # Ignore spec/examples
 /spec/examples.txt
+
+/config/credentials/development.key
+
+/config/credentials/test.key
+
+/config/credentials/production.key
