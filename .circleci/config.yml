@@ -69,6 +69,10 @@ jobs:
       - run: bundle exec bin/webpack
 
       - run:
+        name: check FactoryBot validity
+        command: RAILS_ENV=test bundle exec rails factory_bot:lint
+
+      - run:
           name: run rspec
           command: |
             bundle exec rspec --profile 10 \
