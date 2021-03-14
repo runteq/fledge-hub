@@ -53,6 +53,8 @@ Naming/AccessorMethodName:
 Layout/LineLength:
   Max: 100
   IgnoredPatterns: ['\A#']
+  Exclude:
+    - "config/initializers/*"
 
 # ABC sizeは緩めにする
 Metrics/AbcSize:
