@@ -20,6 +20,7 @@ gem 'sorcery'
 
 group :development, :test do
   gem 'bullet'
+  gem 'factory_bot_rails'
   gem 'pry-byebug'
   gem 'pry-rails'
 end
@@ -27,7 +28,6 @@ end
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'factory_bot_rails'
   gem 'listen'
   gem 'rack-mini-profiler'
   gem 'rails_best_practices'
