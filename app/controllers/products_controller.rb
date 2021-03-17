@@ -1,11 +1,10 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: %i[show edit update destroy]
-
   def index
     @products = Product.all
   end
 
   def show
+    @product = Product.find(params[:id])
   end
 
   def new
@@ -13,12 +12,13 @@ class ProductsController < ApplicationController
   end
 
   def edit
+    @product = current_user.products.find(params[:id])
   end
 
   def create
-    @product = Product.new(product_params)
-
-    if @product.save
+    @product = current_user.products.build(product_params)
+    if @product.valid?
+      current_user.products.create(product_params)
       redirect_to @product, notice: 'Product was successfully created.'
     else
       render :new
@@ -26,6 +26,7 @@ class ProductsController < ApplicationController
   end
 
   def update
+    @product = current_user.products.find(params[:id])
     if @product.update(product_params)
       redirect_to @product, notice: 'Product was successfully updated.'
     else
@@ -34,15 +35,12 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    @product.destroy
+    @product = current_user.products.find(params[:id])
+    @product.destroy!
     redirect_to products_url, notice: 'Product was successfully destroyed.'
   end
 
   private
-
-  def set_product
-    @product = Product.find(params[:id])
-  end
 
   def product_params
     params.require(:product).permit(:title, :description, :url, :sourse_url, :released_on)
