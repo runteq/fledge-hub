@@ -11,6 +11,11 @@
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #
+# Indexes
+#
+#  index_users_on_email        (email) UNIQUE
+#  index_users_on_screen_name  (screen_name) UNIQUE
+#
 class User < ApplicationRecord
   authenticates_with_sorcery!
 

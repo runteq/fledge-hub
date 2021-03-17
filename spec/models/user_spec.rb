@@ -11,6 +11,11 @@
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #
+# Indexes
+#
+#  index_users_on_email        (email) UNIQUE
+#  index_users_on_screen_name  (screen_name) UNIQUE
+#
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
