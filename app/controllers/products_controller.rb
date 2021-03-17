@@ -1,4 +1,6 @@
 class ProductsController < ApplicationController
+  before_action :require_login, only: %i[new edit create update destroy]
+
   def index
     @products = Product.all
   end
@@ -16,6 +18,7 @@ class ProductsController < ApplicationController
   end
 
   def create
+    # 一対多みたいな書き方をしている。user複数のときどうするかは後々
     @product = current_user.products.build(product_params)
     if @product.valid?
       current_user.products.create(product_params)
