@@ -6,7 +6,6 @@ ruby '3.0.0'
 gem 'rails', '~> 6.1.3'
 
 gem 'bootsnap', require: false
-gem 'jbuilder'
 gem 'mysql2'
 gem 'puma'
 gem 'sass-rails'
