@@ -1,0 +1,21 @@
+p#notice = notice
+
+p
+  strong Title:
+  = @product.title
+p
+  strong Description:
+  = @product.description
+p
+  strong Url:
+  = @product.url
+p
+  strong Sourse url:
+  = @product.sourse_url
+p
+  strong Released on:
+  = @product.released_on
+
+=> link_to 'Edit', edit_product_path(@product)
+'|
+=< link_to 'Back', products_path
