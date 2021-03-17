@@ -22,6 +22,16 @@ ActiveRecord::Schema.define(version: 2021_03_17_121657) do
     t.index ["user_id"], name: "index_authentications_on_user_id"
   end
 
+  create_table "products", charset: "utf8mb4", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "description"
+    t.string "url"
+    t.string "sourse_url"
+    t.date "released_on", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "user_products", charset: "utf8mb4", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "product_id", null: false
