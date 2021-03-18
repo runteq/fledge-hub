@@ -3,11 +3,11 @@ h1 Listing products
 table
   thead
     tr
-      th Title
-      th Description
-      th Url
-      th Sourse url
-      th Released on
+      th= Product.human_attribute_name(:title)
+      th= Product.human_attribute_name(:description)
+      th= Product.human_attribute_name(:url)
+      th= Product.human_attribute_name(:source_url)
+      th= Product.human_attribute_name(:released_on)
       th
       th
       th
