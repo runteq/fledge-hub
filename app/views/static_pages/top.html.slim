@@ -6,3 +6,5 @@ h1 StaticPages#top
 p Find me in app/views/static_pages/top.html.slim
 = link_to 'Login with GitHub', auth_at_provider_path(provider: :github) unless logged_in?
 = link_to 'Logout', logout_path, method: :delete if logged_in?
+br
+= link_to 'プロダクト一覧', products_path
