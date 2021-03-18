@@ -114,8 +114,6 @@ GEM
       activesupport (>= 4.2.0)
     i18n (1.8.9)
       concurrent-ruby (~> 1.0)
-    jbuilder (2.11.2)
-      activesupport (>= 5.0.0)
     json (2.5.1)
     jwt (2.2.2)
     listen (3.4.1)
@@ -333,7 +331,6 @@ DEPENDENCIES
   bullet
   capybara
   factory_bot_rails
-  jbuilder
   listen
   mysql2
   pry-byebug
