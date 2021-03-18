@@ -9,9 +9,9 @@ Resolves #
 ## 確認方法
 
 例
-1. `docker-compose build`(gem追加のため)
-2. `bundle exec rails db:migrate`(dbカラム追加のため)
-3. 新規画面のCRUD操作ができる
+1. `bundle install`(gem追加のため)
+1. `bundle exec rails db:migrate`(dbカラム追加のため)
+1. 新規画面のCRUD操作ができる
 
 ローカルURLを貼ってもいいです
 
@@ -20,6 +20,7 @@ Resolves #
 
 - [ ] rubocopをパスした
 - [ ] specをパスした
+- [ ] brakemanをパスした
 
 その他、関連Issueの受け入れ条件など
 
