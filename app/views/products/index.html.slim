@@ -1,3 +1,6 @@
+- flash.each do |key, message|
+  = message
+
 h1 Listing products
 
 table
@@ -23,7 +26,9 @@ table
         td= link_to 'Show', product
         td= link_to 'Edit', edit_product_path(product) if product.permitted_edit?(current_user)
         td= link_to 'Destroy', product, data: { confirm: 'Are you sure?' }, method: :delete if product.permitted_edit?(current_user)
-
 br
-
+= link_to 'Login with GitHub', auth_at_provider_path(provider: :github) unless logged_in?
+br
+= link_to 'Logout', logout_path, method: :delete if logged_in?
+br
 = link_to 'New Product', new_product_path if logged_in?

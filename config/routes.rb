@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'static_pages#top' # ログインの機能をヘッダーとかに移した後にproducts#indexにする
+  root 'products#index'
   resources :products
 
   post 'oauth/callback', to: 'oauths#callback'
