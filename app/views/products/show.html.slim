@@ -8,10 +8,10 @@ p
   = @product.description
 p
   strong= Product.human_attribute_name(:url)
-  = link_to @product.url, sanitize(@product.url), target: :_blank
+  = link_to_blank @product.url, @product.url
 p
   strong= Product.human_attribute_name(:source_url)
-  = link_to @product.sourse_url, sanitize(@product.sourse_url), target: :_blank
+  = link_to_blank @product.sourse_url, @product.sourse_url
 p
   strong= Product.human_attribute_name(:released_on)
   = @product.released_on

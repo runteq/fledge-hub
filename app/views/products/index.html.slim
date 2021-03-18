@@ -17,8 +17,8 @@ table
       tr
         td= product.title
         td= product.description
-        td= link_to product.url, sanitize(product.url), target: :_blank
-        td= link_to product.sourse_url, sanitize(product.sourse_url), target: :_blank
+        td= link_to_blank product.url, product.url
+        td= link_to_blank product.sourse_url, product.sourse_url
         td= product.released_on
         td= link_to 'Show', product
         td= link_to 'Edit', edit_product_path(product) if product.permitted_edit?(current_user)
