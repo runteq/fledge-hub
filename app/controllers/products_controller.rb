@@ -21,7 +21,7 @@ class ProductsController < ApplicationController
     # 一対多みたいな書き方をしている。user複数のときどうするかは後々
     @product = current_user.products.build(product_params)
     if @product.valid?
-      current_user.products.create(product_params)
+      @product = current_user.products.create(product_params)
       redirect_to @product, notice: 'Product was successfully created.'
     else
       render :new
