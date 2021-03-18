@@ -8,14 +8,17 @@ p
   = @product.description
 p
   strong Url:
-  = @product.url
+  = link_to @product.url, sanitize(@product.url), target: :_blank
 p
   strong Sourse url:
-  = @product.sourse_url
+  = link_to @product.sourse_url, sanitize(@product.sourse_url), target: :_blank
 p
   strong Released on:
   = @product.released_on
+p
+  strong Users:
+  = @product.users.map(&:display_name).join
 
-=> link_to 'Edit', edit_product_path(@product)
+=> link_to 'Edit', edit_product_path(@product) if @product.permitted_edit?(current_user)
 '|
 =< link_to 'Back', products_path
