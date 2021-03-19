@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root 'products#index'
+  resources :users, only: %i[index show]
   resources :products
 
   post 'oauth/callback', to: 'oauths#callback'
