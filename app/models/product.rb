@@ -16,8 +16,8 @@ class Product < ApplicationRecord
   has_many :users, through: :user_products
 
   validates :title, presence: true
-  validates :url, url: { allow_blank: true }
-  validates :sourse_url, url: { allow_blank: true }
+  validates :url, url: { allow_blank: true, schemes: %w[https http] }
+  validates :sourse_url, url: { allow_blank: true, schemes: %w[https http] }
   validates :released_on, presence: true
 
   def permitted_edit?(user)
