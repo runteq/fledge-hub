@@ -67,7 +67,7 @@ RSpec.describe "/profile", type: :request do
     subject { delete profile_url(user) }
 
     specify do
-      expect { subject }.to change(User, :count).by(-1)
+      expect { subject }.to change { user.reload.status }.to('deactivated').from('general')
     end
 
     it "redirects to the users list" do

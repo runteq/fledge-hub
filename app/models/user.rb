@@ -30,4 +30,13 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true
 
   enum status: { general: 0, deactivated: 10 }
+
+  def deactivate!
+    update!(
+      display_name: "removed_account_#{id}",
+      screen_name: "removed_account_#{id}",
+      email: "removed_account_#{id}@example.com",
+      status: :deactivated
+    )
+  end
 end
