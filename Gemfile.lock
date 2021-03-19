@@ -301,6 +301,9 @@ GEM
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.0.0)
     uniform_notifier (1.14.1)
+    validate_url (1.0.13)
+      activemodel (>= 3.0.0)
+      public_suffix
     web-console (4.1.0)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -356,6 +359,7 @@ DEPENDENCIES
   spring
   turbolinks
   tzinfo-data
+  validate_url
   web-console
   webdrivers
   webpacker

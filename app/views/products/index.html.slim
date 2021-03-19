@@ -1,13 +1,16 @@
+- flash.each do |key, message|
+  = message
+
 h1 Listing products
 
 table
   thead
     tr
-      th Title
-      th Description
-      th Url
-      th Sourse url
-      th Released on
+      th= Product.human_attribute_name(:title)
+      th= Product.human_attribute_name(:description)
+      th= Product.human_attribute_name(:url)
+      th= Product.human_attribute_name(:source_url)
+      th= Product.human_attribute_name(:released_on)
       th
       th
       th
@@ -15,15 +18,17 @@ table
   tbody
     - @products.each do |product|
       tr
-        td = product.title
-        td = product.description
-        td = product.url
-        td = product.sourse_url
-        td = product.released_on
-        td = link_to 'Show', product
-        td = link_to 'Edit', edit_product_path(product) if product.permitted_edit?(current_user)
-        td = link_to 'Destroy', product, data: { confirm: 'Are you sure?' }, method: :delete if product.permitted_edit?(current_user)
-
+        td= product.title
+        td= product.description
+        td= link_to_blank product.url, product.url
+        td= link_to_blank product.sourse_url, product.sourse_url
+        td= product.released_on
+        td= link_to 'Show', product
+        td= link_to 'Edit', edit_product_path(product) if product.permitted_edit?(current_user)
+        td= link_to 'Destroy', product, data: { confirm: 'Are you sure?' }, method: :delete if product.permitted_edit?(current_user)
 br
-
-= link_to 'New Product', new_product_path
+= link_to 'Login with GitHub', auth_at_provider_path(provider: :github) unless logged_in?
+br
+= link_to 'Logout', logout_path, method: :delete if logged_in?
+br
+= link_to 'New Product', new_product_path if logged_in?

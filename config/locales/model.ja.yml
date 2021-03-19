@@ -3,10 +3,20 @@ ja:
     # User.model_name.human
     models:
       user: ユーザー
-    # User.human_attributes_name(:name)
+      product: サービス
+    # User.human_attribute_name(:name)
     attributes:
       id: ID
       created_at: 作成日時
       updated_at: 更新日時
       user:
-        name: 名前
+        display_name: 名前
+        screen_name: ID
+        email: メールアドレス
+      product:
+        title: サービス名
+        description: 説明文
+        released_on: リリース日
+        url: URL
+        source_url: コードURL
+        users: 製作者

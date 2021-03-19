@@ -16,6 +16,7 @@ gem 'webpacker'
 gem 'rails-i18n'
 gem 'slim-rails'
 gem 'sorcery'
+gem 'validate_url'
 
 group :development, :test do
   gem 'bullet'
