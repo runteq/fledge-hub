@@ -72,9 +72,8 @@ jobs:
           name: eager_load test
           command: bundle exec rails runner Rails.application.eager_load!
 
-      - run:
-        name: check FactoryBot validity
-        command: RAILS_ENV=test bundle exec rails factory_bot:lint
+      - run: bundle exec rails factory_bot:lint RAILS_ENV=test
+      - run: bundle exec brakeman
 
       - run:
           name: run rspec
