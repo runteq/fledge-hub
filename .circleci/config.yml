@@ -21,6 +21,7 @@ jobs:
     steps:
       - checkout
 
+      - run: mkdir /tmp/test-results
       - run:
           name: wait for database
           command: dockerize -wait tcp://127.0.0.1:3306 -timeout 3m
@@ -65,7 +66,7 @@ jobs:
       - run: bundle exec rails db:create
       - run: bundle exec rails db:schema:load
 
-      # Build JavaScript files
+      # Build JavaScript files （eslintも実行する）
       - run: bundle exec bin/webpack
 
       - run:
@@ -83,12 +84,3 @@ jobs:
                               --out test_results/rspec.xml \
                               --format progress \
                               $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
-      # collect reports
-      - store_test_results:
-          path: /tmp/test-results
-      - store_artifacts:
-          path: /tmp/test-results
-          destination: test-results
-      - store_artifacts:
-          path: tmp/screenshots
-          destination: test-screenshots
