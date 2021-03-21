@@ -3,11 +3,12 @@
 # Table name: users
 #
 #  id               :bigint           not null, primary key
-#  display_name     :string(255)      not null
-#  screen_name      :string(255)      not null
-#  email            :string(255)      not null
 #  crypted_password :string(255)
+#  display_name     :string(255)      not null
+#  email            :string(255)      not null
 #  salt             :string(255)
+#  screen_name      :string(255)      not null
+#  status           :integer          default(0), not null
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #
@@ -27,4 +28,15 @@ class User < ApplicationRecord
   validates :display_name, presence: true
   validates :screen_name, presence: true, uniqueness: true
   validates :email, presence: true, uniqueness: true
+
+  enum status: { general: 0, deactivated: 10 }
+
+  def deactivate!
+    update!(
+      display_name: "退会済みユーザー",
+      screen_name: "removed_account_#{id}",
+      email: "removed_account_#{id}@example.com",
+      status: :deactivated
+    )
+  end
 end
