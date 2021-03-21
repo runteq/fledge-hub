@@ -21,6 +21,7 @@ jobs:
     steps:
       - checkout
 
+      - run: mkdir /tmp/test-results
       - run:
           name: wait for database
           command: dockerize -wait tcp://127.0.0.1:3306 -timeout 3m
