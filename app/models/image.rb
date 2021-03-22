@@ -20,4 +20,7 @@
 #
 class Image < ApplicationRecord
   belongs_to :product
+
+  validates :title, presence: true
+  validates :url, presence: true, url: { allow_blank: true, schemes: %w[https http] }
 end
