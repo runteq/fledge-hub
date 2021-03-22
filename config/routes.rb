@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
-  resources :images
   root 'products#index'
   resources :users, only: %i[index show]
   resource :profile, only: %i[show edit update destroy]
-  resources :products
+  resources :products do
+    resources :images, only: %i[new create edit update destroy]
+  end
 
   post 'oauth/callback', to: 'oauths#callback'
   get 'oauth/callback', to: 'oauths#callback'

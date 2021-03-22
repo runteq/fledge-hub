@@ -1,4 +1,4 @@
-= form_with model: @image do |f|
+= form_with model: [@product, @image] do |f|
   - if @image.errors.any?
     #error_explanation
       h2 = "#{pluralize(@image.errors.count, "error")} prohibited this image from being saved:"
@@ -15,7 +15,4 @@
   .field
     = f.label :url
     = f.text_field :url
-  .field
-    = f.label :product
-    = f.text_field :product
   .actions = f.submit
