@@ -1,115 +1,112 @@
 require 'rails_helper'
 
-RSpec.describe "/images", type: :request do
-  let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
-  }
-
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
-  }
-
-  describe "GET /index" do
-    it "renders a successful response" do
-      Image.create! valid_attributes
-      get images_url
-      expect(response).to be_successful
-    end
-  end
-
-  describe "GET /show" do
-    it "renders a successful response" do
-      image = Image.create! valid_attributes
-      get image_url(image)
-      expect(response).to be_successful
-    end
-  end
+RSpec.describe "/products/:product_id/images", type: :request do
+  let(:product) { create(:product) }
 
   describe "GET /new" do
     it "renders a successful response" do
-      get new_image_url
+      get "/products/#{product.id}/images/new"
       expect(response).to be_successful
     end
   end
 
   describe "GET /edit" do
     it "render a successful response" do
-      image = Image.create! valid_attributes
-      get edit_image_url(image)
+      image = create(:image, product: product)
+      get "/products/#{product.id}/images/#{image.id}/edit"
       expect(response).to be_successful
     end
   end
 
   describe "POST /create" do
+    subject { post "/products/#{product.id}/images", params: { image: attributes } }
     context "with valid parameters" do
+      let(:attributes) do
+        {
+          title: 'タイトル',
+          url: Faker::Internet.url
+        }
+      end
+
       it "creates a new Image" do
-        expect {
-          post images_url, params: { image: valid_attributes }
-        }.to change(Image, :count).by(1)
+        expect { subject }.to change(Image, :count).by(1)
       end
 
       it "redirects to the created image" do
-        post images_url, params: { image: valid_attributes }
-        expect(response).to redirect_to(image_url(Image.last))
+        subject
+        expect(response).to redirect_to("/products/#{product.id}")
       end
     end
 
     context "with invalid parameters" do
+      let(:attributes) do
+        {
+          title: 'タイトル',
+          url: ''
+        }
+      end
+
       it "does not create a new Image" do
-        expect {
-          post images_url, params: { image: invalid_attributes }
-        }.to change(Image, :count).by(0)
+        expect { subject }.to change(Image, :count).by(0)
       end
 
       it "renders a successful response (i.e. to display the 'new' template)" do
-        post images_url, params: { image: invalid_attributes }
+        subject
         expect(response).to be_successful
       end
     end
   end
 
   describe "PATCH /update" do
+    let(:image) { create(:image, title: '古いタイトル', product: product) }
+    subject { patch "/products/#{product.id}/images/#{image.id}", params: { image: attributes } }
     context "with valid parameters" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
+      let(:attributes) do
+        {
+          title: '新しいタイトル'
+        }
+      end
 
       it "updates the requested image" do
-        image = Image.create! valid_attributes
-        patch image_url(image), params: { image: new_attributes }
-        image.reload
-        skip("Add assertions for updated state")
+        expect { subject }.to change { image.reload.title }.to('新しいタイトル').from('古いタイトル')
       end
 
       it "redirects to the image" do
-        image = Image.create! valid_attributes
-        patch image_url(image), params: { image: new_attributes }
+        subject
         image.reload
-        expect(response).to redirect_to(image_url(image))
+        expect(response).to redirect_to("/products/#{product.id}")
       end
     end
 
     context "with invalid parameters" do
+      let(:attributes) do
+        {
+          title: ''
+        }
+      end
+
+      it "does not update the requested image" do
+        expect { subject }.not_to change { image.reload.title }.from('古いタイトル')
+      end
+
       it "renders a successful response (i.e. to display the 'edit' template)" do
-        image = Image.create! valid_attributes
-        patch image_url(image), params: { image: invalid_attributes }
+        subject
         expect(response).to be_successful
       end
     end
   end
 
   describe "DELETE /destroy" do
+    let!(:image) { create(:image, product: product) }
+    subject { delete "/products/#{product.id}/images/#{image.id}" }
+
     it "destroys the requested image" do
-      image = Image.create! valid_attributes
-      expect {
-        delete image_url(image)
-      }.to change(Image, :count).by(-1)
+      expect { subject }.to change(Image, :count).by(-1)
     end
 
     it "redirects to the images list" do
-      image = Image.create! valid_attributes
-      delete image_url(image)
-      expect(response).to redirect_to(images_url)
+      subject
+      expect(response).to redirect_to("/products/#{product.id}")
     end
   end
 end

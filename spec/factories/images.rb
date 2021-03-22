@@ -20,9 +20,9 @@
 #
 FactoryBot.define do
   factory :image do
-    title { "MyString" }
+    sequence(:title, "画像_1")
     description { "MyText" }
-    url { "MyString" }
-    product { nil }
+    url { Faker::Internet.url }
+    product
   end
 end
