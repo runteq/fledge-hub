@@ -1,0 +1,18 @@
+p#notice = notice
+
+p
+  strong Title:
+  = @image.title
+p
+  strong Description:
+  = @image.description
+p
+  strong Url:
+  = @image.url
+p
+  strong Product:
+  = @image.product
+
+=> link_to 'Edit', edit_image_path(@image)
+'|
+=< link_to 'Back', images_path
