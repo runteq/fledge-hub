@@ -19,10 +19,9 @@ p
   strong= Product.human_attribute_name(:users)
   = @product.users.map(&:display_name).join
 
-p
-  | image_ids:
-  - @product.images.each do |image|
-    = link_to image.title, edit_product_image_path(@product, image)
+- @product.images.each do |image|
+  .image
+    = image_tag sanitize(image.url), width: '600px'
 
 = link_to 'Edit', edit_product_path(@product) if @product.permitted_edit?(current_user)
 '|
