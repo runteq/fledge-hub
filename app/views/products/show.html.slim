@@ -19,6 +19,12 @@ p
   strong= Product.human_attribute_name(:users)
   = @product.users.map(&:display_name).join
 
-=> link_to 'Edit', edit_product_path(@product) if @product.permitted_edit?(current_user)
+- @product.images.each do |image|
+  .image
+    = image_tag sanitize(image.url), width: '600px'
+
+= link_to 'Edit', edit_product_path(@product) if @product.permitted_edit?(current_user)
 '|
-=< link_to 'Back', products_path
+= link_to 'Back', products_path
+br
+= link_to '画像登録', new_product_image_path(@product)

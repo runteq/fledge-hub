@@ -8,7 +8,7 @@
 #  email            :string(255)      not null
 #  salt             :string(255)
 #  screen_name      :string(255)      not null
-#  status           :integer          default(0), not null
+#  status           :integer          default("general"), not null
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #
