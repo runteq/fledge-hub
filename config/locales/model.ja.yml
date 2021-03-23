@@ -4,6 +4,7 @@ ja:
     models:
       user: ユーザー
       product: サービス
+      image: イメージ画像
     # User.human_attribute_name(:name)
     attributes:
       id: ID
@@ -15,8 +16,12 @@ ja:
         email: メールアドレス
       product:
         title: サービス名
-        description: 説明文
+        description: 説明
         released_on: リリース日
         url: URL
         source_url: コードURL
         users: 製作者
+      image:
+        title: 見出し
+        description: 説明
+        url: 画像URL
