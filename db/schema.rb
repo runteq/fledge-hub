@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2021_03_22_005251) do
 
-  create_table "authentications", charset: "utf8mb4", force: :cascade do |t|
+  create_table "authentications", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "provider", null: false
     t.string "uid", null: false
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 2021_03_22_005251) do
     t.index ["user_id"], name: "index_authentications_on_user_id"
   end
 
-  create_table "images", charset: "utf8mb4", force: :cascade do |t|
+  create_table "images", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.string "title", null: false
     t.text "description"
     t.text "url", null: false
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 2021_03_22_005251) do
     t.index ["product_id"], name: "index_images_on_product_id"
   end
 
-  create_table "products", charset: "utf8mb4", force: :cascade do |t|
+  create_table "products", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.string "title", null: false
     t.text "description"
     t.string "url"
@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 2021_03_22_005251) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "user_products", charset: "utf8mb4", force: :cascade do |t|
+  create_table "user_products", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "product_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 2021_03_22_005251) do
     t.index ["user_id"], name: "index_user_products_on_user_id"
   end
 
-  create_table "users", charset: "utf8mb4", force: :cascade do |t|
+  create_table "users", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.string "display_name", null: false
     t.string "screen_name", null: false
     t.string "email", null: false
