@@ -16,6 +16,7 @@
 
 # Ignore development files
 /config/environments/development.local.rb
+/config/database.yml
 
 # Ignore pidfiles, but keep the directory.
 /tmp/pids/*
