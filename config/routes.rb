@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resource :profile, only: %i[show edit update destroy]
   resources :products do
     resources :images, only: %i[new create edit update destroy]
+    resources :media, only: %i[new create edit update destroy]
   end
 
   post 'oauth/callback', to: 'oauths#callback'
