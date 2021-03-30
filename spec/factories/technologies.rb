@@ -13,7 +13,10 @@
 #  index_technologies_on_name  (name) UNIQUE
 #  index_technologies_on_slug  (slug) UNIQUE
 #
-class Technology < ApplicationRecord
-  validates :name, uniqueness: true
-  validates :slug, uniqueness: true
+
+FactoryBot.define do
+  factory :technology do
+    name { Faker::Lorem.word }
+    slug { Faker::Internet.slug }
+  end
 end

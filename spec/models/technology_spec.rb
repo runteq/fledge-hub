@@ -13,7 +13,7 @@
 #  index_technologies_on_name  (name) UNIQUE
 #  index_technologies_on_slug  (slug) UNIQUE
 #
-class Technology < ApplicationRecord
-  validates :name, uniqueness: true
-  validates :slug, uniqueness: true
+require 'rails_helper'
+
+RSpec.describe Technology, type: :model do
 end
