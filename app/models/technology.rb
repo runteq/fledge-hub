@@ -14,6 +14,9 @@
 #  index_technologies_on_slug  (slug) UNIQUE
 #
 class Technology < ApplicationRecord
+  has_many :product_technologies, dependent: :destroy
+  has_many :products, through: :product_technologies
+
   validates :name, uniqueness: true
   validates :slug, uniqueness: true
 end
