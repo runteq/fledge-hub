@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_30_122714) do
+ActiveRecord::Schema.define(version: 2021_03_30_133823) do
 
   create_table "authentications", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -40,6 +40,15 @@ ActiveRecord::Schema.define(version: 2021_03_30_122714) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["product_id"], name: "index_media_on_product_id"
+  end
+
+  create_table "product_technologies", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.bigint "technology_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["product_id"], name: "index_product_technologies_on_product_id"
+    t.index ["technology_id"], name: "index_product_technologies_on_technology_id"
   end
 
   create_table "products", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
@@ -85,4 +94,6 @@ ActiveRecord::Schema.define(version: 2021_03_30_122714) do
 
   add_foreign_key "images", "products"
   add_foreign_key "media", "products"
+  add_foreign_key "product_technologies", "products"
+  add_foreign_key "product_technologies", "technologies"
 end
