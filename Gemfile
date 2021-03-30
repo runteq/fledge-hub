@@ -13,6 +13,7 @@ gem 'turbolinks'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'webpacker'
 
+gem 'active_hash'
 gem 'rails-i18n'
 gem 'slim-rails'
 gem 'sorcery'
