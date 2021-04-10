@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_29_123133) do
+ActiveRecord::Schema.define(version: 2021_03_30_133823) do
 
   create_table "authentications", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -42,6 +42,15 @@ ActiveRecord::Schema.define(version: 2021_03_29_123133) do
     t.index ["product_id"], name: "index_media_on_product_id"
   end
 
+  create_table "product_technologies", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.bigint "technology_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["product_id"], name: "index_product_technologies_on_product_id"
+    t.index ["technology_id"], name: "index_product_technologies_on_technology_id"
+  end
+
   create_table "products", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.string "title", null: false
     t.text "description"
@@ -50,6 +59,15 @@ ActiveRecord::Schema.define(version: 2021_03_29_123133) do
     t.date "released_on", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "technologies", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "slug", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_technologies_on_name", unique: true
+    t.index ["slug"], name: "index_technologies_on_slug", unique: true
   end
 
   create_table "user_products", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
@@ -76,4 +94,6 @@ ActiveRecord::Schema.define(version: 2021_03_29_123133) do
 
   add_foreign_key "images", "products"
   add_foreign_key "media", "products"
+  add_foreign_key "product_technologies", "products"
+  add_foreign_key "product_technologies", "technologies"
 end

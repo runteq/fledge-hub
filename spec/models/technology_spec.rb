@@ -13,10 +13,7 @@
 #  index_technologies_on_name  (name) UNIQUE
 #  index_technologies_on_slug  (slug) UNIQUE
 #
-class Technology < ApplicationRecord
-  has_many :product_technologies, dependent: :destroy
-  has_many :products, through: :product_technologies
+require 'rails_helper'
 
-  validates :name, uniqueness: true
-  validates :slug, uniqueness: true, format: { with: /\A[a-zA-Z0-9-_]+\z/ }
+RSpec.describe Technology, type: :model do
 end

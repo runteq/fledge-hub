@@ -13,10 +13,10 @@
 #  index_technologies_on_name  (name) UNIQUE
 #  index_technologies_on_slug  (slug) UNIQUE
 #
-class Technology < ApplicationRecord
-  has_many :product_technologies, dependent: :destroy
-  has_many :products, through: :product_technologies
 
-  validates :name, uniqueness: true
-  validates :slug, uniqueness: true, format: { with: /\A[a-zA-Z0-9-_]+\z/ }
+FactoryBot.define do
+  factory :technology do
+    name { Faker::Lorem.word }
+    sequence(:slug, "slug-1")
+  end
 end

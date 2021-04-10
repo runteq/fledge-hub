@@ -16,6 +16,8 @@ class Product < ApplicationRecord
   has_many :users, through: :user_products
   has_many :images, dependent: :destroy
   has_many :media, dependent: :destroy
+  has_many :product_technologies, dependent: :destroy
+  has_many :technologies, through: :product_technologies
 
   validates :title, presence: true
   validates :url, url: { allow_blank: true, schemes: %w[https http] }
