@@ -17,6 +17,6 @@
 FactoryBot.define do
   factory :technology do
     name { Faker::Lorem.word }
-    slug { Faker::Internet.slug }
+    sequence(:slug, "slug-1")
   end
 end
