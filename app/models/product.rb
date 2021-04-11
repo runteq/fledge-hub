@@ -5,7 +5,7 @@
 #  id          :bigint           not null, primary key
 #  description :text(65535)
 #  released_on :date             not null
-#  sourse_url  :string(255)
+#  source_url  :string(255)
 #  title       :string(255)      not null
 #  url         :string(255)
 #  created_at  :datetime         not null
@@ -21,7 +21,7 @@ class Product < ApplicationRecord
 
   validates :title, presence: true
   validates :url, url: { allow_blank: true, schemes: %w[https http] }
-  validates :sourse_url, url: { allow_blank: true, schemes: %w[https http] }
+  validates :source_url, url: { allow_blank: true, schemes: %w[https http] }
   validates :released_on, presence: true
 
   def permitted_edit?(user)
