@@ -18,6 +18,7 @@ $ bundle install --path vendor/bundle
 $ yarn install
 $ rails db:create
 $ rails db:migrate
+$ rake db:seed_fu
 ```
 ### サーバー起動
 ```
