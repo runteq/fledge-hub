@@ -16,6 +16,6 @@ table
         td = user.display_name
         td = user.screen_name
         td = user.email
-        td = link_to 'Show', user
+        td = link_to 'Show', user_path(user.screen_name)
 
 = link_to 'プロフィール編集', edit_profile_path

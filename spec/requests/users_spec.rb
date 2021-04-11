@@ -13,7 +13,7 @@ RSpec.describe "/users", type: :request do
     let(:user) { create(:user) }
 
     it "renders a successful response" do
-      get user_url(user)
+      get user_url(user.screen_name)
       expect(response).to be_successful
     end
   end

@@ -2,8 +2,8 @@ h1 Editing user
 
 == render 'form'
 
-= link_to 'Show', @user
+= link_to 'Show', user_path((@user.screen_name))
 '|
-= link_to 'Back', users_path
+= link_to 'Back', profile_path
 br
 = link_to '退会', profile_path, method: :delete
