@@ -1,11 +1,8 @@
 p#notice = notice
 
-p
-  strong= Product.human_attribute_name(:title)
-  = @product.title
-p
-  strong= Product.human_attribute_name(:description)
-  = @product.description
+
+h1 = @product.title
+= simple_format(h(@product.description))
 p
   strong= Product.human_attribute_name(:url)
   = link_to_blank @product.url, @product.url
@@ -17,22 +14,31 @@ p
   = @product.released_on
 p
   strong= Product.human_attribute_name(:users)
-  = @product.users.map(&:display_name).join
+  - @product.users.each do |user|
+    = link_to user.display_name, user_path(user.screen_name)
 
+h2 イメージ画像
 - @product.images.each do |image|
   .image
     = image_tag sanitize(image.url), alt: image.title, width: '600px'
-    = link_to '編集', edit_product_image_path(@product, image)
+    - if @product.permitted_edit?(current_user)
+      = link_to '編集', edit_product_image_path(@product, image)
+      = link_to '削除', product_image_path(@product, image), method: :delete
 
+h2 メディア
 - @product.media.each do |medium|
-  = link_to_blank medium.title, medium.url
-  = link_to '編集', edit_product_medium_path(@product, medium)
-br
-br
-= link_to 'Edit', edit_product_path(@product) if @product.permitted_edit?(current_user)
-'|
+  p
+    = link_to_blank medium.title, medium.url
+    - if @product.permitted_edit?(current_user)
+      = link_to '編集', edit_product_medium_path(@product, medium)
+      = link_to '削除', product_medium_path(@product, medium), method: :delete
 = link_to 'Back', products_path
 br
-= link_to '画像登録', new_product_image_path(@product)
-br
-= link_to 'メディア登録', new_product_medium_path(@product)
+- if @product.permitted_edit?(current_user)
+  = link_to 'Edit', edit_product_path(@product)
+  br
+  = link_to 'Destroy', product, data: { confirm: 'Are you sure?' }, method: :delete if product.permitted_edit?(current_user)
+  br
+  = link_to '画像登録', new_product_image_path(@product)
+  br
+  = link_to 'メディア登録', new_product_medium_path(@product)

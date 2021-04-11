@@ -24,13 +24,12 @@ table
         td= link_to_blank product.source_url, product.source_url
         td= product.released_on
         td= link_to 'Show', product
-        td= link_to 'Edit', edit_product_path(product) if product.permitted_edit?(current_user)
-        td= link_to 'Destroy', product, data: { confirm: 'Are you sure?' }, method: :delete if product.permitted_edit?(current_user)
-br
-= link_to 'Login with GitHub', auth_at_provider_path(provider: :github) unless logged_in?
-br
-= link_to 'Logout', logout_path, method: :delete if logged_in?
-br
-= link_to 'New Product', new_product_path if logged_in?
 br
 = link_to 'Users', users_path
+br
+- if logged_in?
+  = link_to 'Logout', logout_path, method: :delete if logged_in?
+  br
+  = link_to 'New Product', new_product_path if logged_in?
+- else
+  = link_to 'Login with GitHub', auth_at_provider_path(provider: :github)
