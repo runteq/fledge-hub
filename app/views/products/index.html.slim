@@ -21,7 +21,7 @@ table
         td= product.title
         td= product.description
         td= link_to_blank product.url, product.url
-        td= link_to_blank product.sourse_url, product.sourse_url
+        td= link_to_blank product.source_url, product.source_url
         td= product.released_on
         td= link_to 'Show', product
         td= link_to 'Edit', edit_product_path(product) if product.permitted_edit?(current_user)
