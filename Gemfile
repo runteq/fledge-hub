@@ -15,6 +15,7 @@ gem 'webpacker'
 
 gem 'active_hash'
 gem 'rails-i18n'
+gem 'seed-fu'
 gem 'slim-rails'
 gem 'sorcery'
 gem 'validate_url'
