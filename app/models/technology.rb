@@ -18,5 +18,5 @@ class Technology < ApplicationRecord
   has_many :products, through: :product_technologies
 
   validates :name, uniqueness: true
-  validates :slug, uniqueness: true, format: { with: /\A[a-zA-Z0-9-_]+\z/ }
+  validates :slug, uniqueness: true, format: { with: /\A[a-zA-Z0-9_-]+\z/, message: "この%{attribute}%{value}はだめです" }
 end
