@@ -40,7 +40,7 @@ RSpec.describe "/profile", type: :request do
 
       it "redirects to the user" do
         subject
-        expect(response).to redirect_to(user_url(user))
+        expect(response).to redirect_to(user_url(user.screen_name))
       end
     end
 

@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root 'products#index'
-  resources :users, only: %i[index show]
+  resources :users, only: %i[index show], param: :screen_name
   resource :profile, only: %i[show edit update destroy]
   resources :products do
     resources :images, only: %i[new create edit update destroy]
