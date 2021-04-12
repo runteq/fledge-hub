@@ -5,13 +5,6 @@ h1 Listing products
 
 br
 = link_to 'Users', users_path
-br
-- if logged_in?
-  = link_to 'Logout', logout_path, method: :delete if logged_in?
-  br
-  = link_to 'New Product', new_product_path if logged_in?
-- else
-  = link_to 'Login with GitHub', auth_at_provider_path(provider: :github)
 
 section.text-gray-600.body-font
   .container.px-5.py-24.mx-auto
