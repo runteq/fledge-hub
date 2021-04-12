@@ -10,4 +10,6 @@ html
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
   body
     = render 'shared/header'
-    = yield
+    section.text-gray-600.body-font
+      .container.px-5.py-10.mx-auto
+        = yield
