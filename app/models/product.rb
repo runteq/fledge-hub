@@ -29,6 +29,6 @@ class Product < ApplicationRecord
   end
 
   def top_image
-    images.first || OpenStruct.new(title: title, url: 'https://dummyimage.com/720x400')
+    @top_image ||= images.first || OpenStruct.new(title: title, url: 'https://dummyimage.com/720x400')
   end
 end
