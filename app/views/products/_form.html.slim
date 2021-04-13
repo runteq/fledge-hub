@@ -1,34 +1,22 @@
-= form_with model: @product, class: 'w-full max-w-lg' do |f|
+= form_with model: @product, class: 'form' do |f|
   - if f.object.errors.any?
     ul
       - @product.errors.full_messages.each do |message|
-        li
-          = message
-  .flex.flex-wrap.-mx-3.mb-6
-    .w-full.px-3
-      label.block.uppercase.tracking-wide.text-gray-700.text-xs.font-bold.mb-2
-        = f.label :title
-      = f.text_field :title, class: 'appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
-  .flex.flex-wrap.-mx-3.mb-6
-    .w-full.px-3
-      label.block.uppercase.tracking-wide.text-gray-700.text-xs.font-bold.mb-2
-        = f.label :url
-      = f.text_field :url, class: 'appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
-  .flex.flex-wrap.-mx-3.mb-6
-    .w-full.px-3
-      label.block.uppercase.tracking-wide.text-gray-700.text-xs.font-bold.mb-2
-        = f.label :source_url
-      = f.text_field :source_url, class: 'appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
-  .flex.flex-wrap.-mx-3.mb-6
-    .w-full.px-3
-      label.block.uppercase.tracking-wide.text-gray-700.text-xs.font-bold.mb-2
-        = f.label :description
-      = f.text_area :description, class: 'appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
-  .flex.flex-wrap.-mx-3.mb-6
-    .w-full.px-3
-      label.block.uppercase.tracking-wide.text-gray-700.text-xs.font-bold.mb-2
-        = f.label :released_on
-      = f.date_field :released_on, class: 'appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
-  .flex.flex-wrap.-mx-3.mb-6
-    .w-full.px-3
-      = f.submit class: 'btn btn-indigo'
+        li= message
+  .form-group
+    = f.label :title, class: 'form-label'
+    = f.text_field :title, class: 'text-field'
+  .form-group
+    = f.label :url, class: 'form-label'
+    = f.text_field :url, class: 'text-field'
+  .form-group
+    = f.label :source_url, class: 'form-label'
+    = f.text_field :source_url, class: 'text-field'
+  .form-group
+    = f.label :description, class: 'form-label'
+    = f.text_area :description, class: 'text-field'
+  .form-group
+    = f.label :released_on, class: 'form-label'
+    = f.date_field :released_on, class: 'text-field'
+  .form-group
+    = f.submit class: 'btn-submit btn-indigo'
