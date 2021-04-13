@@ -1,3 +1,20 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+
+// フロントエンド移行時はコンポーネント化するのでクラス依存は除去したい
+// https://tailwindcss-ja.entap.app/docs/extracting-components
+
+@layer components {
+  a {
+    @apply underline hover:opacity-75;
+  }
+
+  .btn {
+    @apply inline-block no-underline text-sm px-4 py-2 mt-4 leading-none rounded lg:mt-0 hover:border-transparent hover:opacity-100;
+  }
+
+  .btn-indigo {
+    @apply bg-indigo-700 text-white hover:opacity-75;
+  }
+}

@@ -4,7 +4,11 @@
 h1 Listing products
 
 br
-= link_to 'Users', users_path
+= link_to 'Users', users_path, class: 'btn btn-indigo'
+br
+= link_to '新規登録', new_product_path, class: 'btn btn-indigo'
+a.btn.btn-indigo
+  | ぼったん
 
 .flex.flex-wrap.-mx-4
   - @products.each do |product|
@@ -16,14 +20,16 @@ br
             = product.released_on
           h1.title-font.text-lg.font-medium.text-gray-900.mb-3
             = product.title
-          .mb-3
-            span.px-2.inline-flex.text-xs.leading-5.font-semibold.rounded-full.bg-indigo-100.text-indigo-800
+          .mb-3.-mx-1
+            span.px-2.mx-1.inline-flex.text-xs.leading-5.font-semibold.rounded-full.bg-gray-200.text-gray-700
               | Active
+            span.px-2.mx-1.inline-flex.text-xs.leading-5.font-semibold.rounded-full.bg-gray-200.text-gray-700
+              | Ruby on Rails
           .leading-relaxed.mb-3
             = simple_format(h(product.description))
 
           .flex.items-center.flex-wrap
-            = link_to product_path(product), class: 'text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0' do
+            = link_to product_path(product), class: 'text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0 no-underline' do
               | Show More
               svg.w-4.h-4.ml-2 fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox=("0 0 24 24")
                 path d=("M5 12h14")

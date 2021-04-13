@@ -11,15 +11,16 @@
   <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
     <div class="text-sm lg:flex-grow">
       <% if logged_in? %>
-        <%= link_to 'Profile', profile_path, class: 'block mt-4 lg:inline-block lg:mt-0 text-indigo-100 hover:text-white mr-4' %>
-        <%= link_to 'New Product', new_product_path, class: 'block mt-4 lg:inline-block lg:mt-0 text-indigo-100 hover:text-white mr-4' %>
-        <%= link_to 'Logout', logout_path, method: :delete, class: 'block mt-4 lg:inline-block lg:mt-0 text-indigo-100 hover:text-white mr-4' %>
+        <%= link_to 'Profile', profile_path, class: 'block mt-4 lg:inline-block lg:mt-0 text-indigo-100 hover:text-white mr-4 no-underline' %>
+        <%= link_to 'New Product', new_product_path, class: 'block mt-4 lg:inline-block lg:mt-0 text-indigo-100 hover:text-white mr-4 no-underline' %>
+        <%= link_to 'Logout', logout_path, method: :delete, class: 'block mt-4 lg:inline-block lg:mt-0 text-indigo-100 hover:text-white mr-4 no-underline' %>
       <% else %>
         <%= link_to 'Login with GitHub', auth_at_provider_path(provider: :github), class: 'block mt-4 lg:inline-block lg:mt-0 text-indigo-100 hover:text-white mr-4' %>
       <% end %>
     </div>
     <div>
-      <a href="#" class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-indigo-800 hover:bg-white mt-4 lg:mt-0">Download</a>
+      <a href="#" class="btn text-white hover:bg-white hover:text-indigo-800">Download</a>
+      <a href="#" class="btn">Button</a>
     </div>
   </div>
 </nav>
