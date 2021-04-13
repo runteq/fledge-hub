@@ -11,7 +11,7 @@
   }
 
   .btn {
-    @apply inline-block no-underline text-sm px-4 py-2 mt-4 leading-none rounded lg:mt-0 hover:border-transparent hover:opacity-100;
+    @apply inline-block cursor-pointer no-underline text-sm px-4 py-2 mt-4 leading-none rounded lg:mt-0 hover:border-transparent hover:opacity-100;
   }
 
   .btn-indigo {
