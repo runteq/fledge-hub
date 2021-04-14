@@ -27,4 +27,8 @@ class Product < ApplicationRecord
   def permitted_edit?(user)
     !!user&.in?(users)
   end
+
+  def top_image
+    @top_image ||= images.first || OpenStruct.new(title: title, url: 'https://dummyimage.com/720x400')
+  end
 end

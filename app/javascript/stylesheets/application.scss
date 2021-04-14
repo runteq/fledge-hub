@@ -1,0 +1,40 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+// フロントエンド移行時はコンポーネント化するのでクラス依存は除去したい
+// https://tailwindcss-ja.entap.app/docs/extracting-components
+
+@layer components {
+  a {
+    @apply underline hover:opacity-75;
+  }
+
+  .btn {
+    @apply inline-block cursor-pointer no-underline text-sm px-4 py-2 mt-4 leading-none rounded lg:mt-0 hover:border-transparent hover:opacity-100;
+  }
+
+  .btn-indigo {
+    @apply bg-indigo-700 text-white hover:opacity-75;
+  }
+
+  .form {
+    @apply w-full max-w-lg text-sm;
+
+    .form-group {
+      @apply flex flex-wrap -mx-3 mb-6;
+    }
+
+    .form-label {
+      @apply block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2;
+    }
+
+    .text-field {
+      @apply appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500;
+    }
+
+    .btn-submit {
+      @apply btn py-3 px-4;
+    }
+  }
+}

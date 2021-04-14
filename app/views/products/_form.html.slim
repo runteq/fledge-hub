@@ -1,24 +1,22 @@
-= form_with model: @product do |f|
-  - if @product.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@product.errors.count, "error")} prohibited this product from being saved:"
-      ul
-        - @product.errors.full_messages.each do |message|
-          li = message
-
-  .field
-    = f.label :title
-    = f.text_field :title
-  .field
-    = f.label :description
-    = f.text_area :description
-  .field
-    = f.label :url
-    = f.text_field :url
-  .field
-    = f.label :source_url
-    = f.text_field :source_url
-  .field
-    = f.label :released_on
-    = f.date_field :released_on
-  .actions = f.submit
+= form_with model: @product, class: 'form' do |f|
+  - if f.object.errors.any?
+    ul
+      - @product.errors.full_messages.each do |message|
+        li= message
+  .form-group
+    = f.label :title, class: 'form-label'
+    = f.text_field :title, class: 'text-field'
+  .form-group
+    = f.label :url, class: 'form-label'
+    = f.text_field :url, class: 'text-field'
+  .form-group
+    = f.label :source_url, class: 'form-label'
+    = f.text_field :source_url, class: 'text-field'
+  .form-group
+    = f.label :description, class: 'form-label'
+    = f.text_area :description, class: 'text-field'
+  .form-group
+    = f.label :released_on, class: 'form-label'
+    = f.date_field :released_on, class: 'text-field'
+  .form-group
+    = f.submit class: 'btn-submit btn-indigo'
