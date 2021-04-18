@@ -29,6 +29,7 @@ $ cp config/database.yml.default config/database.yml
 
 ```
 $ rbenv local 3.0.0
+$ nodenv local 14.16.1
 $ bundle install --path vendor/bundle
 $ yarn install
 $ rails db:create
