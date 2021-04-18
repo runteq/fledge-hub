@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_11_113620) do
+ActiveRecord::Schema.define(version: 2021_04_18_130830) do
 
   create_table "authentications", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 2021_04_11_113620) do
 
   create_table "images", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.string "title", null: false
-    t.text "description"
+    t.text "description", null: false
     t.text "url", null: false
     t.bigint "product_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 2021_04_11_113620) do
 
   create_table "media", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.string "title", null: false
-    t.text "description"
+    t.text "description", null: false
     t.text "url", null: false
     t.bigint "product_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -53,9 +53,9 @@ ActiveRecord::Schema.define(version: 2021_04_11_113620) do
 
   create_table "products", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.string "title", null: false
-    t.text "description"
-    t.string "url"
-    t.string "source_url"
+    t.text "summary", null: false
+    t.text "url", null: false
+    t.text "source_url", null: false
     t.date "released_on", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

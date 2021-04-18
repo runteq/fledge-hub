@@ -26,6 +26,7 @@ RSpec.describe "/products/:product_id/media", type: :request do
       let(:attributes) do
         {
           title: 'タイトル',
+          description: '',
           url: Faker::Internet.url
         }
       end

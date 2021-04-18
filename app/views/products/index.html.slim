@@ -26,7 +26,7 @@ a.btn.btn-indigo
             span.px-2.mx-1.inline-flex.text-xs.leading-5.font-semibold.rounded-full.bg-gray-200.text-gray-700
               | Ruby on Rails
           .leading-relaxed.mb-3
-            = simple_format(h(product.description))
+            = simple_format(h(product.summary))
 
           .flex.items-center.flex-wrap
             = link_to product_path(product), class: 'text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0 no-underline' do

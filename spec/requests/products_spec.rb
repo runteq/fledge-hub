@@ -51,9 +51,10 @@ RSpec.describe "/products", type: :request do
       let(:attributes) do
         {
           title: 'hoge',
-          "released_on(1i)" =>"2021",
-          "released_on(2i)"=>"3",
-          "released_on(3i)"=>"17"
+          summary: '',
+          url: '',
+          source_url: '',
+          released_on: Time.zone.today
         }
       end
 
