@@ -3,7 +3,7 @@
 # Table name: images
 #
 #  id          :bigint           not null, primary key
-#  description :text(65535)
+#  description :text(65535)      not null
 #  title       :string(255)      not null
 #  url         :text(65535)      not null
 #  created_at  :datetime         not null
