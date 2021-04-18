@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_11_113620) do
+ActiveRecord::Schema.define(version: 2021_04_18_130246) do
 
   create_table "authentications", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(version: 2021_04_11_113620) do
 
   create_table "products", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.string "title", null: false
-    t.text "description"
+    t.text "summary"
     t.string "url"
     t.string "source_url"
     t.date "released_on", null: false

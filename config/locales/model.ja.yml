@@ -16,7 +16,7 @@ ja:
         email: メールアドレス
       product:
         title: サービス名
-        description: 説明
+        summary: 概要
         released_on: リリース日
         url: URL
         source_url: コードURL
