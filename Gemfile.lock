@@ -141,6 +141,8 @@ GEM
     nio4r (2.5.7)
     nokogiri (1.11.2-x86_64-darwin)
       racc (~> 1.4)
+    nokogiri (1.11.2-x86_64-linux)
+      racc (~> 1.4)
     oauth (0.5.5)
     oauth2 (1.4.7)
       faraday (>= 0.8, < 2.0)
@@ -334,6 +336,7 @@ GEM
 PLATFORMS
   x86_64-darwin-19
   x86_64-darwin-20
+  x86_64-linux
 
 DEPENDENCIES
   active_hash
