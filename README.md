@@ -25,6 +25,9 @@ RUNTEQ生のポートフォリオ、どこで見れるんじゃ？<br>
 
 ```
 $ cp config/database.yml.default config/database.yml
+
+# Dockerを使う場合
+$ cp config/database.yml.docker config/database.yml
 ```
 
 ```
