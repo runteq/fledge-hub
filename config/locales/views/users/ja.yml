@@ -1,6 +1,6 @@
 ja:
   users:
     index:
-      title: 'ユーザ一覧'
+      title: ユーザ一覧
     show:
-      title: 'ユーザー詳細'
+      title: ユーザー詳細
