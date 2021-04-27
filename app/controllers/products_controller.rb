@@ -2,7 +2,7 @@ class ProductsController < ApplicationController
   before_action :require_login, only: %i[new edit create update destroy]
 
   def index
-    @products = Product.all
+    @products = Product.includes(:technologies)
   end
 
   def show

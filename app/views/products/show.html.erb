@@ -8,6 +8,13 @@
         <h2 class="max-w-lg mb-6 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl sm:leading-none">
           <%= @product.title %>
         </h2>
+        <div class="max-w-xl mb-6 -mx-1">
+          <% @product.technologies.each do |technology| %>
+            <div class="span px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-200 text-gray-700">
+              <%= technology.name %>
+            </div>
+          <% end %>
+        </div>
         <%= simple_format h(@product.summary), class: 'text-base text-gray-700 md:text-lg' %>
       </div>
 

@@ -21,10 +21,9 @@ a.btn.btn-indigo
           h1.title-font.text-lg.font-medium.text-gray-900.mb-3
             = product.title
           .mb-3.-mx-1
-            span.px-2.mx-1.inline-flex.text-xs.leading-5.font-semibold.rounded-full.bg-gray-200.text-gray-700
-              | Active
-            span.px-2.mx-1.inline-flex.text-xs.leading-5.font-semibold.rounded-full.bg-gray-200.text-gray-700
-              | Ruby on Rails
+            - product.technologies.each do |technology|
+              span.px-2.mx-1.inline-flex.text-xs.leading-5.font-semibold.rounded-full.bg-gray-200.text-gray-700
+                = technology.name
           .leading-relaxed.mb-3
             = simple_format(h(product.summary))
 
