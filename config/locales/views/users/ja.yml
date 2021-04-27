@@ -1,0 +1,6 @@
+ja:
+  users:
+    index:
+      title: ユーザ一覧
+    show:
+      title: ユーザー詳細
