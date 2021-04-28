@@ -32,5 +32,17 @@
     .text-field {
       @apply appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500;
     }
+
+    .field_with_errors {
+      display: contents;
+
+      .form-label {
+        @apply text-red-700;
+      }
+
+      .text-field {
+        @apply bg-red-200 border-red-200 focus:outline-none focus:bg-white focus:border-gray-500;
+      }
+    }
   }
 }
