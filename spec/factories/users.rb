@@ -4,7 +4,7 @@
 #
 #  id               :bigint           not null, primary key
 #  crypted_password :string(255)
-#  display_name     :string(255)      default(""), not null
+#  display_name     :string(255)      not null
 #  email            :string(255)      not null
 #  salt             :string(255)
 #  screen_name      :string(255)      not null
