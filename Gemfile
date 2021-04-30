@@ -20,7 +20,6 @@ gem 'tailwindcss-rails', '~> 0.3.3'
 gem 'slim-rails'
 gem 'sorcery'
 gem 'validate_url'
-gem 'draper'
 
 group :development, :test do
   gem 'bullet'
