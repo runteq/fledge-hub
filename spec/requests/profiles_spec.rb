@@ -43,23 +43,6 @@ RSpec.describe "/profile", type: :request do
         expect(response).to redirect_to(user_url(user.screen_name))
       end
     end
-
-    context "with invalid parameters" do
-      let(:attributes) do
-        {
-          display_name: '',
-        }
-      end
-
-      it "does not update the requested user" do
-        expect { subject }.not_to change { user.reload.display_name }.from('古い表示名')
-      end
-
-      it "renders a successful response (i.e. to display the 'edit' template)" do
-        subject
-        expect(response).to be_successful
-      end
-    end
   end
 
   describe "DELETE /destroy" do
