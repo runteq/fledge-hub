@@ -18,7 +18,7 @@ RUNTEQ生のポートフォリオ、どこで見れるんじゃ？<br>
 
 困ったときは[先人の知恵](https://github.com/runteq/runteq_senses/issues/12)が役立つかもしれません。コマンドや記録などを残してくれると後進のためになります。
 
-- 事前に管理者からmaster.keyを取得してconfig配下に置いてください
+- 事前に管理者からmaster.keyを取得してconfig配下に置いてください<br>
 配置しないとrails db:create で `NoMethodError: undefined method '[]' for nil:NilClass` になります
 
 - config/database.yml の作成
@@ -29,17 +29,17 @@ $ cp config/database.yml.default config/database.yml
 
 ```
 $ rbenv local 3.0.0
-$ nodenv local 14.16.1
-$ bundle install --path vendor/bundle
+$ nodenv local 14.16.1 # nodeのバージョンが14.16.1なら大丈夫です
+$ bundle install
 $ yarn install
-$ rails db:create
-$ rails db:migrate
+$ bundle exec rails db:create
+$ bundle exec rails db:migrate
 $ rake db:seed_fu
 ```
 
 #### サーバー起動
 ```
-rails server
+bundle exec rails server
 ```
 
 #### テスト実行
