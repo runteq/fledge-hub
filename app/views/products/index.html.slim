@@ -19,15 +19,14 @@ a.btn.btn-indigo
         .p-6
           h2.tracking-widest.text-xs.title-font.font-medium.text-gray-400.mb-1
             = product.released_on
-          h1.title-font.text-lg.font-medium.text-gray-900.mb-3
+          h1.title-font.text-lg.font-medium.text-gray-900.mb-1
             = product.title
-          .mb-3.-mx-1
-            span.px-2.mx-1.inline-flex.text-xs.leading-5.font-semibold.rounded-full.bg-gray-200.text-gray-700
-              | Active
-            span.px-2.mx-1.inline-flex.text-xs.leading-5.font-semibold.rounded-full.bg-gray-200.text-gray-700
-              | Ruby on Rails
           .leading-relaxed.mb-3
             = simple_format(h(product.summary))
+          .mb-3.-mx-1
+            - product.technologies.each do |technology|
+              span.px-2.mx-1.inline-flex.text-xs.leading-5.font-semibold.rounded-full.bg-gray-200.text-gray-700
+                = technology.name
 
           .flex.items-center.flex-wrap
             = link_to product_path(product), class: 'text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0 no-underline' do

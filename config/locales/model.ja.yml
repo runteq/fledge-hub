@@ -20,6 +20,7 @@ ja:
         released_on: リリース日
         url: URL
         source_url: コードURL
+        technology_ids: 使用技術
         users: 製作者
       image:
         title: 見出し
