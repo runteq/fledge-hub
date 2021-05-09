@@ -90,6 +90,6 @@ bundle exec rspec spec
 
 ### 画面遷移図
 
-![画面遷移図](https://www.figma.com/file/AwHt66yEYV4qlvxi4Nv19F/Runteq-senses?node-id=0%3A88)
+[画面遷移図](https://www.figma.com/file/AwHt66yEYV4qlvxi4Nv19F/Runteq-senses?node-id=0%3A88)
 イメージです。
 気づいたところがあれば、適宜いじって欲しい！！
