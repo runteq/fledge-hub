@@ -87,3 +87,9 @@ bundle exec rspec spec
 
 ![ER図](./erd.png)
 詳細は https://github.com/runteq/runteq_senses/pull/1 だけど、若干内容が変わっている。
+
+### 画面遷移図
+
+![画面遷移図](https://www.figma.com/file/AwHt66yEYV4qlvxi4Nv19F/Runteq-senses?node-id=0%3A88)
+イメージです。
+気づいたところがあれば、適宜いじって欲しい！！
