@@ -22,11 +22,11 @@
     @apply w-full max-w-lg text-sm;
 
     .form-group {
-      @apply flex flex-wrap -mx-3 mb-6;
+      @apply flex flex-wrap mb-6;
     }
 
     .form-label {
-      @apply block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2;
+      @apply block tracking-wide text-gray-700 text-xs font-bold mb-2;
     }
 
     .text-field {
