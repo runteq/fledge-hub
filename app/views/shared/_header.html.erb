@@ -1,28 +1,35 @@
-<nav class="flex items-center justify-between flex-wrap bg-indigo-800 p-6">
-  <div class="flex items-center flex-no-shrink text-white mr-6">
-    <svg class="h-8 w-8 mr-2" width="54" height="54" viewBox="0 0 54 54" xmlns="http://www.w3.org/2000/svg"><path d="M13.5 22.1c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05zM0 38.3c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05z"/></svg>
+<nav class="flex items-center justify-between flex-wrap bg-indigo-100 p-6">
+  <div class="flex items-center flex-no-shrink text-indigo-800 mr-6">
     <span class="font-semibold text-xl tracking-tight">
       <%= link_to 'RUNTEQ senses', root_path, class: 'no-underline' %>
     </span>
   </div>
-  <div class="block lg:hidden">
-    <button class="flex items-center px-3 py-2 border rounded text-indigo-100 border-indigo-400 hover:text-white hover:border-white">
-      <svg class="h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
-    </button>
-  </div>
-  <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
-    <div class="text-sm lg:flex-grow">
-      <% if logged_in? %>
-        <%= link_to 'Profile', profile_path, class: 'block mt-4 lg:inline-block lg:mt-0 text-indigo-100 hover:text-white mr-4 no-underline' %>
-        <%= link_to 'New Product', new_product_path, class: 'block mt-4 lg:inline-block lg:mt-0 text-indigo-100 hover:text-white mr-4 no-underline' %>
-        <%= link_to 'Logout', logout_path, method: :delete, class: 'block mt-4 lg:inline-block lg:mt-0 text-indigo-100 hover:text-white mr-4 no-underline' %>
+  <div>
+    <div class="pr-0">
+      <div class="flex relative inline-block float-right">
+        <%= link_to 'About', '#', class: 'btn text-indigo-800 hover:bg-indigo-200' %>
+        <%= link_to 'Products', root_path, class: 'btn text-indigo-800 hover:bg-indigo-200' %>
+        <%= link_to 'Users', '#', class: 'btn text-indigo-800 hover:bg-indigo-200' %>
+        <% if logged_in? %>
+          <div class="relative text-sm text-gray-100">
+            <button id="userButton" class="btn items-center focus:outline-none mr-3">
+              <img class="w-10 h-10 rounded-full mr-4" src="http://i.pravatar.cc/300" alt="Avatar of User">
+            </button>
+            <div id="userMenu" class="bg-white nunito rounded shadow-md absolute mt-12 top-5 right-0 min-w-full overflow-auto z-30 ">
+              <ul class="list-reset">
+                <li><%= link_to 'Profile', '#', class: 'px-4 py-2 block text-gray-900 hover:bg-indigo-200 no-underline hover:no-underline' %></li>
+                <li><%= link_to 'Setting', '#', class: 'px-4 py-2 block text-gray-900 hover:bg-indigo-200 no-underline hover:no-underline' %></li>
+                <li>
+                    <hr class="border-t mx-2 border-gray-400">
+                </li>
+                <li><%= link_to 'Logout', logout_path, method: :delete, class: 'px-4 py-2 block text-gray-900 hover:bg-indigo-200 no-underline hover:no-underline' %></li>
+              </ul>
+            </div>
+          </div>
+        </div>
       <% else %>
-        <%= link_to 'Login with GitHub', auth_at_provider_path(provider: :github), class: 'block mt-4 lg:inline-block lg:mt-0 text-indigo-100 hover:text-white mr-4' %>
+        <%= link_to 'Login with GitHub', auth_at_provider_path(provider: :github), class: 'btn bg-black text-white' %>
       <% end %>
-    </div>
-    <div>
-      <a href="#" class="btn text-white hover:bg-white hover:text-indigo-800">Download</a>
-      <a href="#" class="btn">Button</a>
     </div>
   </div>
 </nav>
