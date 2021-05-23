@@ -19,6 +19,7 @@
 FactoryBot.define do
   factory :image do
     description { "MyText" }
+    product_image { fixture_file_upload('spec/fixtures/files/images/720x400.png') }
     product
   end
 end
