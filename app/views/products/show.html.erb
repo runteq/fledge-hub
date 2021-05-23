@@ -44,7 +44,7 @@
 
 <% @product.images.each do |image| %>
   <div>
-    <%= image_tag image.product_image, alt: image.title, width: '600px' %>
+    <%= image_tag image.product_image, alt: @product.title, width: '600px' %>
     <% if @product.permitted_edit?(current_user) %>
       <%= link_to '編集', edit_product_image_path(@product, image) %>
       <%= link_to '削除', product_image_path(@product, image), method: :delete %>
