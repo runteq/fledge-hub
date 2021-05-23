@@ -14,7 +14,7 @@ br
   - @products.each do |product|
     .p-4.md:w-1/3
       .h-full.border-2.border-gray-200.border-opacity-60.rounded-lg.overflow-hidden
-        = image_tag product.top_image.url, alt: product.title, class: 'lg:h-48 md:h-36 w-full object-cover object-center'
+        = image_tag product.top_image.product_image, alt: product.title, class: 'lg:h-48 md:h-36 w-full object-cover object-center'
         .p-6
           h2.tracking-widest.text-xs.title-font.font-medium.text-gray-400.mb-1
             = product.released_on
