@@ -39,8 +39,4 @@ class User < ApplicationRecord
       status: :deactivated
     )
   end
-
-  def name
-    display_name.presence || screen_name
-  end
 end
