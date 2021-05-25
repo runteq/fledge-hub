@@ -11,7 +11,7 @@
   .form-group
     = f.label :product_image, class: 'form-label'
     .block.w-full
-      - if @image.product_image.attached?
+      - if @image.product_image.attached? && @image.product_image.blob&.persisted?
         = image_tag @image.product_image, class: 'w-48 mb-3'
       = f.file_field :product_image
   .form-group
