@@ -42,7 +42,7 @@
 
 以下はデータ表示用
 
-<% @product.images.includes({ product_image_attachment: :blob }).each do |image| %>
+<% @product.images.with_attached_product_image.each do |image| %>
   <div>
     <%= image_tag image.product_image, alt: @product.title, width: '600px' %>
     <% if @product.permitted_edit?(current_user) %>
