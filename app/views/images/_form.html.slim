@@ -15,4 +15,6 @@
         = image_tag @image.product_image, class: 'w-48 mb-3'
       = f.file_field :product_image
   .form-group
-    = f.submit class: 'btn btn-indigo'
+    = f.submit class: 'btn btn-indigo mr-1'
+    = link_to '削除', product_image_path(@image.product, @image), method: :delete,
+      data: { confirm: '画像を削除しますか？' }, class: 'btn btn-danger'

@@ -18,6 +18,10 @@
     @apply bg-indigo-700 text-white hover:opacity-75;
   }
 
+  .btn-danger {
+    @apply bg-red-700 text-white hover:opacity-75;
+  }
+
   .form {
     @apply w-full max-w-lg text-sm;
 
