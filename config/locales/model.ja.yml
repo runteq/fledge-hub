@@ -11,7 +11,7 @@ ja:
       created_at: 作成日時
       updated_at: 更新日時
       user:
-        display_name: 名前
+        display_name: 表示名
         screen_name: ID
         email: メールアドレス
       product:
