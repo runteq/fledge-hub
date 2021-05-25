@@ -13,6 +13,8 @@ gem 'turbolinks'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'webpacker'
 
+gem 'active_storage_validations'
+gem 'mini_magick', '>= 4.9.5'
 gem 'active_hash'
 gem 'rails-i18n'
 gem 'seed-fu'
