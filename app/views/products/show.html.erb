@@ -19,20 +19,22 @@
         <%= simple_format h(@product.summary), class: 'text-base text-gray-700 md:text-lg' %>
       </div>
 
-      <p class="mb-3 font-bold">メディア</p>
-      <ul>
-        <% @product.media.each do |medium| %>
-          <li class="flex mb-2">
-            <span class="mr-1">
-              <svg class="h-4 w-4" viewBox="0 -5 20 20" fill="currentColor">
-                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd">
-                </path>
-              </svg>
-            </span>
-            <%= link_to_blank medium.title, medium.url %>
-          </li>
-        <% end %>
-      </ul>
+      <% if @product.media.present? %>
+        <p class="mb-3 font-bold">メディア</p>
+        <ul>
+          <% @product.media.each do |medium| %>
+            <li class="flex mb-2">
+              <span class="mr-1">
+                <svg class="h-4 w-4" viewBox="0 -5 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd">
+                  </path>
+                </svg>
+              </span>
+              <%= link_to_blank medium.title, medium.url %>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
     </div>
     <div>
       <%= image_tag @product.top_image.product_image, alt: @product.title, class: 'object-cover w-full h-56 rounded shadow-lg sm:h-96' %>
