@@ -35,16 +35,16 @@
       </ul>
     </div>
     <div>
-      <%= image_tag @product.top_image.url, alt: @product.title, class: 'object-cover w-full h-56 rounded shadow-lg sm:h-96' %>
+      <%= image_tag @product.top_image.product_image, alt: @product.title, class: 'object-cover w-full h-56 rounded shadow-lg sm:h-96' %>
     </div>
   </div>
 </div>
 
 以下はデータ表示用
 
-<% @product.images.each do |image| %>
-  <div class="image">
-    <%= image_tag sanitize(image.url), alt: image.title, width: '600px' %>
+<% @product.images.includes({ product_image_attachment: :blob }).each do |image| %>
+  <div>
+    <%= image_tag image.product_image, alt: @product.title, width: '600px' %>
     <% if @product.permitted_edit?(current_user) %>
       <%= link_to '編集', edit_product_image_path(@product, image) %>
       <%= link_to '削除', product_image_path(@product, image), method: :delete %>

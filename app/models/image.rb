@@ -4,8 +4,6 @@
 #
 #  id          :bigint           not null, primary key
 #  description :text(65535)      not null
-#  title       :string(255)      not null
-#  url         :text(65535)      not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  product_id  :bigint           not null
@@ -20,7 +18,7 @@
 #
 class Image < ApplicationRecord
   belongs_to :product
+  has_one_attached :product_image
 
-  validates :title, presence: true
-  validates :url, presence: true, url: { allow_blank: true, schemes: %w[https http] }
+  validates :product_image, presence: true
 end

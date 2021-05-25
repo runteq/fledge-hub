@@ -23,6 +23,5 @@ ja:
         technology_ids: 使用技術
         users: 製作者
       image:
-        title: 見出し
         description: 説明
-        url: 画像URL
+        product_image: 画像
