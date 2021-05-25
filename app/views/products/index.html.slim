@@ -21,7 +21,7 @@ br
           h1.title-font.text-lg.font-medium.text-gray-900.mb-1
             = product.title
           .leading-relaxed.mb-3
-            = simple_format(h(product.summary))
+            = simple_format(truncate(h(product.summary), length: 100, separator: /[\s、。]/))
           .mb-3.-mx-1
             - product.technologies.each do |technology|
               span.px-2.mx-1.inline-flex.text-xs.leading-5.font-semibold.rounded-full.bg-gray-200.text-gray-700
