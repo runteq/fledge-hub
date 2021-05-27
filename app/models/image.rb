@@ -20,5 +20,7 @@ class Image < ApplicationRecord
   belongs_to :product
   has_one_attached :product_image
 
-  validates :product_image, presence: true
+  validates :product_image, attached: true,
+    content_type: /\Aimage\/.*\z/,
+    size: { less_than: 10.megabytes }
 end
