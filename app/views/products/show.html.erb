@@ -19,7 +19,6 @@
         <%= simple_format h(@product.summary), class: 'text-base text-gray-700 md:text-lg' %>
       </div>
 
-      <p class="mb-3 font-bold">メディア</p>
       <ul>
         <% @product.media.each do |medium| %>
           <li class="flex mb-2">

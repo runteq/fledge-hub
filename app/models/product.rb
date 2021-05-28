@@ -14,7 +14,7 @@
 class Product < ApplicationRecord
   has_many :user_products, dependent: :destroy
   has_many :users, through: :user_products
-  has_many :images, dependent: :destroy
+  has_many :images, -> { order(created_at: :desc) }, dependent: :destroy
   has_many :media, dependent: :destroy
   has_many :product_technologies, dependent: :destroy
   has_many :technologies, through: :product_technologies
@@ -29,6 +29,10 @@ class Product < ApplicationRecord
   end
 
   def top_image
-    @top_image ||= images.first || OpenStruct.new(product_image: 'https://dummyimage.com/720x400')
+    @top_image ||= images.take || OpenStruct.new(product_image: 'https://dummyimage.com/720x400')
+  end
+
+  def user
+    @user ||= users.take
   end
 end
