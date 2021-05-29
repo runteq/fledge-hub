@@ -11,7 +11,7 @@ ja:
       created_at: 作成日時
       updated_at: 更新日時
       user:
-        display_name: 名前
+        display_name: 表示名
         screen_name: ID
         email: メールアドレス
       product:
@@ -20,8 +20,8 @@ ja:
         released_on: リリース日
         url: URL
         source_url: コードURL
+        technology_ids: 使用技術
         users: 製作者
       image:
-        title: 見出し
         description: 説明
-        url: 画像URL
+        product_image: 画像

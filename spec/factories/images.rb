@@ -4,8 +4,6 @@
 #
 #  id          :bigint           not null, primary key
 #  description :text(65535)      not null
-#  title       :string(255)      not null
-#  url         :text(65535)      not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  product_id  :bigint           not null
@@ -20,9 +18,8 @@
 #
 FactoryBot.define do
   factory :image do
-    sequence(:title, "画像_1")
     description { "MyText" }
-    url { Faker::Internet.url }
+    product_image { Rack::Test::UploadedFile.new('spec/fixtures/files/images/720x400.png', 'image/png') }
     product
   end
 end

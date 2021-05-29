@@ -2,7 +2,7 @@ class ProductsController < ApplicationController
   before_action :require_login, only: %i[new edit create update destroy]
 
   def index
-    @products = Product.all
+    @products = Product.includes(:technologies, :users, { images: { product_image_attachment: :blob } })
   end
 
   def show
@@ -46,6 +46,6 @@ class ProductsController < ApplicationController
   private
 
   def product_params
-    params.require(:product).permit(:title, :summary, :url, :source_url, :released_on)
+    params.require(:product).permit(:title, :summary, :url, :source_url, :released_on, technology_ids: [])
   end
 end

@@ -68,6 +68,28 @@ RSpec.describe "/products", type: :request do
       end
     end
 
+    context "with technology_ids" do
+      let!(:technology) { create(:technology) }
+      let(:attributes) do
+        {
+          title: 'hoge',
+          summary: '',
+          url: '',
+          source_url: '',
+          released_on: Time.zone.today,
+          technology_ids: [technology.id]
+        }
+      end
+
+      it "creates a new Product" do
+        expect { subject }.to change(Product, :count).by(1)
+      end
+
+      it "中間テーブルを作成する" do
+        expect { subject }.to change(ProductTechnology, :count).by(1)
+      end
+    end
+
     context "with invalid parameters" do
       let(:attributes) do
         {
@@ -87,11 +109,11 @@ RSpec.describe "/products", type: :request do
   end
 
   describe "PATCH /update" do
-    before { login_as(user) }
-    let(:product) { create(:product, title: 'hoge', users: [user]) }
     subject { patch product_url(product), params: { product: attributes } }
+    before { login_as(user) }
 
     context "with valid parameters" do
+      let!(:product) { create(:product, title: 'hoge', users: [user]) }
       let(:attributes) do
         {
           title: 'foo',
@@ -108,7 +130,28 @@ RSpec.describe "/products", type: :request do
       end
     end
 
+    context "既にtechnologyと紐付いていて、違うtechnologyにしたとき" do
+      let!(:previous_technology) { create(:technology) }
+      let!(:new_technology) { create(:technology) }
+      let!(:product) { create(:product, title: 'hoge', users: [user], technologies: [previous_technology]) }
+      let(:attributes) do
+        {
+          title: 'hoge',
+          summary: '',
+          url: '',
+          source_url: '',
+          released_on: Time.zone.today,
+          technology_ids: [new_technology.id]
+        }
+    end
+
+      it "上書きされる" do
+        expect { subject }.to change{ product.reload.technologies }.to([new_technology]).from([previous_technology])
+      end
+    end
+
     context "with invalid parameters" do
+      let!(:product) { create(:product, title: 'hoge', users: [user]) }
       let(:attributes) do
         {
           title: '',

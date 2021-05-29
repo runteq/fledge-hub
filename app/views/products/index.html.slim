@@ -1,3 +1,4 @@
+- content_for(:title, t('.title'))
 - flash.each do |key, message|
   = message
 
@@ -5,10 +6,9 @@ h1 Listing products
 
 br
 = link_to 'Users', users_path, class: 'btn btn-indigo'
-br
-= link_to '新規登録', new_product_path, class: 'btn btn-indigo'
-a.btn.btn-indigo
-  | ぼったん
+- if logged_in?
+  br
+  = link_to '新規登録', new_product_path, class: 'btn btn-indigo'
 
 .flex.flex-wrap.-mx-4
   = render(ProductComponent.with_collection(@products))

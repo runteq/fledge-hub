@@ -59,5 +59,10 @@ Technology.seed(:id,
     id: 103,
     name: 'Firebase',
     slug: 'firebase'
+  },
+  {
+    id: 104,
+    name: 'Docker',
+    slug: 'docker'
   }
 )

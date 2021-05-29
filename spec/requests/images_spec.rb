@@ -25,9 +25,8 @@ RSpec.describe "/products/:product_id/images", type: :request do
     context "with valid parameters" do
       let(:attributes) do
         {
-          title: 'タイトル',
           description: '',
-          url: Faker::Internet.url
+          product_image: fixture_file_upload('images/720x400.png')
         }
       end
 
@@ -44,8 +43,8 @@ RSpec.describe "/products/:product_id/images", type: :request do
     context "with invalid parameters" do
       let(:attributes) do
         {
-          title: 'タイトル',
-          url: ''
+          description: '',
+          product_image: nil
         }
       end
 
@@ -61,17 +60,17 @@ RSpec.describe "/products/:product_id/images", type: :request do
   end
 
   describe "PATCH /update" do
-    let(:image) { create(:image, title: '古いタイトル', product: product) }
+    let(:image) { create(:image, description: '古い説明', product: product) }
     subject { patch "/products/#{product.id}/images/#{image.id}", params: { image: attributes } }
     context "with valid parameters" do
       let(:attributes) do
         {
-          title: '新しいタイトル'
+          description: '新しい説明'
         }
       end
 
       it "updates the requested image" do
-        expect { subject }.to change { image.reload.title }.to('新しいタイトル').from('古いタイトル')
+        expect { subject }.to change { image.reload.description }.to('新しい説明').from('古い説明')
       end
 
       it "redirects to the image" do
@@ -84,12 +83,13 @@ RSpec.describe "/products/:product_id/images", type: :request do
     context "with invalid parameters" do
       let(:attributes) do
         {
-          title: ''
+          description: '新しい説明',
+          product_image: nil
         }
       end
 
       it "does not update the requested image" do
-        expect { subject }.not_to change { image.reload.title }.from('古いタイトル')
+        expect { subject }.not_to change { image.reload.description }.from('古い説明')
       end
 
       it "renders a successful response (i.e. to display the 'edit' template)" do

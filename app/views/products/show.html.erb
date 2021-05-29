@@ -1,17 +1,24 @@
+ <% content_for(:title, @product.title) %>
 <div class="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
   <div class="grid gap-12 row-gap-8 lg:grid-cols-2">
     <div class="flex flex-col justify-center">
       <div class="max-w-xl mb-6">
         <p class="text-base leading-6 text-indigo-500 font-semibold tracking-widest">
-          <%= @product.released_on %>
+          <%= "#{@product.released_on} Released" %>
         </p>
-        <h2 class="max-w-lg mb-6 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl sm:leading-none">
+        <h2 class="max-w-lg mb-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl sm:leading-none">
           <%= @product.title %>
         </h2>
+        <div class="max-w-xl mb-6 -mx-1">
+          <% @product.technologies.each do |technology| %>
+            <div class="span px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-200 text-gray-700">
+              <%= technology.name %>
+            </div>
+          <% end %>
+        </div>
         <%= simple_format h(@product.summary), class: 'text-base text-gray-700 md:text-lg' %>
       </div>
 
-      <p class="mb-3 font-bold">メディア</p>
       <ul>
         <% @product.media.each do |medium| %>
           <li class="flex mb-2">
@@ -27,16 +34,16 @@
       </ul>
     </div>
     <div>
-      <%= image_tag @product.top_image.url, alt: @product.title, class: 'object-cover w-full h-56 rounded shadow-lg sm:h-96' %>
+      <%= image_tag @product.top_image.product_image, alt: @product.title, class: 'object-cover w-full h-56 rounded shadow-lg sm:h-96' %>
     </div>
   </div>
 </div>
 
 以下はデータ表示用
 
-<% @product.images.each do |image| %>
-  <div class="image">
-    <%= image_tag sanitize(image.url), alt: image.title, width: '600px' %>
+<% @product.images.with_attached_product_image.each do |image| %>
+  <div>
+    <%= image_tag image.product_image, alt: @product.title, width: '600px' %>
     <% if @product.permitted_edit?(current_user) %>
       <%= link_to '編集', edit_product_image_path(@product, image) %>
       <%= link_to '削除', product_image_path(@product, image), method: :delete %>
