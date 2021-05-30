@@ -10,5 +10,7 @@ html
   body
     = render 'shared/header'
     section.text-gray-600.body-font
-      .container.px-5.py-10.mx-auto
-        = yield
+      .container.px-5.py-3.mx-auto
+        = render 'shared/flash'
+        .py-5
+          = yield
