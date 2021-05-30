@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Oauths", type: :request do
+RSpec.describe OauthsController, type: :request do
   # describe "GET /oauth" do
   #   it "returns http success" do
   #     get "/oauths/oauth"
