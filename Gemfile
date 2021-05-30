@@ -20,6 +20,7 @@ gem 'rails-i18n'
 gem 'seed-fu'
 gem 'tailwindcss-rails', '~> 0.3.3'
 gem 'slim-rails'
+gem "view_component", require: "view_component/engine"
 gem 'sorcery'
 gem 'validate_url'
 
