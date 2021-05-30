@@ -32,16 +32,22 @@ RSpec.describe User, type: :model do
     end
   end
 
-
   describe '#deactivate!' do
     let!(:user) { create(:user, id: 1, status: :general) }
+    let!(:authentication) { create(:authentication, user: user, provider: 'github') }
     subject { user.deactivate! }
 
-    it '規定の値になること' do
+    it 'Userのデータが規定の値になること' do
       expect { subject }.to change { user.reload.display_name }.to('退会済みユーザー')
                         .and change { user.reload.screen_name }.to('removed_account_1')
                         .and change { user.reload.email }.to('removed_account_1@example.com')
                         .and change { user.reload.status }.to('deactivated').from('general')
+    end
+
+    it 'Authenticationのproviderがdeactivatedになること' do
+      expect { subject }.to change {
+        authentication.reload.provider
+      }.to('github/deactivated').from('github')
     end
   end
 end

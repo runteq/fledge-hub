@@ -41,5 +41,10 @@ class User < ApplicationRecord
       email: "removed_account_#{id}@example.com",
       status: :deactivated
     )
+    authentications.each do |authentication|
+      authentication.update!(
+        provider: "#{authentication.provider}/deactivated"
+      )
+    end
   end
 end
