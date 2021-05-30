@@ -5,14 +5,14 @@ class OauthsController < ApplicationController
 
   def callback
     provider = auth_params[:provider]
-    if (@user = login_from(provider))
+    if (user = login_from(provider))
       redirect_to root_path, notice: "#{provider.titleize}でログインしました"
     else
       @user_hash[:user_info]['name'] ||= @user_hash[:user_info]['login']
-      @user = create_from(provider)
+      user = create_from(provider)
       reset_session
-      auto_login(@user)
-      redirect_to root_path, notice: "#{provider.titleize}でログインしました"
+      auto_login(user)
+      redirect_to root_path, notice: "#{provider.titleize}で新規登録しました"
     end
   end
 
