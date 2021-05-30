@@ -22,6 +22,10 @@ FactoryBot.define do
     sequence(:display_name, "名前_1")
     sequence(:screen_name, "screen_name_1")
     sequence(:email){ |n| "test_#{n}@example.com" }
-    status { :general }
+    status { User.statuses.keys.sample }
+
+    trait :active do
+      status { :general }
+    end
   end
 end

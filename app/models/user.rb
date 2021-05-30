@@ -32,6 +32,8 @@ class User < ApplicationRecord
 
   enum status: { general: 0, deactivated: 10 }
 
+  scope :active, -> { where.not(status: :deactivated) }
+
   def deactivate!
     update!(
       display_name: "退会済みユーザー",
