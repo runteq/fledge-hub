@@ -16,7 +16,7 @@ class MediaController < ApplicationController
     if @medium.save
       redirect_to product_path(@product), notice: 'medium was successfully created.'
     else
-      render :new, status: :unprocessable_entity # 422errorを起こす
+      render :new
     end
   end
 
@@ -25,7 +25,7 @@ class MediaController < ApplicationController
     if @medium.update(medium_params)
       redirect_to product_path(@product), notice: 'medium was successfully updated.'
     else
-      render :edit, status: :unprocessable_entity # 422errorを起こす
+      render :edit
     end
   end
 
