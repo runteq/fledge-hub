@@ -3,6 +3,7 @@ class ProductsController < ApplicationController
 
   def index
     @products = Product.includes(:technologies, :users, { images: { product_image_attachment: :blob } })
+                       .order(created_at: :desc)
   end
 
   def show
