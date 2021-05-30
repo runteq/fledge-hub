@@ -9,7 +9,7 @@ gem 'bootsnap', require: false
 gem 'mysql2'
 gem 'puma'
 gem 'sass-rails'
-gem 'turbolinks'
+
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'webpacker'
 
@@ -22,6 +22,8 @@ gem 'tailwindcss-rails', '~> 0.3.3'
 gem 'slim-rails'
 gem 'sorcery'
 gem 'validate_url'
+gem 'hotwire-rails', '~> 0.1.0'
+gem 'redis', '~> 4.0'
 
 group :development, :test do
   gem 'bullet'
