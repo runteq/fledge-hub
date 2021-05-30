@@ -57,7 +57,7 @@ RSpec.describe "/profile", type: :request do
 
       it "renders a successful response (i.e. to display the 'edit' template)" do
         subject
-        expect(response).to be_successful
+        expect(response.status).to eq(422)
       end
     end
   end
