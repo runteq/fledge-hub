@@ -18,6 +18,12 @@ RSpec.describe UserDeactivationsController, type: :request do
       expect { subject }.to change { user.reload.status }.to('deactivated').from('general')
     end
 
+    it 'ログアウトすること' do
+      expect(logged_in?).to eq true
+      subject
+      expect(logged_in?).to eq false
+    end
+
     it "redirects to the users list" do
       subject
       expect(response).to redirect_to(users_url)
