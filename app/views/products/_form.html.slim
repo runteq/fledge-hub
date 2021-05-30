@@ -7,6 +7,9 @@
     = f.label :title, class: 'form-label'
     = f.text_field :title, class: 'text-field'
   .form-group
+    = f.label :released_on, class: 'form-label'
+    = f.date_field :released_on, class: 'text-field'
+  .form-group
     = f.label :url, class: 'form-label'
     = f.text_field :url, class: 'text-field'
   .form-group
@@ -14,10 +17,7 @@
     = f.text_field :source_url, class: 'text-field'
   .form-group
     = f.label :summary, class: 'form-label'
-    = f.text_area :summary, class: 'text-field'
-  .form-group
-    = f.label :released_on, class: 'form-label'
-    = f.date_field :released_on, class: 'text-field'
+    = f.text_area :summary, class: 'text-field h-24'
   .form-group
     = f.label :technology_ids, class: 'form-label'
     | （commandキーを押しながら複数選択可能）
