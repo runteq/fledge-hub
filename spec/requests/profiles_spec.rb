@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "/profile", type: :request do
+RSpec.describe ProfilesController, type: :request do
   before { login_as(user) }
 
   describe "GET /edit" do
