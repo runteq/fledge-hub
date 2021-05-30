@@ -20,6 +20,7 @@
 class User < ApplicationRecord
   authenticates_with_sorcery!
 
+  # dependent: :destroyだけど、Userを物理削除することはない
   has_many :user_products, dependent: :destroy
   has_many :products, through: :user_products
   has_many :authentications, dependent: :destroy

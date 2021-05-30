@@ -1,0 +1,8 @@
+h1 退会前に確認
+
+ul.list-disc.ml-6.my-2
+  li ユーザーのデータは削除されます。
+  li 退会後はプロダクトの削除ができなくなるので、退会前に削除してください。
+
+= link_to '同意して退会する', user_deactivation_path, method: :delete, class: 'btn btn-danger'
+= link_to '戻る', edit_profile_path, class: 'ml-1 btn btn-indigo'

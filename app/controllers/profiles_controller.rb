@@ -16,11 +16,6 @@ class ProfilesController < ApplicationController
     end
   end
 
-  def destroy
-    current_user.deactivate!
-    redirect_to users_url, notice: '退会しました'
-  end
-
   private
 
   def user_params
