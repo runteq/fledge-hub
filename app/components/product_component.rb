@@ -7,7 +7,7 @@ class ProductComponent < ViewComponent::Base
   end
 
   def top_image_url
-    @product.top_image.url
+    @product.top_image.product_image
   end
 
   def product_title
