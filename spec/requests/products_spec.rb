@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "/products", type: :request do
+RSpec.describe ProductsController, type: :request do
   let(:user) { create(:user) }
 
   describe "GET /index" do
