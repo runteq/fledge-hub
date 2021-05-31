@@ -23,7 +23,6 @@ gem 'slim-rails'
 gem 'sorcery'
 gem 'validate_url'
 gem 'hotwire-rails', '~> 0.1.0'
-gem 'redis', '~> 4.0'
 
 group :development, :test do
   gem 'bullet'
