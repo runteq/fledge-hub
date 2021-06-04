@@ -22,7 +22,7 @@ RSpec.describe UsersController, type: :request do
     end
 
     context '退会済みユーザーのとき' do
-      let!(:user) { create(:user, status: :deactivated) }
+      let!(:user) { create(:user, :deactivated) }
 
       it "404エラーになる" do
         expect { subject }.to raise_error ActiveRecord::RecordNotFound
