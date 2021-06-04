@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "/products", type: :request do
+RSpec.describe ProductsController, type: :request do
   let(:user) { create(:user) }
 
   describe "GET /index" do
@@ -103,7 +103,7 @@ RSpec.describe "/products", type: :request do
 
       it "renders a successful response (i.e. to display the 'new' template)" do
         subject
-        expect(response).to be_successful
+        expect(response.status).to eq(422)
       end
     end
   end
@@ -164,7 +164,7 @@ RSpec.describe "/products", type: :request do
 
       it "renders a successful response (i.e. to display the 'edit' template)" do
         subject
-        expect(response).to be_successful
+        expect(response.status).to eq(422)
       end
     end
   end

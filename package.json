@@ -2,14 +2,16 @@
   "name": "runteq-senses",
   "private": true,
   "dependencies": {
+    "@hotwired/turbo-rails": "^7.0.0-beta.5",
     "@rails/actioncable": "^6.0.0",
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "5.2.1",
     "autoprefixer": "^9",
     "postcss": "^7",
+    "stimulus": "^2.0.0",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat",
-    "turbolinks": "^5.2.0"
+    "tailwindcss-stimulus-components": "^2.2.0"
   },
   "version": "0.1.0",
   "devDependencies": {

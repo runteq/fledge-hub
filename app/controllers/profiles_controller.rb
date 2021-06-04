@@ -12,7 +12,7 @@ class ProfilesController < ApplicationController
     if @user.update(user_params)
       redirect_to user_path(@user.screen_name), notice: 'User was successfully updated.'
     else
-      render :edit
+      render :edit, status: :unprocessable_entity # 422errorを起こす
     end
   end
 

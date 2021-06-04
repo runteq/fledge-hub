@@ -3,6 +3,7 @@ class ProductsController < ApplicationController
 
   def index
     @products = Product.includes(:technologies, :users, { images: { product_image_attachment: :blob } })
+                       .order(created_at: :desc)
   end
 
   def show
@@ -24,7 +25,7 @@ class ProductsController < ApplicationController
       @product = current_user.products.create(product_params)
       redirect_to @product, notice: 'Product was successfully created.'
     else
-      render :new
+      render :new, status: :unprocessable_entity # 422errorを起こす
     end
   end
 
@@ -33,7 +34,7 @@ class ProductsController < ApplicationController
     if @product.update(product_params)
       redirect_to @product, notice: 'Product was successfully updated.'
     else
-      render :edit
+      render :edit, status: :unprocessable_entity # 422errorを起こす
     end
   end
 
