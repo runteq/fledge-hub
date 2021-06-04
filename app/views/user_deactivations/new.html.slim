@@ -1,8 +1,26 @@
-h1 退会前に確認
+.mb-4
+  h2.text-lg.font-semibold
+    | 退会時に削除されるデータ
+  ul.list-disc.ml-6
+    li メールアドレス
+    li ユーザープロフィールのデータ
+    / li ブックマーク
+.mb-4
+  h2.text-lg.font-semibold
+    | 退会時に削除されないデータ
+  ul.list-disc.ml-6
+    li 連携GitHubアカウントのID
+    li 投稿したサービスのデータ
 
-ul.list-disc.ml-6.my-2
-  li ユーザーのデータは削除されます。
-  li 退会後はプロダクトの削除ができなくなるので、退会前に削除してください。
+- if current_user.products.present?
+  .mb-4
+    .mb-2
+      h2.text-lg.font-semibold
+        | 投稿済みサービスについて
+      p 投稿済みサービスは、製作者の表示が「退会済みユーザー」になります。
+      p 退会後は投稿データの編集・削除ができません。
+    .-m-4
+      = render(ProductComponent.new(product: @deactivated_product_sample))
 
 = link_to '同意して退会する', user_deactivation_path, method: :delete, class: 'btn btn-danger'
 = link_to '戻る', edit_profile_path, class: 'ml-1 btn btn-indigo'
