@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe UserDeactivationsController, type: :request do
-  let!(:user) { create(:user) }
+  let!(:user) { create(:user, :active) }
   before { login_as(user) }
 
   describe "GET /new" do
