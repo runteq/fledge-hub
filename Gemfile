@@ -9,7 +9,7 @@ gem 'bootsnap', require: false
 gem 'mysql2'
 gem 'puma'
 gem 'sass-rails'
-
+gem 'rename', git: "git@github.com:rlogwood/rename.git"
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'webpacker'
 
