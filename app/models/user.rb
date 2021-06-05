@@ -20,6 +20,7 @@
 class User < ApplicationRecord
   authenticates_with_sorcery!
 
+  # dependent: :destroyだけど、Userを物理削除することはない
   has_many :user_products, dependent: :destroy
   has_many :products, through: :user_products
   has_many :authentications, dependent: :destroy
@@ -31,6 +32,8 @@ class User < ApplicationRecord
 
   enum status: { general: 0, deactivated: 10 }
 
+  scope :active, -> { where.not(status: :deactivated) }
+
   def deactivate!
     update!(
       display_name: "退会済みユーザー",
@@ -38,5 +41,10 @@ class User < ApplicationRecord
       email: "removed_account_#{id}@example.com",
       status: :deactivated
     )
+    authentications.each do |authentication|
+      authentication.update!(
+        provider: "#{authentication.provider}/deactivated"
+      )
+    end
   end
 end

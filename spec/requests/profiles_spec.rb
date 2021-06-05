@@ -61,18 +61,4 @@ RSpec.describe ProfilesController, type: :request do
       end
     end
   end
-
-  describe "DELETE /destroy" do
-    let!(:user) { create(:user) }
-    subject { delete profile_url(user) }
-
-    specify do
-      expect { subject }.to change { user.reload.status }.to('deactivated').from('general')
-    end
-
-    it "redirects to the users list" do
-      subject
-      expect(response).to redirect_to(users_url)
-    end
-  end
 end

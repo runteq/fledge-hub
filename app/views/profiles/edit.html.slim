@@ -3,8 +3,9 @@ h1 Editing user
 
 == render 'form'
 
+= link_to '退会', new_user_deactivation_path, class: 'btn btn-danger'
+
+br
 = link_to 'ユーザーページ', user_path((@user.screen_name))
 '|
 = link_to 'プロフィール', profile_path
-br
-= link_to '退会', profile_path, method: :delete

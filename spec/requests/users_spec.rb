@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe UsersController, type: :request do
   describe "GET /index" do
     it "renders a successful response" do
-      create(:user)
+      create(:user, :active)
       get users_url
       expect(response).to be_successful
     end
