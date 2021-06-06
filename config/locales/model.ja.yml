@@ -21,6 +21,7 @@ ja:
         url: URL
         source_url: コードURL
         technology_ids: 使用技術
+        genre_id: ジャンル
         users: 製作者
       image:
         description: 説明
