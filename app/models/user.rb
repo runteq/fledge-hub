@@ -36,7 +36,7 @@ class User < ApplicationRecord
 
   def deactivate!
     update!(
-      display_name: "退会済みユーザー",
+      display_name: '退会済みユーザー',
       screen_name: "removed_account_#{id}",
       email: "removed_account_#{id}@example.com",
       status: :deactivated

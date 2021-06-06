@@ -2,7 +2,8 @@ class ProductsController < ApplicationController
   before_action :require_login, only: %i[new edit create update destroy]
 
   def index
-    @products = Product.includes(:technologies, :users, { images: { product_image_attachment: :blob } })
+    @products = Product.includes(:technologies, :users,
+                                 { images: { product_image_attachment: :blob } })
                        .order(created_at: :desc)
   end
 

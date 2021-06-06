@@ -22,6 +22,7 @@ class Medium < ApplicationRecord
   belongs_to :product
 
   validates :title, presence: true, length: { maximum: 100 }
-  validates :url, presence: true, url: { allow_blank: true, schemes: %w[https http] }, length: { maximum: 500 }
+  validates :url, presence: true, url: { allow_blank: true, schemes: %w[https http] },
+                  length: { maximum: 500 }
   validates :description, length: { maximum: 500 }
 end

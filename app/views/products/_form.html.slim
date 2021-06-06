@@ -5,10 +5,10 @@
         li= message
   .form-group
     = f.label :title, class: 'form-label'
-    = f.text_field :title, class: 'text-field'
+    = f.text_field :title, required: true, class: 'text-field'
   .form-group
     = f.label :released_on, class: 'form-label'
-    = f.date_field :released_on, class: 'text-field'
+    = f.date_field :released_on, required: true, class: 'text-field'
   .form-group
     = f.label :url, class: 'form-label'
     = f.text_field :url, class: 'text-field'
