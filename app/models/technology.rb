@@ -18,5 +18,10 @@ class Technology < ApplicationRecord
   has_many :products, through: :product_technologies
 
   validates :name, uniqueness: true, length: { maximum: 100 }
-  validates :slug, uniqueness: true, format: { with: /\A[a-zA-Z0-9_-]+\z/, message: "この%{attribute}%{value}はだめです" }, length: { maximum: 100 }
+  validates :slug, uniqueness: true,
+                   format: {
+                     with: /\A[a-zA-Z0-9_-]+\z/,
+                     message: 'の「%<value>s」には使用できない文字が含まれています'
+                   },
+                   length: { maximum: 100 }
 end

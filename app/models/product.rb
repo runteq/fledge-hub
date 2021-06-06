@@ -14,14 +14,15 @@
 class Product < ApplicationRecord
   has_many :user_products, dependent: :destroy
   has_many :users, through: :user_products
-  has_many :images, -> { order(created_at: :desc) }, dependent: :destroy
+  has_many :images, -> { order(created_at: :desc) }, dependent: :destroy, inverse_of: :product
   has_many :media, dependent: :destroy
   has_many :product_technologies, dependent: :destroy
   has_many :technologies, through: :product_technologies
 
   validates :title, presence: true, length: { maximum: 100 }
   validates :url, url: { allow_blank: true, schemes: %w[https http] }, length: { maximum: 500 }
-  validates :source_url, url: { allow_blank: true, schemes: %w[https http] }, length: { maximum: 500 }
+  validates :source_url, url: { allow_blank: true, schemes: %w[https http] },
+                         length: { maximum: 500 }
   validates :released_on, presence: true
   validates :summary, length: { maximum: 500 }
 
