@@ -21,7 +21,7 @@ class Product < ApplicationRecord
   has_many :media, dependent: :destroy
   has_many :product_technologies, dependent: :destroy
   has_many :technologies, through: :product_technologies
-  belongs_to :genre
+  belongs_to_active_hash :genre
 
   validates :title, presence: true, length: { maximum: 100 }
   validates :url, url: { allow_blank: true, schemes: %w[https http] }, length: { maximum: 500 }
