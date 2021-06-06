@@ -1,7 +1,10 @@
 class UserDeactivationsController < ApplicationController
   def new
     @deactivated_product_sample = current_user.products.first.clone
-    @deactivated_product_sample.user.display_name = '退会済みユーザー' if @deactivated_product_sample
+    return unless @deactivated_product_sample
+
+    @deactivated_product_sample.user.display_name = '退会済みユーザー'
+    @deactivated_product_sample.user.status = :deactivated
   end
 
   def destroy

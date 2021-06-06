@@ -62,7 +62,7 @@
 <% end %>
 <br>
 <% @product.users.each do |user| %>
-  <%= link_to user.display_name, user_path(user.screen_name) %>
+  <%= link_to_active user %>
 <% end %>
 
 <br>
