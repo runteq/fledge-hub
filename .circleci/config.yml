@@ -29,6 +29,7 @@ commands:
   setup_bundler:
     steps:
       - run:
+          name: Setup bundler
           command: |
             sudo gem update --system
             sudo gem uninstall bundler
@@ -54,10 +55,10 @@ commands:
   setup_database:
     steps:
       - run:
-          name: wait for database
+          name: Wait for database
           command: dockerize -wait tcp://127.0.0.1:3306 -timeout 3m
       - run:
-          name: cp database.yml
+          name: Prepare database.yml
           command: |
             cp -v config/database.ci.yml config/database.yml
       - run: mysql_config --socket
@@ -91,10 +92,10 @@ commands:
   run_tests:
     steps:
       - run:
-          name: eager_load test
+          name: Run eager_load test
           command: bundle exec rails runner Rails.application.eager_load!
       - run:
-          name: run rspec
+          name: Run rspec
           command: |
             bundle exec rspec --profile 10 \
                               --format RspecJunitFormatter \
