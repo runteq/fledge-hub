@@ -20,7 +20,7 @@
     = f.text_area :summary, class: 'text-field h-24'
   .form-group
     = f.label :genre_id, class: 'form-label'
-    = f.select :genre_id, Genre.order(:position).pluck(:name, :id), { prompt: 'ジャンルを選択してください' }, required: true, class: 'select-box'
+    = f.select :genre_id, Genre.asc.pluck(:name, :id), { required: true, prompt: 'ジャンルを選択してください' }, class: 'select-box'
   .form-group
     = f.label :technology_ids, class: 'form-label'
     | （commandキーを押しながら複数選択可能）
