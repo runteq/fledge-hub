@@ -83,7 +83,7 @@ ActiveRecord::Schema.define(version: 2021_06_06_012253) do
     t.text "url", null: false
     t.text "source_url", null: false
     t.date "released_on", null: false
-    t.integer "genre_id", default: 0, null: false
+    t.integer "genre_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

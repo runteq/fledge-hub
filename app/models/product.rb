@@ -10,7 +10,7 @@
 #  url         :text(65535)      not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  genre_id    :integer          default(0), not null
+#  genre_id    :integer          not null
 #
 class Product < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
@@ -28,6 +28,7 @@ class Product < ApplicationRecord
   validates :source_url, url: { allow_blank: true, schemes: %w[https http] }, length: { maximum: 500 }
   validates :released_on, presence: true
   validates :summary, length: { maximum: 500 }
+  validates :genre_id, presence: true
 
   def permitted_edit?(user)
     !!user&.in?(users)
