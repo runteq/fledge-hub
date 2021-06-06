@@ -73,6 +73,7 @@ jobs:
           command: bundle exec rails runner Rails.application.eager_load!
 
       - run: bundle exec rails factory_bot:lint RAILS_ENV=test
+      - run: bundle exec rubocop
       - run: bundle exec brakeman
 
       - run:
