@@ -29,25 +29,25 @@ commands:
   setup_bundler:
     steps:
       - run:
-        command: |
-          sudo gem update --system
-          sudo gem uninstall bundler
-          sudo rm /usr/local/bin/bundle
-          sudo gem install bundler
+          command: |
+            sudo gem update --system
+            sudo gem uninstall bundler
+            sudo rm /usr/local/bin/bundle
+            sudo gem install bundler
       - run:
-        name: bundle install
-        command: |
-          bundle install --jobs=4 --retry=3 --path vendor/bundle
+          name: bundle install
+          command: |
+            bundle install --jobs=4 --retry=3 --path vendor/bundle
 
   setup_database:
     steps:
       - run:
-        name: wait for database
-        command: dockerize -wait tcp://127.0.0.1:3306 -timeout 3m
+          name: wait for database
+          command: dockerize -wait tcp://127.0.0.1:3306 -timeout 3m
       - run:
-        name: cp database.yml
-        command: |
-          cp -v config/database.ci.yml config/database.yml
+          name: cp database.yml
+          command: |
+            cp -v config/database.ci.yml config/database.yml
       - run: mysql_config --socket
       - run: bundle exec rails db:create
       - run: bundle exec rails db:schema:load
