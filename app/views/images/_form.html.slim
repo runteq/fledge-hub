@@ -9,7 +9,7 @@
     = f.label :description, class: 'form-label'
     = f.text_area :description, class: 'text-field'
   .form-group
-    = f.label :product_image, class: 'form-label'
+    = f.label :product_image, required: true, class: 'form-label'
     .block.w-full
       - if @image.product_image.attached? && @image.product_image.blob&.persisted?
         = image_tag @image.product_image, class: 'w-48 mb-3'
