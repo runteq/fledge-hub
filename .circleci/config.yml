@@ -1,4 +1,5 @@
 version: 2.1
+
 orbs:
   ruby: circleci/ruby@1.1.2
 
@@ -17,46 +18,6 @@ executors:
         environment:
           MYSQL_USER: root
           MYSQL_DB: circle_test
-
-workflows:
-  version: 2
-
-  commit:
-    jobs:
-      - setup
-      # - lint:
-      #   requires:
-      #     - setup
-      # - test:
-      #   requires:
-      #     - setup
-
-jobs:
-  setup:
-    executor: default_executor
-    steps:
-      - checkout
-      - setup_bundler
-      - setup_yarn
-      - check_versions
-  # lint:
-  #   executor: default_executor
-  #   steps:
-  #     - checkout
-  #     - setup_yarn
-  #     - build_webpack
-  #     - run_lint
-  # test:
-  #   executor: default_executor
-  #   environment:
-  #     RAILS_ENV: test
-  #   steps:
-  #     - checkout
-  #     - setup_bundler
-  #     - setup_database
-  #     - setup_yarn
-  #     - build_webpack
-  #     - run_tests
 
 commands:
   check_versions:
@@ -182,3 +143,43 @@ commands:
   #                         --out test_results/rspec.xml \
   #                         --format progress \
   #                         $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+
+jobs:
+  setup:
+    executor: default_executor
+    steps:
+      - checkout
+      - setup_bundler
+      - setup_yarn
+      - check_versions
+  # lint:
+  #   executor: default_executor
+  #   steps:
+  #     - checkout
+  #     - setup_yarn
+  #     - build_webpack
+  #     - run_lint
+  # test:
+  #   executor: default_executor
+  #   environment:
+  #     RAILS_ENV: test
+  #   steps:
+  #     - checkout
+  #     - setup_bundler
+  #     - setup_database
+  #     - setup_yarn
+  #     - build_webpack
+  #     - run_tests
+
+workflows:
+  version: 2
+
+  commit:
+    jobs:
+      - setup
+      # - lint:
+      #   requires:
+      #     - setup
+      # - test:
+      #   requires:
+      #     - setup
