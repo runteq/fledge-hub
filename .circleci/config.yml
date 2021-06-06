@@ -86,6 +86,7 @@ commands:
       - run: bundle exec rails factory_bot:lint RAILS_ENV=test
       - run: bundle exec rubocop
       - run: bundle exec brakeman
+      - run: yarn run lint
 
   run_tests:
     steps:
@@ -101,69 +102,6 @@ commands:
                               --format progress \
                               $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
 
-  # steps:
-  #   - checkout
-
-  # - run:
-  #     name: wait for database
-  #     command: dockerize -wait tcp://127.0.0.1:3306 -timeout 3m
-
-  # まだ↓
-  # Restore bundle cache
-  # - restore_cache:
-  #     keys:
-  #       - rails-demo-{{ checksum "Gemfile.lock" }}-{{ checksum "yarn.lock" }}
-  #       - rails-demo-
-
-  # - run:
-  #     name: setup bundler
-  #     command: |
-  #       sudo gem update --system
-  #       sudo gem uninstall bundler
-  #       sudo rm /usr/local/bin/bundle
-  #       sudo gem install bundler
-  # - run:
-  #     name: Which bundler?
-  #     command: bundle -v
-
-  # - run:
-  #     name: bundle install
-  #     command: |
-  #       bundle install --jobs=4 --retry=3 --path vendor/bundle
-
-  # Store bundle cache
-  # まだ↓
-  # - save_cache:
-  #     paths:
-  #       - ./vendor/bundle
-  #       - ./node_modules
-  #     key: v1-dependencies-{{ checksum "Gemfile.lock" }}-{{ checksum "yarn.lock" }}
-
-  # - run:
-  #     name: setup database
-  #     command: |
-  #       cp -v config/database.ci.yml config/database.yml
-  # - run: mysql_config --socket
-  # - run: bundle exec rails db:create
-  # - run: bundle exec rails db:schema:load
-
-  # - run:
-  #     name: eager_load test
-  #     command: bundle exec rails runner Rails.application.eager_load!
-
-  # - run: bundle exec rails factory_bot:lint RAILS_ENV=test
-  # - run: bundle exec rubocop
-  # - run: bundle exec brakeman
-
-  # - run:
-  #     name: run rspec
-  #     command: |
-  #       bundle exec rspec --profile 10 \
-  #                         --format RspecJunitFormatter \
-  #                         --out test_results/rspec.xml \
-  #                         --format progress \
-  #                         $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
-
 jobs:
   setup:
     executor: default_executor
@@ -173,13 +111,16 @@ jobs:
       - setup_gems
       - setup_yarn
       - check_versions
+
   lint:
     executor: default_executor
     steps:
       - checkout
+      - setup_bundler
+      - setup_gems
       - setup_yarn
-      - build_webpack
       - run_lint
+
   test:
     executor: default_executor
     environment:
