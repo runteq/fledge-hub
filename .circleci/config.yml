@@ -34,10 +34,22 @@ commands:
             sudo gem uninstall bundler
             sudo rm /usr/local/bin/bundle
             sudo gem install bundler
+
+  setup_gems:
+    steps:
+      - restore_cache:
+          keys:
+            - gems-{{ checksum ".circleci/.cache_version" }}-{{ checksum ".ruby-version" }}-{{ checksum "Gemfile.lock" }}
+            - gems-{{ checksum ".circleci/.cache_version" }}-{{ checksum ".ruby-version" }}-
+            - gems-{{ checksum ".circleci/.cache_version" }}-
       - run:
           name: bundle install
           command: |
-            bundle install --jobs=4 --retry=3 --path vendor/bundle
+            bundle check || bundle install --jobs=4 --retry=3 --path vendor/bundle
+      - save_cache:
+          key: gems-{{ checksum ".circleci/.cache_version" }}-{{ checksum ".ruby-version" }}-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
 
   setup_database:
     steps:
@@ -54,7 +66,15 @@ commands:
 
   setup_yarn:
     steps:
+      - restore_cache:
+          keys:
+            - yarn-{{ checksum ".circleci/.cache_version" }}-{{ checksum "yarn.lock" }}
+            - yarn-{{ checksum ".circleci/.cache_version" }}-
       - run: yarn install
+      - save_cache:
+          key: yarn-{{ checksum ".circleci/.cache_version" }}-{{ checksum "yarn.lock" }}
+          paths:
+            - vendor/bundle
 
   # Build JavaScript files （eslintも実行する）
   build_webpack:
@@ -150,6 +170,7 @@ jobs:
     steps:
       - checkout
       - setup_bundler
+      - setup_gems
       - setup_yarn
       - check_versions
   lint:
@@ -166,6 +187,7 @@ jobs:
     steps:
       - checkout
       - setup_bundler
+      - setup_gems
       - setup_database
       - setup_yarn
       - build_webpack
