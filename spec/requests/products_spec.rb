@@ -54,7 +54,9 @@ RSpec.describe ProductsController, type: :request do
           summary: '',
           url: '',
           source_url: '',
-          released_on: Time.zone.today
+          released_on: Time.zone.today,
+          genre_id: Genre.pluck(:id).sample,
+          technology_ids: ['']
         }
       end
 
@@ -77,6 +79,7 @@ RSpec.describe ProductsController, type: :request do
           url: '',
           source_url: '',
           released_on: Time.zone.today,
+          genre_id: Genre.pluck(:id).sample,
           technology_ids: [technology.id]
         }
       end
@@ -98,7 +101,7 @@ RSpec.describe ProductsController, type: :request do
       end
 
       it "does not create a new Product" do
-        expect { subject }.to change(Product, :count).by(0)
+        expect { subject }.not_to change(Product, :count)
       end
 
       it "renders a successful response (i.e. to display the 'new' template)" do
@@ -141,6 +144,7 @@ RSpec.describe ProductsController, type: :request do
           url: '',
           source_url: '',
           released_on: Time.zone.today,
+          genre_id: product.genre_id,
           technology_ids: [new_technology.id]
         }
     end
