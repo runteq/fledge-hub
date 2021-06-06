@@ -56,30 +56,30 @@ commands:
     steps:
       - run: yarn install
 
-  # # Build JavaScript files （eslintも実行する）
-  # build_webpack:
-  #   steps:
-  #     - run: bundle exec bin/webpack
+  # Build JavaScript files （eslintも実行する）
+  build_webpack:
+    steps:
+      - run: bundle exec bin/webpack
 
-  # run_lint:
-  #   steps:
-  #     - run: bundle exec rails factory_bot:lint RAILS_ENV=test
-  #     - run: bundle exec rubocop
-  #     - run: bundle exec brakeman
+  run_lint:
+    steps:
+      - run: bundle exec rails factory_bot:lint RAILS_ENV=test
+      - run: bundle exec rubocop
+      - run: bundle exec brakeman
 
-  # run_tests:
-  #   steps:
-  #     - run:
-  #       name: eager_load test
-  #       command: bundle exec rails runner Rails.application.eager_load!
-  #     - run:
-  #       name: run rspec
-  #       command: |
-  #         bundle exec rspec --profile 10 \
-  #                           --format RspecJunitFormatter \
-  #                           --out test_results/rspec.xml \
-  #                           --format progress \
-  #                           $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+  run_tests:
+    steps:
+      - run:
+          name: eager_load test
+          command: bundle exec rails runner Rails.application.eager_load!
+      - run:
+          name: run rspec
+          command: |
+            bundle exec rspec --profile 10 \
+                              --format RspecJunitFormatter \
+                              --out test_results/rspec.xml \
+                              --format progress \
+                              $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
 
   # steps:
   #   - checkout
@@ -152,24 +152,24 @@ jobs:
       - setup_bundler
       - setup_yarn
       - check_versions
-  # lint:
-  #   executor: default_executor
-  #   steps:
-  #     - checkout
-  #     - setup_yarn
-  #     - build_webpack
-  #     - run_lint
-  # test:
-  #   executor: default_executor
-  #   environment:
-  #     RAILS_ENV: test
-  #   steps:
-  #     - checkout
-  #     - setup_bundler
-  #     - setup_database
-  #     - setup_yarn
-  #     - build_webpack
-  #     - run_tests
+  lint:
+    executor: default_executor
+    steps:
+      - checkout
+      - setup_yarn
+      - build_webpack
+      - run_lint
+  test:
+    executor: default_executor
+    environment:
+      RAILS_ENV: test
+    steps:
+      - checkout
+      - setup_bundler
+      - setup_database
+      - setup_yarn
+      - build_webpack
+      - run_tests
 
 workflows:
   version: 2
@@ -177,9 +177,9 @@ workflows:
   commit:
     jobs:
       - setup
-      # - lint:
-      #   requires:
-      #     - setup
-      # - test:
-      #   requires:
-      #     - setup
+      - lint:
+        requires:
+          - setup
+      - test:
+        requires:
+          - setup
