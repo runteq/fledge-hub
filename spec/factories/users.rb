@@ -21,11 +21,18 @@ FactoryBot.define do
   factory :user do
     sequence(:display_name, "名前_1")
     sequence(:screen_name, "screen_name_1")
-    sequence(:email){ |n| "test_#{n}@example.com" }
+    sequence(:email) { |n| "test_#{n}@example.com" }
     status { User.statuses.keys.sample }
 
     trait :active do
       status { :general }
+    end
+
+    trait :deactivated do
+      display_name { '退会済みユーザー' }
+      sequence(:screen_name, "removed_account_1")
+      sequence(:email) { |n| "removed_account_#{n}@example.com" }
+      status { :deactivated }
     end
   end
 end
