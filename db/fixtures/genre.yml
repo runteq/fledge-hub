@@ -1,5 +1,8 @@
 # リリース後はidの変更をしないでください
 
+- id: 0
+  position: 1000
+  name: その他
 - id: 1
   position: 1
   name: ゲーム
@@ -27,6 +30,3 @@
 - id: 9
   position: 9
   name: コンテンツ
-- id: 1000
-  position: 1000
-  name: その他
