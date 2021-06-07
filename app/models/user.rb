@@ -17,6 +17,8 @@
 #  index_users_on_email        (email) UNIQUE
 #  index_users_on_screen_name  (screen_name) UNIQUE
 #
+require "open-uri" 
+
 class User < ApplicationRecord
   authenticates_with_sorcery!
 
@@ -24,6 +26,7 @@ class User < ApplicationRecord
   has_many :user_products, dependent: :destroy
   has_many :products, through: :user_products
   has_many :authentications, dependent: :destroy
+  has_one_attached :avatar, dependent: :destroy
   accepts_nested_attributes_for :authentications
 
   validates :display_name, presence: true, length: { maximum: 100 }
@@ -46,5 +49,10 @@ class User < ApplicationRecord
         provider: "#{authentication.provider}/deactivated"
       )
     end
+  end
+
+  def grab_avatar_image(url)
+    avatar_url = url.open
+    self.avatar.attach(io: avatar_url, filename: "user_avatar_#{self.id}.jpg")
   end
 end
