@@ -38,17 +38,19 @@ class User < ApplicationRecord
   scope :active, -> { where.not(status: :deactivated) }
 
   def deactivate!
-    update!(
-      display_name: "退会済みユーザー",
-      screen_name: "removed_account_#{id}",
-      email: "removed_account_#{id}@example.com",
-      status: :deactivated
-    )
-    self.avatar.purge_later
-    authentications.each do |authentication|
-      authentication.update!(
-        provider: "#{authentication.provider}/deactivated"
+    transaction do
+      update!(
+        display_name: "退会済みユーザー",
+        screen_name: "removed_account_#{id}",
+        email: "removed_account_#{id}@example.com",
+        status: :deactivated
       )
+      avatar.purge_later
+      authentications.each do |authentication|
+        authentication.update!(
+          provider: "#{authentication.provider}/deactivated"
+        )
+      end
     end
   end
 
