@@ -11,7 +11,7 @@ class OauthsController < ApplicationController
       @user_hash[:user_info]['name'] ||= @user_hash[:user_info]['login']
       url = URI.parse(@user_hash[:user_info]['avatar_url'])
       user = create_from(provider)
-      avatar_image = user.grab_avatar_image(url)
+      user.grab_avatar_image(url)
       reset_session
       auto_login(user)
       redirect_to root_path, notice: "#{provider.titleize}で新規登録しました"

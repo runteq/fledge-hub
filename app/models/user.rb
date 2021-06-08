@@ -17,7 +17,7 @@
 #  index_users_on_email        (email) UNIQUE
 #  index_users_on_screen_name  (screen_name) UNIQUE
 #
-require "open-uri" 
+require 'open-uri'
 
 class User < ApplicationRecord
   authenticates_with_sorcery!
@@ -40,7 +40,7 @@ class User < ApplicationRecord
   def deactivate!
     transaction do
       update!(
-        display_name: "退会済みユーザー",
+        display_name: '退会済みユーザー',
         screen_name: "removed_account_#{id}",
         email: "removed_account_#{id}@example.com",
         status: :deactivated
@@ -56,6 +56,6 @@ class User < ApplicationRecord
 
   def grab_avatar_image(url)
     avatar_url = url.open
-    self.avatar.attach(io: avatar_url, filename: "user_avatar_#{self.id}.jpg")
+    avatar.attach(io: avatar_url, filename: "user_avatar_#{id}.jpg")
   end
 end
