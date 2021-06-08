@@ -8,10 +8,10 @@
 
   .form-group
     = f.label :title, class: 'form-label'
-    = f.text_field :title, class: 'text-field'
+    = f.text_field :title, required: true, class: 'text-field'
   .form-group
     = f.label :url, class: 'form-label'
-    = f.text_field :url, class: 'text-field'
+    = f.text_field :url, required: true, class: 'text-field'
   .form-group
     = f.label :description, class: 'form-label'
     = f.text_area :description, class: 'text-field'

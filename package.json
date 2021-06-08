@@ -18,5 +18,8 @@
     "eslint": "^7.21.0",
     "eslint-loader": "^4.0.2",
     "webpack-dev-server": "^3.11.2"
+  },
+  "scripts": {
+    "lint": "yarn run eslint --ext .js app/javascript"
   }
 }
