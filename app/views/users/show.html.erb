@@ -1,7 +1,7 @@
 <% content_for(:title, @user.display_name) %>
 <div>
   <div class="text-center mb-5 opacity-90">
-    <img alt="profil" src="http://i.pravatar.cc/300" class="mx-auto object-cover rounded-full h-32 w-32"/>
+    <%= image_tag @user.avatar, alt: @user.display_name, class: 'mx-auto object-cover rounded-full h-32 w-32' %>
   </div>
   <div class="text-center mb-4">
     <p class="text-xl text-gray-800 dark:text-white">
