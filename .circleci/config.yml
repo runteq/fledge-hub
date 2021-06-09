@@ -5,7 +5,7 @@ orbs:
 
 executors:
   default_executor:
-    working_directory: ~/circleci-demo-ruby-rails
+    working_directory: ~/fledge-hub-circleci
     docker:
       - image: circleci/ruby:3.0.0-node-browsers
         environment:
@@ -46,7 +46,7 @@ commands:
       - run:
           name: bundle install
           command: |
-            bundle check || bundle install --jobs=4 --retry=3 --path vendor/bundle
+            bundle check || bundle install --jobs=4 --retry=3
       - save_cache:
           key: gems-{{ checksum ".circleci/.cache_version" }}-{{ checksum ".ruby-version" }}-{{ checksum "Gemfile.lock" }}
           paths:
