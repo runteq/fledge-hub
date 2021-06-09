@@ -5,7 +5,8 @@ product_hashes = (1..20).map do |n|
     summary: "革新的・革命的なサービス！\n圧倒的な素晴らしさにきっとあなたは涙する……。",
     released_on: n.months.ago,
     url: 'https://runteq.jp/',
-    source_url: ''
+    source_url: 'https://github.com/runteq/fledge-hub',
+    genre_id: 1
   }
 end
 
