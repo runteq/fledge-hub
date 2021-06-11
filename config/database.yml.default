@@ -21,14 +21,14 @@ default: &default
 
 development:
   <<: *default
-  database: runteq_senses_development
+  database: fledge_hub_development
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: runteq_senses_test
+  database: fledge_hub_test
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -52,6 +52,6 @@ test:
 #
 production:
   <<: *default
-  database: runteq_senses_production
-  username: runteq_senses
-  password: <%= ENV['RUNTEQ_SENSES_DATABASE_PASSWORD'] %>
+  database: fledge_hub_production
+  username: fledge_hub
+  password: <%= ENV['FLEDGE_HUB_DATABASE_PASSWORD'] %>

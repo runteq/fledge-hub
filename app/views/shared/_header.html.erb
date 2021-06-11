@@ -1,7 +1,7 @@
 <nav class="flex items-center justify-between flex-wrap bg-indigo-100 px-4 md:h-20">
   <div class="flex items-center flex-no-shrink text-indigo-800 mr-6">
     <span class="flex items-center font-semibold text-xl tracking-tight">
-      <%= link_to 'RUNTEQ senses', root_path, class: 'no-underline' %>
+      <%= link_to 'Fledge Hub', root_path, class: 'no-underline' %>
     </span>
   </div>
   <div>
@@ -13,7 +13,7 @@
         <% if logged_in? %>
           <div  class="relative text-sm text-gray-100" data-controller="dropdown">
             <div data-action="click->dropdown#toggle click@window->dropdown#hide" role="button" data-dropdown-target="button" tabindex="0" class="inline-block select-none">
-              <img class="btn items-center focus:outline-none w-16 h-16 rounded-full" src="http://i.pravatar.cc/300" alt="Avatar of User" >
+              <%= image_tag current_user.avatar, alt: current_user.display_name, class: 'items-center focus:outline-none w-12 h-12 rounded-full' %>
             </div>
             <div id="userMenu" data-dropdown-target="menu" class="absolute right-0 mt-2 hidden">
               <div class="bg-white shadow rounded border overflow-hidden">
