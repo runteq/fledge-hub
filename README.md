@@ -1,22 +1,23 @@
-# RUNTEQ senses
+# Fledge Hub
 
 ## is 何？
 
 RUNTEQ生のポートフォリオ、どこで見れるんじゃ？<br>
 →ないなら作ろう
 
-そんな感じで始まりました。みんなでカスタマイズしていけたらいいなと思っています。
+そんな感じで始まりましたが、想定ユーザーはRUNTEQ生に限定しないことになりました。<br>
+みんなでカスタマイズしていけたらいいなと思っています。
 
 ## 参加したい！
 
 まずは[Mattermostのチャンネル](https://chat.runteq.jp/runteq/channels/c01rtlnl5qx)に入ってください。
 
-思いついた機能を[Issue](https://github.com/runteq/runteq_senses/issues)に投げるだけでも大丈夫です。<br>
+思いついた機能を[Issue](https://github.com/runteq/fledge-hub/issues)に投げるだけでも大丈夫です。<br>
 実装できそうかも？と思った人は、環境構築からお願いします（ものによっては環境構築不要なものもありますが）
 
 ### 環境構築
 
-困ったときは[先人の知恵](https://github.com/runteq/runteq_senses/issues/12)が役立つかもしれません。コマンドや記録などを残してくれると後進のためになります。
+困ったときは[先人の知恵](https://github.com/runteq/fledge-hub/issues/12)が役立つかもしれません。コマンドや記録などを残してくれると後進のためになります。
 
 - 事前に管理者からmaster.keyを取得してconfig配下に置いてください<br>
 配置しないとrails db:create で `NoMethodError: undefined method '[]' for nil:NilClass` になります
@@ -35,6 +36,7 @@ $ yarn install
 $ bundle exec rails db:create
 $ bundle exec rails db:migrate
 $ rake db:seed_fu
+$ rails db:seed
 ```
 
 #### サーバー起動
@@ -51,7 +53,7 @@ bundle exec rspec spec
 
 - Issueの追加
   - やりたいことがIssueにない場合は、自分で作ってください
-  - [New Issue](https://github.com/runteq/runteq_senses/issues/new)からタスクを追加する
+  - [New Issue](https://github.com/runteq/fledge-hub/issues/new)からタスクを追加する
 
 - Issueに取り掛かる
   - `Assignees`に自分を追加して「やります表明」をする
@@ -86,7 +88,7 @@ bundle exec rspec spec
 ### ER図
 
 ![ER図](./erd.png)
-詳細は https://github.com/runteq/runteq_senses/pull/1 だけど、若干内容が変わっている。
+詳細は https://github.com/runteq/fledge-hub/pull/1 だけど、若干内容が変わっている。
 
 ### 画面遷移図
 

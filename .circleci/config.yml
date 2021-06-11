@@ -1,10 +1,11 @@
 version: 2.1
+
 orbs:
   ruby: circleci/ruby@1.1.2
 
-jobs:
-  build:
-    working_directory: ~/circleci-demo-ruby-rails
+executors:
+  default_executor:
+    working_directory: ~/fledge-hub-circleci
     docker:
       - image: circleci/ruby:3.0.0-node-browsers
         environment:
@@ -18,68 +19,137 @@ jobs:
           MYSQL_USER: root
           MYSQL_DB: circle_test
 
+commands:
+  check_versions:
     steps:
-      - checkout
+      - run: bundle -v
+      - run: node -v
+      - run: yarn -v
 
+  setup_bundler:
+    steps:
       - run:
-          name: wait for database
-          command: dockerize -wait tcp://127.0.0.1:3306 -timeout 3m
-
-      # Restore bundle cache
-      - restore_cache:
-          keys:
-            - rails-demo-{{ checksum "Gemfile.lock" }}-{{ checksum "yarn.lock" }}
-            - rails-demo-
-
-      - run:
-          name: setup bundler
+          name: Setup bundler
           command: |
             sudo gem update --system
             sudo gem uninstall bundler
             sudo rm /usr/local/bin/bundle
             sudo gem install bundler
-      - run:
-          name: Which bundler?
-          command: bundle -v
 
+  setup_gems:
+    steps:
+      - restore_cache:
+          keys:
+            - gems-{{ checksum ".circleci/.cache_version" }}-{{ checksum ".ruby-version" }}-{{ checksum "Gemfile.lock" }}
+            - gems-{{ checksum ".circleci/.cache_version" }}-{{ checksum ".ruby-version" }}-
+            - gems-{{ checksum ".circleci/.cache_version" }}-
       - run:
           name: bundle install
           command: |
-            bundle install --jobs=4 --retry=3 --path vendor/bundle
-      - run:
-          name: yarn
-          command: yarn
-
-      # Store bundle cache
+            bundle check || bundle install --jobs=4 --retry=3
       - save_cache:
+          key: gems-{{ checksum ".circleci/.cache_version" }}-{{ checksum ".ruby-version" }}-{{ checksum "Gemfile.lock" }}
           paths:
-            - ./vendor/bundle
-            - ./node_modules
-          key: v1-dependencies-{{ checksum "Gemfile.lock" }}-{{ checksum "yarn.lock" }}
+            - vendor/bundle
 
+  setup_database:
+    steps:
       - run:
-          name: setup database
+          name: Wait for database
+          command: dockerize -wait tcp://127.0.0.1:3306 -timeout 3m
+      - run:
+          name: Prepare database.yml
           command: |
             cp -v config/database.ci.yml config/database.yml
       - run: mysql_config --socket
       - run: bundle exec rails db:create
       - run: bundle exec rails db:schema:load
 
-      # Build JavaScript files （eslintも実行する）
+  drop_tables:
+    steps:
+      - run: bundle exec rails db:drop
+
+  setup_yarn:
+    steps:
+      - restore_cache:
+          keys:
+            - yarn-{{ checksum ".circleci/.cache_version" }}-{{ checksum "yarn.lock" }}
+            - yarn-{{ checksum ".circleci/.cache_version" }}-
+      - run: yarn install
+      - save_cache:
+          key: yarn-{{ checksum ".circleci/.cache_version" }}-{{ checksum "yarn.lock" }}
+          paths:
+            - vendor/bundle
+
+  # Build JavaScript files （eslintも実行する）
+  build_webpack:
+    steps:
       - run: bundle exec bin/webpack
 
-      - run:
-          name: eager_load test
-          command: bundle exec rails runner Rails.application.eager_load!
-
+  run_lint:
+    steps:
       - run: bundle exec rails factory_bot:lint RAILS_ENV=test
+      - run: bundle exec rubocop
       - run: bundle exec brakeman
+      - run: yarn run lint
 
+  run_tests:
+    steps:
       - run:
-          name: run rspec
+          name: Run eager_load test
+          command: bundle exec rails runner Rails.application.eager_load!
+      - run:
+          name: Run rspec
           command: |
             bundle exec rspec --profile 10 \
                               --format RspecJunitFormatter \
                               --out test_results/rspec.xml \
                               --format progress \
                               $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+
+jobs:
+  setup:
+    executor: default_executor
+    steps:
+      - checkout
+      - setup_bundler
+      - setup_yarn
+      - check_versions
+
+  lint:
+    executor: default_executor
+    steps:
+      - checkout
+      - setup_bundler
+      - setup_gems
+      - setup_database
+      - setup_yarn
+      - run_lint
+      - drop_tables
+
+  test:
+    executor: default_executor
+    environment:
+      RAILS_ENV: test
+    steps:
+      - checkout
+      - setup_bundler
+      - setup_gems
+      - setup_database
+      - setup_yarn
+      - build_webpack
+      - run_tests
+      - drop_tables
+
+workflows:
+  version: 2
+
+  commit:
+    jobs:
+      - setup
+      - lint:
+          requires:
+            - setup
+      - test:
+          requires:
+            - setup

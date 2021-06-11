@@ -24,6 +24,8 @@ FactoryBot.define do
     sequence(:email) { |n| "test_#{n}@example.com" }
     status { User.statuses.keys.sample }
 
+    avatar { Rack::Test::UploadedFile.new('spec/fixtures/files/images/avatar_test.png', 'image/png') } 
+
     trait :active do
       status { :general }
     end
