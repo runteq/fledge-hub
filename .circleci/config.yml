@@ -5,7 +5,7 @@ orbs:
 
 executors:
   default_executor:
-    working_directory: ~/circleci-demo-ruby-rails
+    working_directory: ~/fledge-hub-circleci
     docker:
       - image: circleci/ruby:3.0.0-node-browsers
         environment:
@@ -46,7 +46,7 @@ commands:
       - run:
           name: bundle install
           command: |
-            bundle check || bundle install --jobs=4 --retry=3 --path vendor/bundle
+            bundle check || bundle install --jobs=4 --retry=3
       - save_cache:
           key: gems-{{ checksum ".circleci/.cache_version" }}-{{ checksum ".ruby-version" }}-{{ checksum "Gemfile.lock" }}
           paths:
@@ -64,6 +64,10 @@ commands:
       - run: mysql_config --socket
       - run: bundle exec rails db:create
       - run: bundle exec rails db:schema:load
+
+  drop_tables:
+    steps:
+      - run: bundle exec rails db:drop
 
   setup_yarn:
     steps:
@@ -121,6 +125,7 @@ jobs:
       - setup_database
       - setup_yarn
       - run_lint
+      - drop_tables
 
   test:
     executor: default_executor
@@ -134,6 +139,7 @@ jobs:
       - setup_yarn
       - build_webpack
       - run_tests
+      - drop_tables
 
 workflows:
   version: 2
