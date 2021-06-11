@@ -10,6 +10,7 @@
 #  url         :text(65535)      not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  genre_id    :integer          not null
 #
 FactoryBot.define do
   factory :product do
@@ -18,5 +19,6 @@ FactoryBot.define do
     url { Faker::Internet.url }
     source_url { Faker::Internet.url }
     released_on { Time.zone.today }
+    genre_id { Genre.pluck(:id).sample }
   end
 end

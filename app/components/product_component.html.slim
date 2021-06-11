@@ -1,12 +1,15 @@
-.p-4.md:w-1/3
+.lg:p-4.p-2.md:w-1/3
   .h-full.border-2.border-gray-200.border-opacity-60.rounded-lg.overflow-hidden
     = image_tag product.top_image.product_image, alt: product.title, class: 'lg:h-48 md:h-36 w-full object-cover object-center'
-    .p-6
-      h2.tracking-widest.text-xs.title-font.font-medium.text-gray-400.mb-1
-        = product.released_on
-      h1.title-font.text-lg.font-medium.text-gray-900.mb-1
+    .px-5.pt-3.pb-4
+      .flex.items-center.flex-wrap
+        .inline-flex.tracking-widest.text-xs.title-font.font-medium.text-gray-400mb-1
+          = product.released_on
+        span.inline-flex.ml-auto.px-2.inline-flex.text-xs.leading-5.font-semibold.bg-yellow-100.text-yellow-900.mb-2
+          = product.genre.name
+      h2.title-font.text-lg.font-medium.text-gray-900
         = product.title
-      .leading-relaxed.mb-3
+      .leading-relaxed.mb-1
         = simple_format(truncate(h(product.summary), length: 100, separator: /[\s、。　]/))
       .mb-3.-mx-1
         - product.technologies.each do |technology|
@@ -19,12 +22,7 @@
           svg.w-4.h-4.ml-2 fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox=("0 0 24 24")
             path d=("M5 12h14")
             path d=("M12 5l7 7-7 7")
-        span.text-gray-400.mr-3.inline-flex.items-center.lg:ml-auto.md:ml-0.ml-auto.leading-none.text-sm.pr-3.py-1.border-r-2.border-gray-200
-          svg.w-4.h-4.mr-1 fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox=("0 0 24 24")
-            path d=("M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z")
-            circle cx="12" cy="12" r="3"
-          | 1.2K
-        span.text-gray-400.inline-flex.items-center.leading-none.text-sm
+        span.text-gray-400.inline-flex.lg:ml-auto.md:ml-0.ml-auto.leading-none.text-sm.py-1
           svg.w-4.h-4.mr-1 fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox=("0 0 24 24")
             path d=("M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z")
           = link_to_active product.user

@@ -10,6 +10,7 @@
 #  url         :text(65535)      not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  genre_id    :integer          not null
 #
 require 'rails_helper'
 

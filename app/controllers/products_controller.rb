@@ -54,6 +54,7 @@ class ProductsController < ApplicationController
       :url,
       :source_url,
       :released_on,
+      :genre_id,
       technology_ids: []
     )
   end
