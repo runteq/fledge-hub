@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   def index
-    @users = User.active.order(created_at: :desc)
+    @users = User.active.with_attached_avatar.order(created_at: :desc)
   end
 
   def show
