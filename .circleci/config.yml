@@ -65,6 +65,10 @@ commands:
       - run: bundle exec rails db:create
       - run: bundle exec rails db:schema:load
 
+  drop_tables:
+    steps:
+      - run: bundle exec rails db:drop
+
   setup_yarn:
     steps:
       - restore_cache:
@@ -121,6 +125,7 @@ jobs:
       - setup_database
       - setup_yarn
       - run_lint
+      - drop_tables
 
   test:
     executor: default_executor
@@ -134,6 +139,7 @@ jobs:
       - setup_yarn
       - build_webpack
       - run_tests
+      - drop_tables
 
 workflows:
   version: 2
