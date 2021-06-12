@@ -58,4 +58,9 @@ class User < ApplicationRecord
     avatar_url = url.open
     avatar.attach(io: avatar_url, filename: "user_avatar_#{id}.jpg")
   end
+
+  def github_url
+    # いずれUser#screen_nameとGitHubのscreen_nameは別にしたい
+    "https://github.com/#{screen_name}"
+  end
 end

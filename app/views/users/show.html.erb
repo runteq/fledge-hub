@@ -16,9 +16,9 @@
     <a href="#" class='text-3xl'>
       <i class="fab fa-twitter"></i>
     </a>
-    <a href="#" class='text-3xl'>
+    <%= link_to sanitize(@user.github_url), target: :_blank, rel: 'noopener noreferrer', class: 'text-3xl' do %>
       <i class="fab fa-github"></i>
-    </a>
+    <% end %>
   </div>
 </div>
 
