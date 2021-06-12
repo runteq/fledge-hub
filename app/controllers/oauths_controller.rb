@@ -6,7 +6,7 @@ class OauthsController < ApplicationController
   def callback
     provider = auth_params[:provider]
     if login_from(provider)
-      redirect_to root_path, notice: "#{provider.titleize}でログインしました"
+      redirect_back_or_to root_path, notice: "#{provider.titleize}でログインしました"
     else
       @user_hash[:user_info]['name'] ||= @user_hash[:user_info]['login']
       url = URI.parse(@user_hash[:user_info]['avatar_url'])
@@ -14,7 +14,7 @@ class OauthsController < ApplicationController
       user.grab_avatar_image(url)
       reset_session
       auto_login(user)
-      redirect_to root_path, notice: "#{provider.titleize}で新規登録しました"
+      redirect_back_or_to root_path, notice: "#{provider.titleize}で新規登録しました"
     end
   end
 
