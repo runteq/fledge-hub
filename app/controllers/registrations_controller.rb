@@ -11,15 +11,10 @@ class RegistrationsController < ApplicationController
   end
 
   def create
+    user_info = session[:user_info]
+    avatar_url = URI.parse(user_info['avatar_url'])
     @user = User.new(user_params)
-    if @user.save
-      user_info = session[:user_info]
-      url = URI.parse(user_info['avatar_url'])
-      @user.grab_avatar_image(url)
-      @user.authentications.create!(
-        provider: 'github',
-        uid: user_info['id']
-      )
+    if @user.registration(avatar_url, user_info['id'])
       reset_session
       auto_login(@user)
       redirect_back_or_to root_path, notice: 'ログインしました'
@@ -31,7 +26,7 @@ class RegistrationsController < ApplicationController
   private
 
   def require_not_login
-    # redirect_to root_path if logged_in?
+    redirect_to root_path if logged_in?
   end
 
   def user_params
