@@ -5,11 +5,11 @@ RSpec.describe ProfilesController, type: :request do
 
   describe "GET /edit" do
     let(:user) { create(:user) }
-    subject { get profile_url }
+    subject { get '/profile' }
 
     it "render a successful response" do
       subject
-      expect(response).to be_successful
+      expect(response).to have_http_status(:success)
     end
   end
 
@@ -19,13 +19,13 @@ RSpec.describe ProfilesController, type: :request do
 
     it "render a successful response" do
       subject
-      expect(response).to be_successful
+      expect(response).to have_http_status(:success)
     end
   end
 
   describe "PATCH /update" do
     let(:user) { create(:user, display_name: '古い表示名') }
-    subject { patch profile_url, params: { user: attributes } }
+    subject { patch '/profile', params: { user: attributes } }
 
     context "with valid parameters" do
       let(:attributes) do
