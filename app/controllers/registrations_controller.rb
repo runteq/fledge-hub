@@ -26,7 +26,7 @@ class RegistrationsController < ApplicationController
   private
 
   def require_not_login
-    redirect_to root_path if logged_in?
+    redirect_to root_path if logged_in? || session[:user_info].nil?
   end
 
   def user_params
