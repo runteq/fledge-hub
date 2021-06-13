@@ -2,9 +2,9 @@ class ProductsController < ApplicationController
   before_action :require_login, only: %i[new edit create update destroy]
 
   def index
-    @products = Product.includes(:technologies, :users,
+    @search_form = SearchProductsForm.new(search_params)
+    @products = @search_form.search.includes(:technologies, :users,
                                  { images: { product_image_attachment: :blob } })
-                       .order(created_at: :desc)
   end
 
   def show
@@ -57,5 +57,9 @@ class ProductsController < ApplicationController
       :genre_id,
       technology_ids: []
     )
+  end
+
+  def search_params
+    params[:search]&.permit(:title)
   end
 end

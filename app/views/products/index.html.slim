@@ -1,5 +1,7 @@
 - content_for(:title, t('.title'))
 
+= render 'search_form'
+
 - if logged_in?
   = link_to '新規登録', new_product_path, class: 'btn btn-indigo'
 
