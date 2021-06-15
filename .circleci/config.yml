@@ -62,12 +62,7 @@ commands:
           command: |
             cp -v config/database.ci.yml config/database.yml
       - run: mysql_config --socket
-      - run: bundle exec rails db:create
       - run: bundle exec rails db:schema:load
-
-  drop_tables:
-    steps:
-      - run: bundle exec rails db:drop
 
   setup_yarn:
     steps:
@@ -88,7 +83,6 @@ commands:
 
   run_lint:
     steps:
-      - run: bundle exec rails factory_bot:lint RAILS_ENV=test
       - run: bundle exec rubocop
       - run: bundle exec brakeman
       - run: yarn run lint
@@ -98,6 +92,7 @@ commands:
       - run:
           name: Run eager_load test
           command: bundle exec rails runner Rails.application.eager_load!
+      - run: bundle exec rails factory_bot:lint RAILS_ENV=test
       - run:
           name: Run rspec
           command: |
@@ -122,10 +117,8 @@ jobs:
       - checkout
       - setup_bundler
       - setup_gems
-      - setup_database
       - setup_yarn
       - run_lint
-      - drop_tables
 
   test:
     executor: default_executor
@@ -139,7 +132,6 @@ jobs:
       - setup_yarn
       - build_webpack
       - run_tests
-      - drop_tables
 
 workflows:
   version: 2
