@@ -133,7 +133,7 @@ jobs:
       - checkout
       - setup_bundler
       - setup_gems
-      - drop_tables
+      # - drop_tables
       - setup_database
       - setup_yarn
       - build_webpack
