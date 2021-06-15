@@ -62,12 +62,9 @@ commands:
           command: |
             cp -v config/database.ci.yml config/database.yml
       - run: mysql_config --socket
+      - run: bundle exec rails db:drop
       - run: bundle exec rails db:create
       - run: bundle exec rails db:schema:load
-
-  drop_tables:
-    steps:
-      - run: bundle exec rails db:drop
 
   setup_yarn:
     steps:
@@ -133,7 +130,6 @@ jobs:
       - checkout
       - setup_bundler
       - setup_gems
-      # - drop_tables
       - setup_database
       - setup_yarn
       - build_webpack
