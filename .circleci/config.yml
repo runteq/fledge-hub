@@ -62,8 +62,6 @@ commands:
           command: |
             cp -v config/database.ci.yml config/database.yml
       - run: mysql_config --socket
-      - run: bundle exec rails db:drop
-      - run: bundle exec rails db:create
       - run: bundle exec rails db:schema:load
 
   setup_yarn:
