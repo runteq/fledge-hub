@@ -4,6 +4,22 @@ html
     title= page_title(yield(:title))
     meta[name="viewport" content="width=device-width,initial-scale=1"]
     script src="https://kit.fontawesome.com/a059254462.js" crossorigin="anonymous"
+
+    meta content="#{page_title(yield(:title))}" name="title"
+    meta content="With Meta Tags you can edit and experiment with your content then preview how your webpage will look on Google), Facebook, Twitter and more!" name="description"
+    /! Open Graph / Facebook
+    meta content="website" property="og:type"
+    meta content="https://metatags.io/" property="og:url"
+    meta content="#{page_title(yield(:title))}" property="og:title"
+    meta content="With Meta Tags you can edit and experiment with your content then preview how your webpage will look on Google), Facebook, Twitter and more!" property="og:description"
+    meta content="https://metatags.io/assets/meta-tags-16a33a6a8531e519cc0936fbba0ad904e52d35f34a46c97a2c9f6f7dd7d336f2.png" property="og:image"
+    /! Twitter
+    meta content="summary_large_image" property="twitter:card"
+    meta content="https://metatags.io/" property="twitter:url"
+    meta content="#{page_title(yield(:title))}" property="twitter:title"
+    meta content="With Meta Tags you can edit and experiment with your content then preview how your webpage will look on Google), Facebook, Twitter and more!" property="twitter:description"
+    meta content="https://metatags.io/assets/meta-tags-16a33a6a8531e519cc0936fbba0ad904e52d35f34a46c97a2c9f6f7dd7d336f2.png" property="twitter:image"
+
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag 'application', media: 'all', 'data-turbo-track': 'reload'
