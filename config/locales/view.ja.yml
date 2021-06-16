@@ -23,8 +23,14 @@ ja:
       title: プロフィール編集
     show:
       title: プロフィール詳細
+  registrations:
+    new:
+      title: ユーザー登録
   users:
     index:
       title: ユーザ一覧
     show:
       title: ユーザー詳細
+  user_deactivations:
+    new:
+      title: 退会
