@@ -15,5 +15,9 @@
   .form-group
     = f.label :email, class: 'form-label'
     = f.email_field :email, required: true, class: 'text-field'
+  label.items-center.form-group
+    = check_box_tag :acceptable, true, false, class: "form-checkbox h-4 w-4 mr-1"
+    = link_to '利用規約', root_path
+    | に同意する
   .form-group
-    = f.submit '利用規約に同意して登録する', class: 'btn btn-indigo'
+    = f.submit 'ユーザー登録', class: 'btn btn-indigo'

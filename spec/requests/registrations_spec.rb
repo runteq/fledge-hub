@@ -69,9 +69,31 @@ RSpec.describe RegistrationsController, type: :request do
         })
       end
 
+      context '利用規約に同意していないとき' do
+        subject {
+          post '/registration', params: {
+            user: {
+              screen_name: 'screen_name',
+              display_name: '表示名',
+              email: 'example@example.com',
+            }
+          }
+        }
+
+        it 'ユーザーを作成しない' do
+          expect { subject }.not_to change(User, :count)
+        end
+
+        it "return 422" do
+          subject
+          expect(response.status).to eq(422)
+        end
+      end
+
       context 'バリデーションエラー' do
         subject {
           post '/registration', params: {
+            acceptable: 'true',
             user: {
               screen_name: '', # バリデーションエラー
               display_name: '表示名',
@@ -93,6 +115,7 @@ RSpec.describe RegistrationsController, type: :request do
       context '値が適切なとき' do
         subject {
           post '/registration', params: {
+            acceptable: 'true',
             user: {
               screen_name: 'screen_name',
               display_name: '表示名',

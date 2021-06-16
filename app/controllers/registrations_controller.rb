@@ -14,6 +14,12 @@ class RegistrationsController < ApplicationController
     user_info = session[:user_info]
     avatar_url = URI.parse(user_info['avatar_url'])
     @user = User.new(user_params)
+
+    unless params[:acceptable]
+      flash.now[:alert] = '利用規約に同意してください'
+      return render :new, status: :unprocessable_entity
+    end
+
     if @user.registration(avatar_url, user_info['id'])
       reset_session
       auto_login(@user)
