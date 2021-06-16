@@ -1,4 +1,6 @@
 <% content_for(:title, @user.display_name) %>
+<% content_for(:description, "#{@user.display_name}のユーザーページ") %>
+
 <div>
   <div class="text-center mb-5 opacity-90">
     <%= image_tag @user.avatar, alt: @user.display_name, class: 'mx-auto object-cover rounded-full h-32 w-32' %>

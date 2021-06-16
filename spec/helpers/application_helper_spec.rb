@@ -12,4 +12,16 @@ RSpec.describe ApplicationHelper, type: :helper do
       it { is_expected.to eq 'Fledge Hub' }
     end
   end
+
+  describe '#description' do
+    context '引数があるとき' do
+      subject { helper.description('テキスト') }
+      it { is_expected.to eq 'テキスト' }
+    end
+
+    context '引数がないとき' do
+      subject { helper.description }
+      it { is_expected.to eq 'サービスの説明' }
+    end
+  end
 end
