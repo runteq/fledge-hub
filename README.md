@@ -38,6 +38,7 @@ $ bundle exec rails db:migrate
 $ rake db:seed_fu
 $ rails db:seed
 ```
+- mysqlのバージョンは5.7でも8.0でも大丈夫です。
 
 #### サーバー起動
 ```
