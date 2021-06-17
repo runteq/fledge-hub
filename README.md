@@ -19,7 +19,7 @@ RUNTEQ生のポートフォリオ、どこで見れるんじゃ？<br>
 
 困ったときは[先人の知恵](https://github.com/runteq/fledge-hub/issues/12)が役立つかもしれません。コマンドや記録などを残してくれると後進のためになります。
 
-- 事前に管理者からmaster.keyを取得してconfig配下に置いてください<br>
+- 事前に管理者からdevelopment.keyを取得し、config配下にdevelopment.keyファイルを作成してファイル内に書き込んでください。<br>
 配置しないとrails db:create で `NoMethodError: undefined method '[]' for nil:NilClass` になります
 
 - config/database.yml の作成
@@ -27,6 +27,16 @@ RUNTEQ生のポートフォリオ、どこで見れるんじゃ？<br>
 ```
 $ cp config/database.yml.default config/database.yml
 ```
+上記コマンドでdatabase.ymlを作成後、passwordを指定する。
+環境変数を用いて指定する場合は、database.yml 内で例えば
+```
+password: <%= ENV['DB_PASSWORD'] %>
+```
+のように記述した後、ターミナル上でhogeの部分をパスワードに書き換えて実行する。
+```
+$ export DB_PASSWORD=hoge
+```
+
 
 ```
 $ rbenv local 3.0.0
