@@ -27,7 +27,7 @@ class ProductForm
   end
 
   def to_model
-    Product.new
+    product
   end
 
   private

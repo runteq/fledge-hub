@@ -54,4 +54,37 @@ RSpec.describe ProductForm do
       end
     end
   end
+
+
+  describe '#to_model' do
+    subject { form.to_model }
+    let!(:form) { ProductForm.new(**attributes) }
+    let!(:attributes) do
+      {
+        title: 'タイトル',
+        url: 'URL',
+        source_url: '',
+        released_on: '2021-06-17',
+        summary: '',
+        genre_id: '1',
+        technology_ids: [],
+        user_ids: [],
+      }
+    end
+
+    it { is_expected.to be_a Product }
+    specify do
+      expect(subject.attributes.deep_symbolize_keys).to match(
+        id: nil,
+        title: 'タイトル',
+        url: 'URL',
+        source_url: '',
+        released_on: Date.parse('2021-06-17'),
+        summary: '',
+        genre_id: 1,
+        created_at: nil,
+        updated_at: nil,
+      )
+    end
+  end
 end
