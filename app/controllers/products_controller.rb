@@ -12,7 +12,7 @@ class ProductsController < ApplicationController
   end
 
   def new
-    @product = Product.new
+    @product = ProductForm.new
   end
 
   def edit
@@ -20,10 +20,8 @@ class ProductsController < ApplicationController
   end
 
   def create
-    # 一対多みたいな書き方をしている。user複数のときどうするかは後々
-    @product = current_user.products.build(product_params)
-    if @product.valid?
-      @product = current_user.products.create(product_params)
+    @product = ProductForm.new(product_params.merge(user_ids: [current_user.id]))
+    if @product.save
       redirect_to @product, notice: 'Product was successfully created.'
     else
       render :new, status: :unprocessable_entity # 422errorを起こす
