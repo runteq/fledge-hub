@@ -2,6 +2,7 @@ class ProductForm
   include ActiveModel::Model
   include ActiveModel::Attributes
 
+  attribute :id, :integer
   attribute :title, :string
   attribute :summary, :string
   attribute :url, :string
@@ -11,6 +12,7 @@ class ProductForm
   attribute :technology_ids
   attribute :user_ids
 
+  validates :id, presence: true, if: -> { product.persisted? }
   validates :title, presence: true, length: { maximum: 100 }
   validates :url, url: { allow_blank: true, schemes: %w[https http] }, length: { maximum: 500 }
   validates :source_url, url: { allow_blank: true, schemes: %w[https http] },
@@ -18,7 +20,9 @@ class ProductForm
   validates :released_on, presence: true
   validates :summary, length: { maximum: 500 }
   validates :genre_id, presence: true
-  validates :user_ids, presence: true
+  validates :user_ids, presence: true, if: -> { product.new_record? }
+
+  delegate :persisted?, :new_record?, to: :product
 
   class << self
     def find(product_id, user_id)
@@ -32,15 +36,19 @@ class ProductForm
 
     def attributes(product)
       product.attributes.deep_symbolize_keys.slice(
+        :id,
         :title,
         :summary,
         :url,
         :source_url,
         :released_on,
-        :genre_id,
-      ).merge({
-        technology_ids: product.technology_ids,
-      })
+        :genre_id
+      ).merge(
+        {
+          technology_ids: product.technology_ids,
+          user_ids: product.user_ids
+        }
+      )
     end
   end
 
@@ -50,6 +58,13 @@ class ProductForm
     product.save!
   end
 
+  def update(params)
+    assign_attributes(params)
+    return false if invalid?
+
+    product.update!(**product_params)
+  end
+
   def to_model
     product
   end
@@ -57,7 +72,7 @@ class ProductForm
   private
 
   def product
-    @product ||= Product.new(**product_params)
+    @product ||= Product.find_by(id: id) || Product.new(**product_params)
   end
 
   def product_params

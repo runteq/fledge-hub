@@ -29,7 +29,7 @@ class ProductsController < ApplicationController
   end
 
   def update
-    @product = current_user.products.find(params[:id])
+    @product = ProductForm.find(params[:id], current_user.id)
     if @product.update(product_params)
       redirect_to @product, notice: '更新しました！'
     else
