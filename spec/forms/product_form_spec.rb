@@ -1,11 +1,33 @@
 require 'rails_helper'
 
 RSpec.describe ProductForm do
+  describe '.find' do
+    subject { ProductForm.find(product.id, user.id) }
+    context 'userによるproductではないとき' do
+      let!(:user) { create(:user) }
+      let!(:product) { create(:product) }
+      it 'ActiveRecord::RecordNotFoundをraiseする' do
+        expect { subject }.to raise_error ActiveRecord::RecordNotFound
+      end
+    end
+
+    context 'userによるproductのとき' do
+      let!(:user) { create(:user) }
+      let!(:product) { create(:product, users: [user]) }
+
+      it { is_expected.to be_a ProductForm }
+      it 'productのattributeをもつ' do
+        # titleしか確認していない
+        expect(subject.title).to eq product.title
+      end
+    end
+  end
+
   describe '#save' do
     subject { form.save }
     let!(:form) { ProductForm.new(**attributes) }
 
-    context 'バリデーションエラー' do
+    context 'バリデーションエラー時' do
       let!(:user) { create(:user, :active) }
       let!(:attributes) do
         {
@@ -54,7 +76,6 @@ RSpec.describe ProductForm do
       end
     end
   end
-
 
   describe '#to_model' do
     subject { form.to_model }

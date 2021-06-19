@@ -20,6 +20,30 @@ class ProductForm
   validates :genre_id, presence: true
   validates :user_ids, presence: true
 
+  class << self
+    def find(product_id, user_id)
+      user = User.find(user_id)
+      product = user.products.find(product_id)
+
+      new(**attributes(product))
+    end
+
+    private
+
+    def attributes(product)
+      product.attributes.deep_symbolize_keys.slice(
+        :title,
+        :summary,
+        :url,
+        :source_url,
+        :released_on,
+        :genre_id,
+      ).merge({
+        technology_ids: product.technology_ids,
+      })
+    end
+  end
+
   def save
     return false if invalid?
 
