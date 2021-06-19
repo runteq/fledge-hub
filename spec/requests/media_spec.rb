@@ -26,7 +26,6 @@ RSpec.describe MediaController, type: :request do
       let(:attributes) do
         {
           title: 'タイトル',
-          description: '',
           url: Faker::Internet.url
         }
       end

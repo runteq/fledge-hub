@@ -25,7 +25,6 @@ RSpec.describe ImagesController, type: :request do
     context "with valid parameters" do
       let(:attributes) do
         {
-          description: '',
           product_image: fixture_file_upload('images/720x400.png')
         }
       end
@@ -43,7 +42,6 @@ RSpec.describe ImagesController, type: :request do
     context "with invalid parameters" do
       let(:attributes) do
         {
-          description: '',
           product_image: nil
         }
       end

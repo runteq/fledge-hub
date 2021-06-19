@@ -17,7 +17,6 @@
 #
 FactoryBot.define do
   factory :image do
-    description { "MyText" }
     product_image { Rack::Test::UploadedFile.new('spec/fixtures/files/images/720x400.png', 'image/png') }
     product
   end

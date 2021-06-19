@@ -22,6 +22,4 @@ class Image < ApplicationRecord
   validates :product_image, attached: true,
                             content_type: %r{\Aimage/.*\z},
                             size: { less_than: 10.megabytes }
-
-  validates :description, length: { maximum: 500 }
 end
