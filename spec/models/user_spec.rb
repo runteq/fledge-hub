@@ -28,7 +28,7 @@ RSpec.describe User, type: :model do
       deactived_user = create(:user, :deactivated)
 
       is_expected.to include(active_user)
-      is_expected.not_to include(deactived_user)
+                 .and not_include(deactived_user)
     end
   end
 
