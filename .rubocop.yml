@@ -34,6 +34,7 @@ Metrics/AbcSize:
 Metrics/BlockLength:
   Exclude:
     - "lib/tasks/auto_annotate_models.rake"
+    - "config/environments/development.rb"
 
 # メソッドの行数を20行までにする
 Metrics/MethodLength:
