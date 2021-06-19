@@ -99,6 +99,8 @@ bundle exec rspec spec
 ### ER図
 
 ![ER図](./erd.png)
+https://drive.google.com/file/d/1lPhbCER0sW7sJMw0R_E0QcrDQB4JijEv/view?usp=sharing
+
 詳細は https://github.com/runteq/fledge-hub/pull/1 だけど、若干内容が変わっている。
 
 ### 画面遷移図
