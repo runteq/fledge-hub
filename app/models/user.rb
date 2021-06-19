@@ -37,6 +37,21 @@ class User < ApplicationRecord
 
   scope :active, -> { where.not(status: :deactivated) }
 
+  def registration(avatar_url, authentication_uid)
+    transaction do
+      if save
+        grab_avatar_image(avatar_url)
+        authentications.find_or_create_by!(
+          provider: 'github',
+          uid: authentication_uid
+        )
+        true
+      else
+        false
+      end
+    end
+  end
+
   def deactivate!
     transaction do
       update!(
