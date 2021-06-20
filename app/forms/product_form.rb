@@ -56,6 +56,8 @@ class ProductForm
     return false if invalid?
 
     product.save!
+    assign_attributes(id: product.id)
+    true
   end
 
   def update(params)
