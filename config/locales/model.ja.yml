@@ -24,7 +24,6 @@ ja:
         genre_id: ジャンル
         users: 製作者
       image:
-        description: 説明
         product_image: 画像
 
   activemodel:

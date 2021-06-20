@@ -25,7 +25,6 @@ RSpec.describe ImagesController, type: :request do
     context "with valid parameters" do
       let(:attributes) do
         {
-          description: '',
           product_image: fixture_file_upload('images/720x400.png')
         }
       end
@@ -43,7 +42,6 @@ RSpec.describe ImagesController, type: :request do
     context "with invalid parameters" do
       let(:attributes) do
         {
-          description: '',
           product_image: nil
         }
       end
@@ -60,17 +58,17 @@ RSpec.describe ImagesController, type: :request do
   end
 
   describe "PATCH /update" do
-    let(:image) { create(:image, description: '古い説明', product: product) }
+    let(:image) { create(:image, product_image: fixture_file_upload('images/720x400.png'), product: product) }
     subject { patch "/products/#{product.id}/images/#{image.id}", params: { image: attributes } }
     context "with valid parameters" do
       let(:attributes) do
         {
-          description: '新しい説明'
+          product_image: fixture_file_upload('images/200x200.png')
         }
       end
 
       it "updates the requested image" do
-        expect { subject }.to change { image.reload.description }.to('新しい説明').from('古い説明')
+        expect { subject }.to change { image.reload.product_image.id }
       end
 
       it "redirects to the image" do
@@ -83,13 +81,12 @@ RSpec.describe ImagesController, type: :request do
     context "with invalid parameters" do
       let(:attributes) do
         {
-          description: '新しい説明',
           product_image: nil
         }
       end
 
       it "does not update the requested image" do
-        expect { subject }.not_to change { image.reload.description }.from('古い説明')
+        expect { subject }.not_to change { image.reload.product_image.id }
       end
 
       it "renders a successful response (i.e. to display the 'edit' template)" do

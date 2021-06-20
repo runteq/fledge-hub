@@ -2,13 +2,12 @@
 #
 # Table name: media
 #
-#  id          :bigint           not null, primary key
-#  description :text(65535)      not null
-#  title       :string(255)      not null
-#  url         :text(65535)      not null
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  product_id  :bigint           not null
+#  id         :bigint           not null, primary key
+#  title      :string(255)      not null
+#  url        :text(65535)      not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  product_id :bigint           not null
 #
 # Indexes
 #
@@ -20,8 +19,7 @@
 #
 FactoryBot.define do
   factory :medium do
-    sequence(:title, "画像_1")
-    description { "MyText" }
+    sequence(:title, "外部記事_1")
     url { Faker::Internet.url }
     product
   end

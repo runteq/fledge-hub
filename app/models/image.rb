@@ -2,11 +2,10 @@
 #
 # Table name: images
 #
-#  id          :bigint           not null, primary key
-#  description :text(65535)      not null
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  product_id  :bigint           not null
+#  id         :bigint           not null, primary key
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  product_id :bigint           not null
 #
 # Indexes
 #
@@ -23,6 +22,4 @@ class Image < ApplicationRecord
   validates :product_image, attached: true,
                             content_type: %r{\Aimage/.*\z},
                             size: { less_than: 10.megabytes }
-
-  validates :description, length: { maximum: 500 }
 end
