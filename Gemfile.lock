@@ -365,6 +365,7 @@ DEPENDENCIES
   capybara
   factory_bot_rails
   faker
+  faraday
   hotwire-rails (~> 0.1.0)
   listen
   mini_magick (>= 4.9.5)
