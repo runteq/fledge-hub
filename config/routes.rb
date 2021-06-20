@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resource :profile, only: %i[show edit update]
   resource :registration, only: %i[new create]
   resource :user_deactivation, only: %i[new destroy]
+  resource :inquiry, only: %i[new create]
   resources :products do
     resources :images, only: %i[new create edit update destroy]
     resources :media, only: %i[new create edit update destroy]
