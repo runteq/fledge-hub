@@ -2,15 +2,16 @@
 #
 # Table name: products
 #
-#  id          :bigint           not null, primary key
-#  released_on :date             not null
-#  source_url  :text(65535)      not null
-#  summary     :text(65535)      not null
-#  title       :string(255)      not null
-#  url         :text(65535)      not null
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  genre_id    :integer          not null
+#  id                  :bigint           not null, primary key
+#  released_on         :date             not null
+#  source_url          :text(65535)      not null
+#  summary             :text(65535)      not null
+#  title               :string(255)      not null
+#  url                 :text(65535)      not null
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  product_category_id :integer          not null
+#  product_type_id     :integer          not null
 #
 class Product < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
