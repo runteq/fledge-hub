@@ -36,7 +36,8 @@ RSpec.describe ProductForm do
           source_url: '',
           released_on: '2021-06-17',
           summary: '',
-          genre_id: '', # バリデーションエラー
+          product_type_id: '1',
+          product_category_id: '1',
           technology_ids: [''],
           user_ids: [user.id],
         }
@@ -48,7 +49,7 @@ RSpec.describe ProductForm do
       end
       it 'エラーメッセージを持つ' do
         subject
-        expect(form.errors.messages).to eq({ title: ['を入力してください'], genre_id: ['を入力してください'] })
+        expect(form.errors.messages).to eq({ title: ['を入力してください'] })
       end
     end
 
@@ -62,7 +63,8 @@ RSpec.describe ProductForm do
           source_url: '',
           released_on: '2021-06-17',
           summary: '',
-          genre_id: '1',
+          product_type_id: '1',
+          product_category_id: '1',
           technology_ids: [technology.id.to_s],
           user_ids: [user.id],
         }
@@ -87,7 +89,8 @@ RSpec.describe ProductForm do
         source_url: '',
         released_on: '2021-06-17',
         summary: '',
-        genre_id: '1',
+        product_type_id: '1',
+        product_category_id: '1',
         technology_ids: [],
         user_ids: [],
       }
@@ -102,7 +105,8 @@ RSpec.describe ProductForm do
         source_url: '',
         released_on: Date.parse('2021-06-17'),
         summary: '',
-        genre_id: 1,
+        product_type_id: 1,
+        product_category_id: 1,
         created_at: nil,
         updated_at: nil,
       )
@@ -120,7 +124,8 @@ RSpec.describe ProductForm do
         source_url: product.source_url,
         released_on: product.released_on,
         summary: product.summary,
-        genre_id: product.genre_id,
+        product_category_id: product.product_category_id,
+        product_type_id: product.product_type_id,
         technology_ids: product.technology_ids,
         user_ids: product.user_ids,
       )
@@ -134,9 +139,10 @@ RSpec.describe ProductForm do
           title: '新タイトル',
           url: '',
           source_url: '',
-          released_on: '2021-06-17',
+          released_on: '', # バリデーションエラー
           summary: '',
-          genre_id: '', # バリデーションエラー
+          product_category_id: '1',
+          product_type_id: '1',
           technology_ids: [''],
         }
       end
@@ -147,7 +153,7 @@ RSpec.describe ProductForm do
       end
       it 'エラーメッセージを持つ' do
         subject
-        expect(form.errors.messages).to eq({ genre_id: ['を入力してください'] })
+        expect(form.errors.messages).to eq({ released_on: ['を入力してください'] })
       end
     end
 
@@ -160,7 +166,8 @@ RSpec.describe ProductForm do
           source_url: '',
           released_on: '2021-06-17',
           summary: '',
-          genre_id: '1',
+          product_category_id: '1',
+          product_type_id: '1',
           technology_ids: [technology.id.to_s],
         }
       end

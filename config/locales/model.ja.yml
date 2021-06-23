@@ -21,7 +21,8 @@ ja:
         url: URL
         source_url: コードURL
         technology_ids: 使用技術
-        genre_id: ジャンル
+        product_category_id: カテゴリ
+        product_type_id: プロダクト形式
         users: 製作者
       image:
         product_image: 画像
@@ -35,5 +36,6 @@ ja:
         url: URL
         source_url: コードURL
         technology_ids: 使用技術
-        genre_id: ジャンル
+        product_category_id: カテゴリ
+        product_type_id: プロダクト形式
         users: 製作者
