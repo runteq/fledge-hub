@@ -7,7 +7,8 @@ class ProductForm
   attribute :url, :string
   attribute :source_url, :string
   attribute :released_on, :date
-  attribute :genre_id, :integer
+  attribute :product_category_id, :integer
+  attribute :product_type_id, :integer
   attribute :technology_ids
   attribute :user_ids
 
@@ -17,7 +18,8 @@ class ProductForm
                          length: { maximum: 500 }
   validates :released_on, presence: true
   validates :summary, length: { maximum: 500 }
-  validates :genre_id, presence: true
+  validates :product_category_id, presence: true
+  validates :product_type_id, presence: true
   validates :user_ids, presence: true
 
   def save
@@ -43,7 +45,8 @@ class ProductForm
       source_url: source_url,
       released_on: released_on,
       summary: summary,
-      genre_id: genre_id,
+      product_type_id: product_type_id,
+      product_category_id: product_category_id,
       technology_ids: technology_ids,
       user_ids: user_ids
     }

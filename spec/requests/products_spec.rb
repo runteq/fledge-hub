@@ -55,7 +55,8 @@ RSpec.describe ProductsController, type: :request do
           url: '',
           source_url: '',
           released_on: Time.zone.today,
-          genre_id: Genre.pluck(:id).sample,
+          product_type_id: 1,
+          product_category_id: 1,
           technology_ids: ['']
         }
       end
@@ -79,7 +80,8 @@ RSpec.describe ProductsController, type: :request do
           url: '',
           source_url: '',
           released_on: Time.zone.today,
-          genre_id: Genre.pluck(:id).sample,
+          product_type_id: 1,
+          product_category_id: 1,
           technology_ids: [technology.id]
         }
       end
@@ -144,7 +146,8 @@ RSpec.describe ProductsController, type: :request do
           url: '',
           source_url: '',
           released_on: Time.zone.today,
-          genre_id: product.genre_id,
+          product_type_id: product.type_id,
+          product_category_id: product.category_id,
           technology_ids: [new_technology.id]
         }
     end

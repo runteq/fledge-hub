@@ -30,7 +30,8 @@ class Product < ApplicationRecord
                          length: { maximum: 500 }
   validates :released_on, presence: true
   validates :summary, length: { maximum: 500 }
-  validates :genre_id, presence: true
+  validates :product_type_id, presence: true
+  validates :product_category_id, presence: true
 
   def permitted_edit?(user)
     !!user&.in?(users)
