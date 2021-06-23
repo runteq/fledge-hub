@@ -55,4 +55,5 @@ group :test do
   gem 'rspec_junit_formatter'
   gem 'selenium-webdriver'
   gem 'webdrivers'
+  gem 'webmock'
 end
