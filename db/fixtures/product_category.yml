@@ -8,25 +8,28 @@
   name: ゲーム
 - id: 2
   position: 2
-  name: 投稿・共有サービス
+  name: エンターテイメント
 - id: 3
   position: 3
-  name: SNS
+  name: 料理
 - id: 4
   position: 4
-  name: 診断サービス
+  name: マインドフルネス
 - id: 5
   position: 5
-  name: 効率化
+  name: ファイナンシャル
 - id: 6
   position: 6
-  name: 学習サービス
+  name: スポーツ
 - id: 7
   position: 7
-  name: 管理ツール
+  name: 教育
 - id: 8
   position: 8
-  name: Bot
+  name: 健康・フィットネス
 - id: 9
   position: 9
-  name: コンテンツ
+  name: 恋愛
+- id: 10
+  position: 10
+  name: 旅行
