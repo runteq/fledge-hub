@@ -26,6 +26,7 @@ class User < ApplicationRecord
   has_many :user_products, dependent: :destroy
   has_many :products, through: :user_products
   has_many :authentications, dependent: :destroy
+  has_many :social_accounts, dependent: :destroy
   has_one_attached :avatar, dependent: :destroy
   accepts_nested_attributes_for :authentications
 

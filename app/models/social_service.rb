@@ -10,4 +10,9 @@
 #  updated_at :datetime         not null
 #
 class SocialService < ApplicationRecord
+  has_many :social_accounts, dependent: :destroy
+
+  validates :name, presence: true, length: { maximum: 100 }
+  validates :icon, presence: true, length: { maximum: 10_000 }
+  validates :base_url, url: { allow_blank: true, schemes: %w[https http] }
 end
