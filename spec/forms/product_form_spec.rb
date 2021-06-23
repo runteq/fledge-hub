@@ -1,11 +1,33 @@
 require 'rails_helper'
 
 RSpec.describe ProductForm do
+  describe '.find' do
+    subject { ProductForm.find(product.id, user.id) }
+    context 'userによるproductではないとき' do
+      let!(:user) { create(:user) }
+      let!(:product) { create(:product) }
+      it 'ActiveRecord::RecordNotFoundをraiseする' do
+        expect { subject }.to raise_error ActiveRecord::RecordNotFound
+      end
+    end
+
+    context 'userによるproductのとき' do
+      let!(:user) { create(:user) }
+      let!(:product) { create(:product, users: [user]) }
+
+      it { is_expected.to be_a ProductForm }
+      it 'productのattributeをもつ' do
+        # titleしか確認していない
+        expect(subject.title).to eq product.title
+      end
+    end
+  end
+
   describe '#save' do
     subject { form.save }
     let!(:form) { ProductForm.new(**attributes) }
 
-    context 'バリデーションエラー' do
+    context 'バリデーションエラー時' do
       let!(:user) { create(:user, :active) }
       let!(:attributes) do
         {
@@ -57,7 +79,6 @@ RSpec.describe ProductForm do
     end
   end
 
-
   describe '#to_model' do
     subject { form.to_model }
     let!(:form) { ProductForm.new(**attributes) }
@@ -89,6 +110,74 @@ RSpec.describe ProductForm do
         created_at: nil,
         updated_at: nil,
       )
+    end
+  end
+
+  describe '#update' do
+    subject { form.update(**attributes) }
+    let!(:form) do
+      # .findの後の状態
+      ProductForm.new(
+        id: product.id,
+        title: product.title,
+        url: product.url,
+        source_url: product.source_url,
+        released_on: product.released_on,
+        summary: product.summary,
+        genre_id: product.genre_id,
+        technology_ids: product.technology_ids,
+        user_ids: product.user_ids,
+      )
+    end
+    let!(:user) { create(:user) }
+    let!(:product) { create(:product, title: '旧タイトル', users: [user]) }
+
+    context 'バリデーションエラー時' do
+      let!(:attributes) do
+        {
+          title: '新タイトル',
+          url: '',
+          source_url: '',
+          released_on: '2021-06-17',
+          summary: '',
+          genre_id: '', # バリデーションエラー
+          technology_ids: [''],
+        }
+      end
+
+      it { expect(subject).to be false }
+      it 'タイトルを変更しない' do
+        expect { subject }.not_to change { product.reload.title }.from('旧タイトル')
+      end
+      it 'エラーメッセージを持つ' do
+        subject
+        expect(form.errors.messages).to eq({ genre_id: ['を入力してください'] })
+      end
+    end
+
+    context '正常系' do
+      let!(:technology) { create(:technology) }
+      let!(:attributes) do
+        {
+          title: '新タイトル',
+          url: '',
+          source_url: '',
+          released_on: '2021-06-17',
+          summary: '',
+          genre_id: '1',
+          technology_ids: [technology.id.to_s],
+        }
+      end
+
+      it { expect(subject).to be true }
+      it 'タイトルを変更する' do
+        expect { subject }.to change { product.reload.title }.to('新タイトル').from('旧タイトル')
+      end
+      it 'userによるproductのまま' do
+        expect(product.reload.users).to eq [user]
+        subject
+        expect(product.reload.users).to eq [user]
+      end
     end
   end
 end
