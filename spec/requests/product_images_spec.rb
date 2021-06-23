@@ -30,7 +30,7 @@ RSpec.describe ProductImagesController, type: :request do
       end
 
       it "creates a new Image" do
-        expect { subject }.to change(Image, :count).by(1)
+        expect { subject }.to change(ProductImage, :count).by(1)
       end
 
       it "redirects to the created image" do
@@ -101,7 +101,7 @@ RSpec.describe ProductImagesController, type: :request do
     subject { delete "/products/#{product.id}/images/#{image.id}" }
 
     it "destroys the requested image" do
-      expect { subject }.to change(Image, :count).by(-1)
+      expect { subject }.to change(ProductImage, :count).by(-1)
     end
 
     it "redirects to the images list" do

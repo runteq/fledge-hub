@@ -5,8 +5,8 @@ Rails.application.routes.draw do
   resource :registration, only: %i[new create]
   resource :user_deactivation, only: %i[new destroy]
   resources :products do
-    resources :images, only: %i[new create edit update destroy]
-    resources :media, only: %i[new create edit update destroy]
+    resources :product_images, only: %i[new create edit update destroy]
+    resources :product_media, only: %i[new create edit update destroy]
   end
 
   post 'oauth/callback', to: 'oauths#callback'

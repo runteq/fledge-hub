@@ -31,7 +31,7 @@ RSpec.describe MediaController, type: :request do
       end
 
       it "creates a new medium" do
-        expect { subject }.to change(Medium, :count).by(1)
+        expect { subject }.to change(ProductMedium, :count).by(1)
       end
 
       it "redirects to the created medium" do
@@ -49,7 +49,7 @@ RSpec.describe MediaController, type: :request do
       end
 
       it "does not create a new medium" do
-        expect { subject }.to change(Medium, :count).by(0)
+        expect { subject }.to change(ProductMedium, :count).by(0)
       end
 
       it "renders a successful response (i.e. to display the 'new' template)" do
@@ -103,7 +103,7 @@ RSpec.describe MediaController, type: :request do
     subject { delete "/products/#{product.id}/media/#{medium.id}" }
 
     it "destroys the requested medium" do
-      expect { subject }.to change(Medium, :count).by(-1)
+      expect { subject }.to change(ProductMedium, :count).by(-1)
     end
 
     it "redirects to the media list" do

@@ -7,4 +7,4 @@ hashes = (1..20).map do |n|
   }
 end
 
-Medium.seed(:id, *hashes)
+ProductMedium.seed(:id, *hashes)
