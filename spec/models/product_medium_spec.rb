@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: media
+# Table name: product_media
 #
 #  id         :bigint           not null, primary key
 #  title      :string(255)      not null
@@ -11,16 +11,13 @@
 #
 # Indexes
 #
-#  index_media_on_product_id  (product_id)
+#  index_product_media_on_product_id  (product_id)
 #
 # Foreign Keys
 #
 #  fk_rails_...  (product_id => products.id)
 #
-class Medium < ApplicationRecord
-  belongs_to :product
+require 'rails_helper'
 
-  validates :title, presence: true, length: { maximum: 100 }
-  validates :url, presence: true, url: { allow_blank: true, schemes: %w[https http] },
-                  length: { maximum: 500 }
+RSpec.describe ProductMedium, type: :model do
 end

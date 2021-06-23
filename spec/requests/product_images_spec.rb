@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe ImagesController, type: :request do
+RSpec.describe ProductImagesController, type: :request do
   let(:user) { create(:user) }
   let(:product) { create(:product) }
   before { login_as(user) }

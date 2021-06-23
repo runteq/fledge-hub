@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: images
+# Table name: product_images
 #
 #  id         :bigint           not null, primary key
 #  created_at :datetime         not null
@@ -9,15 +9,13 @@
 #
 # Indexes
 #
-#  index_images_on_product_id  (product_id)
+#  index_product_images_on_product_id  (product_id)
 #
 # Foreign Keys
 #
 #  fk_rails_...  (product_id => products.id)
 #
-FactoryBot.define do
-  factory :image do
-    product_image { Rack::Test::UploadedFile.new('spec/fixtures/files/images/720x400.png', 'image/png') }
-    product
-  end
+require 'rails_helper'
+
+RSpec.describe ProductImage, type: :model do
 end
