@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_23_141626) do
+ActiveRecord::Schema.define(version: 2021_06_23_151559) do
 
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.string "name", null: false
@@ -85,6 +85,14 @@ ActiveRecord::Schema.define(version: 2021_06_23_141626) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "product_category_id", null: false
+  end
+
+  create_table "social_services", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "icon", null: false
+    t.string "base_url", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "technologies", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
