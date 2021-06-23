@@ -1,17 +1,17 @@
 = form_with model: @inquiry_form, url: inquiry_path, class: 'form', data: { turbo: false } do |f|
   - if f.object.errors.any?
     ul
-      - @inquiry.errors.full_messages.each do |message|
+      - @inquiry_form.errors.full_messages.each do |message|
         li= message
   .form-group
     = f.label :name, class: 'form-label'
     = f.text_field :name, required: true, class: 'text-field'
   .form-group
-    = f.label :contact, class: 'form-label'
-    = f.text_field :contact, class: 'text-field'
+    = f.label :email, class: 'form-label'
+    = f.email_field :email, class: 'text-field'
   .form-group
-    = f.label :title, class: 'form-label'
-    = f.select :title, ['Fledge Hubについて', '不具合について', 'その他' ], { required: true, prompt: '問い合わせ内容を選択してください' }, class: 'select-box'
+    = f.label :about, class: 'form-label'
+    = f.select :about, ['Fledge Hubについて', '不具合について', 'その他' ], { required: true, prompt: '問い合わせ内容を選択してください' }, class: 'select-box'
   .form-group
     = f.label :description, class: 'form-label'
     = f.text_area :description, class: 'text-field h-24'
