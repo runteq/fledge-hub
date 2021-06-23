@@ -46,6 +46,10 @@ class User < ApplicationRecord
           provider: 'github',
           uid: user_hash['id']
         )
+        social_accounts.create!(
+          identifier: user_hash['login'],
+          social_service_id: SocialService.find_by(name: 'GitHub').id
+        )
         true
       else
         false
