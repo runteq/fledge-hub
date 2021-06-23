@@ -42,6 +42,6 @@ class ProductMediaController < ApplicationController
   end
 
   def medium_params
-    params.require(:medium).permit(:title, :url)
+    params.require(:product_medium).permit(:title, :url)
   end
 end
