@@ -84,8 +84,8 @@ RSpec.describe ProductForm do
         source_url: '',
         released_on: Date.parse('2021-06-17'),
         summary: '',
-        product_type_id: '1',
-        product_category_id: '1',
+        product_type_id: 1,
+        product_category_id: 1,
         created_at: nil,
         updated_at: nil,
       )

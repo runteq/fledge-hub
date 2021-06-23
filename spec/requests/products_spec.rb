@@ -146,8 +146,8 @@ RSpec.describe ProductsController, type: :request do
           url: '',
           source_url: '',
           released_on: Time.zone.today,
-          product_type_id: product.type_id,
-          product_category_id: product.category_id,
+          product_type_id: product.product_type_id,
+          product_category_id: product.product_category_id,
           technology_ids: [new_technology.id]
         }
     end
