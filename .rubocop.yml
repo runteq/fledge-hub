@@ -26,6 +26,7 @@ Layout/LineLength:
   IgnoredPatterns: ['\A#']
   Exclude:
     - "config/initializers/*"
+    - "app//forms/inquiry_form.rb"
 
 # ABC sizeは緩めにする
 Metrics/AbcSize:
