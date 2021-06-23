@@ -1,4 +1,4 @@
-class ImagesController < ApplicationController
+class ProductImagesController < ApplicationController
   before_action :require_login
   before_action :set_product
 
@@ -42,6 +42,6 @@ class ImagesController < ApplicationController
   end
 
   def image_params
-    params.require(:image).permit(:product_image)
+    params.require(:product_image).permit(:product_image)
   end
 end

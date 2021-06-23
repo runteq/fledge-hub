@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: media
+# Table name: product_media
 #
 #  id         :bigint           not null, primary key
 #  title      :string(255)      not null
@@ -11,16 +11,16 @@
 #
 # Indexes
 #
-#  index_media_on_product_id  (product_id)
+#  index_product_media_on_product_id  (product_id)
 #
 # Foreign Keys
 #
 #  fk_rails_...  (product_id => products.id)
 #
-FactoryBot.define do
-  factory :medium do
-    sequence(:title, "外部記事_1")
-    url { Faker::Internet.url }
-    product
-  end
+class ProductMedium < ApplicationRecord
+  belongs_to :product
+
+  validates :title, presence: true, length: { maximum: 100 }
+  validates :url, presence: true, url: { allow_blank: true, schemes: %w[https http] },
+                  length: { maximum: 500 }
 end

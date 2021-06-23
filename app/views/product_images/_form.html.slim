@@ -14,5 +14,5 @@
   .form-group
     = f.submit class: 'btn btn-indigo'
     - if @image.persisted?
-      = link_to '削除', product_image_path(@product, @image), method: :delete,
+      = link_to '削除', product_product_image_path(@product, @image), method: :delete,
         data: { confirm: '画像を削除しますか？' }, class: 'btn btn-danger ml-1'

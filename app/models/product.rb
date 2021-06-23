@@ -18,8 +18,10 @@ class Product < ApplicationRecord
 
   has_many :user_products, dependent: :destroy
   has_many :users, through: :user_products
-  has_many :images, -> { order(created_at: :desc) }, dependent: :destroy, inverse_of: :product
-  has_many :media, dependent: :destroy
+  has_many :images, lambda {
+    order(created_at: :desc)
+  }, dependent: :destroy, class_name: 'ProductImage', inverse_of: :product
+  has_many :media, dependent: :destroy, class_name: 'ProductMedium', inverse_of: :product
   has_many :product_technologies, dependent: :destroy
   has_many :technologies, through: :product_technologies
   belongs_to_active_hash :product_type

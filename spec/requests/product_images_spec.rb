@@ -1,27 +1,27 @@
 require 'rails_helper'
 
-RSpec.describe ImagesController, type: :request do
+RSpec.describe ProductImagesController, type: :request do
   let(:user) { create(:user) }
   let(:product) { create(:product) }
   before { login_as(user) }
 
   describe "GET /new" do
     it "renders a successful response" do
-      get "/products/#{product.id}/images/new"
+      get "/products/#{product.id}/product_images/new"
       expect(response).to be_successful
     end
   end
 
   describe "GET /edit" do
     it "render a successful response" do
-      image = create(:image, product: product)
-      get "/products/#{product.id}/images/#{image.id}/edit"
+      image = create(:product_image, product: product)
+      get "/products/#{product.id}/product_images/#{image.id}/edit"
       expect(response).to be_successful
     end
   end
 
   describe "POST /create" do
-    subject { post "/products/#{product.id}/images", params: { image: attributes } }
+    subject { post "/products/#{product.id}/product_images", params: { product_image: attributes } }
     context "with valid parameters" do
       let(:attributes) do
         {
@@ -30,7 +30,7 @@ RSpec.describe ImagesController, type: :request do
       end
 
       it "creates a new Image" do
-        expect { subject }.to change(Image, :count).by(1)
+        expect { subject }.to change(ProductImage, :count).by(1)
       end
 
       it "redirects to the created image" do
@@ -47,7 +47,7 @@ RSpec.describe ImagesController, type: :request do
       end
 
       it "does not create a new Image" do
-        expect { subject }.to change(Image, :count).by(0)
+        expect { subject }.to change(ProductImage, :count).by(0)
       end
 
       it "renders a successful response (i.e. to display the 'new' template)" do
@@ -58,8 +58,8 @@ RSpec.describe ImagesController, type: :request do
   end
 
   describe "PATCH /update" do
-    let(:image) { create(:image, product_image: fixture_file_upload('images/720x400.png'), product: product) }
-    subject { patch "/products/#{product.id}/images/#{image.id}", params: { image: attributes } }
+    let(:product_image) { create(:product_image, product_image: fixture_file_upload('images/720x400.png'), product: product) }
+    subject { patch "/products/#{product.id}/product_images/#{product_image.id}", params: { product_image: attributes } }
     context "with valid parameters" do
       let(:attributes) do
         {
@@ -68,12 +68,12 @@ RSpec.describe ImagesController, type: :request do
       end
 
       it "updates the requested image" do
-        expect { subject }.to change { image.reload.product_image.id }
+        expect { subject }.to change { product_image.reload.product_image.id }
       end
 
       it "redirects to the image" do
         subject
-        image.reload
+        product_image.reload
         expect(response).to redirect_to("/products/#{product.id}")
       end
     end
@@ -86,7 +86,7 @@ RSpec.describe ImagesController, type: :request do
       end
 
       it "does not update the requested image" do
-        expect { subject }.not_to change { image.reload.product_image.id }
+        expect { subject }.not_to change { product_image.reload.product_image.id }
       end
 
       it "renders a successful response (i.e. to display the 'edit' template)" do
@@ -97,11 +97,11 @@ RSpec.describe ImagesController, type: :request do
   end
 
   describe "DELETE /destroy" do
-    let!(:image) { create(:image, product: product) }
-    subject { delete "/products/#{product.id}/images/#{image.id}" }
+    let!(:product_image) { create(:product_image, product: product) }
+    subject { delete "/products/#{product.id}/product_images/#{product_image.id}" }
 
     it "destroys the requested image" do
-      expect { subject }.to change(Image, :count).by(-1)
+      expect { subject }.to change(ProductImage, :count).by(-1)
     end
 
     it "redirects to the images list" do

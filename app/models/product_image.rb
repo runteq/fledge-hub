@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: images
+# Table name: product_images
 #
 #  id         :bigint           not null, primary key
 #  created_at :datetime         not null
@@ -9,13 +9,13 @@
 #
 # Indexes
 #
-#  index_images_on_product_id  (product_id)
+#  index_product_images_on_product_id  (product_id)
 #
 # Foreign Keys
 #
 #  fk_rails_...  (product_id => products.id)
 #
-class Image < ApplicationRecord
+class ProductImage < ApplicationRecord
   belongs_to :product
   has_one_attached :product_image
 

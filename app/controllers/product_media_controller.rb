@@ -1,4 +1,4 @@
-class MediaController < ApplicationController
+class ProductMediaController < ApplicationController
   before_action :require_login
   before_action :set_product
 
@@ -42,6 +42,6 @@ class MediaController < ApplicationController
   end
 
   def medium_params
-    params.require(:medium).permit(:title, :url)
+    params.require(:product_medium).permit(:title, :url)
   end
 end

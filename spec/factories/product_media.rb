@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: media
+# Table name: product_media
 #
 #  id         :bigint           not null, primary key
 #  title      :string(255)      not null
@@ -11,13 +11,16 @@
 #
 # Indexes
 #
-#  index_media_on_product_id  (product_id)
+#  index_product_media_on_product_id  (product_id)
 #
 # Foreign Keys
 #
 #  fk_rails_...  (product_id => products.id)
 #
-require 'rails_helper'
-
-RSpec.describe Medium, type: :model do
+FactoryBot.define do
+  factory :product_medium do
+    sequence(:title, "外部記事_1")
+    url { Faker::Internet.url }
+    product
+  end
 end

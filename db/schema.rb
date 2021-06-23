@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_22_141849) do
+ActiveRecord::Schema.define(version: 2021_06_23_141626) do
 
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.string "name", null: false
@@ -50,20 +50,20 @@ ActiveRecord::Schema.define(version: 2021_06_22_141849) do
     t.index ["user_id"], name: "index_authentications_on_user_id"
   end
 
-  create_table "images", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
+  create_table "product_images", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.bigint "product_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["product_id"], name: "index_images_on_product_id"
+    t.index ["product_id"], name: "index_product_images_on_product_id"
   end
 
-  create_table "media", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
+  create_table "product_media", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.string "title", null: false
     t.text "url", null: false
     t.bigint "product_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["product_id"], name: "index_media_on_product_id"
+    t.index ["product_id"], name: "index_product_media_on_product_id"
   end
 
   create_table "product_technologies", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
@@ -120,8 +120,8 @@ ActiveRecord::Schema.define(version: 2021_06_22_141849) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "images", "products"
-  add_foreign_key "media", "products"
+  add_foreign_key "product_images", "products"
+  add_foreign_key "product_media", "products"
   add_foreign_key "product_technologies", "products"
   add_foreign_key "product_technologies", "technologies"
 end

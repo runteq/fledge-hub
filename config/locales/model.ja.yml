@@ -24,8 +24,11 @@ ja:
         product_category_id: カテゴリ
         product_type_id: プロダクト形式
         users: 製作者
-      image:
+      product_image:
         product_image: 画像
+      product_medium:
+        title: 見出し
+        url: URL
 
   activemodel:
     attributes:
