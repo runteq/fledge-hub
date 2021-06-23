@@ -19,12 +19,13 @@
   .form-group
     = f.label :summary, class: 'form-label'
     = f.text_area :summary, class: 'text-field h-24'
-  .form-group
-    = f.label :product_type_id, class: 'form-label'
-    = f.select :product_type_id, ProductType.asc.pluck(:name, :id), { required: true, prompt: 'ジャンルを選択してください' }, class: 'select-box'
-  .form-group
-    = f.label :product_category_id, class: 'form-label'
-    = f.select :product_category_id, ProductCategory.asc.pluck(:name, :id), { required: true, prompt: 'ジャンルを選択してください' }, class: 'select-box'
+  .flex.flex-wrap.-mx-1
+    .form-group.inline-flex.w-1/2.px-1
+      = f.label :product_category_id, class: 'form-label'
+      = f.select :product_category_id, ProductCategory.asc.pluck(:name, :id), { required: true, prompt: '選択してください' }, class: 'select-box'
+    .form-group.inline-flex.w-1/2.px-1
+      = f.label :product_type_id, class: 'form-label'
+      = f.select :product_type_id, ProductType.asc.pluck(:name, :id), { required: true, prompt: '選択してください' }, class: 'select-box'
   .form-group
     = f.label :technology_ids, class: 'form-label'
     | （commandキーを押しながら複数選択可能）
