@@ -46,10 +46,11 @@ Naming/AccessorMethodName:
   Exclude:
     - "app/controllers/**/*"
 
-# ActiveHashのhas_manyはdependent不要なので
 Rails/HasManyOrHasOneDependent:
   Exclude:
-    - "app/models/genre.rb"
+    # ActiveHashのhas_manyはdependent不要なので
+    - "app/models/product_type.rb"
+    - "app/models/product_category.rb"
 
 # 日本語でのコメントを許可
 Style/AsciiComments:

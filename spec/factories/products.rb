@@ -20,6 +20,7 @@ FactoryBot.define do
     url { Faker::Internet.url }
     source_url { Faker::Internet.url }
     released_on { Time.zone.today }
-    genre_id { Genre.pluck(:id).sample }
+    product_type_id { ProductType.pluck(:id).sample }
+    product_category_id { ProductCategory.pluck(:id).sample }
   end
 end
