@@ -33,12 +33,17 @@ RSpec.describe User, type: :model do
   end
 
   describe '#registration' do
-    subject { user.registration(avatar_url, authentication_uid) }
+    subject { user.registration(avatar_url, user_hash) }
 
     context 'バリデーションエラーのとき' do
       let!(:user) { build(:user, screen_name: '') }
       let!(:avatar_url) { Rails.root.join('spec/fixtures/files/images/avatar_test.png') }
-      let!(:authentication_uid) { Random.new_seed }
+      let!(:user_hash) do
+        # メソッド内で使う値だけ入れている
+        {
+          'id' => Random.new_seed
+        }
+      end
 
       it { is_expected.to eq false }
       specify do
@@ -49,7 +54,12 @@ RSpec.describe User, type: :model do
     context '値が適切なとき' do
       let!(:user) { build(:user) }
       let!(:avatar_url) { Rails.root.join('spec/fixtures/files/images/avatar_test.png') }
-      let!(:authentication_uid) { Random.new_seed }
+      let!(:user_hash) do
+        # メソッド内で使う値だけ入れている
+        {
+          'id' => Random.new_seed
+        }
+      end
 
       it { is_expected.to eq true }
       specify do
