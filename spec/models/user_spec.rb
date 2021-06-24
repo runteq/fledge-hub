@@ -77,6 +77,7 @@ RSpec.describe User, type: :model do
   describe '#deactivate!' do
     let!(:user) { create(:user, status: :general) }
     let!(:authentication) { create(:authentication, user: user, provider: 'github') }
+    let!(:social_account) { create(:social_account, user: user) }
     subject { user.deactivate! }
 
     it 'Userのデータが規定の値になること' do
@@ -90,6 +91,10 @@ RSpec.describe User, type: :model do
       expect { subject }.to change {
         authentication.reload.provider
       }.to('github/deactivated').from('github')
+    end
+
+    it '紐づくSocialAccountを削除する' do
+      expect { subject }.to change(SocialAccount, :count).by(-1)
     end
   end
 end
