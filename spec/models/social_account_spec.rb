@@ -20,4 +20,19 @@
 require 'rails_helper'
 
 RSpec.describe SocialAccount, type: :model do
+  describe '#url' do
+    subject { social_account.url }
+
+    context 'base_urlがあるとき' do
+      let!(:social_account) { build(:social_account, identifier: 'account_name', social_service_id: social_service.id) }
+      let!(:social_service) { SocialService.find_by(base_url: 'https://twitter.com/') }
+      it { is_expected.to eq 'https://twitter.com/account_name' }
+    end
+
+    context 'base_urlがないとき' do
+      let!(:social_account) { build(:social_account, identifier: 'https://example.com', social_service_id: social_service.id) }
+      let!(:social_service) { SocialService.find_by(base_url: '') }
+      it { is_expected.to eq 'https://example.com' }
+    end
+  end
 end

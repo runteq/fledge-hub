@@ -22,4 +22,10 @@ class SocialAccount < ApplicationRecord
 
   belongs_to :user
   belongs_to_active_hash :social_service
+
+  delegate :service_name, :icon, to: :social_service
+
+  def url
+    "#{social_service.base_url}#{identifier}"
+  end
 end

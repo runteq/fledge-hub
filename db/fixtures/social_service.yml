@@ -2,9 +2,17 @@
 
 - id: 1
   name: GitHub
-  icon: fa-github
+  icon: fab fa-github
   base_url: https://github.com/
 - id: 2
   name: Twitter
-  icon: fa-twitter
+  icon: fab fa-twitter
   base_url: https://twitter.com/
+- id: 3
+  name: ブログ
+  icon: fas fa-feather-alt
+  base_url: ""
+- id: 4
+  name: リンク
+  icon: fas fa-link
+  base_url: ""
