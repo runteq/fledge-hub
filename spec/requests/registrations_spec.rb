@@ -28,7 +28,7 @@ RSpec.describe RegistrationsController, type: :request do
           user_info: {
             'screen_name' => 'screen_name',
             'display_name' => '',
-            'email' => 'example@example.com'
+            'email' => 'example@example.com',
           }
         })
 
@@ -64,7 +64,8 @@ RSpec.describe RegistrationsController, type: :request do
         allow_any_instance_of(ActionDispatch::Request).to receive(:session).and_return({
           user_info: {
             'id' => Random.new_seed,
-            'avatar_url' => 'http://i.pravatar.cc/300'
+            'avatar_url' => 'http://i.pravatar.cc/300',
+            'login' => 'github_account_name'
           }
         })
       end
