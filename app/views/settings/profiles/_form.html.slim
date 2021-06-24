@@ -12,13 +12,14 @@
   .form-group
     = f.label :email, class: 'form-label'
     = f.email_field :email, required: true, class: 'text-field'
-  - SocialService.all.each do |social_service|
-    .form-group
-      = f.label social_service.name, class: 'form-label'
-      div class="flex flex-row rounded overflow-hidden w-full border border-gray-300"
-        - if @user.social_accounts.find_by(social_service_id: social_service.id)&.social_service&.base_url.present?
-          div class='appearance-none block bg-gray-300 text-gray-800 py-3 px-4 leading-tight'
-            = @user.social_accounts.find_by(social_service_id: social_service.id)&.social_service&.base_url
-        = f.text_field social_service.name, class: 'appearance-none block w-full bg-gray-100 text-gray-700 py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
+  - @social_accounts.each do |social_account|
+    = f.fields_for 'social_accounts_attributes[]', social_account do |e|
+      .form-group
+        = e.label social_account.service_name, class: 'form-label'
+        div class="flex flex-row rounded overflow-hidden w-full border border-gray-300"
+          - if social_account.social_service.base_url.present?
+            div class='appearance-none block bg-gray-300 text-gray-800 py-3 px-4 leading-tight'
+              = social_account.social_service.base_url
+          = e.text_field :identifier, value: social_account.identifier, class: 'appearance-none block w-full bg-gray-100 text-gray-700 py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
   .form-group
     = f.submit class: 'btn btn-indigo'
