@@ -92,11 +92,4 @@ RSpec.describe User, type: :model do
       }.to('github/deactivated').from('github')
     end
   end
-
-  describe '#github_url' do
-    let!(:user) { create(:user, screen_name: 'github_screen_name') }
-    subject { user.github_url }
-
-    it { is_expected.to eq 'https://github.com/github_screen_name' }
-  end
 end
