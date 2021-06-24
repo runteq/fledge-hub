@@ -34,12 +34,12 @@
     }
 
     .text-field {
-      @apply appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500;
+      @apply appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-300 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white;
     }
 
     .select-box {
       position: relative;
-      @apply block bg-gray-200 border w-full border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500;
+      @apply block bg-gray-100 border w-full border-gray-300 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white;
     }
 
     .field_with_errors {
@@ -50,7 +50,7 @@
       }
 
       .text-field {
-        @apply bg-red-200 border-red-200 focus:outline-none focus:bg-white focus:border-gray-500;
+        @apply border-red-500 focus:outline-none focus:bg-white;
       }
     }
   }
