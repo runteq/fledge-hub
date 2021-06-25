@@ -50,6 +50,7 @@ Rails/HasManyOrHasOneDependent:
   Exclude:
     # ActiveHashのhas_manyはdependent不要なので
     - "app/models/product_type.rb"
+    - "app/models/social_service.rb"
     - "app/models/product_category.rb"
 
 # 日本語でのコメントを許可
