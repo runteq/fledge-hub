@@ -1,21 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe ProfilesController, type: :request do
+RSpec.describe Settings::ProfilesController, type: :request do
   before { login_as(user) }
 
-  describe "GET /edit" do
+  describe "GET /show" do
     let(:user) { create(:user) }
-    subject { get '/profile' }
-
-    it "render a successful response" do
-      subject
-      expect(response).to have_http_status(:success)
-    end
-  end
-
-  describe "GET /edit" do
-    let(:user) { create(:user) }
-    subject { get edit_profile_url }
+    subject { get '/settings/profile' }
 
     it "render a successful response" do
       subject
@@ -25,7 +15,7 @@ RSpec.describe ProfilesController, type: :request do
 
   describe "PATCH /update" do
     let(:user) { create(:user, display_name: '古い表示名') }
-    subject { patch '/profile', params: { user: attributes } }
+    subject { patch '/settings/profile', params: { user: attributes } }
 
     context "with valid parameters" do
       let(:attributes) do
@@ -40,7 +30,7 @@ RSpec.describe ProfilesController, type: :request do
 
       it "redirects to the user" do
         subject
-        expect(response).to redirect_to(user_url(user.screen_name))
+        expect(response).to redirect_to(settings_profile_url)
       end
     end
 
