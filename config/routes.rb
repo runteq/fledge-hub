@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
   root 'products#index'
   resources :users, only: %i[index show], param: :screen_name
-  resource :profile, only: %i[show edit update]
+  resource :mypage, only: %i[show]
+  namespace :settings do
+    resource :profile, only: %i[show update]
+  end
   resource :registration, only: %i[new create]
   resource :user_deactivation, only: %i[new destroy]
   resources :products do
