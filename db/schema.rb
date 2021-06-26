@@ -59,6 +59,9 @@ ActiveRecord::Schema.define(version: 2021_06_23_152345) do
     t.index ["product_id"], name: "index_product_images_on_product_id"
   end
   
+<<<<<<< HEAD
+>>>>>>> 27978e790efad68fb6bf738cc3480c24a51f731e
+=======
 >>>>>>> 27978e790efad68fb6bf738cc3480c24a51f731e
   create_table "inquiries", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.string "name", null: false
@@ -71,6 +74,7 @@ ActiveRecord::Schema.define(version: 2021_06_23_152345) do
   end
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   create_table "product_images", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.bigint "product_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -78,6 +82,8 @@ ActiveRecord::Schema.define(version: 2021_06_23_152345) do
     t.index ["product_id"], name: "index_product_images_on_product_id"
   end
 
+=======
+>>>>>>> 27978e790efad68fb6bf738cc3480c24a51f731e
 =======
 >>>>>>> 27978e790efad68fb6bf738cc3480c24a51f731e
   create_table "product_media", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
