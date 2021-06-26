@@ -22,7 +22,7 @@ class InquiryForm
     mattermost_url = 'https://chat.runteq.jp'
     mattermost_channel_url = Rails.application.credentials.mattermost[:webhook_url]
     payload = {
-      text: "name: #{name}\n email: #{email}\n about: #{about}\n description: #{description}\n user_agent: #{user_agent}"
+      text: "| name | #{name} |\n | -- | -- |\n | email | #{email} |\n | about | #{about}|\n | description | #{description}|\n | user_agent | #{user_agent}|"
     }
 
     conn = Faraday::Connection.new(url: mattermost_url) do |faraday|
