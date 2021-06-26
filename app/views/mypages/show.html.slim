@@ -1,0 +1,7 @@
+- content_for(:title, 'マイページ')
+
+| マイページ
+br
+= link_to 'ユーザーページ', user_path((current_user.screen_name))
+br
+= link_to 'プロフィール編集', settings_profile_path

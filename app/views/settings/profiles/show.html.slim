@@ -1,0 +1,10 @@
+- content_for(:title, 'プロフィール編集')
+
+= render 'form'
+
+= link_to '退会', new_user_deactivation_path, class: 'btn text-red-700 border border-red-700 bg-white hover:bg-red-700 hover:text-white'
+
+br
+= link_to 'ユーザーページ', user_path((@user.screen_name))
+'|
+= link_to 'マイページ', mypage_path
