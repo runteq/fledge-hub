@@ -10,7 +10,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_20_082545) do
 ActiveRecord::Schema.define(version: 2021_06_23_152345) do
 
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
@@ -51,14 +50,6 @@ ActiveRecord::Schema.define(version: 2021_06_23_152345) do
     t.index ["user_id"], name: "index_authentications_on_user_id"
   end
 
-  create_table "product_images", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
-    t.bigint "product_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["product_id"], name: "index_product_images_on_product_id"
-  end
-
-<<<<<<< HEAD
   create_table "inquiries", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.string "name", null: false
     t.string "email"
@@ -69,10 +60,14 @@ ActiveRecord::Schema.define(version: 2021_06_23_152345) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "media", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
-=======
+  create_table "product_images", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["product_id"], name: "index_product_images_on_product_id"
+  end
+
   create_table "product_media", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
->>>>>>> c0b1743a5a6e6349c1f3503bc9e7c14c7148803c
     t.string "title", null: false
     t.text "url", null: false
     t.bigint "product_id", null: false
