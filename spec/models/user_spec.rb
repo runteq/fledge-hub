@@ -33,28 +33,43 @@ RSpec.describe User, type: :model do
   end
 
   describe '#registration' do
-    subject { user.registration(avatar_url, authentication_uid) }
+    subject { user.registration(avatar_url, user_hash) }
 
     context 'バリデーションエラーのとき' do
       let!(:user) { build(:user, screen_name: '') }
       let!(:avatar_url) { Rails.root.join('spec/fixtures/files/images/avatar_test.png') }
-      let!(:authentication_uid) { Random.new_seed }
+      let!(:user_hash) do
+        # メソッド内で使う値だけ入れている
+        {
+          'id' => Random.new_seed,
+          'login' => 'github_account_name'
+        }
+      end
 
       it { is_expected.to eq false }
       specify do
-        expect { subject }.not_to change(User, :count)
+        expect { subject }.to not_change(User, :count)
+                          .and not_change(Authentication, :count)
+                          .and not_change(SocialAccount, :count)
       end
     end
 
     context '値が適切なとき' do
       let!(:user) { build(:user) }
       let!(:avatar_url) { Rails.root.join('spec/fixtures/files/images/avatar_test.png') }
-      let!(:authentication_uid) { Random.new_seed }
+      let!(:user_hash) do
+        # メソッド内で使う値だけ入れている
+        {
+          'id' => Random.new_seed,
+          'login' => 'github_account_name'
+        }
+      end
 
       it { is_expected.to eq true }
       specify do
-        expect { subject }.to change(User, :count)
-                          .and change(Authentication, :count)
+        expect { subject }.to change(User, :count).by(1)
+                          .and change(Authentication, :count).by(1)
+                          .and change(SocialAccount, :count).by(1)
       end
     end
   end
@@ -76,12 +91,5 @@ RSpec.describe User, type: :model do
         authentication.reload.provider
       }.to('github/deactivated').from('github')
     end
-  end
-
-  describe '#github_url' do
-    let!(:user) { create(:user, screen_name: 'github_screen_name') }
-    subject { user.github_url }
-
-    it { is_expected.to eq 'https://github.com/github_screen_name' }
   end
 end
