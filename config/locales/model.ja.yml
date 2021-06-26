@@ -38,3 +38,8 @@ ja:
         technology_ids: 使用技術
         genre_id: ジャンル
         users: 製作者
+      inquiry_form:
+        name: 氏名
+        email: メールアドレス
+        about: 件名
+        description: 内容 
