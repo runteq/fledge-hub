@@ -6,4 +6,7 @@
   = link_to '新規登録', new_product_path, class: 'btn btn-indigo'
 
 .flex.flex-wrap.-mx-4
-  = render(ProductComponent.with_collection(@products))
+  - if @products.present?
+    = render(ProductComponent.with_collection(@products))
+  - else
+    p.mt-10.mx-auto 検索条件を満たすサービスはありませんでした
