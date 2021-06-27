@@ -3,10 +3,10 @@ class InquiryForm
 
   attr_accessor :name, :email, :about, :description, :user_agent
 
-  validates :name, :about, :description, presence: true
+  validates :name, :about, :description, :user_agent, presence: true
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  validates :email, format: { with: VALID_EMAIL_REGEX }
+  validates :email, format: { with: VALID_EMAIL_REGEX }, allow_blank: true
 
   def save
     return false if invalid?
