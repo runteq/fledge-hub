@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe SearchProductsForm do
-  fdescribe '.search' do
+  describe '.search' do
     subject { SearchProductsForm.new(title: title).search.length }
 
     before do
