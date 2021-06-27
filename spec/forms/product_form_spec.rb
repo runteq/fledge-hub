@@ -39,7 +39,7 @@ RSpec.describe ProductForm do
           product_type_id: '1',
           product_category_id: '1',
           technology_ids: [''],
-          user_ids: [user.id],
+          user_ids: [user.id]
         }
       end
 
@@ -66,15 +66,16 @@ RSpec.describe ProductForm do
           product_type_id: '1',
           product_category_id: '1',
           technology_ids: [technology.id.to_s],
-          user_ids: [user.id],
+          user_ids: [user.id]
         }
       end
 
       it { expect(subject).to be true }
       it 'レコードを作成する' do
         expect { subject }.to change(Product, :count).by(1)
-                          .and change(UserProduct, :count).by(1)
-                          .and change(ProductTechnology, :count).by(1)
+                                                     .and change(UserProduct, :count).by(1)
+                                                                                     .and change(ProductTechnology,
+                                                                                                 :count).by(1)
       end
     end
   end
@@ -92,7 +93,7 @@ RSpec.describe ProductForm do
         product_type_id: '1',
         product_category_id: '1',
         technology_ids: [],
-        user_ids: [],
+        user_ids: []
       }
     end
 
@@ -108,7 +109,7 @@ RSpec.describe ProductForm do
         product_type_id: 1,
         product_category_id: 1,
         created_at: nil,
-        updated_at: nil,
+        updated_at: nil
       )
     end
   end
@@ -127,7 +128,7 @@ RSpec.describe ProductForm do
         product_category_id: product.product_category_id,
         product_type_id: product.product_type_id,
         technology_ids: product.technology_ids,
-        user_ids: product.user_ids,
+        user_ids: product.user_ids
       )
     end
     let!(:user) { create(:user) }
@@ -143,7 +144,7 @@ RSpec.describe ProductForm do
           summary: '',
           product_category_id: '1',
           product_type_id: '1',
-          technology_ids: [''],
+          technology_ids: ['']
         }
       end
 
@@ -168,7 +169,7 @@ RSpec.describe ProductForm do
           summary: '',
           product_category_id: '1',
           product_type_id: '1',
-          technology_ids: [technology.id.to_s],
+          technology_ids: [technology.id.to_s]
         }
       end
 

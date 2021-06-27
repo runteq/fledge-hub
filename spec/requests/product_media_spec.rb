@@ -5,24 +5,24 @@ RSpec.describe ProductMediaController, type: :request do
   let(:product) { create(:product) }
   before { login_as(user) }
 
-  describe "GET /new" do
-    it "renders a successful response" do
+  describe 'GET /new' do
+    it 'renders a successful response' do
       get "/products/#{product.id}/product_media/new"
       expect(response).to be_successful
     end
   end
 
-  describe "GET /edit" do
-    it "render a successful response" do
+  describe 'GET /edit' do
+    it 'render a successful response' do
       medium = create(:product_medium, product: product)
       get "/products/#{product.id}/product_media/#{medium.id}/edit"
       expect(response).to be_successful
     end
   end
 
-  describe "POST /create" do
+  describe 'POST /create' do
     subject { post "/products/#{product.id}/product_media", params: { product_medium: attributes } }
-    context "with valid parameters" do
+    context 'with valid parameters' do
       let(:attributes) do
         {
           title: 'タイトル',
@@ -30,17 +30,17 @@ RSpec.describe ProductMediaController, type: :request do
         }
       end
 
-      it "creates a new medium" do
+      it 'creates a new medium' do
         expect { subject }.to change(ProductMedium, :count).by(1)
       end
 
-      it "redirects to the created medium" do
+      it 'redirects to the created medium' do
         subject
         expect(response).to redirect_to("/products/#{product.id}")
       end
     end
 
-    context "with invalid parameters" do
+    context 'with invalid parameters' do
       let(:attributes) do
         {
           title: 'タイトル',
@@ -48,7 +48,7 @@ RSpec.describe ProductMediaController, type: :request do
         }
       end
 
-      it "does not create a new medium" do
+      it 'does not create a new medium' do
         expect { subject }.to change(ProductMedium, :count).by(0)
       end
 
@@ -59,35 +59,38 @@ RSpec.describe ProductMediaController, type: :request do
     end
   end
 
-  describe "PATCH /update" do
+  describe 'PATCH /update' do
     let(:product_medium) { create(:product_medium, title: '古いタイトル', product: product) }
-    subject { patch "/products/#{product.id}/product_media/#{product_medium.id}", params: { product_medium: attributes } }
-    context "with valid parameters" do
+    subject do
+      patch "/products/#{product.id}/product_media/#{product_medium.id}",
+            params: { product_medium: attributes }
+    end
+    context 'with valid parameters' do
       let(:attributes) do
         {
           title: '新しいタイトル'
         }
       end
 
-      it "updates the requested medium" do
+      it 'updates the requested medium' do
         expect { subject }.to change { product_medium.reload.title }.to('新しいタイトル').from('古いタイトル')
       end
 
-      it "redirects to the medium" do
+      it 'redirects to the medium' do
         subject
         product_medium.reload
         expect(response).to redirect_to("/products/#{product.id}")
       end
     end
 
-    context "with invalid parameters" do
+    context 'with invalid parameters' do
       let(:attributes) do
         {
           title: ''
         }
       end
 
-      it "does not update the requested medium" do
+      it 'does not update the requested medium' do
         expect { subject }.not_to change { product_medium.reload.title }.from('古いタイトル')
       end
 
@@ -98,15 +101,15 @@ RSpec.describe ProductMediaController, type: :request do
     end
   end
 
-  describe "DELETE /destroy" do
+  describe 'DELETE /destroy' do
     let!(:product_medium) { create(:product_medium, product: product) }
     subject { delete "/products/#{product.id}/product_media/#{product_medium.id}" }
 
-    it "destroys the requested medium" do
+    it 'destroys the requested medium' do
       expect { subject }.to change(ProductMedium, :count).by(-1)
     end
 
-    it "redirects to the media list" do
+    it 'redirects to the media list' do
       subject
       expect(response).to redirect_to("/products/#{product.id}")
     end
