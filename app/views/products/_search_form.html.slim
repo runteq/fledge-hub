@@ -1,4 +1,5 @@
 .w-5/12.mx-auto
-  = form_with model: @search_form, url: products_path, method: :get, scope: 'search', data: { turbo: false }, class: 'w-full h-10 pl-3 pr-2 bg-white border rounded-full flex justify-between items-center relative mx-auto', local: true do |f|
-    = f.search_field :title, class: 'w-full ml-1 outline-none focus:outline-none active:outline-none'
-    = f.button content_tag(:i, '', class: 'fas fa-search text-gray-600 h-4 w-4 fill-current'), class: 'ml-1 outline-none focus:outline-none active:outline-none'
+  = form_with model: @search_form, url: products_path, method: :get, scope: 'search', data: { turbo: false },
+                   class: 'w-full h-10 pl-3 pr-2 bg-white border rounded-full flex justify-between items-center mx-auto', local: true do |f|
+    = f.search_field :title, class: 'w-full ml-1 outline-none'
+    = f.button content_tag(:i, '', class: 'fas fa-search text-gray-600 h-4 w-4 fill-current'), class: 'ml-1 outline-none focus:outline-none'
