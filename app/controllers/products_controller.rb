@@ -4,7 +4,7 @@ class ProductsController < ApplicationController
   def index
     @search_form = SearchProductsForm.new(search_params)
     @products = @search_form.search.includes(:technologies, :users,
-                                 { images: { product_image_attachment: :blob } })
+                                             { images: { product_image_attachment: :blob } })
   end
 
   def show

@@ -9,4 +9,3 @@ module KanaHelper
     NKF.nkf('-h2 -w', str)
   end
 end
-
