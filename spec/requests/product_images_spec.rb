@@ -59,8 +59,11 @@ RSpec.describe ProductImagesController, type: :request do
 
   describe 'PATCH /update' do
     let(:product_image) do
-      create(:product_image, product_image: fixture_file_upload('images/720x400.png'),
-                             product: product)
+      create(
+        :product_image,
+        product_image: fixture_file_upload('images/720x400.png'),
+        product: product
+      )
     end
     subject do
       patch "/products/#{product.id}/product_images/#{product_image.id}",
@@ -74,7 +77,8 @@ RSpec.describe ProductImagesController, type: :request do
       end
 
       it 'updates the requested image' do
-        expect { subject }.to change { product_image.reload.product_image.id }
+        product_image = product_image.reload.product_image
+        expect { subject }.to change(product_image, :id)
       end
 
       it 'redirects to the image' do
@@ -92,7 +96,8 @@ RSpec.describe ProductImagesController, type: :request do
       end
 
       it 'does not update the requested image' do
-        expect { subject }.not_to change { product_image.reload.product_image.id }
+        product_image = product_image.reload.product_image
+        expect { subject }.not_to change(product_image, :id)
       end
 
       it "renders a successful response (i.e. to display the 'edit' template)" do

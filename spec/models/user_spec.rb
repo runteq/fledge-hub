@@ -68,9 +68,8 @@ RSpec.describe User, type: :model do
       it { is_expected.to eq true }
       specify do
         expect { subject }.to change(User, :count).by(1)
-                                                  .and change(Authentication, :count).by(1)
-                                                                                     .and change(SocialAccount,
-                                                                                                 :count).by(1)
+                          .and change(Authentication, :count).by(1)
+                          .and change(SocialAccount, :count).by(1)
       end
     end
   end
@@ -83,9 +82,7 @@ RSpec.describe User, type: :model do
 
     it 'Userのデータが規定の値になること' do
       expect { subject }.to change { user.reload.display_name }.to('退会済みユーザー')
-                                                               .and change {
-                                                                      user.reload.status
-                                                                    }.to('deactivated').from('general')
+                        .and change { user.reload.status }.to('deactivated').from('general')
       expect(user.reload.screen_name).to include 'removed_account_'
       expect(user.reload.email).to include 'removed_account_'
     end

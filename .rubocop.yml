@@ -19,12 +19,29 @@ AllCops:
 Bundler/OrderedGems:
   Enabled: false
 
+Layout/FirstArrayElementIndentation:
+  EnforcedStyle: consistent
+
+Layout/FirstHashElementIndentation:
+  EnforcedStyle: consistent
+
 # 一行の長さは100字まで。コメントは制限しない
 Layout/LineLength:
   Max: 100
-  IgnoredPatterns: ['\A#']
+  IgnoredPatterns:
+    - '\A#.+'
   Exclude:
     - "config/initializers/*"
+
+# メソッドチェーンのインデントは自分で調整する
+Layout/MultilineMethodCallIndentation:
+  Exclude:
+    - "spec/**/*"
+
+# 空のモデルスペックは許可する
+Lint/EmptyBlock:
+  Exclude:
+    - "spec/models/**/*"
 
 # ABC sizeは緩めにする
 Metrics/AbcSize:
@@ -32,6 +49,7 @@ Metrics/AbcSize:
 
 Metrics/BlockLength:
   Exclude:
+    - "spec/**/*"
     - "lib/tasks/auto_annotate_models.rake"
     - "config/environments/development.rb"
 
@@ -51,6 +69,10 @@ Rails/HasManyOrHasOneDependent:
     - "app/models/product_type.rb"
     - "app/models/social_service.rb"
     - "app/models/product_category.rb"
+
+# Prefer &&/|| over and/or.
+Style/AndOr:
+  Enabled: true
 
 # 日本語でのコメントを許可
 Style/AsciiComments:

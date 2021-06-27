@@ -14,8 +14,8 @@ RSpec.describe OauthsController, type: :request do
       before do
         # login_from('github')をモックにして、仮想的にlogin_asを実行する
         allow_any_instance_of(OauthsController).to receive(:login_from).with('github') {
-                                                     login_as(create(:user, :active))
-                                                   }
+          login_as(create(:user, :active))
+        }
       end
 
       it 'root_pathにリダイレクトする' do
@@ -27,7 +27,8 @@ RSpec.describe OauthsController, type: :request do
     # context 'ログインできなかったとき（まだユーザー登録していないとき）' do
     #   before do
     #     # login_from('github')をモックにする
-    #     allow_any_instance_of(OauthsController).to receive(:login_from).with('github').and_return(false)
+    #     allow_any_instance_of(OauthsController).to receive(:login_from).with('github')
+    #                                                                    .and_return(false)
     #     allow_any_instance_of(ActionDispatch::Request).to receive(:session).and_return({})
     #     OauthsController.instance_variable_set('@user_hash', {})
     #   end

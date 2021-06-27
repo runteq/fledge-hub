@@ -24,13 +24,15 @@ RSpec.describe RegistrationsController, type: :request do
 
     context 'session[:user_info]に値が入っているとき' do
       it 'ページを描画する' do
-        allow_any_instance_of(ActionDispatch::Request).to receive(:session).and_return({
-                                                                                         user_info: {
-                                                                                           'screen_name' => 'screen_name',
-                                                                                           'display_name' => '',
-                                                                                           'email' => 'example@example.com'
-                                                                                         }
-                                                                                       })
+        allow_any_instance_of(ActionDispatch::Request).to receive(:session).and_return(
+          {
+            user_info: {
+              'screen_name' => 'screen_name',
+              'display_name' => '',
+              'email' => 'example@example.com'
+            }
+          }
+        )
 
         subject
         expect(response).to have_http_status(:success)
@@ -50,7 +52,7 @@ RSpec.describe RegistrationsController, type: :request do
     end
 
     context 'session[:user_info]に値が入っていないとき' do
-      let(:attributes) {}
+      let(:attributes) { nil }
       it 'root_pathにリダイレクトする' do
         allow_any_instance_of(ActionDispatch::Request).to receive(:session).and_return({})
 
@@ -61,13 +63,15 @@ RSpec.describe RegistrationsController, type: :request do
 
     context 'session[:user_info]に値が入っているとき' do
       before do
-        allow_any_instance_of(ActionDispatch::Request).to receive(:session).and_return({
-                                                                                         user_info: {
-                                                                                           'id' => Random.new_seed,
-                                                                                           'avatar_url' => 'http://i.pravatar.cc/300',
-                                                                                           'login' => 'github_account_name'
-                                                                                         }
-                                                                                       })
+        allow_any_instance_of(ActionDispatch::Request).to receive(:session).and_return(
+          {
+            user_info: {
+              'id' => Random.new_seed,
+              'avatar_url' => 'http://i.pravatar.cc/300',
+              'login' => 'github_account_name'
+            }
+          }
+        )
       end
 
       context '利用規約に同意していないとき' do

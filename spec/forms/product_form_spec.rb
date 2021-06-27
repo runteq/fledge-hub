@@ -73,9 +73,8 @@ RSpec.describe ProductForm do
       it { expect(subject).to be true }
       it 'レコードを作成する' do
         expect { subject }.to change(Product, :count).by(1)
-                                                     .and change(UserProduct, :count).by(1)
-                                                                                     .and change(ProductTechnology,
-                                                                                                 :count).by(1)
+                          .and change(UserProduct, :count).by(1)
+                          .and change(ProductTechnology, :count).by(1)
       end
     end
   end
