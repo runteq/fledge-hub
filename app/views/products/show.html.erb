@@ -1,4 +1,6 @@
 <% content_for(:title, @product.title) %>
+<% content_for(:description, @product.summary.presence || @product.title) %>
+<% content_for(:meta_image_url, url_for(@product.top_image.product_image)) %>
 
 <div class="mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-1">
   <div class="grid gap-12 row-gap-8 lg:grid-cols-2">
@@ -49,8 +51,8 @@
   <div>
     <%= image_tag image.product_image, alt: @product.title, width: '600px' %>
     <% if @product.permitted_edit?(current_user) %>
-      <%= link_to '編集', edit_product_image_path(@product, image) %>
-      <%= link_to '削除', product_image_path(@product, image), method: :delete %>
+      <%= link_to '編集', edit_product_product_image_path(@product, image) %>
+      <%= link_to '削除', product_product_image_path(@product, image), method: :delete %>
     <% end %>
   </div>
 <% end %>
@@ -59,8 +61,8 @@
 <% @product.media.each do |medium| %>
   <%= link_to_blank medium.title, medium.url %>
   <% if @product.permitted_edit?(current_user) %>
-    <%= link_to '編集', edit_product_medium_path(@product, medium) %>
-    <%= link_to '削除', product_medium_path(@product, medium), method: :delete %>
+    <%= link_to '編集', edit_product_product_medium_path(@product, medium) %>
+    <%= link_to '削除', product_product_medium_path(@product, medium), method: :delete %>
   <% end %>
   <br>
 <% end %>
@@ -75,7 +77,7 @@
   <br>
   <%= link_to 'Destroy', @product, data: { confirm: 'Are you sure?' }, method: :delete %>
   <br>
-  <%= link_to '画像登録', new_product_image_path(@product) %>
+  <%= link_to '画像登録', new_product_product_image_path(@product) %>
   <br>
-  <%= link_to 'メディア登録', new_product_medium_path(@product) %>
+  <%= link_to 'メディア登録', new_product_product_medium_path(@product) %>
 <% end %>

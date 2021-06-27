@@ -6,7 +6,8 @@ product_hashes = (1..20).map do |n|
     released_on: n.months.ago,
     url: 'https://runteq.jp/',
     source_url: 'https://github.com/runteq/fledge-hub',
-    genre_id: 1
+    product_type_id: 1,
+    product_category_id: 1
   }
 end
 

@@ -26,6 +26,7 @@ class User < ApplicationRecord
   has_many :user_products, dependent: :destroy
   has_many :products, through: :user_products
   has_many :authentications, dependent: :destroy
+  has_many :social_accounts, dependent: :destroy
   has_one_attached :avatar, dependent: :destroy
   accepts_nested_attributes_for :authentications
 
@@ -36,6 +37,25 @@ class User < ApplicationRecord
   enum status: { general: 0, deactivated: 10 }
 
   scope :active, -> { where.not(status: :deactivated) }
+
+  def registration(avatar_url, user_hash)
+    transaction do
+      if save
+        grab_avatar_image(avatar_url)
+        authentications.find_or_create_by!(
+          provider: 'github',
+          uid: user_hash['id']
+        )
+        social_accounts.create!(
+          identifier: user_hash['login'],
+          social_service_id: SocialService.find_by(name: 'GitHub').id
+        )
+        true
+      else
+        false
+      end
+    end
+  end
 
   def deactivate!
     transaction do
@@ -57,10 +77,5 @@ class User < ApplicationRecord
   def grab_avatar_image(url)
     avatar_url = url.open
     avatar.attach(io: avatar_url, filename: "user_avatar_#{id}.jpg")
-  end
-
-  def github_url
-    # いずれUser#screen_nameとGitHubのscreen_nameは別にしたい
-    "https://github.com/#{screen_name}"
   end
 end

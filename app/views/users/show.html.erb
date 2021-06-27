@@ -1,4 +1,6 @@
 <% content_for(:title, @user.display_name) %>
+<% content_for(:description, "#{@user.display_name}のユーザーページ") %>
+
 <div>
   <div class="text-center mb-5 opacity-90">
     <%= image_tag @user.avatar, alt: @user.display_name, class: 'mx-auto object-cover rounded-full h-32 w-32' %>
@@ -12,12 +14,11 @@
     </p>
   </div>
 
-  <div class="pt-4 flex border-t border-gray-200 w-40 mx-auto px-8 text-gray-500 items-center justify-between">
-    <a href="#" class='text-3xl'>
-      <i class="fab fa-twitter"></i>
-    </a>
-    <%= link_to sanitize(@user.github_url), target: :_blank, rel: 'noopener noreferrer', class: 'text-3xl' do %>
-      <i class="fab fa-github"></i>
+  <div class="pt-4 flex border-t border-gray-200 w-40 mx-auto px-2 text-gray-500 items-center justify-between">
+    <% @user.social_accounts.each do |social_account| %>
+      <%= link_to sanitize(social_account.url), target: :_blank, rel: 'noopener noreferrer', class: 'text-3xl' do %>
+        <i class="<%= social_account.icon %>"></i>
+      <% end %>
     <% end %>
   </div>
 </div>

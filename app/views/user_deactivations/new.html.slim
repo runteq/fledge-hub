@@ -1,3 +1,5 @@
+- content_for(:title, '退会')
+
 .mb-4
   h2.text-lg.font-semibold
     | 退会時に削除されるデータ
@@ -17,10 +19,14 @@
     .mb-2
       h2.text-lg.font-semibold
         | 投稿済みサービスについて
-      p 投稿済みサービスは、製作者の表示が「退会済みユーザー」になります。
-      p 退会後は投稿データの編集・削除ができません。
+      p 投稿済みサービスは、退会によって自動的に削除されません。
+      p 以下のサービスは、退会後に製作者の表示が「退会済みユーザー」になります。
+      ul.list-disc.ml-8.mb-2
+        - current_user.products.each do |product|
+          li= product.title
+      p 退会後に投稿データの編集・削除はできません。
     .-m-4
       = render(ProductComponent.new(product: @deactivated_product_sample))
 
 = link_to '同意して退会する', user_deactivation_path, method: :delete, class: 'btn btn-danger'
-= link_to '戻る', edit_profile_path, class: 'ml-1 btn btn-indigo'
+= link_to '戻る', settings_profile_path, class: 'ml-1 btn btn-indigo'

@@ -28,20 +28,62 @@ RSpec.describe User, type: :model do
       deactived_user = create(:user, :deactivated)
 
       is_expected.to include(active_user)
-      is_expected.not_to include(deactived_user)
+                 .and not_include(deactived_user)
+    end
+  end
+
+  describe '#registration' do
+    subject { user.registration(avatar_url, user_hash) }
+
+    context 'バリデーションエラーのとき' do
+      let!(:user) { build(:user, screen_name: '') }
+      let!(:avatar_url) { Rails.root.join('spec/fixtures/files/images/avatar_test.png') }
+      let!(:user_hash) do
+        # メソッド内で使う値だけ入れている
+        {
+          'id' => Random.new_seed,
+          'login' => 'github_account_name'
+        }
+      end
+
+      it { is_expected.to eq false }
+      specify do
+        expect { subject }.to not_change(User, :count)
+                          .and not_change(Authentication, :count)
+                          .and not_change(SocialAccount, :count)
+      end
+    end
+
+    context '値が適切なとき' do
+      let!(:user) { build(:user) }
+      let!(:avatar_url) { Rails.root.join('spec/fixtures/files/images/avatar_test.png') }
+      let!(:user_hash) do
+        # メソッド内で使う値だけ入れている
+        {
+          'id' => Random.new_seed,
+          'login' => 'github_account_name'
+        }
+      end
+
+      it { is_expected.to eq true }
+      specify do
+        expect { subject }.to change(User, :count).by(1)
+                          .and change(Authentication, :count).by(1)
+                          .and change(SocialAccount, :count).by(1)
+      end
     end
   end
 
   describe '#deactivate!' do
-    let!(:user) { create(:user, id: 1, status: :general) }
+    let!(:user) { create(:user, status: :general) }
     let!(:authentication) { create(:authentication, user: user, provider: 'github') }
     subject { user.deactivate! }
 
     it 'Userのデータが規定の値になること' do
       expect { subject }.to change { user.reload.display_name }.to('退会済みユーザー')
-                        .and change { user.reload.screen_name }.to('removed_account_1')
-                        .and change { user.reload.email }.to('removed_account_1@example.com')
                         .and change { user.reload.status }.to('deactivated').from('general')
+      expect(user.reload.screen_name).to include 'removed_account_'
+      expect(user.reload.email).to include 'removed_account_'
     end
 
     it 'Authenticationのproviderがdeactivatedになること' do
@@ -49,12 +91,5 @@ RSpec.describe User, type: :model do
         authentication.reload.provider
       }.to('github/deactivated').from('github')
     end
-  end
-
-  describe '#github_url' do
-    let!(:user) { create(:user, screen_name: 'github_screen_name') }
-    subject { user.github_url }
-
-    it { is_expected.to eq 'https://github.com/github_screen_name' }
   end
 end

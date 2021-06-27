@@ -12,28 +12,26 @@ class ProductsController < ApplicationController
   end
 
   def new
-    @product = Product.new
+    @product = ProductForm.new
   end
 
   def edit
-    @product = current_user.products.find(params[:id])
+    @product = ProductForm.find(params[:id], current_user.id)
   end
 
   def create
-    # 一対多みたいな書き方をしている。user複数のときどうするかは後々
-    @product = current_user.products.build(product_params)
-    if @product.valid?
-      @product = current_user.products.create(product_params)
-      redirect_to @product, notice: 'Product was successfully created.'
+    @product = ProductForm.new(product_params.merge(user_ids: [current_user.id]))
+    if @product.save
+      redirect_to product_path(@product), notice: '投稿しました！'
     else
       render :new, status: :unprocessable_entity # 422errorを起こす
     end
   end
 
   def update
-    @product = current_user.products.find(params[:id])
+    @product = ProductForm.find(params[:id], current_user.id)
     if @product.update(product_params)
-      redirect_to @product, notice: 'Product was successfully updated.'
+      redirect_to product_path(@product), notice: '更新しました！'
     else
       render :edit, status: :unprocessable_entity # 422errorを起こす
     end
@@ -54,7 +52,8 @@ class ProductsController < ApplicationController
       :url,
       :source_url,
       :released_on,
-      :genre_id,
+      :product_category_id,
+      :product_type_id,
       technology_ids: []
     )
   end

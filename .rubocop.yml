@@ -34,6 +34,7 @@ Metrics/AbcSize:
 Metrics/BlockLength:
   Exclude:
     - "lib/tasks/auto_annotate_models.rake"
+    - "config/environments/development.rb"
 
 # メソッドの行数を20行までにする
 Metrics/MethodLength:
@@ -45,10 +46,12 @@ Naming/AccessorMethodName:
   Exclude:
     - "app/controllers/**/*"
 
-# ActiveHashのhas_manyはdependent不要なので
 Rails/HasManyOrHasOneDependent:
   Exclude:
-    - "app/models/genre.rb"
+    # ActiveHashのhas_manyはdependent不要なので
+    - "app/models/product_type.rb"
+    - "app/models/social_service.rb"
+    - "app/models/product_category.rb"
 
 # 日本語でのコメントを許可
 Style/AsciiComments:
