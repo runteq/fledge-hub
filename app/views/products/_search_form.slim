@@ -1,4 +1,0 @@
-.flex.justify-center
-  = form_with model: @search_form, url: products_path, method: :get, scope: 'search', class: 'form text-center', local: true do |f|
-    = f.search_field :title, class: 'text-field'
-    = f.submit '検索', class: 'btn', name: nil
