@@ -71,6 +71,7 @@ class User < ApplicationRecord
           provider: "#{authentication.provider}/deactivated"
         )
       end
+      social_accounts.destroy_all
     end
   end
 
