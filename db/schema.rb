@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(version: 2021_06_23_152345) do
 
   create_table "inquiries", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.string "name", null: false
-    t.string "email"
+    t.string "email", default: "", null: false
     t.string "about", null: false
     t.text "description", null: false
     t.string "user_agent", null: false
