@@ -7,6 +7,6 @@ class UsersController < ApplicationController
     @user = User.active.find_by!(screen_name: params[:screen_name])
 
     @products = @user.products.includes(:technologies,
-                                        { images: { product_image_attachment: :blob } },)
+                                        { images: { product_image_attachment: :blob } })
   end
 end
