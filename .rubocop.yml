@@ -38,6 +38,10 @@ Layout/MultilineMethodCallIndentation:
   Exclude:
     - "spec/**/*"
 
+Lint/AmbiguousBlockAssociation:
+  # RSpecのchange { object.attribute }は許可する
+  IgnoredMethods: [change]
+
 # 空のモデルスペックは許可する
 Lint/EmptyBlock:
   Exclude:

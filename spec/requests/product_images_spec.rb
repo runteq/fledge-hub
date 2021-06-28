@@ -77,8 +77,7 @@ RSpec.describe ProductImagesController, type: :request do
       end
 
       it 'updates the requested image' do
-        product_image = product_image.reload.product_image
-        expect { subject }.to change(product_image, :id)
+        expect { subject }.to change { product_image.reload.product_image.id }
       end
 
       it 'redirects to the image' do
@@ -96,8 +95,7 @@ RSpec.describe ProductImagesController, type: :request do
       end
 
       it 'does not update the requested image' do
-        product_image = product_image.reload.product_image
-        expect { subject }.not_to change(product_image, :id)
+        expect { subject }.not_to change { product_image.reload.product_image.id }
       end
 
       it "renders a successful response (i.e. to display the 'edit' template)" do
