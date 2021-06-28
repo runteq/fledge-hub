@@ -131,7 +131,7 @@ RSpec.describe RegistrationsController, type: :request do
 
         it 'ユーザーが作成される' do
           expect { subject }.to change(User, :count).by(1)
-                                                    .and change(Authentication, :count).by(1)
+                            .and change(Authentication, :count).by(1)
         end
 
         it 'ログインする' do

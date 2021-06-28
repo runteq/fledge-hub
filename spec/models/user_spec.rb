@@ -28,7 +28,7 @@ RSpec.describe User, type: :model do
       deactived_user = create(:user, :deactivated)
 
       is_expected.to include(active_user)
-        .and not_include(deactived_user)
+                 .and not_include(deactived_user)
     end
   end
 
@@ -49,8 +49,8 @@ RSpec.describe User, type: :model do
       it { is_expected.to eq false }
       specify do
         expect { subject }.to not_change(User, :count)
-          .and not_change(Authentication, :count)
-          .and not_change(SocialAccount, :count)
+                          .and not_change(Authentication, :count)
+                          .and not_change(SocialAccount, :count)
       end
     end
 
