@@ -22,7 +22,7 @@ RSpec.describe InquiryForm do
   end
 
   describe '#save' do
-    subject { form.send(:save) }
+    subject { form.save }
     let!(:form) { InquiryForm.new(**attributes) }
 
     context 'バリデーションエラー' do
@@ -42,7 +42,7 @@ RSpec.describe InquiryForm do
       end
       it 'エラーメッセージを持つ' do
         subject
-        expect(form.errors.messages).to eq({ name: ['を入力してください'], description: ['を入力してください']})
+        expect(form.errors.messages).to eq({ name: ['を入力してください'], description: ['を入力してください'] })
       end
     end
 
