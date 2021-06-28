@@ -25,7 +25,7 @@ RSpec.describe ProductImagesController, type: :request do
     context 'with valid parameters' do
       let(:attributes) do
         {
-          product_image: fixture_file_upload('images/720x400.png')
+          product_image: fixture_file_upload('images/720x400.png'),
         }
       end
 
@@ -42,7 +42,7 @@ RSpec.describe ProductImagesController, type: :request do
     context 'with invalid parameters' do
       let(:attributes) do
         {
-          product_image: nil
+          product_image: nil,
         }
       end
 
@@ -62,7 +62,7 @@ RSpec.describe ProductImagesController, type: :request do
       create(
         :product_image,
         product_image: fixture_file_upload('images/720x400.png'),
-        product: product
+        product: product,
       )
     end
     subject do
@@ -72,7 +72,7 @@ RSpec.describe ProductImagesController, type: :request do
     context 'with valid parameters' do
       let(:attributes) do
         {
-          product_image: fixture_file_upload('images/200x200.png')
+          product_image: fixture_file_upload('images/200x200.png'),
         }
       end
 
@@ -91,7 +91,7 @@ RSpec.describe ProductImagesController, type: :request do
     context 'with invalid parameters' do
       let(:attributes) do
         {
-          product_image: nil
+          product_image: nil,
         }
       end
 

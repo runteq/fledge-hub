@@ -20,7 +20,7 @@ RSpec.describe Settings::ProfilesController, type: :request do
     context 'with valid parameters' do
       let(:attributes) do
         {
-          display_name: '新しい表示名'
+          display_name: '新しい表示名',
         }
       end
 
@@ -37,7 +37,7 @@ RSpec.describe Settings::ProfilesController, type: :request do
     context 'with invalid parameters' do
       let(:attributes) do
         {
-          display_name: ''
+          display_name: '',
         }
       end
 

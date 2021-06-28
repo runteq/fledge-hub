@@ -26,7 +26,7 @@ RSpec.describe ProductMediaController, type: :request do
       let(:attributes) do
         {
           title: 'タイトル',
-          url: Faker::Internet.url
+          url: Faker::Internet.url,
         }
       end
 
@@ -44,7 +44,7 @@ RSpec.describe ProductMediaController, type: :request do
       let(:attributes) do
         {
           title: 'タイトル',
-          url: ''
+          url: '',
         }
       end
 
@@ -68,7 +68,7 @@ RSpec.describe ProductMediaController, type: :request do
     context 'with valid parameters' do
       let(:attributes) do
         {
-          title: '新しいタイトル'
+          title: '新しいタイトル',
         }
       end
 
@@ -86,7 +86,7 @@ RSpec.describe ProductMediaController, type: :request do
     context 'with invalid parameters' do
       let(:attributes) do
         {
-          title: ''
+          title: '',
         }
       end
 

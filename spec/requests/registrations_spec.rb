@@ -29,9 +29,9 @@ RSpec.describe RegistrationsController, type: :request do
             user_info: {
               'screen_name' => 'screen_name',
               'display_name' => '',
-              'email' => 'example@example.com'
-            }
-          }
+              'email' => 'example@example.com',
+            },
+          },
         )
 
         subject
@@ -68,9 +68,9 @@ RSpec.describe RegistrationsController, type: :request do
             user_info: {
               'id' => Random.new_seed,
               'avatar_url' => 'http://i.pravatar.cc/300',
-              'login' => 'github_account_name'
-            }
-          }
+              'login' => 'github_account_name',
+            },
+          },
         )
       end
 
@@ -80,8 +80,8 @@ RSpec.describe RegistrationsController, type: :request do
             user: {
               screen_name: 'screen_name',
               display_name: '表示名',
-              email: 'example@example.com'
-            }
+              email: 'example@example.com',
+            },
           }
         end
 
@@ -102,8 +102,8 @@ RSpec.describe RegistrationsController, type: :request do
             user: {
               screen_name: '', # バリデーションエラー
               display_name: '表示名',
-              email: 'example@example.com'
-            }
+              email: 'example@example.com',
+            },
           }
         end
 
@@ -124,8 +124,8 @@ RSpec.describe RegistrationsController, type: :request do
             user: {
               screen_name: 'screen_name',
               display_name: '表示名',
-              email: 'example@example.com'
-            }
+              email: 'example@example.com',
+            },
           }
         end
 

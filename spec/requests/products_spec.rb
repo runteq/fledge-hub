@@ -57,7 +57,7 @@ RSpec.describe ProductsController, type: :request do
           released_on: Time.zone.today,
           product_type_id: 1,
           product_category_id: 1,
-          technology_ids: ['']
+          technology_ids: [''],
         }
       end
 
@@ -82,7 +82,7 @@ RSpec.describe ProductsController, type: :request do
           released_on: Time.zone.today,
           product_type_id: 1,
           product_category_id: 1,
-          technology_ids: [technology.id]
+          technology_ids: [technology.id],
         }
       end
 
@@ -98,7 +98,7 @@ RSpec.describe ProductsController, type: :request do
     context 'with invalid parameters' do
       let(:attributes) do
         {
-          title: 'hoge'
+          title: 'hoge',
         }
       end
 
@@ -121,7 +121,7 @@ RSpec.describe ProductsController, type: :request do
       let!(:product) { create(:product, title: 'hoge', users: [user]) }
       let(:attributes) do
         {
-          title: 'foo'
+          title: 'foo',
         }
       end
 
@@ -150,7 +150,7 @@ RSpec.describe ProductsController, type: :request do
           released_on: Time.zone.today,
           product_type_id: product.product_type_id,
           product_category_id: product.product_category_id,
-          technology_ids: [new_technology.id]
+          technology_ids: [new_technology.id],
         }
       end
 
@@ -165,7 +165,7 @@ RSpec.describe ProductsController, type: :request do
       let!(:product) { create(:product, title: 'hoge', users: [user]) }
       let(:attributes) do
         {
-          title: ''
+          title: '',
         }
       end
 

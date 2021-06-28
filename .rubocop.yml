@@ -82,6 +82,10 @@ Style/AsciiComments:
 Style/ClassAndModuleChildren:
   Enabled: false
 
+# クラスにコメントを残さない
+Style/Documentation:
+  Enabled: false
+
 # frozen_string_literal: trueはなくていい
 Style/FrozenStringLiteralComment:
   Enabled: false
@@ -94,6 +98,13 @@ Style/HashTransformKeys:
 Style/HashTransformValues:
   Enabled: true
 
-# クラスにコメントを残さない
-Style/Documentation:
-  Enabled: false
+# 複数行の最後にカンマを付ける
+# 行の追加時にdiffが出ないようにするため
+Style/TrailingCommaInArguments:
+  EnforcedStyleForMultiline: consistent_comma
+
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: consistent_comma
+
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: consistent_comma
