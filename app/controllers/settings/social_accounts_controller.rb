@@ -6,7 +6,13 @@ module Settings
     end
 
     def upsert_all
-      current_user.upsert_social_accounts!(social_accounts_params[:social_accounts_attributes])
+      social_accounts_params[:social_accounts_attributes].each do |attribute|
+        SocialAccount.upsert!(
+          user_id: current_user.id,
+          social_service_id: attribute[:social_service_id],
+          identifier: attribute[:identifier],
+        )
+      end
       redirect_to settings_social_accounts_path, notice: '外部サービスの情報を更新しました！'
     end
 

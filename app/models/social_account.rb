@@ -25,6 +25,15 @@ class SocialAccount < ApplicationRecord
 
   delegate :service_name, :icon, to: :social_service
 
+  def self.upsert!(user_id:, social_service_id:, identifier:)
+    find_or_initialize_by(
+      user_id: user_id,
+      social_service_id: social_service_id,
+    ).update!(
+      identifier: identifier,
+    )
+  end
+
   def url
     "#{social_service.base_url}#{identifier}"
   end
