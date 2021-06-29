@@ -10,7 +10,7 @@ module Settings
         SocialAccount.upsert!(
           user_id: current_user.id,
           social_service_id: attribute[:social_service_id],
-          identifier: attribute[:identifier],
+          identifier: attribute[:identifier]
         )
       end
       redirect_to settings_social_accounts_path, notice: '外部サービスの情報を更新しました！'
@@ -19,12 +19,13 @@ module Settings
     private
 
     def social_accounts_params
-      params.require(:user).permit(social_accounts_attributes: [:social_service_id, :identifier])
+      params.require(:user).permit(social_accounts_attributes: %i[social_service_id identifier])
     end
 
     def all_social_accounts(user, social_accounts_hash)
       SocialService.all.map do |social_service|
-        social_accounts_hash[social_service.id] || user.social_accounts.new(social_service_id: social_service.id)
+        social_accounts_hash[social_service.id] ||
+          user.social_accounts.new(social_service_id: social_service.id)
       end
     end
   end
