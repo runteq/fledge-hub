@@ -28,12 +28,11 @@ class SocialAccount < ApplicationRecord
   delegate :service_name, :icon, to: :social_service
 
   def self.upsert(user_id:, social_service_id:, identifier:)
-    find_or_initialize_by(
+    social_account = find_or_initialize_by(
       user_id: user_id,
       social_service_id: social_service_id
-    ).update(
-      identifier: identifier
     )
+    social_account.update(identifier: identifier) || social_account.destroy!
   end
 
   def url
