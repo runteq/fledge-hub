@@ -23,13 +23,15 @@ class SocialAccount < ApplicationRecord
   belongs_to :user
   belongs_to_active_hash :social_service
 
+  validates :identifier, presence: true
+
   delegate :service_name, :icon, to: :social_service
 
-  def self.upsert!(user_id:, social_service_id:, identifier:)
+  def self.upsert(user_id:, social_service_id:, identifier:)
     find_or_initialize_by(
       user_id: user_id,
       social_service_id: social_service_id
-    ).update!(
+    ).update(
       identifier: identifier
     )
   end

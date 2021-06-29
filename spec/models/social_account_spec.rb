@@ -20,8 +20,24 @@
 require 'rails_helper'
 
 RSpec.describe SocialAccount, type: :model do
-  describe '.upsert!' do
-    subject { SocialAccount.upsert!(**attribute) }
+  describe '.upsert' do
+    subject { SocialAccount.upsert(**attribute) }
+
+    context 'identifierが空文字のとき' do
+      let!(:user) { create(:user) }
+      let!(:social_service_id) { SocialService.pluck(:id).sample }
+      let!(:attribute) do
+        {
+          user_id: user.id,
+          social_service_id: social_service_id,
+          identifier: '',
+        }
+      end
+
+      it 'createしない' do
+        expect { subject }.to not_change(SocialAccount, :count)
+      end
+    end
 
     context 'user_id, social_service_idが一致するレコードが既にあるとき' do
       let!(:social_account) { create(:social_account, identifier: 'prev_identifier') }
