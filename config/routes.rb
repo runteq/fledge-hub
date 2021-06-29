@@ -6,7 +6,8 @@ Rails.application.routes.draw do
     resource :profile, only: %i[show update]
     resources :social_accounts, only: %i[index] do
       collection do
-        put '', action: :update_all
+        # putだとうまく飛ばないのでpost
+        post '', action: :upsert_all
       end
     end
   end

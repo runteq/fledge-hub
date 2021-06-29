@@ -1,8 +1,9 @@
 - content_for(:title, '外部アカウント設定')
 
-= form_with model: @user, url: settings_social_accounts_path, method: :put, class: 'form', data: { turbo: false } do |f|
+= form_with model: current_user, url: settings_social_accounts_path, method: :post, class: 'form', data: { turbo: false } do |f|
   - @social_accounts.each do |social_account|
-    = f.fields_for 'social_accounts_attributes[]', social_account do |ff|
+    = f.fields_for 'social_accounts_attributes[]', SocialAccount.new do |ff|
+      = ff.hidden_field :social_service_id, value: social_account.social_service.id
       .form-group
         = ff.label social_account.service_name, class: 'form-label'
         div class="flex flex-row rounded overflow-hidden w-full border border-gray-300"
@@ -14,6 +15,6 @@
     = f.submit class: 'btn btn-indigo'
 
 br
-= link_to 'ユーザーページ', user_path((@user.screen_name))
+= link_to 'ユーザーページ', user_path((current_user.screen_name))
 '|
 = link_to 'マイページ', mypage_path

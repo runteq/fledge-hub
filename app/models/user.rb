@@ -75,6 +75,16 @@ class User < ApplicationRecord
     end
   end
 
+  def upsert_social_accounts!(attributes)
+    attributes.each do |attribute|
+      social_accounts.find_or_initialize_by(
+        social_service_id: attribute[:social_service_id]
+      ).update!(
+        identifier: attribute[:identifier]
+      )
+    end
+  end
+
   def grab_avatar_image(url)
     avatar_url = url.open
     avatar.attach(io: avatar_url, filename: "user_avatar_#{id}.jpg")

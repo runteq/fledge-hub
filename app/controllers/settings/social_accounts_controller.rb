@@ -1,24 +1,19 @@
 module Settings
   class SocialAccountsController < ApplicationController
     def index
-      @user = current_user
-      social_accounts_hash = @user.social_accounts.index_by(&:social_service_id)
-      @social_accounts = all_social_accounts(@user, social_accounts_hash)
+      social_accounts_hash = current_user.social_accounts.index_by(&:social_service_id)
+      @social_accounts = all_social_accounts(current_user, social_accounts_hash)
     end
 
-    def update_all
-      @user = current_user
-      if @user.update(user_params)
-        redirect_to settings_profile_path, notice: 'ユーザー情報を更新しました！'
-      else
-        render :show, status: :unprocessable_entity # 422errorを起こす
-      end
+    def upsert_all
+      current_user.upsert_social_accounts!(social_accounts_params[:social_accounts_attributes])
+      redirect_to settings_social_accounts_path, notice: '外部サービスの情報を更新しました！'
     end
 
     private
 
-    def user_params
-      params.require(:user).permit(:display_name, :email)
+    def social_accounts_params
+      params.require(:user).permit(social_accounts_attributes: [:social_service_id, :identifier])
     end
 
     def all_social_accounts(user, social_accounts_hash)

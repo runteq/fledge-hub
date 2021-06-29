@@ -4,7 +4,7 @@ RSpec.describe Settings::ProfilesController, type: :request do
   before { login_as(user) }
 
   describe "GET /show" do
-    let(:user) { create(:user) }
+    let!(:user) { create(:user) }
     subject { get '/settings/profile' }
 
     it "render a successful response" do
@@ -14,7 +14,7 @@ RSpec.describe Settings::ProfilesController, type: :request do
   end
 
   describe "PATCH /update" do
-    let(:user) { create(:user, display_name: '古い表示名') }
+    let!(:user) { create(:user, display_name: '古い表示名') }
     subject { patch '/settings/profile', params: { user: attributes } }
 
     context "with valid parameters" do
