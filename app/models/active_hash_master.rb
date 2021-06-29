@@ -7,4 +7,8 @@ class ActiveHashMaster < ActiveYaml::Base
 
     klass.set_filename klass.to_s.underscore.singularize
   end
+
+  def self.asc
+    all.sort_by(&:position)
+  end
 end
