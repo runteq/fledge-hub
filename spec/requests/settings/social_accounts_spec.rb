@@ -16,7 +16,7 @@ RSpec.describe Settings::SocialAccountsController, type: :request do
 
   describe "POST /upsert_all" do
     let!(:social_service_id) { SocialService.pluck(:id).sample }
-    subject { post '/settings/social_accounts', params: { user: attributes } }
+    subject { put '/settings/social_accounts', params: { user: attributes } }
 
     context '既にsocial_accountがある場合' do
       let!(:social_account) { create(:social_account, identifier: 'prev_identifier', social_service_id: social_service_id, user: user) }

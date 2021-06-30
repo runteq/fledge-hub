@@ -1,6 +1,6 @@
 - content_for(:title, '外部アカウント設定')
 
-= form_with model: current_user, url: settings_social_accounts_path, method: :post, class: 'form', data: { turbo: false } do |f|
+= form_with model: current_user, url: settings_social_accounts_path, method: :put, class: 'form' do |f|
   - @social_accounts.each do |social_account|
     = f.fields_for 'social_accounts_attributes[]', SocialAccount.new do |ff|
       = ff.hidden_field :social_service_id, value: social_account.social_service.id
