@@ -10,7 +10,7 @@ module Settings
         SocialAccount.create_or_update_or_destroy(
           user_id: current_user.id,
           social_service_id: attribute[:social_service_id],
-          identifier: attribute[:identifier]
+          identifier: attribute[:identifier],
         )
       end
       redirect_to settings_social_accounts_path, notice: '外部サービスの情報を更新しました！'

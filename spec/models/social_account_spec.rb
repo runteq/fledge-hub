@@ -50,7 +50,9 @@ RSpec.describe SocialAccount, type: :model do
         end
 
         it 'updateする' do
-          expect { subject }.to change { social_account.reload.identifier }.to('new_identifier').from('prev_identifier')
+          expect { subject }.to change {
+            social_account.reload.identifier
+          }.to('new_identifier').from('prev_identifier')
         end
       end
     end
