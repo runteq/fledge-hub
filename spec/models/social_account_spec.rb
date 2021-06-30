@@ -20,6 +20,21 @@
 require 'rails_helper'
 
 RSpec.describe SocialAccount, type: :model do
+  describe '.sorted' do
+    it 'SocialServiceのposition順で並び替える' do
+      service_2 = SocialService.create(position: 2)
+      account_2 = create(:social_account, id: 1, social_service_id: service_2.id)
+      service_1 = SocialService.create(position: 1)
+      account_1 = create(:social_account, id: 2, social_service_id: service_1.id)
+      service_3 = SocialService.create(position: 3)
+      account_3 = create(:social_account, id: 3, social_service_id: service_3.id)
+
+      expect(SocialAccount.sorted(SocialAccount.order(:id))).to eq(
+        [account_1, account_2, account_3]
+      )
+    end
+  end
+
   describe '#url' do
     subject { social_account.url }
 

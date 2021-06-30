@@ -25,6 +25,10 @@ class SocialAccount < ApplicationRecord
 
   delegate :service_name, :icon, to: :social_service
 
+  def self.sorted(social_accounts)
+    social_accounts.sort_by { |social_account| social_account.social_service.position }
+  end
+
   def url
     "#{social_service.base_url}#{identifier}"
   end
