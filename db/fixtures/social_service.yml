@@ -3,7 +3,7 @@
 - id: 0
   position: 1000
   icon: fas fa-link
-  name: リンク
+  name: その他リンク
 - id: 1
   position: 999
   name: ブログ
