@@ -45,12 +45,12 @@ class ProductForm
         :source_url,
         :released_on,
         :product_type_id,
-        :product_category_id
+        :product_category_id,
       ).merge(
         {
           technology_ids: product.technology_ids,
-          user_ids: product.user_ids
-        }
+          user_ids: product.user_ids,
+        },
       )
     end
   end
@@ -90,7 +90,7 @@ class ProductForm
       product_type_id: product_type_id,
       product_category_id: product_category_id,
       technology_ids: technology_ids,
-      user_ids: user_ids
+      user_ids: user_ids,
     }
   end
 end
