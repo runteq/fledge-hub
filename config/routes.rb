@@ -4,6 +4,11 @@ Rails.application.routes.draw do
   resource :mypage, only: %i[show]
   namespace :settings do
     resource :profile, only: %i[show update]
+    resources :social_accounts, only: %i[index] do
+      collection do
+        put '', action: :upsert_all
+      end
+    end
   end
   resource :registration, only: %i[new create]
   resource :user_deactivation, only: %i[new destroy]
