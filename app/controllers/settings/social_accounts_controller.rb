@@ -23,7 +23,7 @@ module Settings
     end
 
     def all_social_accounts(user, social_accounts_hash)
-      SocialService.all.map do |social_service|
+      SocialService.asc.map do |social_service|
         social_accounts_hash[social_service.id] ||
           user.social_accounts.new(social_service_id: social_service.id)
       end
