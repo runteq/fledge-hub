@@ -6,7 +6,7 @@ class RegistrationsController < ApplicationController
     @user = User.new(
       screen_name: user_info['login'],
       display_name: user_info['name'],
-      email: user_info['email']
+      email: user_info['email'],
     )
   end
 

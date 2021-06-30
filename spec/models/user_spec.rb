@@ -42,7 +42,7 @@ RSpec.describe User, type: :model do
         # メソッド内で使う値だけ入れている
         {
           'id' => Random.new_seed,
-          'login' => 'github_account_name'
+          'login' => 'github_account_name',
         }
       end
 
@@ -61,7 +61,7 @@ RSpec.describe User, type: :model do
         # メソッド内で使う値だけ入れている
         {
           'id' => Random.new_seed,
-          'login' => 'github_account_name'
+          'login' => 'github_account_name',
         }
       end
 

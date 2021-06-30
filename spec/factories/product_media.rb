@@ -19,7 +19,7 @@
 #
 FactoryBot.define do
   factory :product_medium do
-    sequence(:title, "外部記事_1")
+    sequence(:title, '外部記事_1')
     url { Faker::Internet.url }
     product
   end

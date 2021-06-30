@@ -17,7 +17,9 @@
 #
 FactoryBot.define do
   factory :product_image do
-    product_image { Rack::Test::UploadedFile.new('spec/fixtures/files/images/720x400.png', 'image/png') }
+    product_image do
+      Rack::Test::UploadedFile.new('spec/fixtures/files/images/720x400.png', 'image/png')
+    end
     product
   end
 end
