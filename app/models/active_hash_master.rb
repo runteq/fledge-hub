@@ -8,6 +8,7 @@ class ActiveHashMaster < ActiveYaml::Base
     klass.set_filename klass.to_s.underscore.singularize
   end
 
+  # TODO: いずれかの継承先で使えなくなったらモジュールにする
   def self.asc
     all.sort_by(&:position)
   end
