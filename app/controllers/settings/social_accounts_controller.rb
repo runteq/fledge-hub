@@ -7,7 +7,7 @@ module Settings
 
     def upsert_all
       social_accounts_params[:social_accounts_attributes].each do |attribute|
-        SocialAccount.upsert(
+        SocialAccount.create_or_update_or_destroy(
           user_id: current_user.id,
           social_service_id: attribute[:social_service_id],
           identifier: attribute[:identifier]

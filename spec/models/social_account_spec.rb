@@ -20,8 +20,8 @@
 require 'rails_helper'
 
 RSpec.describe SocialAccount, type: :model do
-  describe '.upsert' do
-    subject { SocialAccount.upsert(**attribute) }
+  describe '.create_or_update_or_destroy' do
+    subject { SocialAccount.create_or_update_or_destroy(**attribute) }
 
     context 'user_id, social_service_idが一致するレコードが既にあるとき' do
       context 'identifierが空文字のとき' do

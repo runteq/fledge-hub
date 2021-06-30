@@ -27,11 +27,12 @@ class SocialAccount < ApplicationRecord
 
   delegate :service_name, :icon, to: :social_service
 
-  def self.upsert(user_id:, social_service_id:, identifier:)
+  def self.create_or_update_or_destroy(user_id:, social_service_id:, identifier:)
     social_account = find_or_initialize_by(
       user_id: user_id,
       social_service_id: social_service_id
     )
+    # 更新に失敗 = identifierが空なので、レコードを削除する
     social_account.update(identifier: identifier) || social_account.destroy!
   end
 
