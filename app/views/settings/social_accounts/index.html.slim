@@ -5,7 +5,7 @@
     = f.fields_for 'social_accounts_attributes[]', SocialAccount.new do |ff|
       = ff.hidden_field :social_service_id, value: social_account.social_service.id
       .form-group
-        = ff.label social_account.service_name, class: 'form-label'
+        = ff.label :service_name, "#{social_account.service_name} URL", class: 'form-label'
         div class="flex flex-row rounded overflow-hidden w-full border border-gray-300"
           - if social_account.social_service.base_url.present?
             div class='appearance-none block bg-gray-300 text-gray-800 py-3 px-4 leading-tight'
