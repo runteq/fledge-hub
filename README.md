@@ -8,57 +8,16 @@ RUNTEQ生のポートフォリオ、どこで見れるんじゃ？<br>
 そんな感じで始まりましたが、想定ユーザーはRUNTEQ生に限定しないことになりました。<br>
 みんなでカスタマイズしていけたらいいなと思っています。
 
+
 ## 参加したい！
 
 まずは[Mattermostのチャンネル](https://chat.runteq.jp/runteq/channels/c01rtlnl5qx)に入ってください。
 
+環境構築手順は[こちら](https://github.com/runteq/fledge-hub/wiki/%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89%E6%89%8B%E9%A0%86)から。
+
 思いついた機能を[Issue](https://github.com/runteq/fledge-hub/issues)に投げるだけでも大丈夫です。<br>
 実装できそうかも？と思った人は、環境構築からお願いします（ものによっては環境構築不要なものもありますが）
 
-### 環境構築
-
-困ったときは[先人の知恵](https://github.com/runteq/fledge-hub/issues/12)が役立つかもしれません。コマンドや記録などを残してくれると後進のためになります。
-
-- 事前に管理者からdevelopment.keyを取得し、config配下にdevelopment.keyファイルを作成してファイル内に書き込んでください。<br>
-配置しないとrails db:create で `NoMethodError: undefined method '[]' for nil:NilClass` になります
-
-- config/database.yml の作成
-
-```
-$ cp config/database.yml.default config/database.yml
-```
-上記コマンドでdatabase.ymlを作成後、passwordを指定する。
-環境変数を用いて指定する場合は、database.yml 内で例えば
-```
-password: <%= ENV['DB_PASSWORD'] %>
-```
-のように記述した後、ターミナル上でhogeの部分をパスワードに書き換えて実行する。
-```
-$ export DB_PASSWORD=hoge
-```
-
-
-```
-$ rbenv local 3.0.0
-$ nodenv local 14.16.1 # nodeのバージョンが14.16.1なら大丈夫です
-$ bundle install
-$ yarn install
-$ bundle exec rails db:create
-$ bundle exec rails db:migrate
-$ rake db:seed_fu
-$ rails db:seed
-```
-- mysqlのバージョンは5.7でも8.0でも大丈夫です。
-
-#### サーバー起動
-```
-bundle exec rails server
-```
-
-#### テスト実行
-```
-bundle exec rspec spec
-```
 
 ### タスクの進め方
 
@@ -79,15 +38,17 @@ bundle exec rspec spec
 - Approveを受けたらマージする
   - コンフリクトの解消も経験です
 
+
 #### その他
 
-- 解答などが必要な場合はメンションをすると確実です
+- 回答などが必要な場合はメンションをすると確実です
 
 - 1つのIssueの規模が大きい場合、PRを複数に分けて出すことをおすすめします
   - PRの粒度が小さいと、レビュワーの負担が軽くなります
 
 - あなたのレビューも歓迎です！
   - LGTMを出すほどの自信がなくても、他人のコードを読んでコメントしてみましょう！
+
 
 ## 仕様
 
