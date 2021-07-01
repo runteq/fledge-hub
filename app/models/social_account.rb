@@ -27,6 +27,10 @@ class SocialAccount < ApplicationRecord
 
   delegate :service_name, :icon, to: :social_service
 
+  def self.sorted(social_accounts)
+    social_accounts.sort_by { |social_account| social_account.social_service.position }
+  end
+
   def self.create_or_update_or_destroy(user_id:, social_service_id:, identifier:)
     social_account = find_or_initialize_by(
       user_id: user_id,

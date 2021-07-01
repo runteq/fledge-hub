@@ -1,7 +1,5 @@
 class ProductCategory < ActiveHashMaster
-  has_many :products
+  fields :id, :position, :name
 
-  def self.asc
-    ProductCategory.all.sort_by(&:position)
-  end
+  has_many :products
 end

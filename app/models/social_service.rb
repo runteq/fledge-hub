@@ -1,5 +1,5 @@
 class SocialService < ActiveHashMaster
-  fields :id, :name, :icon, :base_url
+  fields :id, :position, :name, :icon, :base_url
 
   has_many :social_accounts
 
