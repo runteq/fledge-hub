@@ -21,7 +21,7 @@ class Technology < ApplicationRecord
   validates :slug, uniqueness: true,
                    format: {
                      with: /\A[a-zA-Z0-9_-]+\z/,
-                     message: 'の「%<value>s」には使用できない文字が含まれています'
+                     message: 'の「%<value>s」には使用できない文字が含まれています',
                    },
                    length: { maximum: 100 }
 end

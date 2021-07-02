@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_19_074630) do
+ActiveRecord::Schema.define(version: 2021_06_23_152345) do
 
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.string "name", null: false
@@ -50,20 +50,30 @@ ActiveRecord::Schema.define(version: 2021_06_19_074630) do
     t.index ["user_id"], name: "index_authentications_on_user_id"
   end
 
-  create_table "images", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
+  create_table "inquiries", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "email", default: "", null: false
+    t.string "about", null: false
+    t.text "description", null: false
+    t.string "user_agent", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "product_images", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.bigint "product_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["product_id"], name: "index_images_on_product_id"
+    t.index ["product_id"], name: "index_product_images_on_product_id"
   end
 
-  create_table "media", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
+  create_table "product_media", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.string "title", null: false
     t.text "url", null: false
     t.bigint "product_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["product_id"], name: "index_media_on_product_id"
+    t.index ["product_id"], name: "index_product_media_on_product_id"
   end
 
   create_table "product_technologies", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
@@ -81,9 +91,19 @@ ActiveRecord::Schema.define(version: 2021_06_19_074630) do
     t.text "url", null: false
     t.text "source_url", null: false
     t.date "released_on", null: false
-    t.integer "genre_id", null: false
+    t.integer "product_type_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "product_category_id", null: false
+  end
+
+  create_table "social_accounts", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
+    t.integer "social_service_id", null: false
+    t.bigint "user_id", null: false
+    t.text "identifier", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_social_accounts_on_user_id"
   end
 
   create_table "technologies", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
@@ -119,8 +139,9 @@ ActiveRecord::Schema.define(version: 2021_06_19_074630) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "images", "products"
-  add_foreign_key "media", "products"
+  add_foreign_key "product_images", "products"
+  add_foreign_key "product_media", "products"
   add_foreign_key "product_technologies", "products"
   add_foreign_key "product_technologies", "technologies"
+  add_foreign_key "social_accounts", "users"
 end

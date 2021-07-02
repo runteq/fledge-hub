@@ -10,7 +10,6 @@ AllCops:
     - "vendor/**/*"
     - "db/**/*"
     - "bin/**/*"
-    - "spec/**/*"
     - "node_modules/**/*"
   DisplayCopNames: true
   DisplayStyleGuide: true
@@ -20,12 +19,34 @@ AllCops:
 Bundler/OrderedGems:
   Enabled: false
 
+Layout/FirstArrayElementIndentation:
+  EnforcedStyle: consistent
+
+Layout/FirstHashElementIndentation:
+  EnforcedStyle: consistent
+
 # 一行の長さは100字まで。コメントは制限しない
 Layout/LineLength:
   Max: 100
-  IgnoredPatterns: ['\A#']
+  IgnoredPatterns:
+    - '\A#.+'
   Exclude:
     - "config/initializers/*"
+    - "app/forms/inquiry_form.rb"
+
+# メソッドチェーンのインデントは自分で調整する
+Layout/MultilineMethodCallIndentation:
+  Exclude:
+    - "spec/**/*"
+
+Lint/AmbiguousBlockAssociation:
+  # RSpecのchange { object.attribute }は許可する
+  IgnoredMethods: [change]
+
+# 空のモデルスペックは許可する
+Lint/EmptyBlock:
+  Exclude:
+    - "spec/models/**/*"
 
 # ABC sizeは緩めにする
 Metrics/AbcSize:
@@ -33,6 +54,7 @@ Metrics/AbcSize:
 
 Metrics/BlockLength:
   Exclude:
+    - "spec/**/*"
     - "lib/tasks/auto_annotate_models.rake"
     - "config/environments/development.rb"
 
@@ -46,10 +68,16 @@ Naming/AccessorMethodName:
   Exclude:
     - "app/controllers/**/*"
 
-# ActiveHashのhas_manyはdependent不要なので
 Rails/HasManyOrHasOneDependent:
   Exclude:
-    - "app/models/genre.rb"
+    # ActiveHashのhas_manyはdependent不要なので
+    - "app/models/product_type.rb"
+    - "app/models/social_service.rb"
+    - "app/models/product_category.rb"
+
+# Prefer &&/|| over and/or.
+Style/AndOr:
+  Enabled: true
 
 # 日本語でのコメントを許可
 Style/AsciiComments:
@@ -57,6 +85,10 @@ Style/AsciiComments:
 
 # Admin::BaseControllerのような書き方を許可
 Style/ClassAndModuleChildren:
+  Enabled: false
+
+# クラスにコメントを残さない
+Style/Documentation:
   Enabled: false
 
 # frozen_string_literal: trueはなくていい
@@ -71,6 +103,13 @@ Style/HashTransformKeys:
 Style/HashTransformValues:
   Enabled: true
 
-# クラスにコメントを残さない
-Style/Documentation:
-  Enabled: false
+# 複数行の最後にカンマを付ける
+# 行の追加時にdiffが出ないようにするため
+Style/TrailingCommaInArguments:
+  EnforcedStyleForMultiline: comma
+
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: comma
+
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: comma

@@ -1,12 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe UserSessionsController, type: :request do
-  describe "DELETE /logout" do
+  describe 'DELETE /logout' do
     let(:user) { create(:user) }
     before { login_as(user) }
     subject { delete '/logout' }
 
-    it "redirect root_path" do
+    it 'redirect root_path' do
       subject
       expect(response).to redirect_to '/'
     end

@@ -6,8 +6,10 @@
       .flex.items-center.flex-wrap
         .inline-flex.tracking-widest.text-xs.title-font.font-medium.text-gray-400mb-1
           = product.released_on
-        span.inline-flex.ml-auto.px-2.inline-flex.text-xs.leading-5.font-semibold.bg-yellow-100.text-yellow-900.mb-2
-          = product.genre.name
+        span.inline-flex.ml-auto.px-2.text-xs.leading-5.font-semibold.bg-yellow-100.text-yellow-900.mb-2
+          = product.product_type.name
+        span.inline-flex.ml-2.px-2.text-xs.leading-5.font-semibold.bg-red-100.text-red-900.mb-2
+          = product.product_category.name
       h2.title-font.text-lg.font-medium.text-gray-900
         = product.title
       .leading-relaxed.mb-1

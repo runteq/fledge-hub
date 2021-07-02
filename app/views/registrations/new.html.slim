@@ -1,4 +1,4 @@
-- content_for(:title, t('.title'))
+- content_for(:title, 'ユーザー登録')
 
 = form_with model: @user, url: registration_path, class: 'form' do |f|
   - if @user.errors.any?
