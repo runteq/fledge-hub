@@ -56,7 +56,4 @@ class ProductsController < ApplicationController
       technology_ids: []
     )
   end
-
-  def terms
-  end
 end

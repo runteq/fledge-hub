@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     resources :media, only: %i[new create edit update destroy]
   end
 
-  get '/terms', to: 'products#terms'
+  get '/terms', to: 'static_pages#terms'
   post 'oauth/callback', to: 'oauths#callback'
   get 'oauth/callback', to: 'oauths#callback'
   get 'oauth/:provider', to: 'oauths#oauth', as: :auth_at_provider
