@@ -8,16 +8,16 @@ RSpec.describe InquiryForm do
   before do
     WebMock.disable!(except: [:net_http])
     WebMock.stub_request(:post, MATTERMOST_WEBHOOK_URL).to_return(
-      body: {"text": "test_inquiry_form"}.to_json,
+      body: { text: 'test_inquiry_form' }.to_json,
       status: 200,
-      headers: { 'Content-Type' =>  'application/json' }
+      headers: { 'Content-Type' => 'application/json' },
     )
   end
-  describe "#post_to_mattermost" do
+  describe '#post_to_mattermost' do
     subject { InquiryForm.new }
-    it "will_be_successful" do
+    it 'will_be_successful' do
       response = subject.send(:post_to_mattermost)
-      expect(response.body).to eq({"text": "test_inquiry_form"}.to_json)
+      expect(response.body).to eq({ text: 'test_inquiry_form' }.to_json)
     end
   end
 
@@ -32,7 +32,7 @@ RSpec.describe InquiryForm do
           email: 'test@example.com',
           about: 'about_test',
           description: '', # バリデーションエラー
-          user_agent: 'user_agent_test'
+          user_agent: 'user_agent_test',
         }
       end
 
@@ -53,7 +53,7 @@ RSpec.describe InquiryForm do
           email: 'test@example.com',
           about: 'about_test',
           description: 'description_test',
-          user_agent: 'user_agent_test'
+          user_agent: 'user_agent_test',
         }
       end
 
