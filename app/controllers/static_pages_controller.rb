@@ -1,4 +1,3 @@
 class StaticPagesController < ApplicationController
-  def terms
-  end
+  def terms; end
 end

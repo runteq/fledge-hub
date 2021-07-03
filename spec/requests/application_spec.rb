@@ -8,9 +8,9 @@ RSpec.describe ApplicationController, type: :request do
     end
   end
 
-  describe "GET terms" do
-    it "returns http success" do
-      get "/terms"
+  describe 'GET terms' do
+    it 'returns http success' do
+      get '/terms'
       expect(response).to have_http_status(:success)
     end
   end
