@@ -13,8 +13,3 @@
           = ff.text_field :identifier, value: social_account.identifier, class: 'appearance-none block w-full bg-gray-100 text-gray-700 py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
   .form-group
     = f.submit class: 'btn btn-indigo'
-
-br
-= link_to 'ユーザーページ', user_path((current_user.screen_name))
-'|
-= link_to 'マイページ', mypage_path
