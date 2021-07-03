@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     resources :product_media, only: %i[new create edit update destroy]
   end
 
+  get '/terms', to: 'static_pages#terms'
   get 'inquiry', to: 'inquiries#new', as: :new_inquiry
   post 'oauth/callback', to: 'oauths#callback'
   get 'oauth/callback', to: 'oauths#callback'
