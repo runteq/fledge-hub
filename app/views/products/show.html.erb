@@ -4,6 +4,9 @@
 
 <div class="mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-1">
   <div class="grid gap-12 row-gap-8 lg:grid-cols-2">
+    <div>
+      <%= image_tag @product.top_image.product_image, alt: @product.title, class: 'object-cover w-full h-56 rounded shadow-lg sm:h-96' %>
+    </div>
     <div class="flex flex-col justify-center">
       <div class="max-w-xl mb-6">
         <p class="text-base leading-6 text-indigo-500 font-semibold tracking-widest">
@@ -38,9 +41,6 @@
           </li>
         <% end %>
       </ul>
-    </div>
-    <div>
-      <%= image_tag @product.top_image.product_image, alt: @product.title, class: 'object-cover w-full h-56 rounded shadow-lg sm:h-96' %>
     </div>
   </div>
 </div>
