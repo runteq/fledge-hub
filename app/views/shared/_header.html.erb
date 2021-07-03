@@ -13,7 +13,7 @@
         <% if logged_in? %>
           <div  class="relative text-sm text-gray-100" data-controller="dropdown">
             <div data-action="click->dropdown#toggle click@window->dropdown#hide" role="button" data-dropdown-target="button" tabindex="0" class="inline-block select-none">
-              <%= image_tag current_user.avatar, alt: current_user.display_name, class: 'items-center focus:outline-none w-12 h-12 rounded-full' %>
+              <%= image_tag current_user.avatar, alt: current_user.display_name, class: 'items-center focus:outline-none md:w-9 h-9 sm:w-6 h-6 rounded-full' %>
             </div>
             <div id="userMenu" data-dropdown-target="menu" class="absolute right-0 hidden">
               <div class="bg-white shadow rounded border overflow-hidden">
