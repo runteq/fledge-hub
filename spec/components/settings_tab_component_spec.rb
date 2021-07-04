@@ -1,4 +1,4 @@
-require "rails_helper"
+require 'rails_helper'
 
 RSpec.describe SettingsTabComponent, type: :component do
   context 'tab_pathが現在のパスのとき' do
