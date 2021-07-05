@@ -38,9 +38,7 @@ RSpec.describe ProductForm do
           summary: '',
           product_type_id: '1',
           product_category_id: '1',
-          technology_ids: [''],
           user_ids: [user.id],
-          media_attributes: [],
         }
       end
 
@@ -68,7 +66,6 @@ RSpec.describe ProductForm do
           product_category_id: '1',
           technology_ids: [technology.id.to_s],
           user_ids: [user.id],
-          media_attributes: [],
         }
       end
 
@@ -152,9 +149,6 @@ RSpec.describe ProductForm do
         summary: '',
         product_type_id: '1',
         product_category_id: '1',
-        technology_ids: [],
-        user_ids: [],
-        media_attributes: [],
       }
     end
 
@@ -191,8 +185,6 @@ RSpec.describe ProductForm do
           summary: '',
           product_category_id: '1',
           product_type_id: '1',
-          technology_ids: [''],
-          media_attributes: [],
         }
       end
 
@@ -218,7 +210,6 @@ RSpec.describe ProductForm do
           product_category_id: '1',
           product_type_id: '1',
           technology_ids: [technology.id.to_s],
-          media_attributes: [],
         }
       end
 
