@@ -83,25 +83,25 @@ RSpec.describe ProductForm do
     describe 'メディア' do
       let!(:user) { create(:user, :active) }
       let!(:attributes) do
-          {
-            title: 'タイトル',
-            url: '',
-            source_url: '',
-            released_on: '2021-06-17',
-            summary: '',
-            product_type_id: '1',
-            product_category_id: '1',
-            technology_ids: [],
-            user_ids: [user.id],
-            media_attributes: [media_attribute]
-          }
-        end
+        {
+          title: 'タイトル',
+          url: '',
+          source_url: '',
+          released_on: '2021-06-17',
+          summary: '',
+          product_type_id: '1',
+          product_category_id: '1',
+          technology_ids: [],
+          user_ids: [user.id],
+          media_attributes: [media_attribute],
+        }
+      end
 
       context 'バリデーションエラーのとき' do
         let!(:media_attribute) do
           {
             title: '', # バリデーションエラー
-            url: 'https://example.com'
+            url: 'https://example.com',
           }
         end
 
@@ -120,7 +120,7 @@ RSpec.describe ProductForm do
         let!(:media_attribute) do
           {
             title: 'タイトル',
-            url: 'https://example.com'
+            url: 'https://example.com',
           }
         end
 
