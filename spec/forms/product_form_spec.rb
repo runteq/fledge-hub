@@ -40,6 +40,7 @@ RSpec.describe ProductForm do
           product_category_id: '1',
           technology_ids: [''],
           user_ids: [user.id],
+          media_attributes: [],
         }
       end
 
@@ -67,6 +68,7 @@ RSpec.describe ProductForm do
           product_category_id: '1',
           technology_ids: [technology.id.to_s],
           user_ids: [user.id],
+          media_attributes: [],
         }
       end
 
@@ -75,6 +77,43 @@ RSpec.describe ProductForm do
         expect { subject }.to change(Product, :count).by(1)
                           .and change(UserProduct, :count).by(1)
                           .and change(ProductTechnology, :count).by(1)
+      end
+    end
+
+    context 'メディアが入力されているとき' do
+      let!(:user) { create(:user, :active) }
+      let!(:technology) { create(:technology) }
+      let!(:attributes) do
+        {
+          title: 'タイトル',
+          url: '',
+          source_url: '',
+          released_on: '2021-06-17',
+          summary: '',
+          product_type_id: '1',
+          product_category_id: '1',
+          technology_ids: [technology.id.to_s],
+          user_ids: [user.id],
+          media_attributes: [
+            {
+              title: 'タイトル',
+              url: 'https://example.com'
+            }
+          ]
+        }
+      end
+
+      it { expect(subject).to be true }
+      it 'ProductMediumレコードを作成する' do
+        expect { subject }.to change(ProductMedium, :count).by(1)
+        expect(ProductMedium.last.attributes).to match(
+          'title' => 'タイトル',
+          'url' => 'https://example.com',
+          'id' => be_a(Integer),
+          'product_id' => be_a(Integer),
+          'created_at' => be_a(ActiveSupport::TimeWithZone),
+          'updated_at' => be_a(ActiveSupport::TimeWithZone),
+        )
       end
     end
   end
@@ -93,6 +132,7 @@ RSpec.describe ProductForm do
         product_category_id: '1',
         technology_ids: [],
         user_ids: [],
+        media_attributes: [],
       }
     end
 
@@ -144,6 +184,7 @@ RSpec.describe ProductForm do
           product_category_id: '1',
           product_type_id: '1',
           technology_ids: [''],
+          media_attributes: [],
         }
       end
 
@@ -169,6 +210,7 @@ RSpec.describe ProductForm do
           product_category_id: '1',
           product_type_id: '1',
           technology_ids: [technology.id.to_s],
+          media_attributes: [],
         }
       end
 

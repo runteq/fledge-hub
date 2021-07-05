@@ -12,6 +12,7 @@ class ProductForm
   attribute :product_type_id, :integer
   attribute :technology_ids
   attribute :user_ids
+  attribute :media_attributes
 
   validates :id, presence: true, if: -> { product.persisted? }
   validates :title, presence: true, length: { maximum: 100 }
@@ -59,6 +60,7 @@ class ProductForm
     return false if invalid?
 
     product.save!
+    media.each(&:save!)
     assign_attributes(id: product.id)
     true
   end
@@ -92,5 +94,11 @@ class ProductForm
       technology_ids: technology_ids,
       user_ids: user_ids,
     }
+  end
+
+  def media
+    media_attributes.map do |attribute|
+      product.media.build(attribute)
+    end
   end
 end

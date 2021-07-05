@@ -30,5 +30,15 @@
     = f.label :technology_ids, class: 'form-label'
     | （commandキーを押しながら複数選択可能）
     = f.select :technology_ids, Technology.order(:id).pluck(:name, :id), { include_blank: 'なし' }, { multiple: true, class: 'text-field' }
+
+  h2.text-lg メディア
+  = f.fields_for 'media_attributes[]', ProductMedium.new do |ff|
+    .form-group
+      = ff.label :title, class: 'form-label'
+      = ff.text_field :title, class: 'text-field'
+    .form-group
+      = ff.label :url, class: 'form-label'
+      = ff.text_field :url, class: 'text-field'
+
   .form-group
     = f.submit class: 'btn btn-indigo'
