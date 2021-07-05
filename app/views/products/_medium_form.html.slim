@@ -1,0 +1,8 @@
+= f.fields_for 'media_attributes[]', ProductMedium.new do |ff|
+  .form-group
+    = ff.label :title, class: 'form-label'
+    / 0はindex番号。暫定的に
+    = ff.text_field :title, value: product.media_attributes.dig(0, 'title'), class: 'text-field'
+  .form-group
+    = ff.label :url, class: 'form-label'
+    = ff.text_field :url, value: product.media_attributes.dig(0, 'url'), class: 'text-field'

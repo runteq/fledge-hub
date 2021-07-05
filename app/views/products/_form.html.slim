@@ -32,13 +32,7 @@
     = f.select :technology_ids, Technology.order(:id).pluck(:name, :id), { include_blank: 'なし' }, { multiple: true, class: 'text-field' }
 
   h2.text-lg メディア
-  = f.fields_for 'media_attributes[]', ProductMedium.new do |ff|
-    .form-group
-      = ff.label :title, class: 'form-label'
-      = ff.text_field :title, value: @product.media_attributes.dig(0, 'title'), class: 'text-field' # 0はindex番号。暫定的に
-    .form-group
-      = ff.label :url, class: 'form-label'
-      = ff.text_field :url, value: @product.media_attributes.dig(0, 'url'), class: 'text-field' # 0はindex番号。暫定的に
+  = render 'medium_form', f: f, product: @product
 
   .form-group
     = f.submit class: 'btn btn-indigo'
