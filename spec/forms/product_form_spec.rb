@@ -45,7 +45,7 @@ RSpec.describe ProductForm do
       end
 
       it { expect(subject).to be false }
-      it 'レコードを作成しない' do
+      it 'Productレコードを作成しない' do
         expect { subject }.not_to change(Product, :count)
       end
       it 'エラーメッセージを持つ' do
@@ -73,47 +73,69 @@ RSpec.describe ProductForm do
       end
 
       it { expect(subject).to be true }
-      it 'レコードを作成する' do
+      it 'Productレコードと中間テーブルを作成する' do
         expect { subject }.to change(Product, :count).by(1)
                           .and change(UserProduct, :count).by(1)
                           .and change(ProductTechnology, :count).by(1)
       end
     end
 
-    context 'メディアが入力されているとき' do
+    describe 'メディア' do
       let!(:user) { create(:user, :active) }
-      let!(:technology) { create(:technology) }
       let!(:attributes) do
-        {
-          title: 'タイトル',
-          url: '',
-          source_url: '',
-          released_on: '2021-06-17',
-          summary: '',
-          product_type_id: '1',
-          product_category_id: '1',
-          technology_ids: [technology.id.to_s],
-          user_ids: [user.id],
-          media_attributes: [
-            {
-              title: 'タイトル',
-              url: 'https://example.com'
-            }
-          ]
-        }
+          {
+            title: 'タイトル',
+            url: '',
+            source_url: '',
+            released_on: '2021-06-17',
+            summary: '',
+            product_type_id: '1',
+            product_category_id: '1',
+            technology_ids: [],
+            user_ids: [user.id],
+            media_attributes: [media_attribute]
+          }
+        end
+
+      context 'バリデーションエラーのとき' do
+        let!(:media_attribute) do
+          {
+            title: '', # バリデーションエラー
+            url: 'https://example.com'
+          }
+        end
+
+        it { expect(subject).to be false }
+        it 'ProductもProductMediumを作成しない' do
+          expect { subject }.to not_change(Product, :count)
+                            .and not_change(ProductMedium, :count)
+        end
+        it 'エラーメッセージを持つ' do
+          subject
+          expect(form.errors.messages).to eq({ media_attributes: ['の見出しを入力してください'] })
+        end
       end
 
-      it { expect(subject).to be true }
-      it 'ProductMediumレコードを作成する' do
-        expect { subject }.to change(ProductMedium, :count).by(1)
-        expect(ProductMedium.last.attributes).to match(
-          'title' => 'タイトル',
-          'url' => 'https://example.com',
-          'id' => be_a(Integer),
-          'product_id' => be_a(Integer),
-          'created_at' => be_a(ActiveSupport::TimeWithZone),
-          'updated_at' => be_a(ActiveSupport::TimeWithZone),
-        )
+      context '正常系' do
+        let!(:media_attribute) do
+          {
+            title: 'タイトル',
+            url: 'https://example.com'
+          }
+        end
+
+        it { expect(subject).to be true }
+        it 'ProductMediumレコードを作成する' do
+          expect { subject }.to change(ProductMedium, :count).by(1)
+          expect(ProductMedium.last.attributes).to match(
+            'title' => 'タイトル',
+            'url' => 'https://example.com',
+            'id' => be_a(Integer),
+            'product_id' => be_a(Integer),
+            'created_at' => be_a(ActiveSupport::TimeWithZone),
+            'updated_at' => be_a(ActiveSupport::TimeWithZone),
+          )
+        end
       end
     end
   end
@@ -137,20 +159,6 @@ RSpec.describe ProductForm do
     end
 
     it { is_expected.to be_a Product }
-    specify do
-      expect(subject.attributes.deep_symbolize_keys).to match(
-        id: nil,
-        title: 'タイトル',
-        url: 'URL',
-        source_url: '',
-        released_on: Date.parse('2021-06-17'),
-        summary: '',
-        product_type_id: 1,
-        product_category_id: 1,
-        created_at: nil,
-        updated_at: nil,
-      )
-    end
   end
 
   describe '#update' do
