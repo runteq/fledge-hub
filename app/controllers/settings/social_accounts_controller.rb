@@ -13,7 +13,7 @@ module Settings
           identifier: attribute[:identifier],
         )
       end
-      redirect_to settings_social_accounts_path, notice: '外部サービスの情報を更新しました！'
+      redirect_to settings_social_accounts_path, notice: '外部アカウントの情報を更新しました！'
     end
 
     private

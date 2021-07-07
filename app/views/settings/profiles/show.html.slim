@@ -16,12 +16,3 @@
     = f.email_field :email, required: true, class: 'text-field'
   .form-group
     = f.submit class: 'btn btn-indigo'
-
-= link_to '退会', new_user_deactivation_path, class: 'btn text-red-700 border border-red-700 bg-white hover:bg-red-700 hover:text-white'
-= link_to '外部アカウント', settings_social_accounts_path, class: 'btn btn-indigo'
-
-
-br
-= link_to 'ユーザーページ', user_path((@user.screen_name))
-'|
-= link_to 'マイページ', mypage_path
