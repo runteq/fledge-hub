@@ -48,6 +48,9 @@
 
   <div id='js-media-form'>
     <h2 class='text-lg'>メディア</h2>
+    <% @product.media.each do |medium| %>
+      <%= render 'medium_form', f: f, medium: medium %>
+    <% end %>
   </div>
   <div class='my-2'>
     <span class='cursor-pointer underline hover:opacity-75' onclick='addMediumForm(event)'>フォームを追加</span>
@@ -57,18 +60,18 @@
     <%= f.submit class: 'btn btn-indigo' %>
   </div>
 
-  <script>
-    const mediaForm = document.getElementById('js-media-form')
+  バリデーションエラー時に再度実行されるので、二重定義を回避する
+  <% if @product.errors.blank? %>
+    <script>
+      const addMediumForm = (e) => {
+        const mediaForm = document.getElementById('js-media-form')
+        mediaForm.insertAdjacentHTML('afterend', '<%= render 'medium_form', f: f, medium: ProductMedium.new %>');
+      }
 
-    const addMediumForm = (e) => {
-      e.preventDefault();
-      mediaForm.insertAdjacentHTML('beforeend', '<%= render 'medium_form', f: f, medium: ProductMedium.new %>');
-    }
-
-    const removeMediumForm = (e) => {
-      e.preventDefault();
-      const mediumForm = e.currentTarget.closest('.js-medium-form')
-      mediumForm.remove();
-    }
-  </script>
+      const removeMediumForm = (e) => {
+        const mediumForm = e.currentTarget.closest('.js-medium-form')
+        mediumForm.remove();
+      }
+    </script>
+  <% end %>
 <% end %>
