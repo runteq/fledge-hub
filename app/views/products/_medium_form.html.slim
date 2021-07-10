@@ -1,5 +1,5 @@
 .js-medium-form.border.rounded.p-4.mb-3
-  = f.fields_for 'media_attributes[]', medium, {} do |ff|
+  = f.fields_for 'media_attributes[]', ProductMedium.new, {} do |ff|
     = ff.hidden_field :id, value: medium.id
     .form-group
       = ff.label :title, class: 'form-label'
