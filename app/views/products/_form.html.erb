@@ -60,7 +60,7 @@
     <%= f.submit class: 'btn btn-indigo' %>
   </div>
 
-  バリデーションエラー時に再度実行されるので、二重定義を回避する
+  <%# バリデーションエラー時に再度実行されるので、二重定義を回避する %>
   <% if @product.errors.blank? %>
     <script>
       const addMediumForm = (e) => {
