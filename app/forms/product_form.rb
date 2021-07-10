@@ -76,6 +76,12 @@ class ProductForm
     product
   end
 
+  def media
+    media_attributes.map do |attribute|
+      product.media.build(attribute)
+    end
+  end
+
   private
 
   def product
@@ -94,12 +100,6 @@ class ProductForm
       technology_ids: technology_ids,
       user_ids: user_ids,
     }
-  end
-
-  def media
-    media_attributes.map do |attribute|
-      product.media.build(attribute)
-    end
   end
 
   def media_validity
