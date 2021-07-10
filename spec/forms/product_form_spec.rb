@@ -215,4 +215,46 @@ RSpec.describe ProductForm do
       end
     end
   end
+
+  describe '#media' do
+    subject { form.media }
+    let!(:form) { create_form(product) }
+    let!(:product) { create(:product) }
+
+    context '該当IDのProductMediumが既に存在するとき' do
+      let!(:medium) { create(:product_medium, product: product) }
+      before do
+        allow_any_instance_of(ProductForm).to receive(:media_attributes).and_return(
+          [
+            {
+              id: medium.id,
+              title: medium.title,
+              url: medium.url,
+            },
+          ],
+        )
+      end
+      it '既存のProductMediumの配列を返す' do
+        is_expected.to eq [medium]
+      end
+    end
+
+    context 'IDがnilのとき' do
+      before do
+        allow_any_instance_of(ProductForm).to receive(:media_attributes).and_return(
+          [
+            {
+              id: nil,
+              title: 'タイトル',
+              url: 'https://example.com',
+            },
+          ],
+        )
+      end
+      it '新たに作られたProductMediumの配列を返す' do
+        is_expected.to be_an(Array)
+        expect(subject.first).to be_a_new(ProductMedium)
+      end
+    end
+  end
 end

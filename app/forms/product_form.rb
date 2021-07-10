@@ -52,6 +52,8 @@ class ProductForm
         {
           technology_ids: product.technology_ids,
           user_ids: product.user_ids,
+          # #mediaで使うidしか使用しない↓
+          media_attributes: product.media.map(&:attributes)
         },
       )
     end
@@ -77,8 +79,8 @@ class ProductForm
   end
 
   def media
-    media_attributes.map do |attribute|
-      product.media.build(attribute)
+    media_attributes.map(&:deep_symbolize_keys).map do |attribute|
+      attribute[:id] ? product.media.find(attribute[:id]) : product.media.build(attribute)
     end
   end
 
