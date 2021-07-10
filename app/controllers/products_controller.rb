@@ -61,6 +61,6 @@ class ProductsController < ApplicationController
   end
 
   def search_params
-    params[:search]&.permit(:title)
+    params.fetch(:search, {}).permit(:title)
   end
 end
