@@ -44,11 +44,11 @@ class User < ApplicationRecord
         grab_avatar_image(avatar_url)
         authentications.find_or_create_by!(
           provider: 'github',
-          uid: user_hash['id']
+          uid: user_hash['id'],
         )
         social_accounts.create!(
           identifier: user_hash['login'],
-          social_service_id: SocialService.find_by(name: 'GitHub').id
+          social_service_id: SocialService.find_by(name: 'GitHub').id,
         )
         true
       else
@@ -63,14 +63,15 @@ class User < ApplicationRecord
         display_name: '退会済みユーザー',
         screen_name: "removed_account_#{id}",
         email: "removed_account_#{id}@example.com",
-        status: :deactivated
+        status: :deactivated,
       )
       avatar.purge_later
       authentications.each do |authentication|
         authentication.update!(
-          provider: "#{authentication.provider}/deactivated"
+          provider: "#{authentication.provider}/deactivated",
         )
       end
+      social_accounts.destroy_all
     end
   end
 

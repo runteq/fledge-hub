@@ -1,0 +1,15 @@
+- content_for(:title, '外部アカウント設定')
+
+= form_with model: current_user, url: settings_social_accounts_path, method: :put, class: 'form' do |f|
+  - @social_accounts.each do |social_account|
+    = f.fields_for 'social_accounts_attributes[]', SocialAccount.new do |ff|
+      = ff.hidden_field :social_service_id, value: social_account.social_service.id
+      .form-group
+        = ff.label :service_name, "#{social_account.service_name} URL", class: 'form-label'
+        div class="flex flex-row rounded overflow-hidden w-full border border-gray-300"
+          - if social_account.social_service.base_url.present?
+            div class='appearance-none block bg-gray-300 text-gray-800 py-3 px-4 leading-tight'
+              = social_account.social_service.base_url
+          = ff.text_field :identifier, value: social_account.identifier, class: 'appearance-none block w-full bg-gray-100 text-gray-700 py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
+  .form-group
+    = f.submit class: 'btn btn-indigo'

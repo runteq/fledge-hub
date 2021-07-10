@@ -15,8 +15,8 @@
 #
 FactoryBot.define do
   factory :product do
-    sequence(:title, "プロダクト_1")
-    summary { "MyText" }
+    sequence(:title, 'プロダクト_1')
+    summary { 'MyText' }
     url { Faker::Internet.url }
     source_url { Faker::Internet.url }
     released_on { Time.zone.today }

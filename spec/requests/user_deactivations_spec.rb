@@ -4,24 +4,24 @@ RSpec.describe UserDeactivationsController, type: :request do
   let!(:user) { create(:user, :active) }
   before { login_as(user) }
 
-  describe "GET /new" do
+  describe 'GET /new' do
     context 'ユーザーのサービスがあるとき' do
-      it "returns http success" do
+      it 'returns http success' do
         create(:product, users: [user])
-        get "/user_deactivation/new"
+        get '/user_deactivation/new'
         expect(response).to have_http_status(:success)
       end
     end
 
     context 'ユーザーのサービスがないとき' do
-      it "returns http success" do
-        get "/user_deactivation/new"
+      it 'returns http success' do
+        get '/user_deactivation/new'
         expect(response).to have_http_status(:success)
       end
     end
   end
 
-  describe "DELETE /create" do
+  describe 'DELETE /create' do
     subject { delete '/user_deactivation' }
 
     it 'ユーザーを退会させること' do
@@ -39,7 +39,7 @@ RSpec.describe UserDeactivationsController, type: :request do
       expect(logged_in?).to eq false
     end
 
-    it "トップページに遷移すること" do
+    it 'トップページに遷移すること' do
       subject
       expect(response).to redirect_to(root_url)
       expect(flash[:notice]).to eq '退会処理が完了しました。ありがとうございました。'

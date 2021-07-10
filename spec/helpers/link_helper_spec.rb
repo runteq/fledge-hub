@@ -7,13 +7,17 @@ RSpec.describe LinkHelper, type: :helper do
     context '正常系' do
       let!(:text) { 'テキスト' }
       let!(:url) { 'http://example.com/hoge' }
-      specify { is_expected.to eq '<a target="_blank" rel="noopener noreferrer" href="http://example.com/hoge">テキスト</a>' }
+      specify do
+        is_expected.to eq '<a target="_blank" rel="noopener noreferrer" href="http://example.com/hoge">テキスト</a>' # rubocop:disable Layout/LineLength
+      end
     end
 
     context 'textがnilのとき' do
       let!(:text) { nil }
       let!(:url) { 'http://example.com/hoge' }
-      specify { is_expected.to eq '<a target="_blank" rel="noopener noreferrer" href="http://example.com/hoge">http://example.com/hoge</a>' }
+      specify do
+        is_expected.to eq '<a target="_blank" rel="noopener noreferrer" href="http://example.com/hoge">http://example.com/hoge</a>' # rubocop:disable Layout/LineLength
+      end
     end
 
     context '不適なURLのとき' do

@@ -5,6 +5,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.active.find_by!(screen_name: params[:screen_name])
+    @social_accounts = SocialAccount.sorted(@user.social_accounts)
 
     @products = @user.products.includes(:technologies,
                                         { images: { product_image_attachment: :blob } })

@@ -1,7 +1,5 @@
 class ProductType < ActiveHashMaster
-  has_many :products
+  fields :id, :position, :name
 
-  def self.asc
-    ProductType.all.sort_by(&:position)
-  end
+  has_many :products
 end

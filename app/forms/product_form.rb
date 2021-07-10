@@ -10,8 +10,9 @@ class ProductForm
   attribute :released_on, :date
   attribute :product_category_id, :integer
   attribute :product_type_id, :integer
-  attribute :technology_ids
-  attribute :user_ids
+  attribute :technology_ids, default: []
+  attribute :user_ids, default: []
+  attribute :media_attributes, default: []
 
   validates :id, presence: true, if: -> { product.persisted? }
   validates :title, presence: true, length: { maximum: 100 }
@@ -23,6 +24,7 @@ class ProductForm
   validates :product_category_id, presence: true
   validates :product_type_id, presence: true
   validates :user_ids, presence: true, if: -> { product.new_record? }
+  validate :media_validity
 
   delegate :persisted?, :new_record?, to: :product
 
@@ -45,12 +47,12 @@ class ProductForm
         :source_url,
         :released_on,
         :product_type_id,
-        :product_category_id
+        :product_category_id,
       ).merge(
         {
           technology_ids: product.technology_ids,
-          user_ids: product.user_ids
-        }
+          user_ids: product.user_ids,
+        },
       )
     end
   end
@@ -58,7 +60,7 @@ class ProductForm
   def save
     return false if invalid?
 
-    product.save!
+    product.save! # product.mediaのアソシエーションごと保存される
     assign_attributes(id: product.id)
     true
   end
@@ -72,6 +74,12 @@ class ProductForm
 
   def to_model
     product
+  end
+
+  def media
+    media_attributes.map do |attribute|
+      product.media.build(attribute)
+    end
   end
 
   private
@@ -90,7 +98,15 @@ class ProductForm
       product_type_id: product_type_id,
       product_category_id: product_category_id,
       technology_ids: technology_ids,
-      user_ids: user_ids
+      user_ids: user_ids,
     }
+  end
+
+  def media_validity
+    return if errors.any?
+
+    media.select(&:invalid?).flat_map(&:errors).flat_map(&:full_messages).each do |full_message|
+      errors.add(:media_attributes, "の#{full_message}")
+    end
   end
 end

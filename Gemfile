@@ -23,6 +23,7 @@ gem 'view_component', require: 'view_component/engine'
 gem 'sorcery'
 gem 'validate_url'
 gem 'hotwire-rails'
+gem 'faraday'
 
 group :development, :test do
   gem 'bullet'
@@ -54,4 +55,5 @@ group :test do
   gem 'rspec_junit_formatter'
   gem 'selenium-webdriver'
   gem 'webdrivers'
+  gem 'webmock', require: false
 end

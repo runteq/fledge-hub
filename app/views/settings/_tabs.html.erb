@@ -1,0 +1,5 @@
+<ul class='flex border-b text-sm'>
+  <%= render(SettingsTabComponent.new(tab_name: 'プロフィール', tab_path: settings_profile_path)) %>
+  <%= render(SettingsTabComponent.new(tab_name: '外部アカウント', tab_path: settings_social_accounts_path)) %>
+  <%= render(SettingsTabComponent.new(tab_name: '退会', tab_path: new_user_deactivation_path)) %>
+</ul>
