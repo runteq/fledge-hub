@@ -1,6 +1,22 @@
 require 'rails_helper'
 
 RSpec.describe ProductForm do
+  def create_form(product)
+    # .findの後の状態
+    ProductForm.new(
+      id: product.id,
+      title: product.title,
+      url: product.url,
+      source_url: product.source_url,
+      released_on: product.released_on,
+      summary: product.summary,
+      product_category_id: product.product_category_id,
+      product_type_id: product.product_type_id,
+      technology_ids: product.technology_ids,
+      user_ids: product.user_ids,
+    )
+  end
+
   describe '.find' do
     subject { ProductForm.find(product.id, user.id) }
     context 'userによるproductではないとき' do
@@ -77,7 +93,7 @@ RSpec.describe ProductForm do
       end
     end
 
-    describe 'メディア' do
+    describe 'メディアについて' do
       let!(:user) { create(:user, :active) }
       let!(:attributes) do
         {
@@ -139,39 +155,14 @@ RSpec.describe ProductForm do
 
   describe '#to_model' do
     subject { form.to_model }
-    let!(:form) { ProductForm.new(**attributes) }
-    let!(:attributes) do
-      {
-        title: 'タイトル',
-        url: 'URL',
-        source_url: '',
-        released_on: '2021-06-17',
-        summary: '',
-        product_type_id: '1',
-        product_category_id: '1',
-      }
-    end
+    let!(:form) { create_form(create(:product)) }
 
     it { is_expected.to be_a Product }
   end
 
   describe '#update' do
     subject { form.update(**attributes) }
-    let!(:form) do
-      # .findの後の状態
-      ProductForm.new(
-        id: product.id,
-        title: product.title,
-        url: product.url,
-        source_url: product.source_url,
-        released_on: product.released_on,
-        summary: product.summary,
-        product_category_id: product.product_category_id,
-        product_type_id: product.product_type_id,
-        technology_ids: product.technology_ids,
-        user_ids: product.user_ids,
-      )
-    end
+    let!(:form) { create_form(product) }
     let!(:user) { create(:user) }
     let!(:product) { create(:product, title: '旧タイトル', users: [user]) }
 
