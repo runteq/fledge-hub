@@ -3,8 +3,10 @@ class ProductsController < ApplicationController
 
   def index
     @search_form = SearchProductsForm.new(search_params)
-    @products = @search_form.search.includes(:technologies, :users,
-                                             { images: { product_image_attachment: :blob } })
+    @products = @search_form.search
+                            .includes(:technologies,
+                                      :users, { images: { product_image_attachment: :blob } })
+                            .order(created_at: :desc)
   end
 
   def show

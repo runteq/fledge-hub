@@ -7,7 +7,7 @@ class SearchProductsForm
   def search
     relation = Product
     relation = search_title(relation) if title.present?
-    relation.order(created_at: :desc)
+    relation
   end
 
   private
