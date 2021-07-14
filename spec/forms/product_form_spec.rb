@@ -214,6 +214,60 @@ RSpec.describe ProductForm do
         expect(product.reload.users).to eq [user]
       end
     end
+
+    describe 'メディアについて' do
+      let!(:medium) { create(:product_medium, product: product, title: '旧タイトル') }
+      let!(:attributes) do
+        {
+          title: '新タイトル',
+          url: '',
+          source_url: '',
+          released_on: '2021-06-17',
+          summary: '',
+          product_type_id: '1',
+          product_category_id: '1',
+          technology_ids: [],
+          user_ids: [user.id],
+          media_attributes: [media_attribute],
+        }
+      end
+
+      context 'バリデーションエラーのとき' do
+        let!(:media_attribute) do
+          {
+            id: medium.id,
+            title: '', # バリデーションエラー
+            url: 'https://example.com',
+          }
+        end
+
+        it { expect(subject).to be false }
+        it 'productもmediumも変更しない' do
+          expect { subject }.to not_change { product.reload.title }.from('旧タイトル')
+                            .and not_change { product.media.first.reload.title }.from('旧タイトル')
+        end
+        it 'エラーメッセージを持つ' do
+          subject
+          expect(form.errors.messages).to eq({ media_attributes: ['の見出しを入力してください'] })
+        end
+      end
+
+      context '正常系' do
+        let!(:media_attribute) do
+          {
+            id: medium.id,
+            title: '新タイトル',
+            url: 'https://example.com',
+          }
+        end
+
+        it { expect(subject).to be true }
+        it 'productとmediumのレコードを更新する' do
+          expect{ subject }.to change { product.reload.title }.to('新タイトル').from('旧タイトル')
+                           .and change { medium.reload.title }.to('新タイトル').from('旧タイトル')
+        end
+      end
+    end
   end
 
   describe '#media' do
@@ -239,12 +293,12 @@ RSpec.describe ProductForm do
       end
     end
 
-    context 'IDがnilのとき' do
+    context 'IDがない（新しいレコード）とき' do
       before do
         allow_any_instance_of(ProductForm).to receive(:media_attributes).and_return(
           [
             {
-              id: nil,
+              id: '', # フォームから送られる形に準拠する
               title: 'タイトル',
               url: 'https://example.com',
             },
