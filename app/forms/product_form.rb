@@ -62,7 +62,10 @@ class ProductForm
   def save
     return false if invalid?
 
-    product.save! # product.mediaのアソシエーションごと保存される
+    ActiveRecord::Base.transaction(joinable: false, requires_new: true) do
+      product.save!
+      media.each(&:save!)
+    end
     assign_attributes(id: product.id)
     true
   end
@@ -74,8 +77,8 @@ class ProductForm
     ActiveRecord::Base.transaction(joinable: false, requires_new: true) do
       product.update!(**product_params)
       media.each(&:save!)
-      true
     end
+    true
   end
 
   def to_model
@@ -89,7 +92,7 @@ class ProductForm
         medium.assign_attributes(attributes.slice(:title, :url))
         medium
       else
-        product.media.build(attributes)
+        ProductMedium.new(**attributes, product: product)
       end
     end
   end

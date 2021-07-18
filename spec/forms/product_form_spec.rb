@@ -228,17 +228,19 @@ RSpec.describe ProductForm do
           product_category_id: '1',
           technology_ids: [],
           user_ids: [user.id],
-          media_attributes: [media_attribute],
+          media_attributes: media_attributes,
         }
       end
 
       context 'バリデーションエラーのとき' do
-        let!(:media_attribute) do
-          {
-            id: medium.id,
-            title: '', # バリデーションエラー
-            url: 'https://example.com',
-          }
+        let!(:media_attributes) do
+          [
+            {
+              id: medium.id,
+              title: '', # バリデーションエラー
+              url: 'https://example.com',
+            }
+          ]
         end
 
         it { expect(subject).to be false }
@@ -253,19 +255,45 @@ RSpec.describe ProductForm do
       end
 
       context '正常系' do
-        let!(:media_attribute) do
-          {
-            id: medium.id,
-            title: '新タイトル',
-            url: 'https://example.com',
-          }
+        let!(:media_attributes) do
+          [
+            {
+              id: medium.id,
+              title: '新タイトル',
+              url: 'https://example.com',
+            },
+          ]
         end
 
         it { expect(subject).to be true }
         it 'productとmediumのレコードを更新する' do
           expect{ subject }.to change { product.reload.title }.to('新タイトル').from('旧タイトル')
-                           .and change { medium.reload.title }.to('新タイトル').from('旧タイトル')
+          .and change { medium.reload.title }.to('新タイトル').from('旧タイトル')
         end
+      end
+
+      context 'ProductMediumレコードの追加' do
+        let!(:media_attributes) do
+          [
+            {
+              id: '',
+              title: '新しいProductMedium',
+              url: 'https://example.com',
+            },
+          ]
+        end
+
+        it { expect(subject).to be true }
+        it { expect { subject }.to change(ProductMedium, :count).by(1) }
+      end
+
+      context 'ProductMediumレコードの削除' do
+        let!(:media_attributes) do
+          []
+        end
+
+        it { expect(subject).to be true }
+        it { expect { subject }.to change(ProductMedium, :count).by(-1) }
       end
     end
   end
