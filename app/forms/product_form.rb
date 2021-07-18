@@ -62,11 +62,7 @@ class ProductForm
   def save
     return false if invalid?
 
-    ActiveRecord::Base.transaction(joinable: false, requires_new: true) do
-      product.save!
-      media.each(&:save!)
-    end
-    assign_attributes(id: product.id)
+    save!
     true
   end
 
@@ -74,10 +70,8 @@ class ProductForm
     assign_attributes(params)
     return false if invalid?
 
-    ActiveRecord::Base.transaction(joinable: false, requires_new: true) do
-      product.update!(**product_params)
-      media.each(&:save!)
-    end
+    product.assign_attributes(**product_params)
+    save!
     true
   end
 
@@ -89,7 +83,7 @@ class ProductForm
     media_attributes.map(&:deep_symbolize_keys).map do |attributes|
       if attributes[:id].present?
         medium = product.media.find(attributes[:id])
-        medium.assign_attributes(attributes.slice(:title, :url))
+        medium.assign_attributes(**attributes.slice(:title, :url))
         medium
       else
         ProductMedium.new(**attributes, product: product)
@@ -98,6 +92,14 @@ class ProductForm
   end
 
   private
+
+  def save!
+    ActiveRecord::Base.transaction(joinable: false, requires_new: true) do
+      product.save!
+      media.each(&:save!)
+    end
+    assign_attributes(id: product.id)
+  end
 
   def product
     @product ||= Product.find_by(id: id) || Product.new(**product_params)
