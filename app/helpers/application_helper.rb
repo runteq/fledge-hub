@@ -1,4 +1,6 @@
 module ApplicationHelper
+  include Pagy::Frontend
+
   def page_title(page_title = '')
     base_title = 'Fledge Hub'
 

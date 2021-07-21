@@ -48,3 +48,5 @@ yarn-debug.log*
 
 # RubyMine
 /.idea
+
+.DS_Store

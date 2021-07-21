@@ -55,3 +55,20 @@
     }
   }
 }
+
+.pagy-nav {
+  @apply flex space-x-2;
+}
+
+.pagy-nav .page a,
+.pagy-nav .page.active,
+.pagy-nav .page.prev.disabled,
+.pagy-nav .page.next.disabled {
+  @apply block rounded-lg px-3 py-1 text-sm text-gray-500 font-semibold bg-gray-200 shadow-md;
+  &:hover{
+    @apply bg-gray-300;
+  }
+  &:active{
+    @apply bg-gray-400 text-white;
+  }
+}
