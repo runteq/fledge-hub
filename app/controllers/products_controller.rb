@@ -1,12 +1,13 @@
 class ProductsController < ApplicationController
   before_action :require_login, only: %i[new edit create update destroy]
+  include Pagy::Backend
 
   def index
     @search_form = SearchProductsForm.new(search_params)
-    @products = @search_form.search
+    @pagy, @products = pagy(@search_form.search
                             .includes(:technologies,
                                       :users, { images: { product_image_attachment: :blob } })
-                            .order(created_at: :desc)
+                            .order(created_at: :desc))
   end
 
   def show
