@@ -86,6 +86,7 @@ class ProductForm
         medium.assign_attributes(**attributes.slice(:title, :url))
         medium
       else
+        # product.mediaでは取得できないようにする
         ProductMedium.new(**attributes, product: product)
       end
     end
@@ -96,9 +97,15 @@ class ProductForm
   def save!
     ActiveRecord::Base.transaction(joinable: false, requires_new: true) do
       product.save!
+      remained_medium_ids = attr_medium_ids & product.media.ids # 重複を返す
+      product.media.where.not(id: remained_medium_ids).destroy_all
       media.each(&:save!)
     end
     assign_attributes(id: product.id)
+  end
+
+  def attr_medium_ids
+    media_attributes.map { |attr| attr.deep_symbolize_keys[:id] }.reject(&:blank?).map(&:to_i)
   end
 
   def product

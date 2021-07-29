@@ -113,6 +113,7 @@ RSpec.describe ProductForm do
       context 'バリデーションエラーのとき' do
         let!(:media_attribute) do
           {
+            id: '',
             title: '', # バリデーションエラー
             url: 'https://example.com',
           }
@@ -132,6 +133,7 @@ RSpec.describe ProductForm do
       context '正常系' do
         let!(:media_attribute) do
           {
+            id: '',
             title: 'タイトル',
             url: 'https://example.com',
           }
@@ -276,6 +278,11 @@ RSpec.describe ProductForm do
         let!(:media_attributes) do
           [
             {
+              id: medium.id,
+              title: medium.title,
+              url: medium.url,
+            },
+            {
               id: '',
               title: '新しいProductMedium',
               url: 'https://example.com',
@@ -326,7 +333,7 @@ RSpec.describe ProductForm do
         allow_any_instance_of(ProductForm).to receive(:media_attributes).and_return(
           [
             {
-              id: '', # フォームから送られる形に準拠する
+              id: '',
               title: 'タイトル',
               url: 'https://example.com',
             },
