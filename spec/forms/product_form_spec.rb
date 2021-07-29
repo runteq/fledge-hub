@@ -241,7 +241,7 @@ RSpec.describe ProductForm do
               id: medium.id,
               title: '', # バリデーションエラー
               url: 'https://example.com',
-            }
+            },
           ]
         end
 
@@ -269,7 +269,7 @@ RSpec.describe ProductForm do
 
         it { expect(subject).to be true }
         it 'productとmediumのレコードを更新する' do
-          expect{ subject }.to change { product.reload.title }.to('新タイトル').from('旧タイトル')
+          expect { subject }.to change { product.reload.title }.to('新タイトル').from('旧タイトル')
           .and change { medium.reload.title }.to('新タイトル').from('旧タイトル')
         end
       end

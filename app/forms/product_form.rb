@@ -53,7 +53,7 @@ class ProductForm
           technology_ids: product.technology_ids,
           user_ids: product.user_ids,
           # #mediaで使うidしか使用しない↓
-          media_attributes: product.media.map(&:attributes)
+          media_attributes: product.media.map(&:attributes),
         },
       )
     end
@@ -95,7 +95,9 @@ class ProductForm
   private
 
   def save!
-    attr_medium_ids = media_attributes.map { |attr| attr.deep_symbolize_keys[:id] }.reject(&:blank?).map(&:to_i)
+    attr_medium_ids = media_attributes.map do |attr|
+      attr.deep_symbolize_keys[:id]
+    end.reject(&:blank?).map(&:to_i)
     remained_medium_ids = attr_medium_ids & product.media.ids # 重複を返す
 
     ActiveRecord::Base.transaction(joinable: false, requires_new: true) do
