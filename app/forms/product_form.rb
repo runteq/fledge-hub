@@ -95,17 +95,15 @@ class ProductForm
   private
 
   def save!
+    attr_medium_ids = media_attributes.map { |attr| attr.deep_symbolize_keys[:id] }.reject(&:blank?).map(&:to_i)
+    remained_medium_ids = attr_medium_ids & product.media.ids # 重複を返す
+
     ActiveRecord::Base.transaction(joinable: false, requires_new: true) do
       product.save!
-      remained_medium_ids = attr_medium_ids & product.media.ids # 重複を返す
       product.media.where.not(id: remained_medium_ids).destroy_all
       media.each(&:save!)
     end
     assign_attributes(id: product.id)
-  end
-
-  def attr_medium_ids
-    media_attributes.map { |attr| attr.deep_symbolize_keys[:id] }.reject(&:blank?).map(&:to_i)
   end
 
   def product
