@@ -29,14 +29,14 @@ namespace :puma do
     end
   end
 
-  before :start, :make_dirs
+  # before :start, :make_dirs
 end
 
 namespace :deploy do
   desc 'upload important files'
   task :upload do
     on roles(:app) do
-      sudo :mkdir, '-p', "/var/www/fledge-hub/shared/config"
+      sudo :mkdir, '-p', "/var/www/fledge-hub/shared/config/credentials"
       sudo %[chown -R #{fetch(:user)}.#{fetch(:user)} /var/www/#{fetch(:application)}]
       sudo :mkdir, '-p', '/etc/nginx/sites-enabled'
       sudo :mkdir, '-p', '/etc/nginx/sites-available'
