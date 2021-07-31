@@ -1,0 +1,68 @@
+{
+  "ignored_warnings": [
+    {
+      "warning_type": "Cross-Site Scripting",
+      "warning_code": 4,
+      "fingerprint": "0754f2cf6782d858e4ca1ab847ce5ab3995e8093e77b3e2e0e101bd55bd034ca",
+      "check_name": "LinkToHref",
+      "message": "Potentially unsafe model attribute in `link_to` href",
+      "file": "app/views/products/show.html.erb",
+      "line": 30,
+      "link": "https://brakemanscanner.org/docs/warning_types/link_to_href",
+      "code": "link_to(sanitize(Product.find(params[:id]).source_url), :target => :_blank, :rel => \"noopener noreferrer\", :class => \"no-underline\")",
+      "render_path": [
+        {
+          "type": "controller",
+          "class": "ProductsController",
+          "method": "show",
+          "line": 15,
+          "file": "app/controllers/products_controller.rb",
+          "rendered": {
+            "name": "products/show",
+            "file": "app/views/products/show.html.erb"
+          }
+        }
+      ],
+      "location": {
+        "type": "template",
+        "template": "products/show"
+      },
+      "user_input": "Product.find(params[:id]).source_url",
+      "confidence": "Weak",
+      "note": "source_urlはバリデーションチェックをしているため"
+    },
+    {
+      "warning_type": "Cross-Site Scripting",
+      "warning_code": 4,
+      "fingerprint": "6a6ddcdd05fdd2ef773851b46874e90e1862b79683f1f43dba4567ac477a23b3",
+      "check_name": "LinkToHref",
+      "message": "Potentially unsafe model attribute in `link_to` href",
+      "file": "app/views/products/show.html.erb",
+      "line": 22,
+      "link": "https://brakemanscanner.org/docs/warning_types/link_to_href",
+      "code": "link_to(sanitize(Product.find(params[:id]).url), :target => :_blank, :rel => \"noopener noreferrer\", :class => \"no-underline\")",
+      "render_path": [
+        {
+          "type": "controller",
+          "class": "ProductsController",
+          "method": "show",
+          "line": 15,
+          "file": "app/controllers/products_controller.rb",
+          "rendered": {
+            "name": "products/show",
+            "file": "app/views/products/show.html.erb"
+          }
+        }
+      ],
+      "location": {
+        "type": "template",
+        "template": "products/show"
+      },
+      "user_input": "Product.find(params[:id]).url",
+      "confidence": "Weak",
+      "note": "urlはバリデーションチェックをしているため"
+    }
+  ],
+  "updated": "2021-07-31 23:02:51 +0900",
+  "brakeman_version": "5.0.4"
+}

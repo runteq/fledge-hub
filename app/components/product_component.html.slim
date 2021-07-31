@@ -1,7 +1,13 @@
 .lg:p-4.p-2.md:w-1/3
   .h-full.border-opacity-60.overflow-hidden
     = link_to product_path(product) do
-      = image_tag product.top_image.product_image, alt: product.title, class: 'lg:h-52 h-40 w-full object-cover object-center hover:opacity-70 rounded-md border'
+      .relative.group
+        div class="w-full h-full absolute opacity-0 group-hover:opacity-100"
+          div class="w-full h-full bg-black bg-opacity-30 rounded-lg flex justify-center items-center"
+            div class="rounded-full h-10 w-10 bg-black bg-opacity-80 flex items-center justify-center"
+              i class="fas fa-chevron-right text-white pl-1"
+        div class="w-full"
+          = image_tag product.top_image.product_image, alt: product.title, class: 'rounded-lg'
     .pt-3.pb-4
       .flex.items-center.flex-wrap
         .inline-flex.tracking-widest.text-sm.title-font.font-medium.text-gray-400
@@ -18,7 +24,6 @@
         - product.technologies.each do |technology|
           span.px-2.py-1.mx-1.text-xs.leading-5.rounded-full.bg-indigo-100.text-gray-700
             = technology.name
-          / span.text-xs.mr-2.py-1.5.px-4.text-gray-600.bg-blue-100.rounded-2xl
 
       .flex.items-center.flex-wrap
         - if @product.url.present?

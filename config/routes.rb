@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   resource :registration, only: %i[new create]
   resource :user_deactivation, only: %i[new destroy]
   resource :inquiry, only: %i[create]
-  resources :products do
+  resources :products, only: %i[show new edit create update destroy] do
     resources :product_images, only: %i[new create edit update destroy]
     resources :product_media, only: %i[new create edit update destroy]
   end
