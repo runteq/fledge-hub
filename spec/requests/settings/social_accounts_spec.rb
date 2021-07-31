@@ -9,8 +9,6 @@ RSpec.describe Settings::SocialAccountsController, type: :request do
 
     it 'render a successful response' do
       create(:social_account, user: user)
-      puts SocialService.all
-
       subject
       expect(response).to have_http_status(:success)
     end
