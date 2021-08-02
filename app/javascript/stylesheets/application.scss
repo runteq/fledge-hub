@@ -74,30 +74,31 @@
 }
 
 // カルーセル
-.carousel-open:checked + .carousel-item {
-  position: static;
-  opacity: 100;
+.wrap {
+  scroll-snap-type: x mandatory;
+  white-space: nowrap;
+  overflow-x: auto;
+  margin: 0 auto;
 }
 
-.carousel-item {
-  -webkit-transition: opacity 0.6s ease-out;
-  transition: opacity 0.6s ease-out;
+.item {
+  scroll-snap-align: center;
+  display: inline-block;
+  margin: 0 10px;
+  width: 300px;
+  white-space: normal;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
-#carousel-1:checked ~ .control-1,
-#carousel-2:checked ~ .control-2,
-#carousel-3:checked ~ .control-3 {
+@media not all and (min-width: 568px) {
+  .item {
+    width: 100%;
+  }
+}
+
+img {
   display: block;
-}
-
-.carousel-indicators {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  position: absolute;
-  bottom: 2%;
-  left: 0;
-  right: 0;
-  text-align: center;
-  z-index: 10;
+  width: 100%;
+  height: auto;
 }
