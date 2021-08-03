@@ -1,6 +1,22 @@
 require 'rails_helper'
 
 RSpec.describe ProductForm do
+  def create_form(product)
+    # .findの後の状態
+    ProductForm.new(
+      id: product.id,
+      title: product.title,
+      url: product.url,
+      source_url: product.source_url,
+      released_on: product.released_on,
+      summary: product.summary,
+      product_category_id: product.product_category_id,
+      product_type_id: product.product_type_id,
+      technology_ids: product.technology_ids,
+      user_ids: product.user_ids,
+    )
+  end
+
   describe '.find' do
     subject { ProductForm.find(product.id, user.id) }
     context 'userによるproductではないとき' do
@@ -77,7 +93,7 @@ RSpec.describe ProductForm do
       end
     end
 
-    describe 'メディア' do
+    describe 'メディアについて' do
       let!(:user) { create(:user, :active) }
       let!(:attributes) do
         {
@@ -97,6 +113,7 @@ RSpec.describe ProductForm do
       context 'バリデーションエラーのとき' do
         let!(:media_attribute) do
           {
+            id: '',
             title: '', # バリデーションエラー
             url: 'https://example.com',
           }
@@ -116,6 +133,7 @@ RSpec.describe ProductForm do
       context '正常系' do
         let!(:media_attribute) do
           {
+            id: '',
             title: 'タイトル',
             url: 'https://example.com',
           }
@@ -139,39 +157,14 @@ RSpec.describe ProductForm do
 
   describe '#to_model' do
     subject { form.to_model }
-    let!(:form) { ProductForm.new(**attributes) }
-    let!(:attributes) do
-      {
-        title: 'タイトル',
-        url: 'URL',
-        source_url: '',
-        released_on: '2021-06-17',
-        summary: '',
-        product_type_id: '1',
-        product_category_id: '1',
-      }
-    end
+    let!(:form) { create_form(create(:product)) }
 
     it { is_expected.to be_a Product }
   end
 
   describe '#update' do
     subject { form.update(**attributes) }
-    let!(:form) do
-      # .findの後の状態
-      ProductForm.new(
-        id: product.id,
-        title: product.title,
-        url: product.url,
-        source_url: product.source_url,
-        released_on: product.released_on,
-        summary: product.summary,
-        product_category_id: product.product_category_id,
-        product_type_id: product.product_type_id,
-        technology_ids: product.technology_ids,
-        user_ids: product.user_ids,
-      )
-    end
+    let!(:form) { create_form(product) }
     let!(:user) { create(:user) }
     let!(:product) { create(:product, title: '旧タイトル', users: [user]) }
 
@@ -221,6 +214,135 @@ RSpec.describe ProductForm do
         expect(product.reload.users).to eq [user]
         subject
         expect(product.reload.users).to eq [user]
+      end
+    end
+
+    describe 'メディアについて' do
+      let!(:medium) { create(:product_medium, product: product, title: '旧タイトル') }
+      let!(:attributes) do
+        {
+          title: '新タイトル',
+          url: '',
+          source_url: '',
+          released_on: '2021-06-17',
+          summary: '',
+          product_type_id: '1',
+          product_category_id: '1',
+          technology_ids: [],
+          user_ids: [user.id],
+          media_attributes: media_attributes,
+        }
+      end
+
+      context 'バリデーションエラーのとき' do
+        let!(:media_attributes) do
+          [
+            {
+              id: medium.id,
+              title: '', # バリデーションエラー
+              url: 'https://example.com',
+            },
+          ]
+        end
+
+        it { expect(subject).to be false }
+        it 'productもmediumも変更しない' do
+          expect { subject }.to not_change { product.reload.title }.from('旧タイトル')
+                            .and not_change { product.media.first.reload.title }.from('旧タイトル')
+        end
+        it 'エラーメッセージを持つ' do
+          subject
+          expect(form.errors.messages).to eq({ media_attributes: ['の見出しを入力してください'] })
+        end
+      end
+
+      context '正常系' do
+        let!(:media_attributes) do
+          [
+            {
+              id: medium.id,
+              title: '新タイトル',
+              url: 'https://example.com',
+            },
+          ]
+        end
+
+        it { expect(subject).to be true }
+        it 'productとmediumのレコードを更新する' do
+          expect { subject }.to change { product.reload.title }.to('新タイトル').from('旧タイトル')
+          .and change { medium.reload.title }.to('新タイトル').from('旧タイトル')
+        end
+      end
+
+      context 'ProductMediumレコードの追加' do
+        let!(:media_attributes) do
+          [
+            {
+              id: medium.id,
+              title: medium.title,
+              url: medium.url,
+            },
+            {
+              id: '',
+              title: '新しいProductMedium',
+              url: 'https://example.com',
+            },
+          ]
+        end
+
+        it { expect(subject).to be true }
+        it { expect { subject }.to change(ProductMedium, :count).by(1) }
+      end
+
+      context 'ProductMediumレコードの削除' do
+        let!(:media_attributes) do
+          []
+        end
+
+        it { expect(subject).to be true }
+        it { expect { subject }.to change(ProductMedium, :count).by(-1) }
+      end
+    end
+  end
+
+  describe '#media' do
+    subject { form.media }
+    let!(:form) { create_form(product) }
+    let!(:product) { create(:product) }
+
+    context '該当IDのProductMediumが既に存在するとき' do
+      let!(:medium) { create(:product_medium, product: product) }
+      before do
+        allow_any_instance_of(ProductForm).to receive(:media_attributes).and_return(
+          [
+            {
+              id: medium.id,
+              title: medium.title,
+              url: medium.url,
+            },
+          ],
+        )
+      end
+      it '既存のProductMediumの配列を返す' do
+        is_expected.to eq [medium]
+      end
+    end
+
+    context 'IDがない（新しいレコード）とき' do
+      before do
+        allow_any_instance_of(ProductForm).to receive(:media_attributes).and_return(
+          [
+            {
+              id: '',
+              title: 'タイトル',
+              url: 'https://example.com',
+            },
+          ],
+        )
+      end
+      it '新たに作られたProductMediumの配列を返す' do
+        is_expected.to be_an(Array)
+        expect(subject.first).to be_a_new(ProductMedium)
       end
     end
   end
