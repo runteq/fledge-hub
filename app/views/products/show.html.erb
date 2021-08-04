@@ -2,39 +2,69 @@
 <% content_for(:description, @product.summary.presence || @product.title) %>
 <% content_for(:meta_image_url, url_for(@product.top_image.product_image)) %>
 
-<div class="mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-1">
-  <div class="grid gap-12 row-gap-8 lg:grid-cols-2">
+<div class="mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-lg lg:px-8 lg:py-1">
+  <div class="flex flex-col space-y-4 lg:space-y-0 lg:flex-row lg:items-center lg:justify-between">
     <div>
-      <%= image_tag @product.top_image.product_image, alt: @product.title, class: 'object-cover w-full h-56 rounded shadow-lg sm:h-96' %>
-    </div>
-
-    <div class="flex flex-col justify-center">
-      <div class="max-w-xl mb-6">
-        <p class="text-base leading-6 text-indigo-500 font-semibold tracking-widest">
-          <%= "#{@product.released_on} Released by" %>
-          <%= link_to_active @product.user %>
-        </p>
-        <h2 class="max-w-lg mb-1 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl sm:leading-none">
+      <span class="text-gray-400">
+        <%= "#{@product.released_on} Released" %>
+      </span>
+      <div class="flex flex-col mt-2 space-y-1 sm:flex-row sm:space-y-0 sm:items-center sm:space-x-4">
+        <h3 class="text-2xl font-semibold text-gray-800 dark:text-gray-200">
           <%= @product.title %>
-        </h2>
-
-        <div class="max-w-xl mb-2 -px-1">
-          <% @product.technologies.each do |technology| %>
-            <div class="span px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-200 text-gray-700">
-              <%= technology.name %>
-            </div>
-          <% end %>
-        </div>
-
-        <div class="max-w-xl">
-          <%= link_to_blank @product.url, @product.url %>
-          <br>
-          <%= link_to_blank @product.source_url, @product.source_url %>
-        </div>
-        <div class="mt-3">
-          <%= simple_format h(@product.summary), class: 'text-base text-gray-700 md:text-lg' %>
+        </h3>
+        <div class="text-sm text-gray-400">
+          by <%= link_to @product.user.display_name, user_path(@product.user.screen_name) %>
         </div>
       </div>
+    </div>
+    <div class="flex items-center justify-end space-x-4">
+      <% if @product.url.present? %>
+        <%= link_to sanitize(@product.url), target: :_blank, rel: 'noopener noreferrer', class: "no-underline" do %>
+          <button class="flex items-center px-4 py-2 space-x-3 text-gray-600 transition-colors duration-200 transform border rounded-lg dark:text-gray-200 dark:border-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none">
+            <i class="fas fa-link"></i>
+            <span>Site</span>
+          </button>
+        <% end %>
+      <% end %>
+      <% if @product.source_url.present? %>
+        <%= link_to sanitize(@product.source_url), target: :_blank, rel: 'noopener noreferrer', class: "no-underline" do %>
+          <button class="flex items-center px-4 py-2 space-x-3 text-gray-600 transition-colors duration-200 transform border rounded-lg dark:text-gray-200 dark:border-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none">
+            <i class="fas fa-code"></i>
+            <span>Code</span>
+          </button>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <p class="my-2 text-gray-500 dark:text-gray-400 lg:max-w-xl">
+    <%= safe_join(@product.summary.split("\n"), tag(:br)) %>
+  </p>
+
+
+  <%= image_tag @product.top_image.product_image, alt: @product.title, class: 'w-full rounded shadow-lg' %>
+
+
+  <div class="max-w-xl mb-2 -px-1">
+    <% @product.technologies.each do |technology| %>
+      <div class="span px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-200 text-gray-700">
+        <%= technology.name %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="flex items-center flex-wrap">
+    <div class="inline-flex tracking-widest text-sm title-font font-medium text-gray-400">
+      <span class="inline-flex ml-auto px-2 text-xs leading-5 font-semibold bg-yellow-100 text-yellow-900 mb-2">
+        <%= @product.product_type.name %>
+      </span>
+      <span class="inline-flex ml-2 px-2 text-xs leading-5 font-semibold bg-red-100 text-red-900 mb-2">
+        <%= @product.product_category.name %>
+      </span>
+    </div>
+  </div>
+
+    <div class="flex flex-col justify-center">
+
 
       <ul>
         <% @product.media.each do |medium| %>

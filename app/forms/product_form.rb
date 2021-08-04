@@ -52,6 +52,8 @@ class ProductForm
         {
           technology_ids: product.technology_ids,
           user_ids: product.user_ids,
+          # #mediaで使うidしか使用しない↓
+          media_attributes: product.media.map(&:attributes),
         },
       )
     end
@@ -60,8 +62,7 @@ class ProductForm
   def save
     return false if invalid?
 
-    product.save! # product.mediaのアソシエーションごと保存される
-    assign_attributes(id: product.id)
+    save!
     true
   end
 
@@ -69,7 +70,9 @@ class ProductForm
     assign_attributes(params)
     return false if invalid?
 
-    product.update!(**product_params)
+    product.assign_attributes(**product_params)
+    save!
+    true
   end
 
   def to_model
@@ -77,12 +80,33 @@ class ProductForm
   end
 
   def media
-    media_attributes.map do |attribute|
-      product.media.build(attribute)
+    media_attributes.map(&:deep_symbolize_keys).map do |attributes|
+      if attributes[:id].present?
+        medium = product.media.find(attributes[:id])
+        medium.assign_attributes(**attributes.slice(:title, :url))
+        medium
+      else
+        # product.mediaでは取得できないようにする
+        ProductMedium.new(**attributes, product: product)
+      end
     end
   end
 
   private
+
+  def save!
+    attr_medium_ids = media_attributes.map do |attr|
+      attr.deep_symbolize_keys[:id]
+    end.reject(&:blank?).map(&:to_i)
+    remained_medium_ids = attr_medium_ids & product.media.ids # 重複を返す
+
+    ActiveRecord::Base.transaction(joinable: false, requires_new: true) do
+      product.save!
+      product.media.where.not(id: remained_medium_ids).destroy_all
+      media.each(&:save!)
+    end
+    assign_attributes(id: product.id)
+  end
 
   def product
     @product ||= Product.find_by(id: id) || Product.new(**product_params)

@@ -58,7 +58,7 @@ class ProductsController < ApplicationController
       :product_category_id,
       :product_type_id,
       technology_ids: [],
-      media_attributes: %i[title url],
+      media_attributes: %i[id title url],
     )
   end
 

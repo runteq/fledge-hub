@@ -3,15 +3,6 @@ require 'rails_helper'
 RSpec.describe ProductsController, type: :request do
   let(:user) { create(:user) }
 
-  describe 'GET /index' do
-    before { create(:product, users: [user]) }
-
-    it 'renders a successful response' do
-      get products_url
-      expect(response).to be_successful
-    end
-  end
-
   describe 'GET /show' do
     let(:product) { create(:product, users: [user]) }
     subject { get product_url(product) }
@@ -23,7 +14,7 @@ RSpec.describe ProductsController, type: :request do
   end
 
   describe 'GET /new' do
-    subject { get new_product_url }
+    subject { get '/products/new' }
     before { login_as(user) }
 
     it 'renders a successful response' do
@@ -34,7 +25,7 @@ RSpec.describe ProductsController, type: :request do
 
   describe 'GET /edit' do
     let(:product) { create(:product, users: [user]) }
-    subject { get edit_product_url(product) }
+    subject { get "/products/#{product.id}/edit" }
     before { login_as(user) }
 
     it 'render a successful response' do
@@ -45,7 +36,7 @@ RSpec.describe ProductsController, type: :request do
 
   describe 'POST /create' do
     before { login_as(user) }
-    subject { post products_url, params: { product: attributes } }
+    subject { post '/products', params: { product: attributes } }
 
     context 'with valid parameters' do
       let(:attributes) do
@@ -114,7 +105,7 @@ RSpec.describe ProductsController, type: :request do
   end
 
   describe 'PATCH /update' do
-    subject { patch product_url(product), params: { product: attributes } }
+    subject { patch "/products/#{product.id}", params: { product: attributes } }
     before { login_as(user) }
 
     context 'with valid parameters' do
@@ -182,7 +173,7 @@ RSpec.describe ProductsController, type: :request do
 
   describe 'DELETE /destroy' do
     let!(:product) { create(:product, users: [user]) }
-    subject { delete product_url(product) }
+    subject { delete "/products/#{product.id}" }
     before { login_as(user) }
 
     specify do
