@@ -69,6 +69,10 @@ server {
     # limit_req zone=one;
     access_log <%= shared_path %>/log/nginx.access.log;
     error_log <%= shared_path %>/log/nginx.error.log;
+    if ($http_x_forwarded_proto = "http") {
+      rewrite ^(.*) https://fledge-hub.com$1
+      break;
+    }
   }
 
   location ^~ /assets/ {
