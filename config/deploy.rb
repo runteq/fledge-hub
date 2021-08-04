@@ -16,7 +16,6 @@ set :puma_pid, '/var/www/fledge-hub/shared/tmp/pids/puma.pid'
 set :puma_access_log, '/var/www/fledge-hub/shared/log/puma.error.log'
 set :puma_error_log, '/var/www/fledge-hub/shared/log/puma.access.log'
 set :puma_preload_app, true
-set :nginx_use_ssl, true
 
 # Default branch is :main
 set :branch, ENV['BRANCH'] || 'main'
