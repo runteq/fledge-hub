@@ -41,7 +41,7 @@
   </p>
 
 
-  <%= image_tag @product.top_image.product_image, alt: @product.title, class: 'w-full rounded shadow-lg' %>
+  <%# <%= image_tag @product.top_image.product_image, alt: @product.title, class: 'w-full rounded shadow-lg' %>
 
 
   <div class="max-w-xl mb-2 -px-1">
@@ -63,37 +63,26 @@
     </div>
   </div>
 
-    <div class="flex flex-col justify-center">
-
-
-      <ul>
-        <% @product.media.each do |medium| %>
-          <li class="flex mb-2">
-            <span class="mr-1">
-              <i class="fas fa-external-link-alt"></i>
-            </span>
-            <%= link_to_blank medium.title, medium.url %>
-          </li>
-        <% end %>
-      </ul>
-    </div>
+  <div class="flex flex-col justify-center">
+    <ul>
+      <% @product.media.each do |medium| %>
+        <li class="flex mb-2">
+          <span class="mr-1">
+            <i class="fas fa-external-link-alt"></i>
+          </span>
+          <%= link_to_blank medium.title, medium.url %>
+        </li>
+      <% end %>
+    </ul>
   </div>
-</div>
 
-<br>
-<br>
-<br>
-以下はデータ表示用
-<br>
-<br>
-<br>
-
-<div class="wrap">
-  <% @images.each do |image| %>
-    <div class="item">
-      <%= image_tag image.product_image, alt: @product.title %>
-    </div>
-  <% end %>
+  <div class="wrap whitespace-nowrap overflow-x-auto w-full" style="scroll-snap-type: x mandatory;">
+    <% @images.each do |image| %>
+      <div class="item inline-block px-2 whitespace-normal overflow-hidden w-full md:w-1/2" style="scroll-snap-align: center;">
+        <%= image_tag image.product_image, alt: @product.title, class: 'rounded' %>
+      </div>
+    <% end %>
+  </div>
 </div>
 
 <% if @product.permitted_edit?(current_user) %>

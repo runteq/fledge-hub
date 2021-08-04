@@ -72,33 +72,3 @@
     @apply bg-gray-400 text-white;
   }
 }
-
-// カルーセル
-.wrap {
-  scroll-snap-type: x mandatory;
-  white-space: nowrap;
-  overflow-x: auto;
-  margin: 0 auto;
-}
-
-.item {
-  scroll-snap-align: center;
-  display: inline-block;
-  margin: 0 10px;
-  width: 300px;
-  white-space: normal;
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-@media not all and (min-width: 568px) {
-  .item {
-    width: 100%;
-  }
-}
-
-img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
