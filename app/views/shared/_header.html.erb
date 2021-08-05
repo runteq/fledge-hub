@@ -1,4 +1,4 @@
-<nav class="flex items-center justify-between flex-wrap bg-indigo-100 px-4 md:h-16">
+<header class="flex items-center justify-between flex-wrap bg-indigo-100 px-4 md:h-16">
   <div class="flex items-center flex-no-shrink text-indigo-800 mr-6">
     <span class="flex items-center font-semibold text-xl tracking-tight">
       <%= link_to 'Fledge Hub', root_path, class: 'no-underline' %>
@@ -7,7 +7,6 @@
   <div class='ml-auto'>
     <div class="pr-0">
       <div class="flex relative inline-block float-right items-center">
-        <%= link_to 'About', new_inquiry_path, class: 'btn text-indigo-800 hover:bg-indigo-200' %>
         <%= link_to 'Products', root_path, class: 'btn text-indigo-800 hover:bg-indigo-200' %>
         <%= link_to 'Users', users_path, class: 'btn text-indigo-800 hover:bg-indigo-200' %>
         <% if logged_in? %>
@@ -17,21 +16,21 @@
             </div>
             <div id="userMenu" data-dropdown-target="menu" class="absolute right-0 hidden">
               <div class="bg-white shadow rounded border overflow-hidden">
-                <ul class="list-reset">
-                  <li><%= link_to 'Mypage', mypage_path, class: 'px-4 py-2 block text-gray-900 hover:bg-indigo-200 no-underline hover:no-underline' %></li>
-                  <li><%= link_to 'Setting', settings_profile_path, class: 'px-4 py-2 block text-gray-900 hover:bg-indigo-200 no-underline hover:no-underline' %></li>
+                <ul class="list-reset text-gray-900">
+                  <li><%= link_to 'Mypage', mypage_path, class: 'px-4 py-2 block hover:bg-indigo-100 no-underline hover:no-underline' %></li>
+                  <li><%= link_to 'Setting', settings_profile_path, class: 'px-4 py-2 block hover:bg-indigo-100 no-underline hover:no-underline' %></li>
                   <li>
                     <hr class="border-t mx-2 border-gray-400">
                   </li>
-                  <li><%= link_to 'Logout', logout_path, method: :delete, class: 'px-4 py-2 block text-gray-900 hover:bg-indigo-200 no-underline hover:no-underline' %></li>
+                  <li><%= link_to 'Logout', logout_path, method: :delete, class: 'px-4 py-2 block hover:bg-indigo-100 no-underline hover:no-underline' %></li>
                 </ul>
               </div>
             </div>
           </div>
-        </div>
-      <% else %>
-        <%= link_to 'Login with GitHub', auth_at_provider_path(provider: :github), class: 'btn bg-black text-white' %>
-      <% end %>
+        <% else %>
+          <%= link_to 'Login with GitHub', auth_at_provider_path(provider: :github), class: 'btn bg-black text-white' %>
+        <% end %>
+      </div>
     </div>
   </div>
-</nav>
+</header>
