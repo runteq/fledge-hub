@@ -65,11 +65,10 @@
 .pagy-nav .page.prev.disabled,
 .pagy-nav .page.next.disabled {
   @apply block rounded-lg px-3 py-1 text-sm text-gray-500 font-semibold bg-gray-200 shadow-md;
-  &:hover{
+  &:hover {
     @apply bg-gray-300;
   }
-  &:active{
+  &:active {
     @apply bg-gray-400 text-white;
   }
 }
-

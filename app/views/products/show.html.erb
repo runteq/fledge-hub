@@ -41,7 +41,7 @@
   </p>
 
 
-  <%= image_tag @product.top_image.product_image, alt: @product.title, class: 'w-full rounded shadow-lg' %>
+  <%# <%= image_tag @product.top_image.product_image, alt: @product.title, class: 'w-full rounded shadow-lg' %>
 
 
   <div class="max-w-xl mb-2 -px-1">
@@ -63,42 +63,28 @@
     </div>
   </div>
 
-    <div class="flex flex-col justify-center">
+  <div class="flex flex-col justify-center">
+    <ul>
+      <% @product.media.each do |medium| %>
+        <li class="flex mb-2">
+          <span class="mr-1">
+            <i class="fas fa-external-link-alt"></i>
+          </span>
+          <%= link_to_blank medium.title, medium.url %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
 
-
-      <ul>
-        <% @product.media.each do |medium| %>
-          <li class="flex mb-2">
-            <span class="mr-1">
-              <i class="fas fa-external-link-alt"></i>
-            </span>
-            <%= link_to_blank medium.title, medium.url %>
-          </li>
-        <% end %>
-      </ul>
-    </div>
+  <div class="wrap whitespace-nowrap overflow-x-auto w-full" style="scroll-snap-type: x mandatory;">
+    <% @images.each do |image| %>
+      <div class="item inline-block px-2 whitespace-normal overflow-hidden w-full md:w-1/2" style="scroll-snap-align: center;">
+        <%= image_tag image.product_image, alt: @product.title, class: 'rounded' %>
+      </div>
+    <% end %>
   </div>
 </div>
 
-<br>
-<br>
-<br>
-以下はデータ表示用
-<br>
-<br>
-<br>
-
-<% @product.images.with_attached_product_image.each do |image| %>
-  <div>
-    <%= image_tag image.product_image, alt: @product.title, width: '600px' %>
-    <% if @product.permitted_edit?(current_user) %>
-      <%= link_to '編集', edit_product_product_image_path(@product, image) %>
-      <%= link_to '削除', product_product_image_path(@product, image), method: :delete %>
-    <% end %>
-  </div>
-<% end %>
-
-<br>
 <% if @product.permitted_edit?(current_user) %>
   <%= link_to 'Edit', edit_product_path(@product) %>
   <br>

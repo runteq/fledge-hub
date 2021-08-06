@@ -12,6 +12,7 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find(params[:id])
+    @images = @product.images.with_attached_product_image
   end
 
   def new
