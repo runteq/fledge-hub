@@ -17,7 +17,7 @@
         span.inline-flex.ml-2.px-2.text-xs.leading-5.font-semibold.bg-red-100.text-red-900.mb-2
           = product.product_category.name
       h2.title-font.text-lg.font-bold.text-gray-900
-        = product.title
+        = link_to product.title, product_path(product), class: 'no-underline'
       .leading-relaxed.mb-1
         = simple_format(truncate(h(product.summary), length: 100, separator: /[\s、。　]/))
       .mb-3.-mx-1
