@@ -1,26 +1,6 @@
 require 'webmock/rspec'
 
-WebMock.allow_net_connect! # inquiry以外ではwebmockは使わない
-
-MATTERMOST_WEBHOOK_URL = Rails.application.credentials.mattermost[:webhook_url]
-
 RSpec.describe InquiryForm do
-  before do
-    WebMock.disable!(except: [:net_http])
-    WebMock.stub_request(:post, MATTERMOST_WEBHOOK_URL).to_return(
-      body: { text: 'test_inquiry_form' }.to_json,
-      status: 200,
-      headers: { 'Content-Type' => 'application/json' },
-    )
-  end
-  describe '#post_to_mattermost' do
-    subject { InquiryForm.new }
-    it 'will_be_successful' do
-      response = subject.send(:post_to_mattermost)
-      expect(response.body).to eq({ text: 'test_inquiry_form' }.to_json)
-    end
-  end
-
   describe '#save' do
     subject { form.save }
     let!(:form) { InquiryForm.new(**attributes) }
@@ -58,6 +38,13 @@ RSpec.describe InquiryForm do
       end
 
       it { expect(subject).to be true }
+      specify do
+        expect(MattermostNotifier).to receive(:message).with(
+          channel_url: InquiryForm::CHANNEL_URL,
+          text: "| name | name_test |\n | -- | -- |\n | email | test@example.com |\n | about | about_test|\n | description | description_test|\n | user_agent | user_agent_test|"
+        )
+        subject
+      end
       it 'レコードを作成する' do
         expect { subject }.to change(Inquiry, :count).by(1)
       end
