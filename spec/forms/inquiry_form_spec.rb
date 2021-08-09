@@ -38,7 +38,6 @@ RSpec.describe InquiryForm do
       it { expect(subject).to be true }
       specify do
         expect(MattermostNotifier).to receive(:call).with(
-          channel_url: MattermostNotifier::WEBHOOK_URL,
           text: "| name | name_test |\n | -- | -- |\n | email | test@example.com |\n | about | about_test|\n | description | description_test|\n | user_agent | user_agent_test|",
         )
         subject
