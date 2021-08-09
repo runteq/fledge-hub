@@ -47,4 +47,8 @@ class Product < ApplicationRecord
   def user
     @user ||= users.take
   end
+
+  def release_day_message
+    Time.zone.today < released_on ? "#{released_on} will be released" : "#{released_on} released"
+  end
 end
