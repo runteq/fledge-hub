@@ -3,25 +3,14 @@ class SocialAccountForm
 
   attr_accessor :social_accounts_attributes, :user
 
-  # ここから下は、参考にしたふぉーむおぶじぇくとのままなので、
-
-  # validates :name, :about, :description, :user_agent, presence: true
-
-  # VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  # validates :email, format: { with: VALID_EMAIL_REGEX }, allow_blank: true
-
-  def save
-    return false if invalid?
-
-    post_to_mattermost
-    save_inquiry!
+  def save 
+    social_accounts_attributes.each do |social_account|
+      SocialAccount.create_or_update_or_destroy(
+        user_id: user.id,
+        social_service_id: social_account[:social_service_id],
+        identifier: social_account[:identifier],
+      )
+    end
     true
-  end
-
-  private
-
-  def save_inquiry!
-    Inquiry.new(name: name, email: email, about: about, description: description,
-                user_agent: user_agent).save!
   end
 end

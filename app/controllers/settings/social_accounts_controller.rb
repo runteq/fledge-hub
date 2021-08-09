@@ -7,20 +7,10 @@ module Settings
 
     def upsert_all
       social_account_form = SocialAccountForm.new(social_accounts_params)
+      social_account_form.save
 
-      # if social_account_form.save
-      #   redirect_to 
-
-      # social_accounts_params[:social_accounts_attributes].each do |attribute|
-      #   SocialAccount.create_or_update_or_destroy(
-      #     user_id: current_user.id,
-      #     social_service_id: attribute[:social_service_id],
-      #     identifier: attribute[:identifier],
-      #   )
-      # end
-      # redirect_to settings_social_accounts_path, notice: '外部アカウントの情報を更新しました！'
-    # end
-   end
+      redirect_to settings_social_accounts_path, notice: '外部アカウントの情報を更新しました！'
+    end
 
     private
 
