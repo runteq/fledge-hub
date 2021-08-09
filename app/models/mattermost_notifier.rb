@@ -1,5 +1,5 @@
 class MattermostNotifier
-  SERVER_URL = 'https://chat.runteq.jp'
+  SERVER_URL = 'https://chat.runteq.jp'.freeze
 
   class << self
     def call(channel_url:, text:)

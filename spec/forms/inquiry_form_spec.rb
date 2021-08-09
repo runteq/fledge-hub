@@ -39,7 +39,7 @@ RSpec.describe InquiryForm do
       specify do
         expect(MattermostNotifier).to receive(:call).with(
           channel_url: InquiryForm::CHANNEL_URL,
-          text: "| name | name_test |\n | -- | -- |\n | email | test@example.com |\n | about | about_test|\n | description | description_test|\n | user_agent | user_agent_test|"
+          text: "| name | name_test |\n | -- | -- |\n | email | test@example.com |\n | about | about_test|\n | description | description_test|\n | user_agent | user_agent_test|",
         )
         subject
       end

@@ -1,5 +1,5 @@
 require 'rails_helper'
-require 'webmock/rspec'å
+require 'webmock/rspec'
 WebMock.allow_net_connect!
 
 RSpec.describe MattermostNotifier do

@@ -15,7 +15,7 @@ class InquiryForm
 
     MattermostNotifier.call(
       channel_url: CHANNEL_URL,
-      text: text
+      text: text,
     )
     save_inquiry!
     true
