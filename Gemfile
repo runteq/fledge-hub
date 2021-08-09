@@ -27,6 +27,7 @@ gem 'faraday'
 gem 'pagy', '~> 3.5'
 
 group :development, :test do
+  gem 'active_decorator'
   gem 'bullet'
   gem 'factory_bot_rails'
   gem 'faker'
@@ -35,7 +36,6 @@ group :development, :test do
 end
 
 group :development do
-  gem 'active_decorator'
   gem 'annotate'
   gem 'better_errors'
   gem 'binding_of_caller'
