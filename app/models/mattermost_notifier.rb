@@ -2,7 +2,7 @@ class MattermostNotifier
   SERVER_URL = 'https://chat.runteq.jp'
 
   class << self
-    def message(channel_url:, text:)
+    def call(channel_url:, text:)
       if Rails.env.production?
         post_to_mattermost(channel_url, text)
       else

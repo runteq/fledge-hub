@@ -13,7 +13,7 @@ class InquiryForm
   def save
     return false if invalid?
 
-    MattermostNotifier.message(
+    MattermostNotifier.call(
       channel_url: CHANNEL_URL,
       text: text
     )
