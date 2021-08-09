@@ -6,11 +6,12 @@ module Settings
     end
 
     def upsert_all
-      social_account_form = SocialAccountForm.new(social_accounts_params)
+      social_account_form = SocialAccountsForm.new(social_accounts_params)
       if social_account_form.save
         redirect_to settings_social_accounts_path, notice: '外部アカウントの情報を更新しました！'
       else
-        redirect_to settings_social_accounts_path, alert: social_account_form.errors.full_messages.join(',')
+        redirect_to settings_social_accounts_path,
+                    alert: social_account_form.errors.full_messages.join(',')
       end
     end
 

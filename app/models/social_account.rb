@@ -24,17 +24,14 @@ class SocialAccount < ApplicationRecord
   belongs_to_active_hash :social_service
 
   validates :identifier, presence: true
-  validates :identifier, url: true
+  validates :identifier,
+            url: true,
+            if: [proc { |a| a.social_service.base_url.blank? }]
 
   delegate :service_name, :icon, to: :social_service
 
   def self.sorted(social_accounts)
     social_accounts.sort_by { |social_account| social_account.social_service.position }
-  end
-
-  def create_or_update_or_destroy(user_id:, social_service_id:, identifier:)
-    # fix me
-    update(identifier: identifier) || destroy!
   end
 
   def url
