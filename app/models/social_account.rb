@@ -24,6 +24,7 @@ class SocialAccount < ApplicationRecord
   belongs_to_active_hash :social_service
 
   validates :identifier, presence: true
+  validates :identifier, url: true
 
   delegate :service_name, :icon, to: :social_service
 
@@ -31,13 +32,9 @@ class SocialAccount < ApplicationRecord
     social_accounts.sort_by { |social_account| social_account.social_service.position }
   end
 
-  def self.create_or_update_or_destroy(user_id:, social_service_id:, identifier:)
-    social_account = find_or_initialize_by(
-      user_id: user_id,
-      social_service_id: social_service_id,
-    )
-    # 更新に失敗 = identifierが空なので、レコードを削除する
-    social_account.update(identifier: identifier) || social_account.destroy!
+  def create_or_update_or_destroy(user_id:, social_service_id:, identifier:)
+    # fix me
+    update(identifier: identifier) || destroy!
   end
 
   def url
