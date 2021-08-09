@@ -6,7 +6,7 @@
   <div class="flex flex-col space-y-4 lg:space-y-0 lg:flex-row lg:items-center lg:justify-between">
     <div>
       <span class="text-gray-400">
-        <%= "#{@product.released_on} Released" %>
+        <%= @product.release_day_message %>
       </span>
       <div class="flex flex-col mt-2 space-y-1 sm:flex-row sm:space-y-0 sm:items-center sm:space-x-4">
         <h3 class="text-2xl font-semibold text-gray-800 dark:text-gray-200">

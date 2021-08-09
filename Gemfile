@@ -28,6 +28,7 @@ gem 'pagy', '~> 3.5'
 gem 'config'
 
 group :development, :test do
+  gem 'active_decorator'
   gem 'bullet'
   gem 'factory_bot_rails'
   gem 'faker'
@@ -62,6 +63,7 @@ group :development do
 end
 
 group :test do
+  gem 'active_decorator-rspec'
   gem 'capybara'
   gem 'rspec_junit_formatter'
   gem 'selenium-webdriver'
