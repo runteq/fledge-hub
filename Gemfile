@@ -25,6 +25,7 @@ gem 'validate_url'
 gem 'hotwire-rails'
 gem 'faraday'
 gem 'pagy', '~> 3.5'
+gem 'config'
 
 group :development, :test do
   gem 'bullet'
