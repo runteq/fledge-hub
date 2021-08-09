@@ -22,5 +22,17 @@ FactoryBot.define do
     released_on { Time.zone.today }
     product_type_id { ProductType.pluck(:id).sample }
     product_category_id { ProductCategory.pluck(:id).sample }
+
+    trait :yesterday do
+      released_on { Time.zone.yesterday }
+    end
+
+    trait :today do
+      released_on { Time.zone.today }
+    end
+
+    trait :tomorrow do
+      released_on { Time.zone.tomorrow }
+    end
   end
 end
