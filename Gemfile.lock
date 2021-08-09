@@ -41,6 +41,11 @@ GEM
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
     active_decorator (1.4.0)
       activesupport
+    active_decorator-rspec (0.0.9)
+      actionpack
+      active_decorator
+      activesupport
+      rspec (>= 3.0)
     active_hash (3.1.0)
       activesupport (>= 5.0.0)
     active_storage_validations (0.9.5)
@@ -274,6 +279,10 @@ GEM
     regexp_parser (2.1.1)
     require_all (3.0.0)
     rexml (3.2.5)
+    rspec (3.10.0)
+      rspec-core (~> 3.10.0)
+      rspec-expectations (~> 3.10.0)
+      rspec-mocks (~> 3.10.0)
     rspec-core (3.10.1)
       rspec-support (~> 3.10.0)
     rspec-expectations (3.10.1)
@@ -409,6 +418,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_decorator
+  active_decorator-rspec
   active_hash
   active_storage_validations
   annotate

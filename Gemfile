@@ -62,6 +62,7 @@ group :development do
 end
 
 group :test do
+  gem 'active_decorator-rspec'
   gem 'capybara'
   gem 'rspec_junit_formatter'
   gem 'selenium-webdriver'
