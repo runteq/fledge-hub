@@ -1,6 +1,4 @@
 class InquiryForm
-  CHANNEL_URL = Rails.application.credentials.mattermost[:webhook_url]
-
   include ActiveModel::Model
 
   attr_accessor :name, :email, :about, :description, :user_agent
@@ -14,7 +12,8 @@ class InquiryForm
     return false if invalid?
 
     MattermostNotifier.call(
-      channel_url: CHANNEL_URL,
+      channel: 'fledge-hub',
+      username: 'お問い合わせ',
       text: text,
     )
     save_inquiry!

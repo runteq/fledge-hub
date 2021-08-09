@@ -4,7 +4,7 @@ WebMock.allow_net_connect!
 
 RSpec.describe MattermostNotifier do
   describe '.call' do
-    it 'channel_urlにテキストのリクエストを送れること' do
+    it '処理が実行できること' do
       WebMock.disable!(except: [:net_http])
       WebMock.stub_request(:post, 'https://channel.example.com').to_return(
         body: { text: 'テキスト' }.to_json,
@@ -12,7 +12,8 @@ RSpec.describe MattermostNotifier do
         headers: { 'Content-Type' => 'application/json' },
       )
 
-      MattermostNotifier.call(channel_url: 'https://channel.example.com', text: 'テキスト')
+      # expectしていない
+      MattermostNotifier.call(text: 'テキスト')
     end
   end
 end

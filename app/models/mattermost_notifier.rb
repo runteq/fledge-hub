@@ -1,10 +1,11 @@
 class MattermostNotifier
   SERVER_URL = 'https://chat.runteq.jp'.freeze
+  WEBHOOK_URL = Rails.application.credentials.mattermost[:webhook_url]
 
   class << self
-    def call(channel_url:, text:)
+    def call(username: 'FledgeHub通知', channel: 'fledge-hub', text:)
       if Rails.env.production?
-        post_to_mattermost(channel_url, text)
+        post_to_mattermost(channel, username, text)
       else
         Rails.logger.info 'Message to Mattermost.'
       end
@@ -12,13 +13,13 @@ class MattermostNotifier
 
     private
 
-    def post_to_mattermost(channel_url, text)
-      post_payload = { text: text }
+    def post_to_mattermost(channel, username, text)
+      post_payload = { username: username, channel: channel, text: text }
 
-      post_by_faraday(SERVER_URL, channel_url, post_payload)
+      post_by_faraday(SERVER_URL, post_payload)
     end
 
-    def post_by_faraday(post_url, channel_url, payload)
+    def post_by_faraday(post_url, payload)
       conn = Faraday::Connection.new(url: post_url) do |faraday|
         faraday.request :url_encoded
         faraday.response :raise_error
@@ -27,7 +28,7 @@ class MattermostNotifier
       end
 
       conn.post do |req|
-        req.url channel_url
+        req.url WEBHOOK_URL
         req.headers['Content-Type'] = 'application/json'
         req.body = payload.to_json
       end
