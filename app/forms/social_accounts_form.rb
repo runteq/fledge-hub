@@ -19,9 +19,8 @@ class SocialAccountsForm
   def social_accounts_validity
     error_messages =
       validate_target_accounts.select(&:invalid?).flat_map(&:errors).flat_map(&:full_messages)
-
     error_messages.each do |error_message|
-      errors.add(:social_accounts_attributes, "の#{error_message}")
+      errors.add(:base, error_message) unless errors.full_messages.include?(error_message)
     end
   end
 

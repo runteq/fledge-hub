@@ -30,7 +30,7 @@ ja:
         icon: アイコンフォント用テキスト
         base_url: URL
       social_account:
-        identifer: アカウント名/URL
+        identifier: アカウント名/URL
       user:
         display_name: 表示名
         screen_name: ID
@@ -38,6 +38,8 @@ ja:
 
   activemodel:
     attributes:
+      social_account:
+        identifer: アカウント名/URL
       product_form:
         title: サービス名
         summary: 概要
