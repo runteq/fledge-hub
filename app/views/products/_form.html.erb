@@ -11,10 +11,12 @@
 
   <div class='form-group'>
     <%= f.label :title, class: 'form-label' %>
+    <span class='bg-red-400 text-xs text-white py-1 px-2 rounded ml-1 mb-1'>必須</span>
     <%= f.text_field :title, required: true, class: 'text-field' %>
   </div>
   <div class='form-group'>
     <%= f.label :released_on, class: 'form-label' %>
+    <span class='bg-red-400 text-xs text-white py-1 px-2 rounded ml-1 mb-1'>必須</span>
     <%= f.date_field :released_on, required: true, class: 'text-field' %>
   </div>
   <div class='form-group'>
@@ -33,10 +35,12 @@
   <div class='form-group'>
     <div class='form-group inline-flex w-1/2 px-1'>
       <%= f.label :product_category_id, class: 'form-label' %>
+      <span class='bg-red-400 text-xs text-white py-1 px-2 rounded ml-1 mb-1'>必須</span>
       <%= f.select :product_category_id, ProductCategory.asc.pluck(:name, :id), { required: true, prompt: '選択してください' }, class: 'select-box' %>
     </div>
     <div class='form-group inline-flex w-1/2 px-1'>
       <%= f.label :product_type_id, class: 'form-label' %>
+      <span class='bg-red-400 text-xs text-white py-1 px-2 rounded ml-1 mb-1'>必須</span>
       <%= f.select :product_type_id, ProductType.asc.pluck(:name, :id), { required: true, prompt: '選択してください' }, class: 'select-box' %>
     </div>
   </div>
