@@ -33,7 +33,7 @@ RSpec.describe ApplicationHelper, type: :helper do
 
     context '引数がないとき' do
       subject { helper.meta_image_url }
-      it { is_expected.to eq 'デフォルトのOGP用URL' }
+      it { is_expected.to eq 'https://i.gzn.jp/img/2018/01/15/google-gorilla-ban/00.jpg' }
     end
   end
 end
