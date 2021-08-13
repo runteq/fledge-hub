@@ -11,9 +11,9 @@ amazon:
   service: S3
   access_key_id: <%= Rails.application.credentials.dig(:aws, :access_key_id) %>
   secret_access_key: <%= Rails.application.credentials.dig(:aws, :secret_access_key) %>
-  region: us-east-1
-  bucket: your_own_bucket
-  # public: true # リリースしたらコメントアウトを外す（PublicAccessをtrue）
+  region: ap-northeast-1
+  bucket: <%= Rails.application.credentials.dig(:storage_bucket) %>
+  public: true
 
 # Remember not to checkin your GCS keyfile to a repository
 # google:
