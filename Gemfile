@@ -27,6 +27,9 @@ gem 'faraday'
 gem 'pagy', '~> 3.5'
 gem 'config'
 
+# AWS
+gem 'aws-sdk-s3', require: false
+
 group :development, :test do
   gem 'active_decorator'
   gem 'bullet'
