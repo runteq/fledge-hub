@@ -31,7 +31,10 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :authentications
 
   validates :display_name, presence: true, length: { maximum: 100 }
-  validates :screen_name, presence: true, uniqueness: true, length: { maximum: 100 }
+  validates :screen_name, presence: true,
+                          uniqueness: true,
+                          length: { maximum: 100 },
+                          format: { with: /\A[\w-]+\z/, message: 'には半角英数字と_-のみ使えます。' }
   validates :email, presence: true, uniqueness: true, length: { maximum: 100 }
 
   enum status: { general: 0, deactivated: 10 }
