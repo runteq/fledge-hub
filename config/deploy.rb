@@ -6,7 +6,7 @@ set :repo_url, 'git@github.com:runteq/fledge-hub.git'
 set :user, 'runteq'
 set :deploy_to, '/var/www/fledge-hub'
 set :linked_files, %w[config/master.key config/database.yml config/credentials/production.key]
-set :linked_dirs, %w[log tmp/pids tmp/cache tmp/sockets public/system vendor/bundle]
+set :linked_dirs, %w[log tmp/pids tmp/cache tmp/sockets public/system vendor/bundle public/packs node_modules]
 set :rbenv_ruby, File.read('.ruby-version').strip
 set :puma_threds, [4, 16]
 set :puma_workers, 0
