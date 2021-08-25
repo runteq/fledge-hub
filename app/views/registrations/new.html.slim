@@ -1,6 +1,6 @@
 - content_for(:title, 'ユーザー登録')
 
-= form_with model: @user, url: registration_path, class: 'form' do |f|
+= form_with model: @user, url: registration_path, class: 'form', data: { turbo: false } do |f|
   - if @user.errors.any?
     #error_explanation
       h2 = "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved:"
