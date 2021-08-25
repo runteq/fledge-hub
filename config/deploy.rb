@@ -33,18 +33,13 @@ namespace :puma do
 end
 
 namespace :deploy do
-  desc 'upload important files'
+  desc '初期デプロイ時のファイルをローカルからアップロードする'
   task :upload do
     on roles(:app) do
       sudo :mkdir, '-p', '/var/www/fledge-hub/shared/config/credentials'
       sudo %(chown -R #{fetch(:user)}.#{fetch(:user)} /var/www/#{fetch(:application)})
       sudo :mkdir, '-p', '/etc/nginx/sites-enabled'
       sudo :mkdir, '-p', '/etc/nginx/sites-available'
-
-      upload!('config/database.yml', '/var/www/fledge-hub/shared/config/database.yml')
-      upload!('config/master.key', '/var/www/fledge-hub/shared/config/master.key')
-      upload!('config/credentials/production.key',
-              '/var/www/fledge-hub/shared/config/credentials/production.key')
     end
   end
 
@@ -59,7 +54,6 @@ namespace :deploy do
     end
   end
 
-  before :starting, :upload
   before 'check:linked_files', 'puma:nginx_config'
 end
 
