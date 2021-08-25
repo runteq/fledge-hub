@@ -11,7 +11,6 @@ gem 'puma'
 gem 'sass-rails'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'webpacker'
-gem 'rails-ujs'
 
 gem 'active_storage_validations'
 gem 'mini_magick', '>= 4.9.5'
