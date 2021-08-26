@@ -41,7 +41,7 @@ class Product < ApplicationRecord
   end
 
   def top_image
-    @top_image ||= images.first || DummyImage.new
+    @top_image ||= images.first
   end
 
   def user
