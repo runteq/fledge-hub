@@ -25,6 +25,8 @@ html
     = stylesheet_link_tag 'application', media: 'all', 'data-turbo-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbo-track': 'reload'
     = stylesheet_pack_tag 'application'
+    - if Rails.env.production?
+      = render 'shared/google_analytics'
   body
     .flex.flex-col.w-full.min-h-screen
       = render 'shared/header'
