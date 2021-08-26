@@ -9,18 +9,22 @@
     </ul>
   <% end %>
 
-  <div class='form-group' style='vertical-align: middle;'>
-    <div class='form-label' style='display: flex; align-items: center;'>
-      <%= f.label :title %>
-      <p class='required'>必須</p>
+  <div class='form-group'>
+    <div class='form-label'>
+      <div style='flex items-center'>
+        <%= f.label :title %>
+        <span class='required'>必須</span>
+      </div>
     </div>
     <%= f.text_field :title, required: true, class: 'text-field' %>
   </div>
 
   <div class='align-middle form-group'>
-    <div class='form-label items-center'>
-      <%= f.label :released_on %>
-      <p class='required'>必須</p>
+    <div class='form-label'>
+      <div style='flex items-center'>
+        <%= f.label :released_on %>
+        <span class='required'>必須</span>
+      </div>
     </div>
     <%= f.date_field :released_on, required: true, class: 'text-field' %>
   </div>

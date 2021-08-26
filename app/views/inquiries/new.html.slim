@@ -6,28 +6,32 @@
       - @inquiry_form.errors.full_messages.each do |message|
         li= message
   .form-group
-    .form-label.items-center
-      = f.label :name
-      p.required
-        | 必須
+    .form-label
+      .flex.items-center
+        = f.label :name
+        p.required
+          | 必須
     = f.text_field :name, required: true, class: 'text-field'
   .form-group
     .form-label.items-center
-      = f.label :email
-      p.required
-        | 必須
+      .flex.items-center
+        = f.label :email
+        p.required
+          | 必須
     = f.email_field :email, class: 'text-field'
   .form-group
     .form-label.items-center
-      = f.label :about
-      p.required
-        | 必須
+      .flex.items-center
+        = f.label :about
+        p.required
+          | 必須
     = f.select :about, ['Fledge Hubについて', '不具合について', 'その他' ], { required: true, prompt: '問い合わせ内容を選択してください' }, class: 'select-box'
   .form-group
     .form-label.items-center
-      = f.label :description
-      p.required
-        | 必須
+      .flex.items-center
+        = f.label :description
+        p.required
+          | 必須
     = f.text_area :description, class: 'text-field h-24'
   .form-group
     = f.submit '送信する', class: 'btn btn-indigo'
