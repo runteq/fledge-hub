@@ -26,18 +26,4 @@ RSpec.describe LinkHelper, type: :helper do
       specify { expect { subject }.to raise_error URI::InvalidURIError }
     end
   end
-
-  describe '#link_to_active' do
-    subject { helper.link_to_active(user) }
-
-    context 'ユーザーが退会していないとき' do
-      let!(:user) { create(:user, :active) }
-      it { is_expected.to eq "<a href=\"/users/#{user.screen_name}\">#{user.display_name}</a>" }
-    end
-
-    context 'ユーザーが退会しているとき' do
-      let!(:user) { create(:user, :deactivated) }
-      it { is_expected.to eq '退会済みユーザー' }
-    end
-  end
 end

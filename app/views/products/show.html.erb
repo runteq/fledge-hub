@@ -13,7 +13,7 @@
           <%= @product.title %>
         </h3>
         <div class="text-sm text-gray-400">
-          by <%= link_to @product.user.display_name, user_path(@product.user.screen_name) %>
+          by <%= link_to_if @product.user.active?, @product.user.display_name, user_path(@product.user.screen_name) %>
         </div>
       </div>
     </div>
