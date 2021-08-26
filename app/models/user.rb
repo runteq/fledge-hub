@@ -82,4 +82,8 @@ class User < ApplicationRecord
     avatar_url = url.open
     avatar.attach(io: avatar_url, filename: "user_avatar_#{id}.jpg")
   end
+
+  def active?
+    !deactivated?
+  end
 end
