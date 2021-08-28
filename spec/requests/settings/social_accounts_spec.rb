@@ -8,6 +8,9 @@ RSpec.describe Settings::SocialAccountsController, type: :request do
     subject { get '/settings/social_accounts' }
 
     it 'render a successful response' do
+      # テストが落ちるので、.allを呼んでデータの読み込みを行うようにする
+      SocialService.all
+
       create(:social_account, user: user)
       subject
       expect(response).to have_http_status(:success)
