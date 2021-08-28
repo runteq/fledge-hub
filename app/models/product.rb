@@ -41,7 +41,7 @@ class Product < ApplicationRecord
   end
 
   def top_image
-    @top_image ||= images.take || OpenStruct.new(product_image: 'https://dummyimage.com/720x400')
+    @top_image ||= images.first
   end
 
   def user

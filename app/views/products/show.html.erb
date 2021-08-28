@@ -1,6 +1,6 @@
 <% content_for(:title, @product.title) %>
 <% content_for(:description, @product.summary.presence || @product.title) %>
-<% content_for(:meta_image_url, url_for(@product.top_image.product_image)) %>
+<% content_for(:meta_image_url, url_for(@product.top_image&.product_image || "https://placehold.jp/70/d6d6d6/7d7d7d/800x450.png?text=No%20Image")) %>
 
 <div class="mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-lg lg:px-8 lg:py-1">
   <div class="flex flex-col space-y-4 lg:space-y-0 lg:flex-row lg:items-center lg:justify-between">
