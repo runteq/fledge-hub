@@ -6,8 +6,6 @@ class ActiveHashMaster < ActiveYaml::Base
     super
 
     klass.set_filename klass.to_s.underscore.singularize
-    # このときにデータを読み込む
-    klass.all
   end
 
   # TODO: いずれかの継承先で使えなくなったらモジュールにする
