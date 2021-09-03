@@ -9,7 +9,7 @@ RSpec.describe Settings::SocialAccountsController, type: :request do
 
     it 'render a successful response' do
       # テストが落ちるので、.allを呼んでデータの読み込みを行うようにする
-      SocialService.all
+      puts SocialService.all
 
       create(:social_account, user: user)
       subject
