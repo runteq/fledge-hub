@@ -1,5 +1,7 @@
 - content_for(:title, 'プロフィール設定')
 
+= render 'settings/tabs'
+
 = form_with model: @user, url: settings_profile_path, class: 'form' do |f|
   - if @user.errors.any?
     #error_explanation

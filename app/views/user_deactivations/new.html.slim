@@ -1,5 +1,7 @@
 - content_for(:title, '退会')
 
+= render 'settings/tabs'
+
 .mb-4
   h2.text-lg.font-semibold
     | 退会時に削除されるデータ
@@ -25,7 +27,5 @@
         - current_user.products.each do |product|
           li= product.title
       p 退会後に投稿データの編集・削除はできません。
-    .-m-4
-      = render(ProductComponent.new(product: @deactivated_product_sample))
 
 = link_to '同意して退会する', user_deactivation_path, method: :delete
