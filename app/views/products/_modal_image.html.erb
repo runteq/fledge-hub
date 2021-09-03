@@ -1,14 +1,5 @@
-<button class="bg-pink-500 text-white active:bg-pink-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="toggleModal('modal-id')">
-  Open regular modal
-</button>
-<div class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none bg-black bg-opacity-30" id="modal-id" onclick="toggleModal('modal-id')">
-  <div class="relative w-auto mx-auto max-w-3xl">
-    <!--content-->
-    <div class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-      <!--body-->
-      <div class="relative p-6 flex-auto">
-        <%= image_tag image.product_image, alt: @product.title, class: 'rounded' %>
-      </div>
-    </div>
+<div class="hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none bg-black bg-opacity-30" id="<%= image.id %>" onclick="toggleModal('<%= image.id %>')">
+  <div class="relative">
+    <%= image_tag image.product_image, alt: image.product.title, class: 'object-contain w-screen h-screen' %>
   </div>
 </div>

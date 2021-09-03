@@ -79,7 +79,7 @@
   <div class="wrap whitespace-nowrap overflow-x-auto w-full" style="scroll-snap-type: x mandatory;">
     <% @images.each do |image| %>
       <div class="item inline-block px-2 whitespace-normal overflow-hidden w-full md:w-2/3" style="scroll-snap-align: center;">
-        <%= image_tag image.product_image, alt: @product.title, class: 'rounded' %>
+        <%= image_tag image.product_image, alt: @product.title, class: 'rounded', onclick: "toggleModal('#{image.id}')" %>
       </div>
       <%= render 'modal_image', image: image %>
     <% end %>
@@ -96,8 +96,6 @@
 <script type="text/javascript">
   function toggleModal(modalID){
     document.getElementById(modalID).classList.toggle("hidden");
-    document.getElementById(modalID + "-backdrop").classList.toggle("hidden");
     document.getElementById(modalID).classList.toggle("flex");
-    document.getElementById(modalID + "-backdrop").classList.toggle("flex");
   }
 </script>
