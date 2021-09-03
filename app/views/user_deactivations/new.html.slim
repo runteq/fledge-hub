@@ -28,4 +28,4 @@
           li= product.title
       p 退会後に投稿データの編集・削除はできません。
 
-= link_to '同意して退会する', user_deactivation_path, method: :delete
+= link_to '同意して退会する', user_deactivation_path, method: :delete, data: { confirm: '本当に退会しますか？' }
