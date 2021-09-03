@@ -1,0 +1,8 @@
+<div class="item inline-block px-2 whitespace-normal overflow-hidden w-full md:w-2/3" style="scroll-snap-align: center;">
+  <%= image_tag product_image.product_image, alt: product_image.product.title, class: 'rounded', onclick: "toggleModal('#{product_image.id}')" %>
+</div>
+<div class="hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none bg-black bg-opacity-30" id="<%= product_image.id %>" onclick="toggleModal('<%= product_image.id %>')">
+  <div class="relative">
+    <%= image_tag product_image.product_image, alt: product_image.product.title, class: 'object-contain w-screen h-screen' %>
+  </div>
+</div>
