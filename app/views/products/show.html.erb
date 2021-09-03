@@ -77,11 +77,7 @@
   </div>
 
   <div class="wrap whitespace-nowrap overflow-x-auto w-full" style="scroll-snap-type: x mandatory;">
-    <% @images.each do |image| %>
-      <div class="item inline-block px-2 whitespace-normal overflow-hidden w-full md:w-1/2" style="scroll-snap-align: center;">
-        <%= image_tag image.product_image, alt: @product.title, class: 'rounded' %>
-      </div>
-    <% end %>
+    <%= render @images %>
   </div>
 </div>
 
@@ -92,3 +88,9 @@
   <br>
   <%= link_to '画像登録', new_product_product_image_path(@product) %>
 <% end %>
+<script type="text/javascript">
+  function toggleModal(modalID){
+    document.getElementById(modalID).classList.toggle("hidden");
+    document.getElementById(modalID).classList.toggle("flex");
+  }
+</script>
