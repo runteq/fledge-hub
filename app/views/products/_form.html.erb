@@ -10,13 +10,25 @@
   <% end %>
 
   <div class='form-group'>
-    <%= f.label :title, class: 'form-label' %>
+    <div class='form-label'>
+      <div style='flex items-center'>
+        <%= f.label :title %>
+        <span class='required'>必須</span>
+      </div>
+    </div>
     <%= f.text_field :title, required: true, class: 'text-field' %>
   </div>
-  <div class='form-group'>
-    <%= f.label :released_on, class: 'form-label' %>
+
+  <div class='align-middle form-group'>
+    <div class='form-label'>
+      <div style='flex items-center'>
+        <%= f.label :released_on %>
+        <span class='required'>必須</span>
+      </div>
+    </div>
     <%= f.date_field :released_on, required: true, class: 'text-field' %>
   </div>
+  
   <div class='form-group'>
     <%= f.label :url, class: 'form-label' %>
     <%= f.text_field :url, class: 'text-field' %>
@@ -32,11 +44,21 @@
   </div>
   <div class='form-group'>
     <div class='form-group inline-flex w-1/2 px-1'>
-      <%= f.label :product_category_id, class: 'form-label' %>
+      <div class='form-label'>
+        <div style='display: flex; align-items: center;'>
+          <%= f.label :product_category_id %>
+          <p class='required'>必須</p>
+        </div>
+      </div>
       <%= f.select :product_category_id, ProductCategory.asc.pluck(:name, :id), { required: true, prompt: '選択してください' }, class: 'select-box' %>
     </div>
     <div class='form-group inline-flex w-1/2 px-1'>
-      <%= f.label :product_type_id, class: 'form-label' %>
+      <div class='form-label'>
+        <div style='display: flex; align-items: center;'>
+          <%= f.label :product_type_id %>
+          <p class='required'>必須</p>
+        </div>
+      </div>
       <%= f.select :product_type_id, ProductType.asc.pluck(:name, :id), { required: true, prompt: '選択してください' }, class: 'select-box' %>
     </div>
   </div>
