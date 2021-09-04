@@ -97,4 +97,16 @@ RSpec.describe User, type: :model do
       expect { subject }.to change(SocialAccount, :count).by(-1)
     end
   end
+
+  describe '#active' do
+    it '通常ユーザーのときはtrue' do
+      user = create(:user, status: :general)
+      expect(user.active?).to eq true
+    end
+
+    it '退会済みユーザーのときはfalse' do
+      user = create(:user, :deactivated)
+      expect(user.active?).to eq false
+    end
+  end
 end

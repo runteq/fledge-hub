@@ -30,8 +30,14 @@ class User < ApplicationRecord
   has_one_attached :avatar, dependent: :destroy
   accepts_nested_attributes_for :authentications
 
-  validates :display_name, presence: true, length: { maximum: 100 }
-  validates :screen_name, presence: true, uniqueness: true, length: { maximum: 100 }
+  validates :display_name, presence: true, length: { maximum: 30 }
+  validates :avatar, attached: true,
+                     content_type: %r{\Aimage/.*\z},
+                     size: { less_than: 1.megabytes }
+  validates :screen_name, presence: true,
+                          uniqueness: true,
+                          length: { maximum: 30 },
+                          format: { with: /\A[\w-]+\z/, message: 'には半角英数字と_-のみ使えます。' }
   validates :email, presence: true, uniqueness: true, length: { maximum: 100 }
 
   enum status: { general: 0, deactivated: 10 }
@@ -40,8 +46,8 @@ class User < ApplicationRecord
 
   def registration(avatar_url, user_hash)
     transaction do
+      grab_avatar_image(avatar_url)
       if save
-        grab_avatar_image(avatar_url)
         authentications.find_or_create_by!(
           provider: 'github',
           uid: user_hash['id'],
@@ -78,5 +84,9 @@ class User < ApplicationRecord
   def grab_avatar_image(url)
     avatar_url = url.open
     avatar.attach(io: avatar_url, filename: "user_avatar_#{id}.jpg")
+  end
+
+  def active?
+    !deactivated?
   end
 end

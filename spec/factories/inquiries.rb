@@ -14,7 +14,7 @@
 FactoryBot.define do
   factory :inquiry do
     sequence(:name, '名前_1')
-    sequence(:email, 'email_1@example.com')
+    sequence(:email) { |n| "test_#{n}@example.com" }
     sequence(:about, '項目_1')
     sequence(:description, '内容_1')
     sequence(:user_agent, 'UserAgent_1')

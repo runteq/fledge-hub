@@ -12,7 +12,7 @@ module ApplicationHelper
   end
 
   def meta_image_url(image_url = '')
-    image_url.presence || 'デフォルトのOGP用URL'
+    image_url.presence || 'https://i.gzn.jp/img/2018/01/15/google-gorilla-ban/00.jpg'
   end
 
   def embedded_svg(filename, options = {})

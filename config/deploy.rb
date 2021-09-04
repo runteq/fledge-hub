@@ -6,7 +6,8 @@ set :repo_url, 'git@github.com:runteq/fledge-hub.git'
 set :user, 'runteq'
 set :deploy_to, '/var/www/fledge-hub'
 set :linked_files, %w[config/master.key config/database.yml config/credentials/production.key]
-set :linked_dirs, %w[log tmp/pids tmp/cache tmp/sockets public/system vendor/bundle]
+set :linked_dirs,
+    %w[log tmp/pids tmp/cache tmp/sockets public/system vendor/bundle public/packs node_modules]
 set :rbenv_ruby, File.read('.ruby-version').strip
 set :puma_threds, [4, 16]
 set :puma_workers, 0
@@ -33,18 +34,13 @@ namespace :puma do
 end
 
 namespace :deploy do
-  desc 'upload important files'
+  desc '初期デプロイ時のファイルをローカルからアップロードする'
   task :upload do
     on roles(:app) do
       sudo :mkdir, '-p', '/var/www/fledge-hub/shared/config/credentials'
       sudo %(chown -R #{fetch(:user)}.#{fetch(:user)} /var/www/#{fetch(:application)})
       sudo :mkdir, '-p', '/etc/nginx/sites-enabled'
       sudo :mkdir, '-p', '/etc/nginx/sites-available'
-
-      upload!('config/database.yml', '/var/www/fledge-hub/shared/config/database.yml')
-      upload!('config/master.key', '/var/www/fledge-hub/shared/config/master.key')
-      upload!('config/credentials/production.key',
-              '/var/www/fledge-hub/shared/config/credentials/production.key')
     end
   end
 
@@ -59,12 +55,12 @@ namespace :deploy do
     end
   end
 
-  before :starting, :upload
   before 'check:linked_files', 'puma:nginx_config'
 end
 
 after 'deploy:published', 'nginx:restart'
 before 'deploy:migrate', 'deploy:db_create'
+before 'deploy:publishing', 'db:seed_fu'
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp

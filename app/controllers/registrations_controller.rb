@@ -25,7 +25,7 @@ class RegistrationsController < ApplicationController
     if @user.registration(avatar_url, user_info)
       reset_session
       auto_login(@user)
-      redirect_back_or_to root_path, notice: 'ログインしました'
+      redirect_back_or_to root_path, notice: '登録しました'
     else
       render :new, status: :unprocessable_entity
     end

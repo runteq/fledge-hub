@@ -1,6 +1,4 @@
 class UserDeactivationsController < ApplicationController
-  layout 'settings'
-
   def new
     @deactivated_product_sample = current_user.products.first.clone
     return unless @deactivated_product_sample

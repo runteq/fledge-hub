@@ -15,7 +15,6 @@ Rails.application.routes.draw do
   resource :inquiry, only: %i[create]
   resources :products, only: %i[show new edit create update destroy] do
     resources :product_images, only: %i[new create edit update destroy]
-    resources :product_media, only: %i[new create edit update destroy]
   end
 
   get '/terms', to: 'static_pages#terms'

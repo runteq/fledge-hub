@@ -1,4 +1,4 @@
-- content_for(:title, 'お問い合わせフォーム')
+- content_for(:title, 'お問い合わせ')
 
 = form_with model: @inquiry_form, url: inquiry_path, class: 'form', data: { turbo: false } do |f|
   - if f.object.errors.any?
@@ -25,7 +25,7 @@
         = f.label :about
         p.required
           | 必須
-    = f.select :about, ['Fledge Hubについて', '不具合について', 'その他' ], { required: true, prompt: '問い合わせ内容を選択してください' }, class: 'select-box'
+    = f.select :about, ['ご意見・ご要望', '不具合・バグ', 'その他'], { required: true, prompt: 'お問い合わせ内容を選択してください' }, class: 'select-box'
   .form-group
     .form-label.items-center
       .flex.items-center

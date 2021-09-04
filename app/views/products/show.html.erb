@@ -1,19 +1,19 @@
 <% content_for(:title, @product.title) %>
 <% content_for(:description, @product.summary.presence || @product.title) %>
-<% content_for(:meta_image_url, url_for(@product.top_image.product_image)) %>
+<% content_for(:meta_image_url, url_for(@product.top_image&.product_image || "https://placehold.jp/70/d6d6d6/7d7d7d/800x450.png?text=No%20Image")) %>
 
 <div class="mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-lg lg:px-8 lg:py-1">
   <div class="flex flex-col space-y-4 lg:space-y-0 lg:flex-row lg:items-center lg:justify-between">
     <div>
       <span class="text-gray-400">
-        <%= "#{@product.released_on} Released" %>
+        <%= @product.release_day_message %>
       </span>
       <div class="flex flex-col mt-2 space-y-1 sm:flex-row sm:space-y-0 sm:items-center sm:space-x-4">
         <h3 class="text-2xl font-semibold text-gray-800 dark:text-gray-200">
           <%= @product.title %>
         </h3>
         <div class="text-sm text-gray-400">
-          by <%= link_to @product.user.display_name, user_path(@product.user.screen_name) %>
+          by <%= link_to_if @product.user.active?, @product.user.display_name, user_path(@product.user.screen_name) %>
         </div>
       </div>
     </div>
@@ -77,11 +77,7 @@
   </div>
 
   <div class="wrap whitespace-nowrap overflow-x-auto w-full" style="scroll-snap-type: x mandatory;">
-    <% @images.each do |image| %>
-      <div class="item inline-block px-2 whitespace-normal overflow-hidden w-full md:w-1/2" style="scroll-snap-align: center;">
-        <%= image_tag image.product_image, alt: @product.title, class: 'rounded' %>
-      </div>
-    <% end %>
+    <%= render @images %>
   </div>
 </div>
 
@@ -91,6 +87,10 @@
   <%= link_to 'Destroy', @product, data: { confirm: 'Are you sure?' }, method: :delete %>
   <br>
   <%= link_to '画像登録', new_product_product_image_path(@product) %>
-  <br>
-  <%= link_to 'メディア登録', new_product_product_medium_path(@product) %>
 <% end %>
+<script type="text/javascript">
+  function toggleModal(modalID){
+    document.getElementById(modalID).classList.toggle("hidden");
+    document.getElementById(modalID).classList.toggle("flex");
+  }
+</script>

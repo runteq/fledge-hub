@@ -14,18 +14,23 @@ gem 'webpacker'
 
 gem 'active_storage_validations'
 gem 'mini_magick', '>= 4.9.5'
+gem 'image_processing'
 gem 'active_hash'
 gem 'rails-i18n'
 gem 'seed-fu'
 gem 'tailwindcss-rails', '~> 0.3.3'
 gem 'slim-rails'
 gem 'view_component', require: 'view_component/engine'
+gem 'active_decorator'
 gem 'sorcery'
 gem 'validate_url'
 gem 'hotwire-rails'
 gem 'faraday'
 gem 'pagy', '~> 3.5'
 gem 'config'
+
+# AWS
+gem 'aws-sdk-s3', require: false
 
 group :development, :test do
   gem 'bullet'
@@ -62,6 +67,7 @@ group :development do
 end
 
 group :test do
+  gem 'active_decorator-rspec'
   gem 'capybara'
   gem 'rspec_junit_formatter'
   gem 'selenium-webdriver'

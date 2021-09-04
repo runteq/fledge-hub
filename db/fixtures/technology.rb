@@ -2,7 +2,7 @@
 # バックエンド 1〜50
 # フロント 51〜100
 # インフラ 101〜150
-# 外部APIなど 151〜
+# 外部APIなど 200〜
 # リリース後はidを変更しないでください
 
 Technology.seed(:id,
@@ -23,28 +23,33 @@ Technology.seed(:id,
   },
   {
     id: 52,
-    name: 'Vue.js',
-    slug: 'vue-js'
-  },
-  {
-    id: 53,
-    name: 'Nuxt.js',
-    slug: 'nuxt-js'
-  },
-  {
-    id: 54,
-    name: 'React',
-    slug: 'react'
-  },
-  {
-    id: 55,
-    name: 'Next.js',
-    slug: 'next-js'
+    name: 'TypeScript',
+    slug: 'typescript'
   },
   {
     id: 56,
     name: 'jQuery',
     slug: 'jquery'
+  },
+  {
+    id: 57,
+    name: 'Vue.js',
+    slug: 'vue-js'
+  },
+  {
+    id: 58,
+    name: 'Nuxt.js',
+    slug: 'nuxt'
+  },
+  {
+    id: 59,
+    name: 'React',
+    slug: 'react'
+  },
+  {
+    id: 60,
+    name: 'Next.js',
+    slug: 'next'
   },
   {
     id: 101,
@@ -62,7 +67,7 @@ Technology.seed(:id,
     slug: 'firebase'
   },
   {
-    id: 104,
+    id: 151,
     name: 'Docker',
     slug: 'docker'
   }

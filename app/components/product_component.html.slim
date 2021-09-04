@@ -7,7 +7,9 @@
             div class="rounded-full h-10 w-10 bg-black bg-opacity-80 flex items-center justify-center"
               i class="fas fa-chevron-right text-white pl-1"
         div class="w-full"
-          = image_tag product.top_image.product_image, alt: product.title, class: 'rounded-lg'
+          = image_tag product.top_image&.product_image&.variant(resize_to_fill: [800, 450]) || "https://placehold.jp/70/d6d6d6/7d7d7d/800x450.png?text=No%20Image",
+            alt: product.title,
+            class: 'rounded-lg'
     .pt-3.pb-4
       .flex.items-center.flex-wrap
         .inline-flex.tracking-widest.text-sm.title-font.font-medium.text-gray-400
@@ -17,7 +19,7 @@
         span.inline-flex.ml-2.px-2.text-xs.leading-5.font-semibold.bg-red-100.text-red-900.mb-2
           = product.product_category.name
       h2.title-font.text-lg.font-bold.text-gray-900
-        = product.title
+        = link_to product.title, product_path(product), class: 'no-underline'
       .leading-relaxed.mb-1
         = simple_format(truncate(h(product.summary), length: 100, separator: /[\s、。　]/))
       .mb-3.-mx-1
@@ -32,4 +34,4 @@
             i class="fas fa-caret-right ml-2"
         span.text-gray-400.inline-flex.lg:ml-auto.md:ml-0.ml-auto.leading-none.text-sm.py-1
           i class="fas fa-user mr-1"
-          = link_to_active product.user
+          = link_to_if @product.user.active?, @product.user.display_name, user_path(@product.user.screen_name)
