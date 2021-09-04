@@ -9,6 +9,6 @@ class UsersController < ApplicationController
 
     @products = @user.products.includes(:technologies,
                                         { images: { product_image_attachment: :blob } })
-                              .order(released_on: :desc)
+                     .order(released_on: :desc)
   end
 end
