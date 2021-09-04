@@ -12,4 +12,5 @@
 #  updated_at  :datetime         not null
 #
 class Inquiry < ApplicationRecord
+  validates :name, :about, :description, :user_agent, presence: true
 end
