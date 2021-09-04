@@ -50,7 +50,7 @@ ja:
         users: 製作者
         media_attributes: メディア
       inquiry_form:
-        name: 氏名
+        name: ご氏名
         email: メールアドレス
-        about: 件名
+        about: ご用件
         description: 内容

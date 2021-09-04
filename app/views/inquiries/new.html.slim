@@ -1,4 +1,4 @@
-- content_for(:title, 'お問い合わせフォーム')
+- content_for(:title, 'お問い合わせ')
 
 = form_with model: @inquiry_form, url: inquiry_path, class: 'form', data: { turbo: false } do |f|
   - if f.object.errors.any?
@@ -13,7 +13,7 @@
     = f.email_field :email, class: 'text-field'
   .form-group
     = f.label :about, class: 'form-label'
-    = f.select :about, ['Fledge Hubについて', '不具合について', 'その他' ], { required: true, prompt: '問い合わせ内容を選択してください' }, class: 'select-box'
+    = f.select :about, ['ご意見・ご要望', '不具合・バグ', 'その他'], { required: true, prompt: 'お問い合わせ内容を選択してください' }, class: 'select-box'
   .form-group
     = f.label :description, class: 'form-label'
     = f.text_area :description, class: 'text-field h-24'
