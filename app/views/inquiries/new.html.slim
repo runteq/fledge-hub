@@ -13,21 +13,17 @@
           | 必須
     = f.text_field :name, required: true, class: 'text-field'
   .form-group
-    .form-label.items-center
-      .flex.items-center
-        = f.label :email
-        p.required
-          | 必須
+    = f.label :email, class: 'form-label'
     = f.email_field :email, class: 'text-field'
   .form-group
-    .form-label.items-center
+    .form-label
       .flex.items-center
         = f.label :about
         p.required
           | 必須
     = f.select :about, ['ご意見・ご要望', '不具合・バグ', 'その他'], { required: true, prompt: 'お問い合わせ内容を選択してください' }, class: 'select-box'
   .form-group
-    .form-label.items-center
+    .form-label
       .flex.items-center
         = f.label :description
         p.required
