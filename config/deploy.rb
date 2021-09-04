@@ -60,6 +60,7 @@ end
 
 after 'deploy:published', 'nginx:restart'
 before 'deploy:migrate', 'deploy:db_create'
+before 'deploy:publishing', 'db:seed_fu'
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp

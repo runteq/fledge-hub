@@ -9,6 +9,7 @@ require 'capistrano/yarn'
 require 'capistrano/scm/git'
 require 'capistrano/puma'
 require 'capistrano/nginx'
+require 'seed-fu/capistrano3'
 
 install_plugin Capistrano::SCM::Git
 install_plugin Capistrano::Puma
