@@ -61,18 +61,33 @@
 }
 
 .pagy-nav {
-  @apply flex space-x-2;
+  @apply flex space-x-1;
+  a {
+    @apply no-underline;
+  }
 }
 
 .pagy-nav .page a,
 .pagy-nav .page.active,
 .pagy-nav .page.prev.disabled,
 .pagy-nav .page.next.disabled {
-  @apply block rounded-lg px-3 py-1 text-sm text-gray-500 font-semibold bg-gray-200 shadow-md;
-  &:hover {
-    @apply bg-gray-300;
+  @apply block rounded-lg px-3 py-1 text-sm font-semibold bg-gray-200;
+  &:hover{
+    @apply bg-gray-200;
   }
-  &:active {
-    @apply bg-gray-400 text-white;
+}
+
+.pagy-nav .page.prev.disabled,
+.pagy-nav .page.next.disabled {
+  @apply text-gray-400 bg-gray-200 cursor-default;
+  &:hover {
+    @apply bg-gray-200;
+  }
+}
+
+.pagy-nav .page.active {
+  @apply cursor-default bg-indigo-200 text-indigo-600;;
+  &:hover {
+    @apply bg-indigo-200;
   }
 }
