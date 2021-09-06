@@ -1,6 +1,5 @@
 class ProductsController < ApplicationController
   before_action :require_login, only: %i[new edit create update destroy]
-  include Pagy::Backend
 
   def index
     @search_form = SearchProductsForm.new(search_params)
