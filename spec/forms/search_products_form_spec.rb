@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe SearchProductsForm do
-  describe '.search' do
-    subject { SearchProductsForm.new(title: title).search.length }
+  describe '#search_title' do
+    subject { SearchProductsForm.new(title: title).search }
 
     before do
       create(:product, title: 'ぷろだくと')
@@ -14,7 +14,7 @@ RSpec.describe SearchProductsForm do
       let!(:title) { 'ぷろだくと' }
 
       it 'ひらがな・カタカナを問わず検索されること' do
-        expect(subject).to eq 2
+        expect(subject.length).to eq 2
       end
     end
 
@@ -22,7 +22,7 @@ RSpec.describe SearchProductsForm do
       let!(:title) { 'プロダクト' }
 
       it 'ひらがな・カタカナを問わず検索されること' do
-        expect(subject).to eq 2
+        expect(subject.length).to eq 2
       end
     end
 
@@ -30,7 +30,7 @@ RSpec.describe SearchProductsForm do
       let!(:title) { 'ダク' }
 
       it '検索名を含むプロダクトが検索されること' do
-        expect(subject).to eq 2
+        expect(subject.length).to eq 2
       end
     end
 
@@ -38,7 +38,7 @@ RSpec.describe SearchProductsForm do
       let!(:title) { 'ヒットせず' }
 
       it '何のプロダクトも返らないこと' do
-        expect(subject).to eq 0
+        expect(subject.length).to eq 0
       end
     end
   end
