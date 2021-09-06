@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe SearchProductsForm do
   describe '#search_title' do
-    subject { SearchProductsForm.new(title: title).search }
+    subject { SearchProductsForm.search(title: title) }
 
     before do
       create(:product, title: 'ぷろだくと')

@@ -1,11 +1,16 @@
 class SearchProductsForm
   include ActiveModel::Model
+  include ActiveModel::Attributes
   include KanaHelper
 
-  attr_accessor :title
+  attribute :title, :string, default: ''
+
+  def self.search(args)
+    new(args).search
+  end
 
   def search
-    relation = Product
+    relation = Product.all
     relation = search_title(relation) if title.present?
     relation
   end
