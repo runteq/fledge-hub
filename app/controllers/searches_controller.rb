@@ -10,6 +10,6 @@ class SearchesController < ApplicationController
   private
 
   def search_params
-    params.fetch(:q, {}).permit(:title)
+    params.fetch(:q, {}).permit(:title, :product_type_id, :product_category_id)
   end
 end

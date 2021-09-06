@@ -2,13 +2,13 @@ require 'rails_helper'
 
 RSpec.describe SearchesController, type: :request do
   describe 'GET /show' do
-    let!(:params) {
+    let!(:params) do
       {
         q: {
-          title: 'サービス名'
-        }
+          title: 'サービス名',
+        },
       }
-    }
+    end
     subject { get search_url(params) }
 
     it 'renders a successful response' do

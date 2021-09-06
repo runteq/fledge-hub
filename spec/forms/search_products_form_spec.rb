@@ -42,4 +42,21 @@ RSpec.describe SearchProductsForm do
       end
     end
   end
+
+  describe '#search_product_type, #search_product_category' do
+    subject do
+      SearchProductsForm.search(
+        product_type_id: 1,
+        product_category_id: 1,
+      )
+    end
+    let!(:target_product) { create(:product, product_type_id: 1, product_category_id: 1) }
+    let!(:_non_type_product) { create(:product, product_type_id: 2, product_category_id: 1) }
+    let!(:_non_category_product) { create(:product, product_type_id: 1, product_category_id: 2) }
+    let!(:_non_searched_product) { create(:product, product_type_id: 2, product_category_id: 2) }
+
+    it 'どちらの条件も満たしたプロダクトのみ返す' do
+      expect(subject.length).to eq 1
+    end
+  end
 end
