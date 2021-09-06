@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   resources :products, only: %i[show new edit create update destroy] do
     resources :product_images, only: %i[new create edit update destroy]
   end
+  resource :search, only: %i[show]
 
   resources :users, only: %i[index show], param: :screen_name
 

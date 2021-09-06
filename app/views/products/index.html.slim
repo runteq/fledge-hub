@@ -1,10 +1,8 @@
-= render 'search_form'
+= render 'searches/form'
 
 .flex.flex-wrap.-mx-4
-  - if @products.present?
-    = render(ProductComponent.with_collection(@products))
-  - else
-    p.mt-10.mx-auto 検索条件を満たすサービスはありませんでした
+  = render(ProductComponent.with_collection(@products))
+
 == pagy_nav(@pagy)
 
 - if logged_in?

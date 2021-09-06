@@ -2,11 +2,10 @@ class ProductsController < ApplicationController
   before_action :require_login, only: %i[new edit create update destroy]
 
   def index
-    @search_form = SearchProductsForm.new(search_params)
-    @pagy, @products = pagy(@search_form.search
-                            .includes(:technologies,
-                                      :users, { images: { product_image_attachment: :blob } })
-                            .order(created_at: :desc))
+    products = Product.includes(:technologies,
+                                :users, { images: { product_image_attachment: :blob } })
+                      .order(created_at: :desc)
+    @pagy, @products = pagy(products)
   end
 
   def show
@@ -60,9 +59,5 @@ class ProductsController < ApplicationController
       technology_ids: [],
       media_attributes: %i[id title url],
     )
-  end
-
-  def search_params
-    params.fetch(:search, {}).permit(:title)
   end
 end
