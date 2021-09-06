@@ -23,6 +23,12 @@ FactoryBot.define do
     product_type_id { ProductType.pluck(:id).sample }
     product_category_id { ProductCategory.pluck(:id).sample }
 
+    trait :with_user do
+      after(:build) do |product|
+        create(:user, products: [product])
+      end
+    end
+
     trait :yesterday do
       released_on { Time.zone.yesterday }
     end
