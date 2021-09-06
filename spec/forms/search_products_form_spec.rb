@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe SearchProductsForm do
-  describe '.search' do
-    subject { SearchProductsForm.new(title: title).search.length }
+  describe '#search_title' do
+    subject { SearchProductsForm.search(title: title) }
 
     before do
       create(:product, title: 'ぷろだくと')
@@ -14,7 +14,7 @@ RSpec.describe SearchProductsForm do
       let!(:title) { 'ぷろだくと' }
 
       it 'ひらがな・カタカナを問わず検索されること' do
-        expect(subject).to eq 2
+        expect(subject.length).to eq 2
       end
     end
 
@@ -22,7 +22,7 @@ RSpec.describe SearchProductsForm do
       let!(:title) { 'プロダクト' }
 
       it 'ひらがな・カタカナを問わず検索されること' do
-        expect(subject).to eq 2
+        expect(subject.length).to eq 2
       end
     end
 
@@ -30,7 +30,7 @@ RSpec.describe SearchProductsForm do
       let!(:title) { 'ダク' }
 
       it '検索名を含むプロダクトが検索されること' do
-        expect(subject).to eq 2
+        expect(subject.length).to eq 2
       end
     end
 
@@ -38,8 +38,25 @@ RSpec.describe SearchProductsForm do
       let!(:title) { 'ヒットせず' }
 
       it '何のプロダクトも返らないこと' do
-        expect(subject).to eq 0
+        expect(subject.length).to eq 0
       end
+    end
+  end
+
+  describe '#search_product_type, #search_product_category' do
+    subject do
+      SearchProductsForm.search(
+        product_type_id: 1,
+        product_category_id: 1,
+      )
+    end
+    let!(:target_product) { create(:product, product_type_id: 1, product_category_id: 1) }
+    let!(:_non_type_product) { create(:product, product_type_id: 2, product_category_id: 1) }
+    let!(:_non_category_product) { create(:product, product_type_id: 1, product_category_id: 2) }
+    let!(:_non_searched_product) { create(:product, product_type_id: 2, product_category_id: 2) }
+
+    it 'どちらの条件も満たしたプロダクトのみ返す' do
+      expect(subject.length).to eq 1
     end
   end
 end

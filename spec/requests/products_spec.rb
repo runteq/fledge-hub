@@ -1,10 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe ProductsController, type: :request do
-  let(:user) { create(:user) }
-
   describe 'GET /show' do
-    let(:product) { create(:product, users: [user]) }
+    let(:product) { create(:product, :with_user) }
     subject { get product_url(product) }
 
     it 'renders a successful response' do
@@ -14,6 +12,7 @@ RSpec.describe ProductsController, type: :request do
   end
 
   describe 'GET /new' do
+    let!(:user) { create(:user) }
     subject { get '/products/new' }
     before { login_as(user) }
 
@@ -24,7 +23,8 @@ RSpec.describe ProductsController, type: :request do
   end
 
   describe 'GET /edit' do
-    let(:product) { create(:product, users: [user]) }
+    let!(:user) { create(:user) }
+    let!(:product) { create(:product, users: [user]) }
     subject { get "/products/#{product.id}/edit" }
     before { login_as(user) }
 
@@ -35,6 +35,7 @@ RSpec.describe ProductsController, type: :request do
   end
 
   describe 'POST /create' do
+    let!(:user) { create(:user) }
     before { login_as(user) }
     subject { post '/products', params: { product: attributes } }
 
@@ -64,7 +65,7 @@ RSpec.describe ProductsController, type: :request do
 
     context 'with technology_ids' do
       let!(:technology) { create(:technology) }
-      let(:attributes) do
+      let!(:attributes) do
         {
           title: 'hoge',
           summary: '',
@@ -87,7 +88,7 @@ RSpec.describe ProductsController, type: :request do
     end
 
     context 'with invalid parameters' do
-      let(:attributes) do
+      let!(:attributes) do
         {
           title: 'hoge',
         }
@@ -105,12 +106,13 @@ RSpec.describe ProductsController, type: :request do
   end
 
   describe 'PATCH /update' do
+    let!(:user) { create(:user) }
     subject { patch "/products/#{product.id}", params: { product: attributes } }
     before { login_as(user) }
 
     context 'with valid parameters' do
       let!(:product) { create(:product, title: 'hoge', users: [user]) }
-      let(:attributes) do
+      let!(:attributes) do
         {
           title: 'foo',
         }
@@ -132,7 +134,7 @@ RSpec.describe ProductsController, type: :request do
       let!(:product) do
         create(:product, title: 'hoge', users: [user], technologies: [previous_technology])
       end
-      let(:attributes) do
+      let!(:attributes) do
         {
           title: 'hoge',
           summary: '',
@@ -154,7 +156,7 @@ RSpec.describe ProductsController, type: :request do
 
     context 'with invalid parameters' do
       let!(:product) { create(:product, title: 'hoge', users: [user]) }
-      let(:attributes) do
+      let!(:attributes) do
         {
           title: '',
         }
@@ -172,6 +174,7 @@ RSpec.describe ProductsController, type: :request do
   end
 
   describe 'DELETE /destroy' do
+    let!(:user) { create(:user) }
     let!(:product) { create(:product, users: [user]) }
     subject { delete "/products/#{product.id}" }
     before { login_as(user) }
