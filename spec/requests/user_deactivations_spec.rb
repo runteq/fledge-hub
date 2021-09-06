@@ -8,14 +8,14 @@ RSpec.describe UserDeactivationsController, type: :request do
     context 'ユーザーのサービスがあるとき' do
       it 'returns http success' do
         create(:product, users: [user])
-        get '/user_deactivation/new'
+        get '/deactivation'
         expect(response).to have_http_status(:success)
       end
     end
 
     context 'ユーザーのサービスがないとき' do
       it 'returns http success' do
-        get '/user_deactivation/new'
+        get '/deactivation'
         expect(response).to have_http_status(:success)
       end
     end

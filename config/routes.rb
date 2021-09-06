@@ -15,7 +15,8 @@ Rails.application.routes.draw do
   end
 
   resource :registration, only: %i[new create]
-  resource :user_deactivation, only: %i[new destroy]
+  resource :user_deactivation, only: %i[destroy]
+  get 'deactivation', to: 'user_deactivations#new', as: :new_user_deactivation
   post 'oauth/callback', to: 'oauths#callback'
   get 'oauth/callback', to: 'oauths#callback'
   get 'oauth/:provider', to: 'oauths#oauth', as: :auth_at_provider
