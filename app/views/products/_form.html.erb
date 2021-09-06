@@ -28,7 +28,7 @@
     </div>
     <%= f.date_field :released_on, required: true, class: 'text-field' %>
   </div>
-  
+
   <div class='form-group'>
     <%= f.label :url, class: 'form-label' %>
     <%= f.text_field :url, class: 'text-field' %>
@@ -45,21 +45,21 @@
   <div class='form-group'>
     <div class='form-group inline-flex w-1/2 px-1'>
       <div class='form-label'>
-        <div style='display: flex; align-items: center;'>
-          <%= f.label :product_category_id %>
-          <p class='required'>必須</p>
-        </div>
-      </div>
-      <%= f.select :product_category_id, ProductCategory.asc.pluck(:name, :id), { required: true, prompt: '選択してください' }, class: 'select-box' %>
-    </div>
-    <div class='form-group inline-flex w-1/2 px-1'>
-      <div class='form-label'>
-        <div style='display: flex; align-items: center;'>
+        <div class='flex items-center'>
           <%= f.label :product_type_id %>
           <p class='required'>必須</p>
         </div>
       </div>
       <%= f.select :product_type_id, ProductType.asc.pluck(:name, :id), { required: true, prompt: '選択してください' }, class: 'select-box' %>
+    </div>
+    <div class='form-group inline-flex w-1/2 px-1'>
+      <div class='form-label'>
+        <div class='flex items-center'>
+          <%= f.label :product_category_id %>
+          <p class='required'>必須</p>
+        </div>
+      </div>
+      <%= f.select :product_category_id, ProductCategory.asc.pluck(:name, :id), { required: true, prompt: '選択してください' }, class: 'select-box' %>
     </div>
   </div>
   <div class='form-group'>
