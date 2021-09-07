@@ -111,8 +111,8 @@ ActiveRecord::Schema.define(version: 2021_09_07_131821) do
     t.bigint "product_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["product_id"], name: "index_stocks_on_product_id"
-    t.index ["user_id"], name: "index_stocks_on_user_id"
+    t.index ["product_id", "user_id"], name: "index_stocks_on_product_id_and_user_id", unique: true
+    t.index ["user_id"], name: "fk_rails_f4b3894c0d"
   end
 
   create_table "technologies", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|

@@ -10,8 +10,8 @@
 #
 # Indexes
 #
-#  index_stocks_on_product_id  (product_id)
-#  index_stocks_on_user_id     (user_id)
+#  fk_rails_f4b3894c0d                     (user_id)
+#  index_stocks_on_product_id_and_user_id  (product_id,user_id) UNIQUE
 #
 # Foreign Keys
 #
@@ -21,4 +21,6 @@
 class Stock < ApplicationRecord
   belongs_to :user
   belongs_to :product
+
+  validates :product_id, uniqueness: { scope: :user_id }
 end
