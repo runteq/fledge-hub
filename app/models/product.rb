@@ -38,6 +38,12 @@ class Product < ApplicationRecord
   validates :product_type_id, presence: true
   validates :product_category_id, presence: true
 
+  scope :includes_query, lambda {
+    includes(:technologies,
+             :users,
+             { images: { product_image_attachment: :blob } })
+  }
+
   def permitted_edit?(user)
     !!user&.in?(users)
   end
