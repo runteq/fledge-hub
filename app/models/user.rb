@@ -25,6 +25,8 @@ class User < ApplicationRecord
   # dependent: :destroyだけど、Userを物理削除することはない
   has_many :user_products, dependent: :destroy
   has_many :products, through: :user_products
+  has_many :stocks, dependent: :destroy
+  has_many :stock_products, through: :stocks, source: :product
   has_many :authentications, dependent: :destroy
   has_many :social_accounts, dependent: :destroy
   has_one_attached :avatar, dependent: :destroy

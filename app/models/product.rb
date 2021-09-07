@@ -18,6 +18,8 @@ class Product < ApplicationRecord
 
   has_many :user_products, dependent: :destroy
   has_many :users, through: :user_products
+  has_many :stocks, dependent: :destroy
+  has_many :stocking_users, through: :stocks, source: :user
   has_many :images, lambda {
     order(created_at: :desc)
   }, dependent: :destroy, class_name: 'ProductImage', inverse_of: :product
@@ -46,5 +48,9 @@ class Product < ApplicationRecord
 
   def user
     @user ||= users.take
+  end
+
+  def stocked_by?(user)
+    stocking_users.include?(user)
   end
 end
