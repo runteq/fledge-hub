@@ -70,6 +70,7 @@
 
   <div id='js-media-form'>
     <h2 class='text-lg'>メディア</h2>
+    <p>関連記事・公式アカウントなど</p>
     <% @product.media.each do |medium| %>
       <%= render 'medium_form', f: f, medium: medium %>
     <% end %>
