@@ -14,7 +14,7 @@ class ProductImagesController < ApplicationController
     @image = @product.images.build(image_params)
 
     if @image.save
-      redirect_to product_path(@product), notice: 'Image was successfully created.'
+      redirect_to product_path(@product), notice: '画像を追加しました！'
     else
       render :new, status: :unprocessable_entity # 422errorを起こす
     end
