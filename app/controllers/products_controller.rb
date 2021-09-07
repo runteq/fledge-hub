@@ -24,7 +24,7 @@ class ProductsController < ApplicationController
   def create
     @product = ProductForm.new(product_params.merge(user_ids: [current_user.id]))
     if @product.save
-      redirect_to product_path(@product), notice: '投稿しました！'
+      redirect_to product_path(@product), notice: 'サービスを投稿しました！'
     else
       render :new, status: :unprocessable_entity # 422errorを起こす
     end
@@ -33,7 +33,7 @@ class ProductsController < ApplicationController
   def update
     @product = ProductForm.find(params[:id], current_user.id)
     if @product.update(product_params)
-      redirect_to product_path(@product), notice: '更新しました！'
+      redirect_to product_path(@product), notice: 'データを更新しました！'
     else
       render :edit, status: :unprocessable_entity # 422errorを起こす
     end
@@ -42,7 +42,7 @@ class ProductsController < ApplicationController
   def destroy
     @product = current_user.products.find(params[:id])
     @product.destroy!
-    redirect_to products_url, notice: 'Product was successfully destroyed.'
+    redirect_to products_url, notice: 'サービスを削除しました！'
   end
 
   private

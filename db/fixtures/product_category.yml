@@ -7,8 +7,8 @@
   position: 1
   name: ゲーム
 - id: 2
-  position: 2
-  name: エンターテイメント
+  position: 15
+  name: 娯楽
 - id: 3
   position: 3
   name: 料理
@@ -23,7 +23,7 @@
   name: スポーツ
 - id: 7
   position: 7
-  name: 教育
+  name: 教育・学習
 - id: 8
   position: 8
   name: 健康・フィットネス

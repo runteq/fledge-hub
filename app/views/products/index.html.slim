@@ -7,5 +7,6 @@
 
 - if logged_in?
   .fixed.z-50.right-4.bottom-12.rounded-full.shadow-2xl.cursor-pointer
-    .p-4.w-14.h-14.bg-indigo-600.rounded-full.shadow-2xl.hover:bg-indigo-400.active:shadow-lg.mouse.shadow.transition.ease-in.duration-200.focus:outline-none
-      = link_to embedded_svg("plus.svg", class: "plus-icon", alt: "plus-icon"), new_product_path
+    = link_to new_product_path do
+      .p-4.w-14.h-14.bg-indigo-600.rounded-full.shadow-2xl.hover:bg-indigo-400.active:shadow-lg.mouse.shadow.transition.ease-in.duration-200.focus:outline-none
+        = embedded_svg("plus.svg", class: "plus-icon", alt: "plus-icon")
