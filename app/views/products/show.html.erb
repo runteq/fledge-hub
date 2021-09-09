@@ -1,6 +1,6 @@
 <% content_for(:title, @product.title) %>
 <% content_for(:description, @product.summary.presence || @product.title) %>
-<% content_for(:meta_image_url, url_for(@product.top_image&.product_image || "https://placehold.jp/70/d6d6d6/7d7d7d/800x450.png?text=No%20Image")) %>
+<% content_for(:meta_image_url, url_for(@product.top_image&.product_image&.variant(resize_to_fill: [800, 450]) || "https://placehold.jp/70/d6d6d6/7d7d7d/800x450.png?text=No%20Image")) %>
 
 <div class="mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-lg lg:px-8 lg:py-1">
   <div class="flex flex-col space-y-4 lg:space-y-0 lg:flex-row lg:items-center lg:justify-between">
@@ -39,10 +39,6 @@
   <p class="my-2 text-gray-500 dark:text-gray-400 lg:max-w-xl">
     <%= safe_join(@product.summary.split("\n"), tag(:br)) %>
   </p>
-
-
-  <%# <%= image_tag @product.top_image.product_image, alt: @product.title, class: 'w-full rounded shadow-lg' %>
-
 
   <div class="max-w-xl mb-2 -px-1">
     <% @product.technologies.each do |technology| %>
