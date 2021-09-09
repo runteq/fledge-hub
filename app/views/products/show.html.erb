@@ -34,20 +34,14 @@
           </button>
         <% end %>
       <% end %>
+      <turbo-frame id="stock-button">
+        <%= render 'stocks/stock_button', product: @product, stocked: @product.stocked_by?(current_user) %>
+      </turbo-frame>
     </div>
   </div>
   <p class="my-2 text-gray-500 dark:text-gray-400 lg:max-w-xl">
     <%= safe_join(@product.summary.split("\n"), tag(:br)) %>
   </p>
-
-  <% if @product.stocked_by?(current_user) %>
-    <%= link_to 'ストックから削除', product_stock_path(@product), method: :delete %>
-  <% else %>
-    <%= link_to 'ストック', product_stock_path(@product), method: :post %>
-  <% end %>
-
-  <%# <%= image_tag @product.top_image.product_image, alt: @product.title, class: 'w-full rounded shadow-lg' %>
-
 
   <div class="max-w-xl mb-2 -px-1">
     <% @product.technologies.each do |technology| %>

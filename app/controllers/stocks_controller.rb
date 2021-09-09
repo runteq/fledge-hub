@@ -2,13 +2,23 @@ class StocksController < ApplicationController
   before_action :require_login
 
   def create
-    current_user.stocks.find_or_create_by(product_id: params[:product_id])
-    render status: :created
+    @product = Product.find(params[:product_id])
+    current_user.stocks.find_or_create_by(product_id: @product.id)
+    render turbo_stream: turbo_stream.replace(
+      'stock-button',
+      partial: 'stocks/stock_button',
+      locals: { product: @product, stocked: true }
+    )
   end
 
   def destroy
-    stock = current_user.stocks.find_by!(product_id: params[:product_id])
+    @product = Product.find(params[:product_id])
+    stock = current_user.stocks.find_by!(product_id: @product.id)
     stock.destroy!
-    render status: :ok
+    render turbo_stream: turbo_stream.replace(
+      'stock-button',
+      partial: 'stocks/stock_button',
+      locals: { product: @product, stocked: false }
+    )
   end
 end
