@@ -7,7 +7,7 @@ class StocksController < ApplicationController
     render turbo_stream: turbo_stream.replace(
       'stock-button',
       partial: 'stocks/stock_button',
-      locals: { product: @product, stocked: true }
+      locals: { product: @product, stocked: true },
     )
   end
 
@@ -18,7 +18,7 @@ class StocksController < ApplicationController
     render turbo_stream: turbo_stream.replace(
       'stock-button',
       partial: 'stocks/stock_button',
-      locals: { product: @product, stocked: false }
+      locals: { product: @product, stocked: false },
     )
   end
 end
