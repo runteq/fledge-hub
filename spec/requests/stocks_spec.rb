@@ -4,11 +4,11 @@ RSpec.describe StocksController, type: :request do
   let(:user) { create(:user) }
   before { login_as(user) }
 
-  describe "GET /create" do
+  describe 'GET /create' do
     let!(:product) { create(:product) }
     subject { post "/products/#{product.id}/stock" }
 
-    it "returns http success" do
+    it 'returns http success' do
       subject
       expect(response).to have_http_status(:success)
     end
@@ -18,7 +18,7 @@ RSpec.describe StocksController, type: :request do
     end
   end
 
-  describe "DELETE /destroy" do
+  describe 'DELETE /destroy' do
     let!(:product) { create(:product) }
     subject { delete "/products/#{product.id}/stock" }
     before do
@@ -26,7 +26,8 @@ RSpec.describe StocksController, type: :request do
       create(:stock, user: user, product: product)
     end
 
-    it "returns http success" do
+    it 'returns http success' do
+      subject
       expect(response).to have_http_status(:success)
     end
 
