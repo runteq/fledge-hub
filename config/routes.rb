@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   resource :inquiry, only: %i[create]
 
   resource :mypage, only: %i[show]
+  namespace :mypage do
+    resources :stocks, only: %i[index]
+  end
   namespace :settings do
     resource :profile, only: %i[show update]
     resources :social_accounts, only: %i[index] do
@@ -24,6 +27,7 @@ Rails.application.routes.draw do
 
   resources :products, only: %i[show new edit create update destroy] do
     resources :product_images, only: %i[new create edit update destroy]
+    resource :stock, only: %i[create destroy]
   end
   resource :search, only: %i[show]
 

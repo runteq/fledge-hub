@@ -1,9 +1,7 @@
 class SearchesController < ApplicationController
   def show
     search_result = SearchProductsForm.search(search_params)
-    products = search_result.includes(:technologies,
-                                      :users, { images: { product_image_attachment: :blob } })
-                            .order(created_at: :desc)
+    products = search_result.includes_query.order(created_at: :desc)
     @pagy, @products = pagy(products)
   end
 

@@ -1,0 +1,11 @@
+<% content_for(:title, 'ストック一覧') %>
+
+<div class="flex flex-wrap -mx-4 mt-4">
+  <% if @products.present? %>
+    <%= render(ProductComponent.with_collection(@products)) %>
+  <% else %>
+    <div class="p mt-10 mx-auto">まだストックされていません。</div>
+  <% end %>
+</div>
+
+<%== pagy_nav(@pagy) %>

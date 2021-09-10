@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_23_152345) do
+ActiveRecord::Schema.define(version: 2021_09_07_131821) do
 
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.string "name", null: false
@@ -106,6 +106,15 @@ ActiveRecord::Schema.define(version: 2021_06_23_152345) do
     t.index ["user_id"], name: "index_social_accounts_on_user_id"
   end
 
+  create_table "stocks", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "product_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["product_id", "user_id"], name: "index_stocks_on_product_id_and_user_id", unique: true
+    t.index ["user_id"], name: "fk_rails_f4b3894c0d"
+  end
+
   create_table "technologies", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.string "name", null: false
     t.string "slug", null: false
@@ -144,4 +153,6 @@ ActiveRecord::Schema.define(version: 2021_06_23_152345) do
   add_foreign_key "product_technologies", "products"
   add_foreign_key "product_technologies", "technologies"
   add_foreign_key "social_accounts", "users"
+  add_foreign_key "stocks", "products"
+  add_foreign_key "stocks", "users"
 end

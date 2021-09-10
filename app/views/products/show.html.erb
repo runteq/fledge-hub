@@ -34,6 +34,7 @@
           </button>
         <% end %>
       <% end %>
+      <%= render 'stocks/stock_button', product: @product, stocked: @product.stocked_by?(current_user) %>
     </div>
   </div>
   <p class="my-2 text-gray-500 dark:text-gray-400 lg:max-w-xl">

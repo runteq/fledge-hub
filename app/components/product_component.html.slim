@@ -31,7 +31,7 @@
 
       .flex.items-center.flex-wrap
         - if @product.url.present?
-          = link_to sanitize(@product.url),
+          = link_to sanitize(product.url),
                     class: 'text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0 no-underline font-bold',
                     target: '_blank',
                     rel: 'noopener noreferrer' do
@@ -39,4 +39,4 @@
             i class="fas fa-caret-right ml-2"
         span.text-gray-400.inline-flex.lg:ml-auto.md:ml-0.ml-auto.leading-none.text-sm.py-1
           i class="fas fa-user mr-1"
-          = link_to_if @product.user.active?, @product.user.display_name, user_path(@product.user.screen_name)
+          = link_to_if product.user.active?, product.user.display_name, user_path(product.user.screen_name)

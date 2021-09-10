@@ -1,0 +1,11 @@
+<turbo-frame id="stock-button">
+  <% if stocked %>
+    <%= link_to product_stock_path(product), method: :delete do %>
+      <i class="fas fa-folder"></i>
+    <% end %>
+  <% else %>
+    <%= link_to product_stock_path(product), method: :post do %>
+      <i class="far fa-folder"></i>
+    <% end %>
+  <% end %>
+</turbo-frame>
