@@ -346,4 +346,31 @@ RSpec.describe ProductForm do
       end
     end
   end
+
+  describe '#url_validity' do
+    context '存在しないURLのとき' do
+      subject { form.save }
+      let!(:form) { ProductForm.new(**attributes) }
+      let!(:user) { create(:user, :active) }
+      let!(:attributes) do
+        {
+          title: 'タイトル',
+          url: "https://#{SecureRandom.urlsafe_base64}.com",
+          source_url: '',
+          released_on: '2021-06-17',
+          summary: '',
+          product_type_id: '1',
+          product_category_id: '1',
+          technology_ids: [],
+          user_ids: [user.id],
+        }
+      end
+
+      it { expect(subject).to be false }
+      it 'エラーメッセージを持つ' do
+        subject
+        expect(form.errors.messages).to eq({ url: ['にアクセスできません。'] })
+      end
+    end
+  end
 end

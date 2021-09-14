@@ -24,6 +24,7 @@ class ProductForm
   validates :product_category_id, presence: true
   validates :product_type_id, presence: true
   validates :user_ids, presence: true, if: -> { product.new_record? }
+  validate :url_validity
   validate :media_validity
 
   delegate :persisted?, :new_record?, to: :product
@@ -132,6 +133,12 @@ class ProductForm
       technology_ids: technology_ids,
       user_ids: user_ids,
     }
+  end
+
+  def url_validity
+    ogp_url
+  rescue SocketError
+    errors.add(:url, 'にアクセスできません。')
   end
 
   def media_validity
