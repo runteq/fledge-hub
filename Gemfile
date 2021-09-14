@@ -28,6 +28,7 @@ gem 'hotwire-rails'
 gem 'faraday'
 gem 'pagy', '~> 3.5'
 gem 'config'
+gem 'mechanize'
 
 # AWS
 gem 'aws-sdk-s3', require: false

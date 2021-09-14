@@ -85,7 +85,7 @@
   <br>
   <%= link_to 'Destroy', @product, data: { confirm: 'Are you sure?' }, method: :delete %>
   <br>
-  <%= link_to '画像登録', new_product_product_image_path(@product) %>
+  <%= link_to 'イメージ画像登録', new_product_product_image_path(@product) %>
 
   <% @product.images.with_attached_product_image.each do |image| %>
     <div>

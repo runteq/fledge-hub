@@ -17,8 +17,6 @@
 #  index_users_on_email        (email) UNIQUE
 #  index_users_on_screen_name  (screen_name) UNIQUE
 #
-require 'open-uri'
-
 class User < ApplicationRecord
   authenticates_with_sorcery!
 
@@ -84,8 +82,8 @@ class User < ApplicationRecord
   end
 
   def grab_avatar_image(url)
-    avatar_url = url.open
-    avatar.attach(io: avatar_url, filename: "user_avatar_#{id}.jpg")
+    avatar_file = url.open
+    avatar.attach(io: avatar_file, filename: "user_avatar_#{id}.jpg")
   end
 
   def active?

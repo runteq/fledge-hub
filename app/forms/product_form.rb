@@ -24,6 +24,7 @@ class ProductForm
   validates :product_category_id, presence: true
   validates :product_type_id, presence: true
   validates :user_ids, presence: true, if: -> { product.new_record? }
+  validate :url_validity
   validate :media_validity
 
   delegate :persisted?, :new_record?, to: :product
@@ -95,17 +96,33 @@ class ProductForm
   private
 
   def save!
-    attr_medium_ids = media_attributes.map do |attr|
-      attr.deep_symbolize_keys[:id]
-    end.reject(&:blank?).map(&:to_i)
-    remained_medium_ids = attr_medium_ids & product.media.ids # 重複を返す
-
     ActiveRecord::Base.transaction(joinable: false, requires_new: true) do
       product.save!
+      grab_ogp
       product.media.where.not(id: remained_medium_ids).destroy_all
       media.each(&:save!)
     end
     assign_attributes(id: product.id)
+  end
+
+  # 重複を返す
+  def remained_medium_ids
+    attr_medium_ids = media_attributes.map do |attr|
+      attr.deep_symbolize_keys[:id]
+    end.reject(&:blank?).map(&:to_i)
+    attr_medium_ids & product.media.ids
+  end
+
+  def grab_ogp
+    product.grab_ogp(URI.parse(ogp_url[:content])) if product.images.empty? && ogp_url
+  end
+
+  def ogp_url
+    return nil if url.blank?
+
+    agent = ::Mechanize.new
+    page = agent.get(url)
+    page.at('meta[property="og:image"]')
   end
 
   def product
@@ -124,6 +141,12 @@ class ProductForm
       technology_ids: technology_ids,
       user_ids: user_ids,
     }
+  end
+
+  def url_validity
+    ogp_url
+  rescue SocketError
+    errors.add(:url, 'にアクセスできません。')
   end
 
   def media_validity

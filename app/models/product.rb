@@ -59,4 +59,11 @@ class Product < ApplicationRecord
   def stocked_by?(user)
     stocking_users.include?(user)
   end
+
+  def grab_ogp(url)
+    grab_file = url.open
+    image = images.build
+    image.product_image.attach(io: grab_file, filename: "#{title}.png")
+    image.save!
+  end
 end
