@@ -103,7 +103,7 @@ class ProductForm
 
     ActiveRecord::Base.transaction(joinable: false, requires_new: true) do
       product.save!
-      product.grab_ogp(ogp_url) if product.images.empty?
+      product.grab_ogp(URI.parse(ogp_url[:content])) if product.images.empty? && ogp_url
       product.media.where.not(id: remained_medium_ids).destroy_all
       media.each(&:save!)
     end
@@ -111,10 +111,11 @@ class ProductForm
   end
 
   def ogp_url
+    return nil if url.blank?
+
     agent = ::Mechanize.new
     page = agent.get(url)
-    url = page.at('meta[property="og:image"]')[:content]
-    URI.parse(url)
+    page.at('meta[property="og:image"]')
   end
 
   def product
