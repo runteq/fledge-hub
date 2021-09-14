@@ -102,7 +102,7 @@ class ProductForm
 
     ActiveRecord::Base.transaction(joinable: false, requires_new: true) do
       product.save!
-      product.grab_ogp(ogp_url)
+      product.grab_ogp(ogp_url) if product.images.empty?
       product.media.where.not(id: remained_medium_ids).destroy_all
       media.each(&:save!)
     end
