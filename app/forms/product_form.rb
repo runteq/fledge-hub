@@ -96,18 +96,25 @@ class ProductForm
   private
 
   def save!
-    attr_medium_ids = media_attributes.map do |attr|
-      attr.deep_symbolize_keys[:id]
-    end.reject(&:blank?).map(&:to_i)
-    remained_medium_ids = attr_medium_ids & product.media.ids # 重複を返す
-
     ActiveRecord::Base.transaction(joinable: false, requires_new: true) do
       product.save!
-      product.grab_ogp(URI.parse(ogp_url[:content])) if product.images.empty? && ogp_url
+      grab_ogp
       product.media.where.not(id: remained_medium_ids).destroy_all
       media.each(&:save!)
     end
     assign_attributes(id: product.id)
+  end
+
+  # 重複を返す
+  def remained_medium_ids
+    attr_medium_ids = media_attributes.map do |attr|
+      attr.deep_symbolize_keys[:id]
+    end.reject(&:blank?).map(&:to_i)
+    attr_medium_ids & product.media.ids
+  end
+
+  def grab_ogp
+    product.grab_ogp(URI.parse(ogp_url[:content])) if product.images.empty? && ogp_url
   end
 
   def ogp_url
