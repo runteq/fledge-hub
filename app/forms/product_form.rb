@@ -102,10 +102,18 @@ class ProductForm
 
     ActiveRecord::Base.transaction(joinable: false, requires_new: true) do
       product.save!
+      product.grab_ogp(ogp_url)
       product.media.where.not(id: remained_medium_ids).destroy_all
       media.each(&:save!)
     end
     assign_attributes(id: product.id)
+  end
+
+  def ogp_url
+    agent = ::Mechanize.new
+    page = agent.get(url)
+    url = page.at('meta[property="og:image"]')[:content]
+    URI.parse(url)
   end
 
   def product
