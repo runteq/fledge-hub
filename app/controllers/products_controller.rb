@@ -40,7 +40,7 @@ class ProductsController < ApplicationController
   def destroy
     @product = current_user.products.find(params[:id])
     @product.destroy!
-    redirect_to products_url, notice: 'サービスを削除しました！'
+    redirect_to root_url, notice: 'サービスを削除しました！'
   end
 
   private
