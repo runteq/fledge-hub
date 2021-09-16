@@ -40,7 +40,7 @@ RSpec.describe InquiryForm do
         expect(MattermostNotifier).to receive(:call).with(
           channel: 'fledge-hub',
           username: 'お問い合わせ',
-          text: "| name | name_test |\n | -- | -- |\n | email | test@example.com |\n | about | about_test|\n | description | description_test|\n | user_agent | user_agent_test|",
+          text: "| name | name_test |\n | -- | -- |\n | email | test@example.com |\n | about | about_test|\n | user_agent | user_agent_test|\ndescription_test",
         )
         subject
       end

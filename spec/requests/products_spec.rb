@@ -189,7 +189,7 @@ RSpec.describe ProductsController, type: :request do
 
     it 'redirects to the products list' do
       subject
-      expect(response).to redirect_to(products_url)
+      expect(response).to redirect_to(root_url)
     end
   end
 end
