@@ -145,7 +145,7 @@ class ProductForm
 
   def url_validity
     ogp_url
-  rescue SocketError
+  rescue SocketError, Net::OpenTimeout
     errors.add(:url, 'にアクセスできません。')
   end
 
