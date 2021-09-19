@@ -21,7 +21,7 @@ RSpec.describe ApplicationHelper, type: :helper do
 
     context '引数がないとき' do
       subject { helper.description }
-      it { is_expected.to eq 'サービスの説明' }
+      it { is_expected.to eq '個人開発者のための、技術を検索できる開発サービス投稿サイト' }
     end
   end
 

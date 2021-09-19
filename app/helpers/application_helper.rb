@@ -8,7 +8,7 @@ module ApplicationHelper
   end
 
   def description(text = '')
-    text.presence || 'サービスの説明'
+    text.presence || '個人開発者のための、技術を検索できる開発サービス投稿サイト'
   end
 
   def meta_image_url(image_url = '')
