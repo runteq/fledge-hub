@@ -83,28 +83,26 @@
   }
 </style>
 
-<div class="w-1/2 carousel relative rounded relative overflow-hidden shadow-xl">
-  <div class="carousel-inner relative overflow-hidden w-full">
-  <% @images.each_with_index do |image, index| %>
-    <input class="carousel-open" type="radio" id="carousel-<%= index %>" name="carousel" aria-hidden="true" hidden <%= index.zero? ? 'checked' : nil %>>
+<div class="w-1/2 rounded overflow-hidden shadow-md">
+  <div class="relative overflow-hidden w-full">
+    <% @images.each_with_index do |image, index| %>
+      <% size = @images.size %>
+      <input class="carousel-open" type="radio" id="carousel-<%= index %>" name="carousel" aria-hidden="true" hidden <%= index.zero? ? 'checked' : nil %>>
       <div class="hoge hidden">
-        <%= image_tag image.product_image, class: "carousel-item absolute" %>
+        <%= image_tag image.product_image.variant(resize_to_fill: [800, 450]), class: "carousel-item absolute" %>
 
-        <label for="carousel-<%= (index-1) % @images.size %>" class="control-<%= index %> w-10 h-10 ml-2 md:ml-10 absolute cursor-pointer hidden font-bold text-black hover:text-white rounded-full bg-white hover:bg-blue-700 leading-tight text-center z-10 inset-y-0 left-0 my-auto">
-          <i class="fas fa-angle-left mt-3"></i>
-        </label>
-        <label for="carousel-<%= (index+1) % @images.size %>" class="next control-<%= index %> w-10 h-10 mr-2 md:mr-10 absolute cursor-pointer hidden font-bold text-black hover:text-white rounded-full bg-white hover:bg-blue-700 leading-tight text-center z-10 inset-y-0 right-0 my-auto">
-          <i class="fas fa-angle-right mt-3"></i>
-        </label>
+        <% if size > 1 %>
+          <label for="carousel-<%= (index-1) % size %>" class="w-8 h-8 ml-5 absolute cursor-pointer rounded-full text-white bg-black bg-opacity-30 hover:bg-opacity-80 inset-y-0 left-0 my-auto flex items-center justify-center">
+            <i class="fas fa-angle-left"></i>
+          </label>
+          <label for="carousel-<%= (index+1) % size %>" class="w-8 h-8 mr-5 absolute cursor-pointer rounded-full text-white bg-black bg-opacity-30 hover:bg-opacity-80 inset-y-0 right-0 my-auto flex items-center justify-center">
+            <i class="fas fa-angle-right"></i>
+          </label>
+        <% end %>
       </div>
     <% end %>
   </div>
 </div>
-
-
-
-
-
 
 <% if @product.permitted_edit?(current_user) %>
   以下編集用
