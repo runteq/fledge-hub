@@ -3,10 +3,10 @@
 <% content_for(:meta_image_url, url_for(@product.top_image&.product_image&.variant(resize_to_fill: [800, 450]) || "https://placehold.jp/70/d6d6d6/7d7d7d/800x450.png?text=No%20Image")) %>
 <% content_for :css do %>
   <style type="text/css">
-    .carousel-open:checked+.hoge {
+    .carousel-open:checked+.carousel-item {
       display: block;
     }
-    .carousel-open:checked+.hoge .carousel-item {
+    .carousel-open:checked+.carousel-item .carousel-image {
       position: static;
       opacity: 100;
     }
@@ -90,7 +90,7 @@
     <% @images.each_with_index do |image, index| %>
       <% size = @images.size %>
       <input class="carousel-open" type="radio" id="carousel-<%= index %>" name="carousel" aria-hidden="true" hidden <%= index.zero? ? 'checked' : nil %>>
-      <div class="hoge hidden">
+      <div class="carousel-item hidden">
         <%= render 'product_images/product_image', product_image: image %>
 
         <% if size > 1 %>
