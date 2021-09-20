@@ -89,7 +89,7 @@
       <% size = @images.size %>
       <input class="carousel-open" type="radio" id="carousel-<%= index %>" name="carousel" aria-hidden="true" hidden <%= index.zero? ? 'checked' : nil %>>
       <div class="hoge hidden">
-        <%= image_tag image.product_image.variant(resize_to_fill: [800, 450]), class: "carousel-item absolute" %>
+        <%= render 'product_images/product_image', product_image: image %>
 
         <% if size > 1 %>
           <label for="carousel-<%= (index-1) % size %>" class="w-8 h-8 ml-5 absolute cursor-pointer rounded-full text-white bg-black bg-opacity-30 hover:bg-opacity-80 inset-y-0 left-0 my-auto flex items-center justify-center">
