@@ -1,6 +1,17 @@
 <% content_for(:title, @product.title) %>
 <% content_for(:description, @product.summary.presence || @product.title) %>
 <% content_for(:meta_image_url, url_for(@product.top_image&.product_image&.variant(resize_to_fill: [800, 450]) || "https://placehold.jp/70/d6d6d6/7d7d7d/800x450.png?text=No%20Image")) %>
+<% content_for :css do %>
+  <style type="text/css">
+    .carousel-open:checked+.hoge {
+      display: block;
+    }
+    .carousel-open:checked+.hoge .carousel-item {
+      position: static;
+      opacity: 100;
+    }
+  </style>
+<% end %>
 
 <div class="mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-lg lg:px-8 lg:py-1">
   <div class="flex flex-col space-y-4 lg:space-y-0 lg:flex-row lg:items-center lg:justify-between">
@@ -73,15 +84,6 @@
     </ul>
   </div>
 </div>
-<style>
-  .carousel-open:checked+.hoge {
-    display: block;
-  }
-  .carousel-open:checked+.hoge .carousel-item {
-    position: static;
-    opacity: 100;
-  }
-</style>
 
 <div class="w-1/2 rounded overflow-hidden shadow-md">
   <div class="relative overflow-hidden w-full">
