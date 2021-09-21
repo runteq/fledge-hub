@@ -28,6 +28,13 @@
     </div>
   </div>
 
+  <%= render 'stocks/stock_button', product: @product, stocked: @product.stocked_by?(current_user) %>
+  <%= link_to edit_product_path(@product) do %>
+    <button class="w-10 h-10 text-gray-600 transform border-2 rounded-full hover:border-indigo-200">
+      <i class="fas fa-pen" aria-hidden="true"></i>
+    </button>
+  <% end %>
+
   <div class="grid gap-8 row-gap-8 lg:grid-cols-2">
     <div class="relative rounded overflow-hidden shadow-md">
       <% @images.each_with_index do |image, index| %>
@@ -49,44 +56,54 @@
     </div>
 
     <div class="flex flex-col justify-center">
-      <div class="flex flex-col space-y-4 lg:space-y-0 lg:flex-row lg:items-center lg:justify-between">
-        <div class="flex items-center justify-end space-x-4">
-          <% if @product.url.present? %>
-            <%= link_to sanitize(@product.url), target: :_blank, rel: 'noopener noreferrer', class: "no-underline" do %>
-              <button class="flex items-center px-4 py-2 space-x-3 text-gray-600 transition-colors duration-200 transform border rounded-lg dark:text-gray-200 dark:border-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none">
-                <i class="fas fa-link"></i>
-                <span>Site</span>
-              </button>
-            <% end %>
-          <% end %>
-          <% if @product.source_url.present? %>
-            <%= link_to sanitize(@product.source_url), target: :_blank, rel: 'noopener noreferrer', class: "no-underline" do %>
-              <button class="flex items-center px-4 py-2 space-x-3 text-gray-600 transition-colors duration-200 transform border rounded-lg dark:text-gray-200 dark:border-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none">
-                <i class="fas fa-code"></i>
-                <span>Code</span>
-              </button>
-            <% end %>
-          <% end %>
-          <%= render 'stocks/stock_button', product: @product, stocked: @product.stocked_by?(current_user) %>
+      <div class="flex flex-wrap items-center space-x-2">
+        <div class="w-32 my-1 text-center text-sm font-semibold bg-indigo-100 text-indigo-900">
+          <%= Product.human_attribute_name(:product_category_id) %>
         </div>
+        <p>
+          <%= @product.product_category.name %>
+        </p>
       </div>
 
-      <div class="max-w-xl mb-2 -px-1">
-        <% @product.technologies.each do |technology| %>
-          <div class="span px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-200 text-gray-700">
-            <%= technology.name %>
+      <div class="flex flex-wrap items-center space-x-2">
+        <div class="w-32 my-1 text-center text-sm font-semibold bg-indigo-100 text-indigo-900">
+          <%= Product.human_attribute_name(:product_type_id) %>
+        </div>
+        <p>
+          <%= @product.product_type.name %>
+        </p>
+      </div>
+
+      <% if @product.url.present? %>
+        <div class="flex flex-wrap items-center space-x-2">
+          <span class="w-32 my-1 text-center text-sm font-semibold bg-indigo-100 text-indigo-900">
+            <%= Product.human_attribute_name(:url) %>
+          </span>
+          <p>
+            <%= link_to sanitize(@product.url), target: :_blank, rel: 'noopener noreferrer' %>
+          </p>
+      </div>
+      <% end %>
+
+      <% if @product.source_url.present? %>
+        <div class="flex flex-wrap items-center space-x-2">
+          <div class="w-32 my-1 text-center text-sm font-semibold bg-indigo-100 text-indigo-900">
+            <%= Product.human_attribute_name(:source_url) %>
           </div>
-        <% end %>
-      </div>
+          <p>
+            <%= link_to sanitize(@product.source_url), target: :_blank, rel: 'noopener noreferrer' %>
+          </p>
+        </div>
+      <% end %>
 
-      <div class="flex items-center flex-wrap">
-        <div class="inline-flex tracking-widest text-sm title-font font-medium text-gray-400">
-          <span class="inline-flex ml-auto px-2 text-xs leading-5 font-semibold bg-yellow-100 text-yellow-900 mb-2">
-            <%= @product.product_type.name %>
-          </span>
-          <span class="inline-flex ml-2 px-2 text-xs leading-5 font-semibold bg-red-100 text-red-900 mb-2">
-            <%= @product.product_category.name %>
-          </span>
+      <div class="mb-2">
+        <div class="w-32 my-1 text-center text-sm font-semibold bg-indigo-100 text-indigo-900">
+          使用技術
+        </div>
+        <div class="flex flex-wrap space-x-2">
+          <% @product.technologies.each do |technology| %>
+            <%=link_to technology.name, root_path %>
+          <% end %>
         </div>
       </div>
     </div>
@@ -114,17 +131,13 @@
 <% if @product.permitted_edit?(current_user) %>
   以下編集用
   <br>
-  <%= link_to 'Edit', edit_product_path(@product) %>
-  <br>
-  <%= link_to 'Destroy', @product, data: { confirm: 'Are you sure?' }, method: :delete %>
-  <br>
   <%= link_to '画像登録', new_product_product_image_path(@product) %>
 
   <% @product.images.with_attached_product_image.each do |image| %>
     <div>
       <%= image_tag image.product_image, alt: @product.title, width: '100px' %>
       <%= link_to '編集', edit_product_product_image_path(@product, image) %>
-      <%= link_to '削除', product_product_image_path(@product, image), method: :delete %>
+
     </div>
   <% end %>
 <% end %>
