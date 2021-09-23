@@ -27,9 +27,11 @@ RSpec.describe RegistrationsController, type: :request do
         allow_any_instance_of(ActionDispatch::Request).to receive(:session).and_return(
           {
             user_info: {
-              'screen_name' => 'screen_name',
-              'display_name' => '',
+              'id' => Random.new_seed,
+              'avatar_url' => 'http://i.pravatar.cc/300',
+              'login' => 'github_account_name',
               'email' => 'example@example.com',
+              'created_at' => '2018-11-03T03:17:20Z',
             },
           },
         )
@@ -69,6 +71,8 @@ RSpec.describe RegistrationsController, type: :request do
               'id' => Random.new_seed,
               'avatar_url' => 'http://i.pravatar.cc/300',
               'login' => 'github_account_name',
+              'email' => 'example@example.com',
+              'created_at' => '2018-11-03T03:17:20Z',
             },
           },
         )
@@ -125,6 +129,7 @@ RSpec.describe RegistrationsController, type: :request do
               screen_name: 'screen_name',
               display_name: '表示名',
               email: 'example@example.com',
+              study_started_on: '2018-01-01',
             },
           }
         end

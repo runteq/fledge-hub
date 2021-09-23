@@ -3,10 +3,12 @@ class RegistrationsController < ApplicationController
 
   def new
     user_info = session[:user_info]
+
     @user = User.new(
       screen_name: user_info['login'],
       display_name: user_info['name'],
       email: user_info['email'],
+      study_started_on: user_info['created_at'],
     )
   end
 
@@ -38,6 +40,6 @@ class RegistrationsController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:screen_name, :display_name, :email)
+    params.require(:user).permit(:screen_name, :display_name, :study_started_on, :email)
   end
 end
