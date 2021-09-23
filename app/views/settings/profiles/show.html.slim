@@ -9,7 +9,7 @@
       ul
         - @user.errors.full_messages.each do |message|
           li = message
-
+  = image_tag @user.avatar
   .form-group
     = f.label :display_name, class: 'form-label'
     = f.text_field :display_name, required: true, class: 'text-field'
@@ -17,4 +17,7 @@
     = f.label :email, class: 'form-label'
     = f.email_field :email, required: true, class: 'text-field'
   .form-group
+    = f.label :avatar, class: 'form-label'
+    = f.file_field :avatar, class: 'block w-full'
+
     = f.submit class: 'btn btn-indigo'
