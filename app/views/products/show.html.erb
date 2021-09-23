@@ -43,21 +43,25 @@
 
   <div class="grid gap-8 row-gap-8 lg:grid-cols-2">
     <div class="relative rounded overflow-hidden shadow-md">
-      <% @images.each_with_index do |image, index| %>
-        <% size = @images.size %>
-        <input class="carousel-open" type="radio" id="carousel-<%= index %>" name="carousel" aria-hidden="true" hidden <%= index.zero? ? 'checked' : nil %>>
-        <div class="carousel-item hidden">
-          <%= render 'product_images/product_image', product_image: image %>
+      <% if @images.empty? %>
+        <%= image_tag "https://placehold.jp/70/d6d6d6/7d7d7d/800x450.png?text=No%20Image" %>
+      <% else %>
+        <% @images.each_with_index do |image, index| %>
+          <% size = @images.size %>
+          <input class="carousel-open" type="radio" id="carousel-<%= index %>" name="carousel" aria-hidden="true" hidden <%= index.zero? ? 'checked' : nil %>>
+          <div class="carousel-item hidden">
+            <%= render 'product_images/product_image', product_image: image %>
 
-          <% if size > 1 %>
-            <label for="carousel-<%= (index-1) % size %>" class="w-8 h-8 ml-2 md:ml-3 absolute cursor-pointer rounded-full text-white bg-black bg-opacity-30 hover:bg-opacity-80 inset-y-0 left-0 my-auto flex items-center justify-center">
-              <i class="fas fa-angle-left"></i>
-            </label>
-            <label for="carousel-<%= (index+1) % size %>" class="w-8 h-8 mr-2 md:mr-3 absolute cursor-pointer rounded-full text-white bg-black bg-opacity-30 hover:bg-opacity-80 inset-y-0 right-0 my-auto flex items-center justify-center">
-              <i class="fas fa-angle-right"></i>
-            </label>
-          <% end %>
-        </div>
+            <% if size > 1 %>
+              <label for="carousel-<%= (index-1) % size %>" class="w-8 h-8 ml-2 md:ml-3 absolute cursor-pointer rounded-full text-white bg-black bg-opacity-30 hover:bg-opacity-80 inset-y-0 left-0 my-auto flex items-center justify-center">
+                <i class="fas fa-angle-left"></i>
+              </label>
+              <label for="carousel-<%= (index+1) % size %>" class="w-8 h-8 mr-2 md:mr-3 absolute cursor-pointer rounded-full text-white bg-black bg-opacity-30 hover:bg-opacity-80 inset-y-0 right-0 my-auto flex items-center justify-center">
+                <i class="fas fa-angle-right"></i>
+              </label>
+            <% end %>
+          </div>
+        <% end %>
       <% end %>
     </div>
 
