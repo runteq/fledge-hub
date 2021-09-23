@@ -13,27 +13,33 @@
   </style>
 <% end %>
 
-<div class="mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-lg lg:px-8 lg:py-1">
-  <div>
-    <span class="text-gray-400">
-      <%= @product.release_day_message %>
-    </span>
-    <div class="flex flex-col mt-2 space-y-1 sm:flex-row sm:space-y-0 sm:items-center sm:space-x-4">
-      <h3 class="text-2xl font-semibold text-gray-800 dark:text-gray-200">
-        <%= @product.title %>
-      </h3>
-      <div class="text-sm text-gray-400">
-        by <%= link_to_if @product.user.active?, @product.user.display_name, user_path(@product.user.screen_name) %>
+<div class="mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-lg lg:py-1">
+  <div class="mb-3 flex flex-col lg:space-y-0 lg:flex-row lg:items-center lg:justify-between">
+    <div>
+      <span class="text-gray-400">
+        <%= @product.release_day_message %>
+      </span>
+      <div class="flex flex-col space-y-1 sm:flex-row sm:space-y-0 sm:items-center sm:space-x-4">
+        <h3 class="text-2xl font-semibold text-gray-800 dark:text-gray-200">
+          <%= @product.title %>
+        </h3>
+        <div class="text-sm text-gray-400">
+          by <%= link_to_if @product.user.active?, @product.user.display_name, user_path(@product.user.screen_name) %>
+        </div>
       </div>
     </div>
+    <div class="flex items-center justify-end space-x-4">
+      <% if @product.permitted_edit?(current_user) %>
+        <%= link_to edit_product_path(@product) do %>
+          <button class="w-10 h-10 text-gray-600 transform border-2 rounded-full hover:border-indigo-400">
+            <i class="fas fa-pen" aria-hidden="true"></i>
+          </button>
+        <% end %>
+      <% else %>
+        <%= render 'stocks/stock_button', product: @product, stocked: @product.stocked_by?(current_user) %>
+      <% end %>
+    </div>
   </div>
-
-  <%= render 'stocks/stock_button', product: @product, stocked: @product.stocked_by?(current_user) %>
-  <%= link_to edit_product_path(@product) do %>
-    <button class="w-10 h-10 text-gray-600 transform border-2 rounded-full hover:border-indigo-200">
-      <i class="fas fa-pen" aria-hidden="true"></i>
-    </button>
-  <% end %>
 
   <div class="grid gap-8 row-gap-8 lg:grid-cols-2">
     <div class="relative rounded overflow-hidden shadow-md">
@@ -100,9 +106,11 @@
         <div class="w-32 my-1 text-center text-sm font-semibold bg-indigo-100 text-indigo-900">
           使用技術
         </div>
-        <div class="flex flex-wrap space-x-2">
+        <div class="flex flex-wrap space-x-3">
           <% @product.technologies.each do |technology| %>
-            <%=link_to technology.name, root_path %>
+            <div>
+              <%= technology.name %>
+            </div>
           <% end %>
         </div>
       </div>
