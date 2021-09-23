@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ProductComponent < ViewComponent::Base
-  include LinkHelper
+  include ApplicationHelper
 
   def initialize(product:)
     super()

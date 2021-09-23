@@ -1,6 +1,6 @@
 <% content_for(:title, @product.title) %>
 <% content_for(:description, @product.summary.presence || @product.title) %>
-<% content_for(:meta_image_url, url_for(@product.top_image&.product_image&.variant(resize_to_fill: [800, 450]) || "https://placehold.jp/70/d6d6d6/7d7d7d/800x450.png?text=No%20Image")) %>
+<% content_for(:meta_image_url, product_thumbnail_url(@product.top_image)) %>
 <% content_for :css do %>
   <style type="text/css">
     .carousel-open:checked+.carousel-item {
@@ -44,7 +44,7 @@
   <div class="grid gap-8 row-gap-8 lg:grid-cols-2">
     <div class="relative rounded overflow-hidden shadow-md">
       <% if @images.empty? %>
-        <%= image_tag "https://placehold.jp/70/d6d6d6/7d7d7d/800x450.png?text=No%20Image" %>
+        <%= image_tag ProductImage::NO_IMAGE_URL %>
       <% else %>
         <% @images.each_with_index do |image, index| %>
           <% size = @images.size %>
