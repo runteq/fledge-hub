@@ -6,7 +6,7 @@
       = ff.text_field :title, value: medium.title, class: 'text-field'
     .form-group
       = ff.label :url, class: 'form-label'
-      = ff.text_field :url, value: medium.url, class: 'text-field'
+      = ff.url_field :url, value: medium.url, class: 'text-field'
   .text-right
     span class='cursor-pointer underline hover:opacity-75' onclick='removeMediumForm(event)'
       | 削除
