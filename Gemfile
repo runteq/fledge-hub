@@ -8,9 +8,9 @@ gem 'rails', '~> 6.1.3'
 gem 'bootsnap', require: false
 gem 'mysql2'
 gem 'puma'
-gem 'sass-rails'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'webpacker'
+gem 'sprockets', '~> 3.7.2' # 4.0だとassetsがないときにエラーが発生するため
 
 gem 'active_storage_validations'
 gem 'mini_magick', '>= 4.9.5'
