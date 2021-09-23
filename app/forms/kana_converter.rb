@@ -1,4 +1,4 @@
-module KanaHelper
+module KanaConverter
   require 'nkf'
 
   def to_hiragana(str)
