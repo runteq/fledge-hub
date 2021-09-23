@@ -3,19 +3,19 @@
     {
       "warning_type": "Cross-Site Scripting",
       "warning_code": 4,
-      "fingerprint": "0754f2cf6782d858e4ca1ab847ce5ab3995e8093e77b3e2e0e101bd55bd034ca",
+      "fingerprint": "9f9598532f750afc209dae6378dbf344d79b57d1b8a399298b1bb1014f038aa5",
       "check_name": "LinkToHref",
       "message": "Potentially unsafe model attribute in `link_to` href",
       "file": "app/views/products/show.html.erb",
-      "line": 30,
+      "line": 104,
       "link": "https://brakemanscanner.org/docs/warning_types/link_to_href",
-      "code": "link_to(sanitize(Product.find(params[:id]).source_url), :target => :_blank, :rel => \"noopener noreferrer\", :class => \"no-underline\")",
+      "code": "link_to(Product.find(params[:id]).source_url, sanitize(Product.find(params[:id]).source_url), :target => :_blank, :rel => \"noopener noreferrer\")",
       "render_path": [
         {
           "type": "controller",
           "class": "ProductsController",
           "method": "show",
-          "line": 15,
+          "line": 12,
           "file": "app/controllers/products_controller.rb",
           "rendered": {
             "name": "products/show",
@@ -34,19 +34,19 @@
     {
       "warning_type": "Cross-Site Scripting",
       "warning_code": 4,
-      "fingerprint": "6a6ddcdd05fdd2ef773851b46874e90e1862b79683f1f43dba4567ac477a23b3",
+      "fingerprint": "e27fca2bb1eb6605efa6df6908f2fc8b0928898f9420fe2157bb55105f1c05cd",
       "check_name": "LinkToHref",
       "message": "Potentially unsafe model attribute in `link_to` href",
       "file": "app/views/products/show.html.erb",
-      "line": 22,
+      "line": 93,
       "link": "https://brakemanscanner.org/docs/warning_types/link_to_href",
-      "code": "link_to(sanitize(Product.find(params[:id]).url), :target => :_blank, :rel => \"noopener noreferrer\", :class => \"no-underline\")",
+      "code": "link_to(Product.find(params[:id]).url, sanitize(Product.find(params[:id]).url), :target => :_blank, :rel => \"noopener noreferrer\")",
       "render_path": [
         {
           "type": "controller",
           "class": "ProductsController",
           "method": "show",
-          "line": 15,
+          "line": 12,
           "file": "app/controllers/products_controller.rb",
           "rendered": {
             "name": "products/show",
@@ -63,6 +63,6 @@
       "note": "urlはバリデーションチェックをしているため"
     }
   ],
-  "updated": "2021-07-31 23:02:51 +0900",
-  "brakeman_version": "5.0.4"
+  "updated": "2021-09-23 16:58:06 +0900",
+  "brakeman_version": "5.1.1"
 }
