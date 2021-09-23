@@ -8,9 +8,9 @@ gem 'rails', '~> 6.1.3'
 gem 'bootsnap', require: false
 gem 'mysql2'
 gem 'puma'
-gem 'sass-rails'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'webpacker'
+gem 'sprockets', '~> 3.7.2' # 4.0だとassetsがないときにエラーが発生するため
 
 gem 'active_storage_validations'
 gem 'mini_magick', '>= 4.9.5'
@@ -18,7 +18,7 @@ gem 'image_processing'
 gem 'active_hash'
 gem 'rails-i18n'
 gem 'seed-fu'
-gem 'tailwindcss-rails', '~> 0.3.3'
+gem 'tailwindcss-rails'
 gem 'slim-rails'
 gem 'view_component', require: 'view_component/engine'
 gem 'active_decorator'
@@ -27,7 +27,7 @@ gem 'date_validator'
 gem 'validate_url'
 gem 'hotwire-rails'
 gem 'faraday'
-gem 'pagy', '~> 3.5'
+gem 'pagy'
 gem 'config'
 gem 'mechanize'
 

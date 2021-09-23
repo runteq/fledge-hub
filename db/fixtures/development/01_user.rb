@@ -4,7 +4,7 @@ user_hashes = (1..20).map do |n|
     display_name: "example#{n}",
     screen_name: "example#{n}",
     email: "example#{n}@example.com",
-    study_started_on: Time.current,
+    study_started_on: Date.yesterday,
     status: :general
   }
 end
