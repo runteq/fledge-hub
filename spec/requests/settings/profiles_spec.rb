@@ -14,18 +14,22 @@ RSpec.describe Settings::ProfilesController, type: :request do
   end
 
   describe 'PATCH /update' do
-    let(:user) { create(:user, display_name: '古い表示名') }
+    let(:user) { create(:user, display_name: '古い表示名', study_started_on: '2021-01-01') }
     subject { patch '/settings/profile', params: { user: attributes } }
 
     context 'with valid parameters' do
       let(:attributes) do
         {
           display_name: '新しい表示名',
+          study_started_on: '2020-01-01',
         }
       end
 
       it 'updates the requested user' do
         expect { subject }.to change { user.reload.display_name }.to('新しい表示名').from('古い表示名')
+          .and change {
+            user.reload.study_started_on
+          }.to(Date.parse('2020-01-01')).from(Date.parse('2021-01-01'))
       end
 
       it 'redirects to the user' do
