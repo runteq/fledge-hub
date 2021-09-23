@@ -86,7 +86,7 @@
             <%= Product.human_attribute_name(:url) %>
           </span>
           <p>
-            <%= link_to sanitize(@product.url), target: :_blank, rel: 'noopener noreferrer' %>
+            <%= link_to @product.url, sanitize(@product.url), target: :_blank, rel: 'noopener noreferrer' %>
           </p>
       </div>
       <% end %>
@@ -97,7 +97,7 @@
             <%= Product.human_attribute_name(:source_url) %>
           </div>
           <p>
-            <%= link_to sanitize(@product.source_url), target: :_blank, rel: 'noopener noreferrer' %>
+            <%= link_to @product.source_url, sanitize(@product.source_url), target: :_blank, rel: 'noopener noreferrer' %>
           </p>
         </div>
       <% end %>
@@ -117,7 +117,7 @@
     </div>
   </div>
 
-  <p class="my-2 text-gray-500 dark:text-gray-400 lg:max-w-xl">
+  <p class="my-2 text-gray-500 dark:text-gray-400">
     <%= safe_join(@product.summary.split("\n"), tag(:br)) %>
   </p>
 
