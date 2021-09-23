@@ -443,7 +443,7 @@ GEM
       net-ssh (>= 2.8.0)
     stimulus-rails (0.5.4)
       rails (>= 6.0.0)
-    tailwindcss-rails (0.3.3)
+    tailwindcss-rails (0.4.3)
       rails (>= 6.0.0)
     temple (0.8.2)
     thor (1.1.0)
@@ -549,7 +549,7 @@ DEPENDENCIES
   sorcery
   spring
   sprockets (~> 3.7.2)
-  tailwindcss-rails (~> 0.3.3)
+  tailwindcss-rails
   tzinfo-data
   validate_url
   view_component
