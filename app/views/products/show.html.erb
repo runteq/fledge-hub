@@ -66,7 +66,7 @@
         <div class="w-32 my-1 text-center text-sm font-semibold bg-indigo-100 text-indigo-900">
           <%= Product.human_attribute_name(:product_category_id) %>
         </div>
-        <p>
+        <p class="break-words">
           <%= @product.product_category.name %>
         </p>
       </div>
@@ -75,7 +75,7 @@
         <div class="w-32 my-1 text-center text-sm font-semibold bg-indigo-100 text-indigo-900">
           <%= Product.human_attribute_name(:product_type_id) %>
         </div>
-        <p>
+        <p class="break-words">
           <%= @product.product_type.name %>
         </p>
       </div>
@@ -85,7 +85,7 @@
           <span class="w-32 my-1 text-center text-sm font-semibold bg-indigo-100 text-indigo-900">
             <%= Product.human_attribute_name(:url) %>
           </span>
-          <p>
+          <p class="break-all">
             <%= link_to @product.url, sanitize(@product.url), target: :_blank, rel: 'noopener noreferrer' %>
           </p>
       </div>
@@ -96,7 +96,7 @@
           <div class="w-32 my-1 text-center text-sm font-semibold bg-indigo-100 text-indigo-900">
             <%= Product.human_attribute_name(:source_url) %>
           </div>
-          <p>
+          <p class="break-all">
             <%= link_to @product.source_url, sanitize(@product.source_url), target: :_blank, rel: 'noopener noreferrer' %>
           </p>
         </div>
