@@ -9,6 +9,7 @@
 #  salt             :string(255)
 #  screen_name      :string(255)      not null
 #  status           :integer          default("general"), not null
+#  study_started_on :date
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #
@@ -39,6 +40,7 @@ class User < ApplicationRecord
                           length: { maximum: 30 },
                           format: { with: /\A[\w-]+\z/, message: 'には半角英数字と_-のみ使えます。' }
   validates :email, presence: true, uniqueness: true, length: { maximum: 100 }
+  validates :study_started_on, presence: true
 
   enum status: { general: 0, deactivated: 10 }
 
