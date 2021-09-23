@@ -1,14 +1,25 @@
 <% content_for(:title, @product.title) %>
 <% content_for(:description, @product.summary.presence || @product.title) %>
-<% content_for(:meta_image_url, url_for(@product.top_image&.product_image&.variant(resize_to_fill: [800, 450]) || "https://placehold.jp/70/d6d6d6/7d7d7d/800x450.png?text=No%20Image")) %>
+<% content_for(:meta_image_url, product_thumbnail_url(@product.top_image)) %>
+<% content_for :css do %>
+  <style type="text/css">
+    .carousel-open:checked+.carousel-item {
+      display: block;
+    }
+    .carousel-open:checked+.carousel-item .carousel-image {
+      position: static;
+      opacity: 100;
+    }
+  </style>
+<% end %>
 
-<div class="mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-lg lg:px-8 lg:py-1">
-  <div class="flex flex-col space-y-4 lg:space-y-0 lg:flex-row lg:items-center lg:justify-between">
+<div class="mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-lg lg:py-1">
+  <div class="mb-3 flex flex-col lg:space-y-0 lg:flex-row lg:items-center lg:justify-between">
     <div>
       <span class="text-gray-400">
         <%= @product.release_day_message %>
       </span>
-      <div class="flex flex-col mt-2 space-y-1 sm:flex-row sm:space-y-0 sm:items-center sm:space-x-4">
+      <div class="flex flex-col space-y-1 sm:flex-row sm:space-y-0 sm:items-center sm:space-x-4">
         <h3 class="text-2xl font-semibold text-gray-800 dark:text-gray-200">
           <%= @product.title %>
         </h3>
@@ -18,47 +29,101 @@
       </div>
     </div>
     <div class="flex items-center justify-end space-x-4">
-      <% if @product.url.present? %>
-        <%= link_to sanitize(@product.url), target: :_blank, rel: 'noopener noreferrer', class: "no-underline" do %>
-          <button class="flex items-center px-4 py-2 space-x-3 text-gray-600 transition-colors duration-200 transform border rounded-lg dark:text-gray-200 dark:border-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none">
-            <i class="fas fa-link"></i>
-            <span>Site</span>
+      <% if @product.permitted_edit?(current_user) %>
+        <%= link_to edit_product_path(@product) do %>
+          <button class="w-10 h-10 text-gray-600 transform border-2 rounded-full hover:border-indigo-400">
+            <i class="fas fa-pen" aria-hidden="true"></i>
           </button>
         <% end %>
+      <% else %>
+        <%= render 'stocks/stock_button', product: @product, stocked: @product.stocked_by?(current_user) %>
       <% end %>
-      <% if @product.source_url.present? %>
-        <%= link_to sanitize(@product.source_url), target: :_blank, rel: 'noopener noreferrer', class: "no-underline" do %>
-          <button class="flex items-center px-4 py-2 space-x-3 text-gray-600 transition-colors duration-200 transform border rounded-lg dark:text-gray-200 dark:border-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none">
-            <i class="fas fa-code"></i>
-            <span>Code</span>
-          </button>
-        <% end %>
-      <% end %>
-      <%= render 'stocks/stock_button', product: @product, stocked: @product.stocked_by?(current_user) %>
     </div>
   </div>
-  <p class="my-2 text-gray-500 dark:text-gray-400 lg:max-w-xl">
+
+  <div class="grid gap-8 row-gap-8 lg:grid-cols-2">
+    <div class="relative rounded overflow-hidden shadow-md">
+      <% if @images.empty? %>
+        <%= image_tag ProductImage::NO_IMAGE_URL %>
+      <% else %>
+        <% @images.each_with_index do |image, index| %>
+          <% size = @images.size %>
+          <input class="carousel-open" type="radio" id="carousel-<%= index %>" name="carousel" aria-hidden="true" hidden <%= index.zero? ? 'checked' : nil %>>
+          <div class="carousel-item hidden">
+            <%= render 'product_images/product_image', product_image: image %>
+
+            <% if size > 1 %>
+              <label for="carousel-<%= (index-1) % size %>" class="w-8 h-8 ml-2 md:ml-3 absolute cursor-pointer rounded-full text-white bg-black bg-opacity-30 hover:bg-opacity-80 inset-y-0 left-0 my-auto flex items-center justify-center">
+                <i class="fas fa-angle-left"></i>
+              </label>
+              <label for="carousel-<%= (index+1) % size %>" class="w-8 h-8 mr-2 md:mr-3 absolute cursor-pointer rounded-full text-white bg-black bg-opacity-30 hover:bg-opacity-80 inset-y-0 right-0 my-auto flex items-center justify-center">
+                <i class="fas fa-angle-right"></i>
+              </label>
+            <% end %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+
+    <div class="flex flex-col justify-center">
+      <div class="flex flex-wrap items-center space-x-2">
+        <div class="w-32 my-1 text-center text-sm font-semibold bg-indigo-100 text-indigo-900">
+          <%= Product.human_attribute_name(:product_category_id) %>
+        </div>
+        <p class="break-words">
+          <%= @product.product_category.name %>
+        </p>
+      </div>
+
+      <div class="flex flex-wrap items-center space-x-2">
+        <div class="w-32 my-1 text-center text-sm font-semibold bg-indigo-100 text-indigo-900">
+          <%= Product.human_attribute_name(:product_type_id) %>
+        </div>
+        <p class="break-words">
+          <%= @product.product_type.name %>
+        </p>
+      </div>
+
+      <% if @product.url.present? %>
+        <div class="flex flex-wrap items-center space-x-2">
+          <span class="w-32 my-1 text-center text-sm font-semibold bg-indigo-100 text-indigo-900">
+            <%= Product.human_attribute_name(:url) %>
+          </span>
+          <p class="break-all">
+            <%= link_to @product.url, sanitize(@product.url), target: :_blank, rel: 'noopener noreferrer' %>
+          </p>
+      </div>
+      <% end %>
+
+      <% if @product.source_url.present? %>
+        <div class="flex flex-wrap items-center space-x-2">
+          <div class="w-32 my-1 text-center text-sm font-semibold bg-indigo-100 text-indigo-900">
+            <%= Product.human_attribute_name(:source_url) %>
+          </div>
+          <p class="break-all">
+            <%= link_to @product.source_url, sanitize(@product.source_url), target: :_blank, rel: 'noopener noreferrer' %>
+          </p>
+        </div>
+      <% end %>
+
+      <div class="mb-2">
+        <div class="w-32 my-1 text-center text-sm font-semibold bg-indigo-100 text-indigo-900">
+          使用技術
+        </div>
+        <div class="flex flex-wrap space-x-3">
+          <% @product.technologies.each do |technology| %>
+            <div>
+              <%= technology.name %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="my-2 text-gray-500 dark:text-gray-400">
     <%= safe_join(@product.summary.split("\n"), tag(:br)) %>
   </p>
-
-  <div class="max-w-xl mb-2 -px-1">
-    <% @product.technologies.each do |technology| %>
-      <div class="span px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-200 text-gray-700">
-        <%= technology.name %>
-      </div>
-    <% end %>
-  </div>
-
-  <div class="flex items-center flex-wrap">
-    <div class="inline-flex tracking-widest text-sm title-font font-medium text-gray-400">
-      <span class="inline-flex ml-auto px-2 text-xs leading-5 font-semibold bg-yellow-100 text-yellow-900 mb-2">
-        <%= @product.product_type.name %>
-      </span>
-      <span class="inline-flex ml-2 px-2 text-xs leading-5 font-semibold bg-red-100 text-red-900 mb-2">
-        <%= @product.product_category.name %>
-      </span>
-    </div>
-  </div>
 
   <div class="flex flex-col justify-center">
     <ul>
@@ -72,26 +137,19 @@
       <% end %>
     </ul>
   </div>
-
-  <div class="wrap whitespace-nowrap overflow-x-auto w-full" style="scroll-snap-type: x mandatory;">
-    <%= render @images %>
-  </div>
 </div>
+
 
 <% if @product.permitted_edit?(current_user) %>
   以下編集用
   <br>
-  <%= link_to 'Edit', edit_product_path(@product) %>
-  <br>
-  <%= link_to 'Destroy', @product, data: { confirm: 'Are you sure?' }, method: :delete %>
-  <br>
-  <%= link_to 'イメージ画像登録', new_product_product_image_path(@product) %>
+  <%= link_to '画像登録', new_product_product_image_path(@product) %>
 
   <% @product.images.with_attached_product_image.each do |image| %>
     <div>
       <%= image_tag image.product_image, alt: @product.title, width: '100px' %>
       <%= link_to '編集', edit_product_product_image_path(@product, image) %>
-      <%= link_to '削除', product_product_image_path(@product, image), method: :delete %>
+
     </div>
   <% end %>
 <% end %>
