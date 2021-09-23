@@ -9,6 +9,7 @@
 #  salt             :string(255)
 #  screen_name      :string(255)      not null
 #  status           :integer          default("general"), not null
+#  study_started_on :date
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #

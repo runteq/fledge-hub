@@ -5,7 +5,7 @@
               data: { turbo: false },
               class: 'w-full flex',
               local: true do |f|
-    = f.text_field :title, value: params.dig(:q, :title),
+    = f.search_field :title, value: params.dig(:q, :title),
                            placeholder: 'サービスのタイトルで検索',
                            class: 'w-full pl-4 pr-8 outline-none h-10 rounded-full border bg-gray-50'
     = f.button content_tag(:i, '', class: 'fas fa-search text-gray-600 h-4 w-4 fill-current'),
