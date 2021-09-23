@@ -23,6 +23,7 @@ FactoryBot.define do
     sequence(:display_name, '名前_1')
     sequence(:screen_name, 'screen_name_1')
     sequence(:email) { |n| "test_#{n}@example.com" }
+    study_started_on { Time.current }
     status { User.statuses.keys.sample }
 
     avatar do
