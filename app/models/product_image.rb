@@ -16,6 +16,8 @@
 #  fk_rails_...  (product_id => products.id)
 #
 class ProductImage < ApplicationRecord
+  NO_IMAGE_URL = 'https://placehold.jp/70/d6d6d6/7d7d7d/800x450.png?text=No%20Image'.freeze
+
   belongs_to :product
   has_one_attached :product_image
 

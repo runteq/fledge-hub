@@ -1,7 +1,7 @@
 class SearchProductsForm
   include ActiveModel::Model
   include ActiveModel::Attributes
-  include KanaHelper
+  include KanaConverter
 
   attribute :title, :string, default: ''
   attribute :product_type_id, :integer, default: ''

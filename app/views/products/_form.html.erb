@@ -85,7 +85,7 @@
 
   <%# バリデーションエラー時に再度実行されるので、二重定義を回避する %>
   <% if @product.errors.blank? %>
-    <script>
+    <script type="text/javascript">
       const addMediumForm = (e) => {
         const mediaForm = document.getElementById('js-media-form')
         mediaForm.insertAdjacentHTML('afterend', '<%= render 'medium_form', f: f, medium: ProductMedium.new %>');

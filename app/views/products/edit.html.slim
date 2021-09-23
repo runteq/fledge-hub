@@ -3,3 +3,5 @@
 = render 'form'
 
 = link_to 'Show', @product
+br
+= link_to '削除', product_path(@product), method: :delete, data: { confirm: 'Are you sure?' }
