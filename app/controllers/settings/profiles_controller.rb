@@ -16,7 +16,7 @@ module Settings
     private
 
     def user_params
-      params.require(:user).permit(:display_name, :study_started_on, :email)
+      params.require(:user).permit(:display_name, :email, :avatar, :study_started_on)
     end
   end
 end

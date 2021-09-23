@@ -35,6 +35,7 @@ ja:
         display_name: 表示名
         screen_name: ID
         email: メールアドレス
+        avatar: プロフィール画像
         study_started_on: 学習開始日
 
   activemodel:

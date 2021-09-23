@@ -9,7 +9,11 @@
       ul
         - @user.errors.full_messages.each do |message|
           li = message
-
+  .text-center.mb-5.opacity-90
+    = image_tag @user.avatar, alt: @user.display_name, class: 'mx-auto object-cover rounded-full h-32 w-32'
+  .form-group
+    = f.label :avatar, class: 'form-label'
+    = f.file_field :avatar, accept: 'image/jpg,image/jpeg,image/png,image/gif', class: 'block w-full'
   .form-group
     = f.label :display_name, class: 'form-label'
     = f.text_field :display_name, required: true, class: 'text-field'
@@ -19,5 +23,6 @@
   .form-group
     = f.label :email, class: 'form-label'
     = f.email_field :email, required: true, class: 'text-field'
-  .form-group
-    = f.submit class: 'btn btn-indigo'
+
+
+  = f.submit class: 'btn btn-indigo'
