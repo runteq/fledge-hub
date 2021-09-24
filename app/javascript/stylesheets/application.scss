@@ -11,7 +11,7 @@
   }
 
   .btn {
-    @apply inline-block cursor-pointer no-underline text-sm py-3 px-4 mt-4 leading-none rounded lg:mt-0 hover:border-transparent hover:opacity-100;
+    @apply inline-block cursor-pointer no-underline text-sm py-3 px-4 leading-none rounded hover:border-transparent hover:opacity-100;
   }
 
   .btn-indigo {
@@ -71,7 +71,7 @@
   .page.prev.disabled,
   .page.next.disabled {
     @apply block rounded-lg px-3 py-1 text-sm font-semibold bg-gray-200;
-    &:hover{
+    &:hover {
       @apply bg-gray-200;
     }
   }
@@ -85,7 +85,7 @@
   }
 
   .page.active {
-    @apply cursor-default bg-indigo-200 text-indigo-600;;
+    @apply cursor-default bg-indigo-200 text-indigo-600;
     &:hover {
       @apply bg-indigo-200;
     }
