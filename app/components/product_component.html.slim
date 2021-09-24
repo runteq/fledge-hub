@@ -13,10 +13,10 @@
         .inline-flex.tracking-widest.text-sm.title-font.font-medium.text-gray-400
           = product.released_on
         = link_to search_path(q: { product_type_id: product.product_type_id }),
-                  class: 'inline-flex no-underline ml-auto mb-2 px-2 text-xs leading-5 font-semibold bg-yellow-100 text-yellow-900' do
+                  class: 'inline-flex no-underline ml-auto mb-2 px-2 text-xs leading-5 font-semibold bg-amber-100 text-amber-900' do
           = product.product_type.name
         = link_to search_path(q: { product_category_id: product.product_category_id }),
-                  class: 'inline-flex no-underline ml-2 mb-2 px-2 text-xs leading-5 font-semibold bg-yellow-100 text-yellow-900' do
+                  class: 'inline-flex no-underline ml-2 mb-2 px-2 text-xs leading-5 font-semibold bg-amber-100 text-amber-900' do
           = product.product_category.name
       h2.title-font.text-lg.font-bold.text-gray-900
         = link_to product.title, product_path(product), class: 'no-underline'
