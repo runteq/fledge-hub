@@ -32,12 +32,12 @@
       <% if @product.permitted_edit?(current_user) %>
         <%= link_to edit_product_path(@product) do %>
           <button class="w-10 h-10 text-gray-600 transform border-2 rounded-full hover:border-indigo-400">
-            <i class="fas fa-pen" aria-hidden="true"></i>
+            <i class="fas fa-pen"></i>
           </button>
         <% end %>
         <%= link_to new_product_product_image_path(@product) do %>
           <button class="w-10 h-10 text-gray-600 transform border-2 rounded-full hover:border-indigo-400">
-            <i class="fas fa-image fa-lg" aria-hidden="true"></i>
+            <i class="fas fa-image fa-lg"></i>
           </button>
         <% end %>
       <% else %>
@@ -59,10 +59,10 @@
 
             <% if size > 1 %>
               <label for="carousel-<%= (index-1) % size %>" class="w-8 h-8 ml-2 md:ml-3 absolute cursor-pointer rounded-full text-white bg-black bg-opacity-30 hover:bg-opacity-80 inset-y-0 left-0 my-auto flex items-center justify-center">
-                <i class="fas fa-angle-left"></i>
+                <i class="fas fa-angle-left" aria-hidden="true"></i>
               </label>
               <label for="carousel-<%= (index+1) % size %>" class="w-8 h-8 mr-2 md:mr-3 absolute cursor-pointer rounded-full text-white bg-black bg-opacity-30 hover:bg-opacity-80 inset-y-0 right-0 my-auto flex items-center justify-center">
-                <i class="fas fa-angle-right"></i>
+                <i class="fas fa-angle-right" aria-hidden="true"></i>
               </label>
             <% end %>
           </div>
@@ -135,7 +135,7 @@
       <% @product.media.each do |medium| %>
         <li class="flex mb-2">
           <span class="mr-1">
-            <i class="fas fa-external-link-alt"></i>
+            <i class="fas fa-external-link-alt" aria-hidden="true"></i>
           </span>
           <%= link_to_blank medium.title, medium.url %>
         </li>

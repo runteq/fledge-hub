@@ -5,7 +5,7 @@
         div class="w-full h-full absolute opacity-0 group-hover:opacity-100"
           div class="w-full h-full bg-black bg-opacity-30 rounded-lg flex justify-center items-center"
             div class="rounded-full h-10 w-10 bg-black bg-opacity-80 flex items-center justify-center"
-              i class="fas fa-chevron-right text-white pl-1"
+              i class="fas fa-chevron-right text-white pl-1" aria-hidden="true"
         div class="w-full"
           = image_tag product_thumbnail_url(product.top_image), alt: product.title, class: 'rounded-lg'
     .pt-3.pb-4
@@ -34,7 +34,7 @@
                     target: '_blank',
                     rel: 'noopener noreferrer' do
             | Go WebSite
-            i class="fas fa-caret-right ml-2"
+            i class="fas fa-caret-right ml-2" aria-hidden="true"
         span.text-gray-400.inline-flex.lg:ml-auto.md:ml-0.ml-auto.leading-none.text-sm.py-1
-          i class="fas fa-user mr-1"
+          i class="fas fa-user mr-1" aria-hidden="true"
           = link_to_if product.user.active?, product.user.display_name, user_path(product.user.screen_name)
