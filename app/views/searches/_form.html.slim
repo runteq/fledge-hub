@@ -7,6 +7,6 @@
               local: true do |f|
     = f.text_field :title, value: params.dig(:q, :title),
                            placeholder: 'サービスのタイトルで検索',
-                           class: 'w-full pl-4 pr-8 outline-none h-10 rounded-full border bg-gray-50'
+                           class: 'w-full pl-4 pr-8 outline-none h-10 rounded-full border'
     = f.button content_tag(:i, '', class: 'fas fa-search text-gray-600 h-4 w-4 fill-current'),
       class: 'ml-1 outline-none focus:outline-none relative right-8 -mr-8'
