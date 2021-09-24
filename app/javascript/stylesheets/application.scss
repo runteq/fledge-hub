@@ -38,12 +38,12 @@
     }
 
     .text-field {
-      @apply appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-300 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white;
+      @apply appearance-none block w-full bg-white text-gray-700 border border-gray-300 rounded py-3 px-4 leading-tight focus:outline-none;
     }
 
     .select-box {
       position: relative;
-      @apply block bg-gray-100 border w-full border-gray-300 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white;
+      @apply block bg-white border w-full border-gray-300 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none;
     }
 
     .field_with_errors {
