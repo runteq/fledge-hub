@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe ProductImagesController, type: :request do
   let(:user) { create(:user) }
-  let(:product) { create(:product) }
+  let(:product) { create(:product, users: [user]) }
   before { login_as(user) }
 
   describe 'GET /new' do
