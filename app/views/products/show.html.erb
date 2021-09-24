@@ -35,6 +35,11 @@
             <i class="fas fa-pen" aria-hidden="true"></i>
           </button>
         <% end %>
+        <%= link_to new_product_product_image_path(@product) do %>
+          <button class="w-10 h-10 text-gray-600 transform border-2 rounded-full hover:border-indigo-400">
+            <i class="fas fa-image fa-lg" aria-hidden="true"></i>
+          </button>
+        <% end %>
       <% else %>
         <%= render 'stocks/stock_button', product: @product, stocked: @product.stocked_by?(current_user) %>
       <% end %>
@@ -138,21 +143,6 @@
     </ul>
   </div>
 </div>
-
-
-<% if @product.permitted_edit?(current_user) %>
-  以下編集用
-  <br>
-  <%= link_to '画像登録', new_product_product_image_path(@product) %>
-
-  <% @product.images.with_attached_product_image.each do |image| %>
-    <div>
-      <%= image_tag image.product_image, alt: @product.title, width: '100px' %>
-      <%= link_to '編集', edit_product_product_image_path(@product, image) %>
-
-    </div>
-  <% end %>
-<% end %>
 
 <script type="text/javascript">
   function toggleModal(modalID){

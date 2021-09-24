@@ -38,7 +38,7 @@ class ProductImagesController < ApplicationController
   private
 
   def set_product
-    @product = Product.find(params[:product_id])
+    @product = current_user.products.find(params[:product_id])
   end
 
   def image_params
