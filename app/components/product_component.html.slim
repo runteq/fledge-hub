@@ -25,7 +25,7 @@
       .mb-3.-mx-1
         - product.technologies.each do |technology|
           = link_to root_path(q: { technologies_id_eq: technology.id }), class: 'no-underline' do
-            span.px-2.py-1.mx-1.text-xs.leading-5.rounded-full.bg-indigo-100.text-gray-700
+            span.mr-1.px-1.py-1.text-xs.leading-5.rounded-full.bg-coolGray-200.text-gray-700
               = technology.name
 
       .flex.items-center.flex-wrap
