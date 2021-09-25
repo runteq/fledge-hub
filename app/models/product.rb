@@ -20,9 +20,7 @@ class Product < ApplicationRecord
   has_many :users, through: :user_products
   has_many :stocks, dependent: :destroy
   has_many :stocking_users, through: :stocks, source: :user
-  has_many :images, lambda {
-    order(created_at: :desc)
-  }, dependent: :destroy, class_name: 'ProductImage', inverse_of: :product
+  has_many :images, dependent: :destroy, class_name: 'ProductImage', inverse_of: :product
   has_many :media, dependent: :destroy, class_name: 'ProductMedium', inverse_of: :product
   has_many :product_technologies, dependent: :destroy
   has_many :technologies, through: :product_technologies
@@ -49,7 +47,7 @@ class Product < ApplicationRecord
   end
 
   def top_image
-    @top_image ||= images.last
+    @top_image ||= images.first
   end
 
   def user
