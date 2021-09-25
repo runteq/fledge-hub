@@ -66,6 +66,7 @@
     <%= f.label :technology_ids, class: 'form-label' %>
     （commandキーを押しながら複数選択可能）
     <%= f.select :technology_ids, Technology.order(:id).pluck(:name, :id), { include_blank: 'なし' }, { multiple: true, class: 'text-field' } %>
+    <p class="mt-1">リクエストは<%= link_to 'お問い合わせフォーム', inquiry_path %>からお願いします。</p>
   </div>
 
   <div id='js-media-form'>
