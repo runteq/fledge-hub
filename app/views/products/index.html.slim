@@ -1,7 +1,11 @@
-= render 'searches/form'
+= render 'search_form'
 
 .flex.flex-wrap.-mx-4
-  = render(ProductComponent.with_collection(@products))
+  - if @products.present?
+    = render(ProductComponent.with_collection(@products))
+  - else
+    p.my-10.mx-auto
+      | 条件を満たすサービスはありませんでした
 
 == pagy_nav(@pagy)
 

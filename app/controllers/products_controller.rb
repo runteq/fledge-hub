@@ -2,8 +2,9 @@ class ProductsController < ApplicationController
   before_action :require_login, only: %i[new edit create update destroy]
 
   def index
-    products = Product.includes_query.order(created_at: :desc)
-    @pagy, @products = pagy(products)
+    @q = Product.order(created_at: :desc).ransack(params[:q])
+    result = @q.result(distinct: true).includes_query
+    @pagy, @products = pagy(result)
   end
 
   def show
