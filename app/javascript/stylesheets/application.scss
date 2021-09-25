@@ -11,7 +11,7 @@
   }
 
   .btn {
-    @apply inline-block cursor-pointer no-underline text-sm py-3 px-4 mt-4 leading-none rounded lg:mt-0 hover:border-transparent hover:opacity-100;
+    @apply inline-block cursor-pointer no-underline text-sm py-3 px-4 leading-none rounded hover:border-transparent hover:opacity-100;
   }
 
   .btn-indigo {
@@ -30,20 +30,20 @@
     }
 
     .form-label {
-      @apply block tracking-wide text-gray-700 text-xs font-bold mb-2;
+      @apply block tracking-wide text-gray-700 font-bold mb-2;
 
       .required {
-        @apply bg-red-400 text-xs text-white py-1 px-2 rounded ml-1;
+        @apply bg-red-400 text-2xs text-white font-normal p-1 rounded ml-1;
       }
     }
 
     .text-field {
-      @apply appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-300 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white;
+      @apply appearance-none block w-full bg-white text-gray-700 border border-gray-300 rounded py-3 px-4 leading-tight focus:outline-none;
     }
 
     .select-box {
       position: relative;
-      @apply block bg-gray-100 border w-full border-gray-300 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white;
+      @apply block bg-white border w-full border-gray-300 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none;
     }
 
     .field_with_errors {
@@ -71,7 +71,7 @@
   .page.prev.disabled,
   .page.next.disabled {
     @apply block rounded-lg px-3 py-1 text-sm font-semibold bg-gray-200;
-    &:hover{
+    &:hover {
       @apply bg-gray-200;
     }
   }
@@ -85,7 +85,7 @@
   }
 
   .page.active {
-    @apply cursor-default bg-indigo-200 text-indigo-600;;
+    @apply cursor-default bg-indigo-200 text-indigo-600;
     &:hover {
       @apply bg-indigo-200;
     }
