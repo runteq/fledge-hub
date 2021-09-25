@@ -39,7 +39,10 @@ class User < ApplicationRecord
                           uniqueness: true,
                           length: { maximum: 30 },
                           format: { with: /\A[\w-]+\z/, message: 'には半角英数字と_-のみ使えます。' }
-  validates :email, presence: true, uniqueness: true, length: { maximum: 100 }
+  validates :email, presence: true,
+                    uniqueness: true,
+                    length: { maximum: 100 },
+                    'valid_email_2/email': { strict_mx: true }
   validates :study_started_on, presence: true, date: { before: proc { Time.zone.today } }
 
   enum status: { general: 0, deactivated: 10 }
