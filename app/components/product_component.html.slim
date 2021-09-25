@@ -24,8 +24,9 @@
         = simple_format(truncate(h(product.summary), length: 100, separator: /[\s、。　]/))
       .mb-3.-mx-1
         - product.technologies.each do |technology|
-          span.px-2.py-1.mx-1.text-xs.leading-5.rounded-full.bg-indigo-100.text-gray-700
-            = technology.name
+          = link_to root_path(q: { technologies_id_eq: technology.id }), class: 'no-underline' do
+            span.px-2.py-1.mx-1.text-xs.leading-5.rounded-full.bg-indigo-100.text-gray-700
+              = technology.name
 
       .flex.items-center.flex-wrap
         - if @product.url.present?
