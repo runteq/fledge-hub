@@ -1,4 +1,4 @@
-- content_for(:title, 'ユーザー登録')
+- set_meta_tags title: 'ユーザー登録', noindex: true
 
 = form_with model: @user, url: registration_path, class: 'form' do |f|
   - if @user.errors.any?

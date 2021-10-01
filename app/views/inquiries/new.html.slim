@@ -1,4 +1,4 @@
-- content_for(:title, 'お問い合わせ')
+- set_meta_tags title: 'お問い合わせ'
 
 = form_with model: @inquiry_form, url: inquiry_path, class: 'form', data: { turbo: false } do |f|
   - if f.object.errors.any?
