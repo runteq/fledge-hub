@@ -1,5 +1,4 @@
-<% content_for(:title, @user.display_name) %>
-<% content_for(:description, "#{@user.display_name}のユーザーページ") %>
+<% set_meta_tags @user %>
 
 <div>
   <div class="text-center mb-5 opacity-90">

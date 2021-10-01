@@ -1,24 +1,9 @@
 doctype html
 html
   head
-    title= page_title(yield(:title))
+    = display_meta_tags(default_meta_tags)
     meta[name="viewport" content="width=device-width,initial-scale=1"]
     script src="https://kit.fontawesome.com/a059254462.js" crossorigin="anonymous"
-
-    meta content="#{page_title(yield(:title))}" name="title"
-    meta content="#{description(yield(:description))}" name="description"
-
-    meta content="website" property="og:type"
-    meta content="#{request.url}" property="og:url"
-    meta content="#{page_title(yield(:title))}" property="og:title"
-    meta content="#{description(yield(:description))}" property="og:description"
-    meta content="#{meta_image_url(yield(:meta_image_url))}" property="og:image"
-    /! Twitter
-    meta content="summary_large_image" property="twitter:card"
-    meta content="#{request.url}" property="twitter:url"
-    meta content="#{page_title(yield(:title))}" property="twitter:title"
-    meta content="#{description(yield(:description))}" property="twitter:description"
-    meta content="#{meta_image_url(yield(:meta_image_url))}" property="twitter:image"
 
     = csrf_meta_tags
     = csp_meta_tag
