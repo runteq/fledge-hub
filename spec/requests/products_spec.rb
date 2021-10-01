@@ -57,9 +57,9 @@ RSpec.describe ProductsController, type: :request do
         expect { subject }.to change(Product, :count).by(1)
       end
 
-      it 'redirects to the created product' do
+      it '画像登録ページに遷移する' do
         subject
-        expect(response).to redirect_to(product_url(Product.last))
+        expect(response).to redirect_to(new_product_product_image_url(Product.last))
       end
     end
 

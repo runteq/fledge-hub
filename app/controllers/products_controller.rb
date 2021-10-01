@@ -23,7 +23,7 @@ class ProductsController < ApplicationController
   def create
     @product = ProductForm.new(product_params.merge(user_ids: [current_user.id]))
     if @product.save
-      redirect_to product_path(@product), notice: 'サービスを投稿しました！'
+      redirect_to new_product_product_image_path(@product), notice: 'サービスを投稿しました！'
     else
       render :new, status: :unprocessable_entity # 422errorを起こす
     end
