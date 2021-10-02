@@ -1,9 +1,14 @@
-= render 'searches/form'
+= render 'search_form'
 
 .flex.flex-wrap.-mx-4
-  = render(ProductComponent.with_collection(@products))
+  - if @products.present?
+    = render(ProductComponent.with_collection(@products))
+  - else
+    p.my-10.mx-auto
+      | 条件を満たすサービスはありませんでした
 
-== pagy_nav(@pagy)
+.mb-10.md:mb-0
+  == pagy_nav(@pagy)
 
 - if logged_in?
   .fixed.z-50.right-4.bottom-12.rounded-full.shadow-2xl.cursor-pointer

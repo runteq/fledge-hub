@@ -3,7 +3,7 @@ class MattermostNotifier
   WEBHOOK_URL = Rails.application.credentials.mattermost[:webhook_url]
 
   class << self
-    def call(text:, username: 'FledgeHub通知', channel: 'fledge-hub')
+    def call(text:, username: 'Fledge Hub通知', channel: 'fledge-hub')
       if Rails.env.production?
         post_to_mattermost(channel, username, text)
       else
