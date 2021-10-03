@@ -9,7 +9,8 @@ module ProductDecorator
     {
       title: title,
       description: summary,
-      keywords: "#{product_type.name},#{product_category.name},#{technologies.pluck(:name).join(',')}",
+      keywords:
+        "#{product_type.name},#{product_category.name},#{technologies.pluck(:name).join(',')}",
       og: {
         title: :full_title,
         image: product_thumbnail_url(top_image),
