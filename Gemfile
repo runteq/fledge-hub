@@ -28,6 +28,7 @@ gem 'faraday'
 gem 'pagy'
 gem 'config'
 gem 'mechanize'
+gem 'meta-tags'
 
 # バリデーション
 gem 'valid_email2'

@@ -1,6 +1,4 @@
-<% content_for(:title, @product.title) %>
-<% content_for(:description, @product.summary.presence || @product.title) %>
-<% content_for(:meta_image_url, product_thumbnail_url(@product.top_image)) %>
+<% set_meta_tags @product %>
 <% content_for :css do %>
   <style type="text/css">
     .carousel-open:checked+.carousel-item {
