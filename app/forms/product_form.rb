@@ -123,6 +123,11 @@ class ProductForm
     agent = ::Mechanize.new
     page = agent.get(url)
     page.at('meta[property="og:image"]')
+  rescue SocketError => e
+    raise e
+  rescue StandardError
+    # TODO: エラー通知
+    nil
   end
 
   def product
@@ -145,7 +150,7 @@ class ProductForm
 
   def url_validity
     ogp_url
-  rescue SocketError, Net::OpenTimeout
+  rescue SocketError
     errors.add(:url, 'にアクセスできません。')
   end
 
