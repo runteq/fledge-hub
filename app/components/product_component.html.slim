@@ -20,7 +20,7 @@
           = product.product_category.name
       h2.title-font.text-lg.font-bold.text-gray-900
         = link_to product.title, product_path(product), class: 'no-underline'
-      .leading-relaxed.mb-1
+      / .leading-relaxed.mb-1
         = simple_format(truncate(h(product.summary), length: 50, separator: /[\s、。　]/))
       .mb-1.mx-1
         - product.technologies.each_with_index do |technology, index|
