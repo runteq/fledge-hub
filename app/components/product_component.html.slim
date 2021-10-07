@@ -20,8 +20,6 @@
           = product.product_category.name
       h2.title-font.text-lg.font-bold.text-gray-900
         = link_to product.title, product_path(product), class: 'no-underline'
-      / .leading-relaxed.mb-1
-        = simple_format(truncate(h(product.summary), length: 50, separator: /[\s、。　]/))
       .mb-1.mx-1
         - product.technologies.each_with_index do |technology, index|
           = link_to root_path(q: { technologies_id_eq: technology.id }), class: 'no-underline' do
@@ -32,13 +30,6 @@
               | /
 
       .flex.items-center.flex-wrap
-        / - if @product.url.present?
-          = link_to sanitize(product.url),
-                    class: 'text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0 no-underline font-bold',
-                    target: '_blank',
-                    rel: 'noopener noreferrer' do
-            | Go WebSite
-            i class="fas fa-caret-right ml-2" aria-hidden="true"
         span.text-gray-400.inline-flex.lg:ml-auto.md:ml-0.ml-auto.leading-none.text-sm.py-1
           i class="fas fa-user mr-1" aria-hidden="true"
           = link_to_if product.user.active?, product.user.display_name, user_path(product.user.screen_name)
