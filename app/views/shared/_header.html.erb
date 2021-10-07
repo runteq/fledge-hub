@@ -1,39 +1,31 @@
-<header class="flex px-4 py-2 items-center justify-between flex-wrap bg-indigo-100">
-  <div class="text-indigo-800 mr-6">
-    <span class="font-semibold text-xl tracking-tight">
-      <%= link_to 'Fledge Hub', root_path, class: 'no-underline' %>
-    </span>
-    <span class="text-sm pt-1 text-indigo-900 tracking-tight hidden md:block">
-      個人開発者のための、技術を検索できる開発サービス投稿サイト
-    </span>
+<header class="flex	px-4 py-1 items-center justify-between flex-wrap bg-indigo-800">
+  <%= link_to root_path, class: "mr-6" do %>
+    <%= image_tag '/logo-white.png', class: 'object-scale-down h-12' %>
+  <% end %>
+  <div class="text-sm pt-1 text-indigo-50 tracking-tight hidden md:block">
+    個人開発者のための 技術を検索できる開発サービス投稿サイト
   </div>
-  <div class='ml-auto'>
-    <div class="pr-0">
-      <div class="flex space-x-3 relative inline-block float-right items-center">
-        <%= link_to 'Users', users_path, class: 'text-indigo-800 no-underline text-sm' %>
-        <% if logged_in? %>
-          <%= link_to 'Stocks', mypage_stocks_path, class: 'text-indigo-800 no-underline text-sm' %>
-          <div  class="relative text-sm text-gray-100" data-controller="dropdown">
-            <div data-action="click->dropdown#toggle click@window->dropdown#hide" role="button" data-dropdown-target="button" tabindex="0" class="inline-block select-none">
-              <%= image_tag current_user.avatar, alt: current_user.display_name, class: 'items-center focus:outline-none md:w-9 h-9 sm:w-6 h-6 rounded-full' %>
-            </div>
-            <div id="userMenu" data-dropdown-target="menu" class="absolute right-0 hidden z-10">
-              <div class="bg-white shadow rounded border overflow-hidden">
-                <ul class="list-reset text-gray-900">
-                  <li><%= link_to 'Mypage', mypage_path, class: 'px-4 py-2 block hover:bg-indigo-100 no-underline hover:no-underline' %></li>
-                  <li><%= link_to 'Settings', settings_profile_path, class: 'px-4 py-2 block hover:bg-indigo-100 no-underline hover:no-underline' %></li>
-                  <li>
-                    <hr class="border-t mx-2 border-gray-400">
-                  </li>
-                  <li><%= link_to 'Logout', logout_path, method: :delete, class: 'px-4 py-2 block hover:bg-indigo-100 no-underline hover:no-underline' %></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        <% else %>
-          <%= link_to 'GitHub Login', auth_at_provider_path(provider: :github), class: 'btn bg-black text-white' %>
-        <% end %>
+  <div class='ml-auto flex space-x-3 relative inline-block float-right items-center'>
+    <%= link_to 'Users', users_path, class: 'text-indigo-50 no-underline text-sm' %>
+    <% if logged_in? %>
+      <%= link_to 'Stocks', mypage_stocks_path, class: 'text-indigo-50 no-underline text-sm' %>
+      <div  class="relative text-sm text-gray-100" data-controller="dropdown">
+        <div data-action="click->dropdown#toggle click@window->dropdown#hide" role="button" data-dropdown-target="button" tabindex="0" class="inline-block select-none align-middle">
+          <%= image_tag current_user.avatar, alt: current_user.display_name, class: 'items-center focus:outline-none md:w-9 h-9 sm:w-6 h-6 rounded-full' %>
+        </div>
+        <div id="userMenu" data-dropdown-target="menu" class="absolute right-0 hidden z-10 bg-white shadow rounded border overflow-hidden">
+          <ul class="list-reset text-gray-900">
+            <li><%= link_to 'Mypage', mypage_path, class: 'px-4 py-2 block hover:bg-indigo-100 no-underline hover:no-underline' %></li>
+            <li><%= link_to 'Settings', settings_profile_path, class: 'px-4 py-2 block hover:bg-indigo-100 no-underline hover:no-underline' %></li>
+            <li>
+              <hr class="border-t mx-1 border-gray-300">
+            </li>
+            <li><%= link_to 'Logout', logout_path, method: :delete, class: 'px-4 py-2 block hover:bg-indigo-100 no-underline hover:no-underline' %></li>
+          </ul>
+        </div>
       </div>
-    </div>
+    <% else %>
+      <%= link_to 'GitHub Login', auth_at_provider_path(provider: :github), class: 'btn px-3 py-2 bg-black text-white border border-white hover:border-white' %>
+    <% end %>
   </div>
 </header>

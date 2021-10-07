@@ -5,21 +5,21 @@ module MetaHelper
       site: 'Fledge Hub',
       reverse: true,
       charset: 'utf-8',
-      description: '個人開発者のための、技術を検索できる開発サービス投稿サイト',
+      description: '個人開発者のための 技術を検索できる開発サービス投稿サイト',
       keywords: '個人開発,駆け出しエンジニア',
       canonical: request.original_url,
       separator: ' - ',
-      # icon: [
-      #   { href: image_url('favicon.ico') },
-      #   { href: image_url('icon.jpg'), rel: 'apple-touch-icon', sizes: '180x180', type: 'image/jpg' },
-      # ],
+      icon: [
+        { href: "#{root_url}favicon.ico" },
+        { href: "#{root_url}apple-touch-icon.png", rel: 'apple-touch-icon', sizes: '180x180', type: 'image/png' },
+      ],
       og: {
         site_name: :site,
         title: :title,
         description: :description,
         type: 'website',
         url: request.original_url,
-        image: 'https://i.gzn.jp/img/2018/01/15/google-gorilla-ban/00.jpg',
+        image: "#{root_url}ogp.png",
         locale: 'ja_JP',
       },
       twitter: {
@@ -28,7 +28,7 @@ module MetaHelper
         description: :description,
         card: 'summary_large_image',
         site: '@fledge-hub',
-        image: 'https://i.gzn.jp/img/2018/01/15/google-gorilla-ban/00.jpg',
+        image: "#{root_url}ogp.png",
       },
     }
   end
