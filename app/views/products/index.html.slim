@@ -1,5 +1,8 @@
 = render 'search_form'
 
+/ div onclick="toggleSearch()"
+/   | 検索フォーム
+
 .flex.flex-wrap.-mx-4
   - if @products.present?
     = render(ProductComponent.with_collection(@products))
@@ -15,3 +18,9 @@
     = link_to new_product_path do
       .p-4.w-14.h-14.bg-indigo-600.rounded-full.shadow-2xl.hover:bg-indigo-400.active:shadow-lg.mouse.shadow.transition.ease-in.duration-200.focus:outline-none
         = embedded_svg("plus.svg", class: "plus-icon", alt: "plus-icon")
+
+javascript:
+  function toggleSearch() {
+    document.getElementById('searchArea').classList.toggle("hidden");
+    document.getElementById('searchArea').classList.toggle("flex");
+  }
