@@ -11,7 +11,7 @@
   </style>
 <% end %>
 
-<div class="mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-lg lg:py-1">
+<div class="mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-lg lg:py-5">
   <div class="mb-3 flex flex-col lg:space-y-0 lg:flex-row lg:items-center lg:justify-between">
     <div>
       <span class="text-gray-400">
@@ -93,7 +93,7 @@
             <%= Product.human_attribute_name(:url) %>
           </span>
           <p class="break-all">
-            <%= link_to @product.url, sanitize(@product.url), target: :_blank, rel: 'noopener noreferrer' %>
+            <%= link_to_blank @product.url, sanitize(@product.url) %>
           </p>
       </div>
       <% end %>
@@ -104,7 +104,7 @@
             <%= Product.human_attribute_name(:source_url) %>
           </div>
           <p class="break-all">
-            <%= link_to @product.source_url, sanitize(@product.source_url), target: :_blank, rel: 'noopener noreferrer' %>
+            <%= link_to_blank @product.source_url, sanitize(@product.source_url) %>
           </p>
         </div>
       <% end %>
@@ -124,7 +124,7 @@
     </div>
   </div>
 
-  <p class="my-2 text-gray-500 dark:text-gray-400">
+  <p class="my-4">
     <%= safe_join(@product.summary.split("\n"), tag(:br)) %>
   </p>
 
