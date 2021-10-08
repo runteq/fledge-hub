@@ -26,8 +26,6 @@ ExceptionNotification.configure do |config|
   config.add_notifier :mattermost, {
     webhook_url: MattermostNotifier::WEBHOOK_URL,
     channel: 'fledge-hub_error_notifier',
-    git_url: 'https://github.com/runteq',
-    app_name: 'fledge-hub',
   }
 
   # Campfire notifier sends notifications to your Campfire room. Requires 'tinder' gem.
