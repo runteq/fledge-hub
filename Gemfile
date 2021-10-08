@@ -29,6 +29,9 @@ gem 'pagy'
 gem 'config'
 gem 'mechanize'
 gem 'meta-tags'
+# https://github.com/smartinez87/exception_notification/issues/503 リリースされていないため
+gem 'exception_notification', github: 'smartinez87/exception_notification'
+gem 'httparty'
 
 # バリデーション
 gem 'valid_email2'

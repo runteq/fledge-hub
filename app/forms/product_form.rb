@@ -126,7 +126,7 @@ class ProductForm
   rescue SocketError => e
     raise e
   rescue StandardError
-    # TODO: エラー通知
+    ExceptionNotifier.notify_exception(e)
     nil
   end
 
