@@ -23,7 +23,7 @@ class ProductImagesController < ApplicationController
   def update
     @image = @product.images.find(params[:id])
     if @image.update(image_params)
-      redirect_to product_path(@product), notice: 'Image was successfully updated.'
+      redirect_to product_path(@product), notice: '画像を変更しました！'
     else
       render :edit, status: :unprocessable_entity # 422errorを起こす
     end
@@ -32,7 +32,7 @@ class ProductImagesController < ApplicationController
   def destroy
     @image = @product.images.find(params[:id])
     @image.destroy!
-    redirect_to product_path(@product), notice: 'Image was successfully destroyed.'
+    redirect_to product_path(@product), notice: '画像を削除しました！'
   end
 
   private
