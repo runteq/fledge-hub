@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/smartinez87/exception_notification.git
+  revision: e9f09b836d1d763b855b2a346eb8ebd1b55b1b32
+  specs:
+    exception_notification (4.4.3)
+      actionmailer (>= 4.0, < 7)
+      activesupport (>= 4.0, < 7)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -232,6 +240,9 @@ GEM
       turbo-rails
     http-cookie (1.0.4)
       domain_name (~> 0.5)
+    httparty (0.20.0)
+      mime-types (~> 3.0)
+      multi_xml (>= 0.5.2)
     i18n (1.8.10)
       concurrent-ruby (~> 1.0)
     image_processing (1.12.1)
@@ -529,10 +540,12 @@ DEPENDENCIES
   config
   date_validator
   ed25519
+  exception_notification!
   factory_bot_rails
   faker
   faraday
   hotwire-rails
+  httparty
   image_processing
   listen
   mechanize
