@@ -1,9 +1,0 @@
-#searchArea.my-4.z-20
-  .w-full.md:w-5/12.mx-auto
-    = search_form_for @q, url: root_path, method: :get do |f|
-      = f.collection_check_boxes(:technologies_id_eq_any, Technology.all, :id, :name) do |t|
-        = t.label { t.check_box + t.text }
-      = f.text_field :title_or_summary_cont, placeholder: 'フリーワード検索',
-        class: 'w-full pl-4 pr-8 outline-none h-10 rounded-full border'
-
-      = f.submit '検索', class: 'btn btn-indigo'
