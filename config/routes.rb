@@ -29,7 +29,7 @@ Rails.application.routes.draw do
     resources :product_images, only: %i[new create edit update destroy]
     resource :stock, only: %i[create destroy]
   end
-  resource :search, only: %i[show]
+  resource :search, only: %i[new]
 
   resources :users, only: %i[index show], param: :screen_name
 
