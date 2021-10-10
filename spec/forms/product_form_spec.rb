@@ -49,7 +49,7 @@ RSpec.describe ProductForm do
         {
           title: '', # バリデーションエラー
           url: '',
-          source_url: '',
+          source_url: 'https://example.com',
           released_on: '2021-06-17',
           summary: '',
           product_type_id: '1',
@@ -75,7 +75,7 @@ RSpec.describe ProductForm do
         {
           title: 'タイトル',
           url: '',
-          source_url: '',
+          source_url: 'https://example.com',
           released_on: '2021-06-17',
           summary: '',
           product_type_id: '1',
@@ -99,7 +99,7 @@ RSpec.describe ProductForm do
         {
           title: 'タイトル',
           url: '',
-          source_url: '',
+          source_url: 'https://example.com',
           released_on: '2021-06-17',
           summary: '',
           product_type_id: '1',
@@ -173,7 +173,7 @@ RSpec.describe ProductForm do
         {
           title: '新タイトル',
           url: '',
-          source_url: '',
+          source_url: 'https://example.com',
           released_on: '', # バリデーションエラー
           summary: '',
           product_category_id: '1',
@@ -197,7 +197,7 @@ RSpec.describe ProductForm do
         {
           title: '新タイトル',
           url: '',
-          source_url: '',
+          source_url: 'https://example.com',
           released_on: '2021-06-17',
           summary: '',
           product_category_id: '1',
@@ -223,7 +223,7 @@ RSpec.describe ProductForm do
         {
           title: '新タイトル',
           url: '',
-          source_url: '',
+          source_url: 'https://example.com',
           released_on: '2021-06-17',
           summary: '',
           product_type_id: '1',
@@ -356,7 +356,7 @@ RSpec.describe ProductForm do
         {
           title: 'タイトル',
           url: "https://#{SecureRandom.urlsafe_base64}.com",
-          source_url: '',
+          source_url: 'https://example.com',
           released_on: '2021-06-17',
           summary: '',
           product_type_id: '1',

@@ -34,7 +34,12 @@
     <%= f.url_field :url, class: 'text-field' %>
   </div>
   <div class='form-group'>
-    <%= f.label :source_url, class: 'form-label' %>
+    <div class='form-label'>
+      <div style='flex items-center'>
+        <%= f.label :source_url %>
+        <span class='required'>必須</span>
+      </div>
+    </div>
     <%= f.url_field :source_url, class: 'text-field' %>
     GitHubなどのURL
   </div>
