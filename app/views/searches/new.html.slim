@@ -1,3 +1,10 @@
+- content_for :css do
+  css:
+    label input[type="checkbox"]:checked + span {
+      background-color: gray;
+      color: white;
+    }
+
 .my-4.z-20
   .w-full.md:w-5/12.mx-auto
     = search_form_for @q, url: root_path, method: :get, class: 'form' do |f|
@@ -6,19 +13,28 @@
           = Product.human_attribute_name(:product_category_id)
         div
           = f.collection_check_boxes(:product_category_id_eq_any, ProductCategory.asc, :id, :name) do |t|
-            = t.label { t.check_box + t.text }
+            = t.label do
+              = t.check_box(class: 'hidden')
+              span class='btn border'
+                = t.text
       .form-group
         .form-label
           = Product.human_attribute_name(:product_type_id)
         div
           = f.collection_check_boxes(:product_type_id_eq_any, ProductType.asc, :id, :name) do |t|
-            = t.label { t.check_box + t.text }
+            = t.label do
+              = t.check_box(class: 'hidden')
+              span class='btn border'
+                = t.text
       .form-group
         .form-label
           = Product.human_attribute_name(:technology_ids)
         div
           = f.collection_check_boxes(:technologies_id_eq_any, Technology.all, :id, :name) do |t|
-            = t.label { t.check_box + t.text }
+            = t.label do
+              = t.check_box(class: 'hidden')
+              span class='btn border'
+                = t.text
       .form-group
         = f.text_field :title_or_summary_cont, placeholder: 'フリーワード検索',
           class: 'w-full pl-4 pr-8 outline-none h-10 rounded-full border'
