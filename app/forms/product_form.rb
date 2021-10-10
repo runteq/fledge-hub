@@ -17,7 +17,7 @@ class ProductForm
   validates :id, presence: true, if: -> { product.persisted? }
   validates :title, presence: true, length: { maximum: 100 }
   validates :url, url: { allow_blank: true, schemes: %w[https http] }, length: { maximum: 500 }
-  validates :source_url, url: { allow_blank: true, schemes: %w[https http] },
+  validates :source_url, presence: true, url: { allow_blank: true, schemes: %w[https http] },
                          length: { maximum: 500 }
   validates :released_on, presence: true
   validates :summary, length: { maximum: 500 }
