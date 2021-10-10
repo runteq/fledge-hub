@@ -15,7 +15,7 @@
         </div>
         <div id="userMenu" data-dropdown-target="menu" class="absolute right-0 hidden z-10 bg-white shadow rounded border overflow-hidden">
           <ul class="list-reset text-gray-900">
-            <li><%= link_to 'Mypage', mypage_path, class: 'px-4 py-2 block hover:bg-indigo-100 no-underline hover:no-underline' %></li>
+            <li><%= link_to 'Mypage', user_path((current_user.screen_name)), class: 'px-4 py-2 block hover:bg-indigo-100 no-underline hover:no-underline' %></li>
             <li><%= link_to 'Settings', settings_profile_path, class: 'px-4 py-2 block hover:bg-indigo-100 no-underline hover:no-underline' %></li>
             <li>
               <hr class="border-t mx-1 border-gray-300">
