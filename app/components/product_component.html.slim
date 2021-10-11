@@ -20,13 +20,13 @@
           = product.product_category.name
       h2.title-font.text-lg.font-bold.text-gray-900
         = link_to product.title, product_path(product), class: 'no-underline'
-      .mb-1.mx-1
+      .mb-1.mx-1.flex.flex-wrap.items-center.gap-x-2
         - product.technologies.each_with_index do |technology, index|
           = link_to root_path(q: { technologies_id_eq_any: technology.id }), class: 'no-underline' do
-            span.py-1.text-xs.leading-5.text-gray-500
+            div.py-1.text-xs.leading-5.text-gray-500
               = technology.name
           - if index != product.technologies.size - 1
-            span class="mx-2 text-xs text-indigo-400"
+            div class="text-xs text-indigo-400 inline-flex"
               | /
 
       .flex.items-center.flex-wrap
