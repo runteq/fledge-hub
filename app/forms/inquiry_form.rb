@@ -1,7 +1,7 @@
 class InquiryForm
   include ActiveModel::Model
 
-  attr_accessor :name, :email, :about, :description, :user_agent
+  attr_accessor :name, :email, :about, :description, :user_agent, :current_user
 
   validates :name, :about, :description, :user_agent, presence: true
 
@@ -23,7 +23,11 @@ class InquiryForm
   private
 
   def text
-    "| name | #{name} |\n | -- | -- |\n | email | #{email} |\n | about | #{about} |\n | user_agent | #{user_agent} |\n\n#{description}"
+    "| name | #{name}#{current_user_text} |\n | -- | -- |\n | email | #{email} |\n | about | #{about} |\n | user_agent | #{user_agent} |\n\n#{description}"
+  end
+
+  def current_user_text
+    current_user ? "（user_id: #{current_user&.id}）" : ''
   end
 
   def save_inquiry!

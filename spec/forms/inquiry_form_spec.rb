@@ -25,27 +25,52 @@ RSpec.describe InquiryForm do
     end
 
     context '正常系' do
-      let!(:attributes) do
-        {
-          name: 'name_test',
-          email: 'test@example.com',
-          about: 'about_test',
-          description: 'description_test',
-          user_agent: 'user_agent_test',
-        }
+      context 'current_userがないとき' do
+        let!(:attributes) do
+          {
+            name: 'name_test',
+            email: 'test@example.com',
+            about: 'about_test',
+            description: 'description_test',
+            user_agent: 'user_agent_test',
+          }
+        end
+
+        it { expect(subject).to be true }
+        it do
+          expect(MattermostNotifier).to receive(:call).with(
+            channel: 'fledge-hub',
+            username: 'お問い合わせ',
+            text: "| name | name_test |\n | -- | -- |\n | email | test@example.com |\n | about | about_test |\n | user_agent | user_agent_test |\n\ndescription_test",
+          )
+          subject
+        end
+        it 'レコードを作成する' do
+          expect { subject }.to change(Inquiry, :count).by(1)
+        end
       end
 
-      it { expect(subject).to be true }
-      it do
-        expect(MattermostNotifier).to receive(:call).with(
-          channel: 'fledge-hub',
-          username: 'お問い合わせ',
-          text: "| name | name_test |\n | -- | -- |\n | email | test@example.com |\n | about | about_test |\n | user_agent | user_agent_test |\n\ndescription_test",
-        )
-        subject
-      end
-      it 'レコードを作成する' do
-        expect { subject }.to change(Inquiry, :count).by(1)
+      context 'current_userがあるとき' do
+        let!(:user) { create(:user) }
+        let!(:attributes) do
+          {
+            name: 'name_test',
+            email: 'test@example.com',
+            about: 'about_test',
+            description: 'description_test',
+            user_agent: 'user_agent_test',
+            current_user: user,
+          }
+        end
+
+        it do
+          expect(MattermostNotifier).to receive(:call).with(
+            channel: 'fledge-hub',
+            username: 'お問い合わせ',
+            text: "| name | name_test（user_id: #{user.id}） |\n | -- | -- |\n | email | test@example.com |\n | about | about_test |\n | user_agent | user_agent_test |\n\ndescription_test",
+          )
+          subject
+        end
       end
     end
   end
