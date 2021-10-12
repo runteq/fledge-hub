@@ -7,7 +7,8 @@
 
 .my-4.z-20
   .w-full.md:w-5/12.mx-auto
-    = search_form_for @q, url: root_path, method: :get, class: 'form' do |f|
+    - # 検索→ブラウザの「戻る」→再検索ができないのでturbo: false
+    = search_form_for @q, url: root_path, method: :get, class: 'form', data: { turbo: false } do |f|
       .form-group
         .form-label
           = Product.human_attribute_name(:product_category_id)
