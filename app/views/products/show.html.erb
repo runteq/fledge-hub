@@ -22,7 +22,10 @@
           <%= @product.title %>
         </h3>
         <div class="text-sm text-gray-400">
-          by <%= link_to_if @product.user.active?, @product.user.display_name, user_path(@product.user.screen_name) %>
+          by
+          <% @product.users.each_with_index do |user| %>
+            <%= link_to_if user.active?, user.display_name, user_path(user.screen_name) %>
+          <% end %>
         </div>
       </div>
     </div>

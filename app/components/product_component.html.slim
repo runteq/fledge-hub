@@ -30,6 +30,8 @@
               | /
 
       .flex.items-center.flex-wrap
-        span.text-gray-400.inline-flex.lg:ml-auto.md:ml-0.ml-auto.leading-none.text-sm.py-1
+        .text-gray-400.inline-flex.lg:ml-auto.md:ml-0.ml-auto.leading-none.text-sm.py-1
           i class="fas fa-user mr-1" aria-hidden="true"
-          = link_to_if product.user.active?, product.user.display_name, user_path(product.user.screen_name)
+          div
+            = link_to_if product.user.active?, product.user.display_name, user_path(product.user.screen_name)
+            = ' 他' if product.users.size > 1
