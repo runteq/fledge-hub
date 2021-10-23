@@ -1,43 +1,44 @@
+- set_meta_tags title: '検索'
 - content_for :css do
   css:
     label input[type="checkbox"]:checked + span {
-      background-color: gray;
-      color: white;
+      --tw-bg-opacity: 1;
     }
 
 .my-4.z-20
   .w-full.md:w-5/12.mx-auto
     - # 検索→ブラウザの「戻る」→再検索ができないのでturbo: false
     = search_form_for @q, url: root_path, method: :get, class: 'form', data: { turbo: false } do |f|
-      .form-group
-        .form-label
-          = Product.human_attribute_name(:product_category_id)
-        div
-          = f.collection_check_boxes(:product_category_id_eq_any, ProductCategory.asc, :id, :name) do |t|
-            = t.label do
-              = t.check_box(class: 'hidden')
-              span class='btn border'
-                = t.text
+      .form-group.gap-x-1
+        = f.text_field :title_or_summary_cont, placeholder: 'フリーワード検索',
+          class: 'flex-grow pl-4 pr-8 outline-none h-10 rounded border'
+
+        = f.submit '検索', class: 'btn btn-indigo'
+
       .form-group
         .form-label
           = Product.human_attribute_name(:product_type_id)
-        div
+        .flex.flex-wrap.items-center.gap-x-2.gap-y-1
           = f.collection_check_boxes(:product_type_id_eq_any, ProductType.asc, :id, :name) do |t|
             = t.label do
               = t.check_box(class: 'hidden')
-              span class='btn border'
+              span class='btn bg-gray-300 bg-opacity-25 hover:opacity-70'
+                = t.text
+      .form-group
+        .form-label
+          = Product.human_attribute_name(:product_category_id)
+        .flex.flex-wrap.items-center.gap-x-2.gap-y-1
+          = f.collection_check_boxes(:product_category_id_eq_any, ProductCategory.asc, :id, :name) do |t|
+            = t.label do
+              = t.check_box(class: 'hidden')
+              span class='btn bg-gray-300 bg-opacity-25 hover:opacity-70'
                 = t.text
       .form-group
         .form-label
           = Product.human_attribute_name(:technology_ids)
-        div
+        .flex.flex-wrap.items-center.gap-x-2.gap-y-1
           = f.collection_check_boxes(:technologies_id_eq_any, Technology.all, :id, :name) do |t|
             = t.label do
               = t.check_box(class: 'hidden')
-              span class='btn border'
+              span class='btn bg-gray-300 bg-opacity-25 hover:opacity-70'
                 = t.text
-      .form-group
-        = f.text_field :title_or_summary_cont, placeholder: 'フリーワード検索',
-          class: 'w-full pl-4 pr-8 outline-none h-10 rounded-full border'
-
-      = f.submit '検索', class: 'btn btn-indigo'

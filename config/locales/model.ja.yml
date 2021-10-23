@@ -52,7 +52,7 @@ ja:
         users: 製作者
         media_attributes: メディア
       inquiry_form:
-        name: ご氏名
+        name: お名前
         email: メールアドレス
         about: ご用件
         description: 内容

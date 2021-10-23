@@ -16,7 +16,14 @@ class InquiriesController < ApplicationController
   private
 
   def inquiry_params
-    params.require(:inquiry_form).permit(:name, :email, :about,
-                                         :description).merge(user_agent: request.user_agent)
+    params.require(:inquiry_form).permit(
+      :name,
+      :email,
+      :about,
+      :description,
+    ).merge(
+      user_agent: request.user_agent,
+      current_user: current_user,
+    )
   end
 end

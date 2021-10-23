@@ -10,11 +10,11 @@
           <% end %>
         </div>
         <div class="mt-2 text-center flex flex-col">
-          <span class="text-gray-600 dark:text-white text-lg font-medium">
+          <span class="text-gray-600 text-lg font-medium">
             <%= user.display_name %>
-          </span>
-          <span class="text-gray-400 text-sm">
-            <%= user.screen_name %>
+            <span class="text-gray-400 text-xs">
+              (<%= user.products.count %>)
+            </span>
           </span>
         </div>
       </div>
