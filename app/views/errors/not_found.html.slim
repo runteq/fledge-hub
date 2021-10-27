@@ -1,0 +1,26 @@
+- set_meta_tags title: 'ページが見つかりません', noindex: true
+
+h1.text-6xl.font-extrabold
+  .text-indigo-700.-mb-3
+    | 404
+  .text-indigo-300.leading-none
+    | Not Found
+
+.mt-5.mb-5
+  p.mb-2
+    | お探しのページが見つかりませんでした。
+  p.mb-2
+    | 一時的にアクセスができない状況にあるか、
+    br.block.md:hidden
+    | 移動もしくは削除された可能性があります。
+  p.mb-2
+    |URLにお間違いがないか再度ご確認ください。
+
+.mb-8
+  = link_to 'トップページに戻る', root_path, class: 'btn btn-indigo'
+
+.mb-5.text-4xl.font-extrabold.text-indigo-300
+  | Random Products
+
+.grid.md:grid-cols-3.grid-cols-1.gap-x-8.gap-y-12
+  = render(ProductComponent.with_collection(Product.where(id: Product.pluck(:id).sample(3))))

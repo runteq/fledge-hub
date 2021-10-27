@@ -32,6 +32,7 @@ gem 'meta-tags'
 # https://github.com/smartinez87/exception_notification/issues/503 リリースされていないため
 gem 'exception_notification', github: 'smartinez87/exception_notification'
 gem 'httparty'
+gem 'rambulance'
 
 # バリデーション
 gem 'valid_email2'
