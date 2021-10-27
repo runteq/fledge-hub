@@ -1,12 +1,12 @@
 <% set_meta_tags title: 'ストック一覧', noindex: true %>
 
-
-<div class="flex flex-wrap -mx-4 mt-4">
-  <% if @products.present? %>
+<% if @products.present? %>
+  <div class="grid md:grid-cols-3 grid-cols-1 gap-x-8 gap-y-12">
     <%= render(ProductComponent.with_collection(@products)) %>
-  <% else %>
-    <div class="p mt-10 mx-auto">まだストックされていません。</div>
-  <% end %>
-</div>
-
-<%== pagy_nav(@pagy) %>
+  </div>
+  <div class="mt-10">
+    <%== pagy_nav(@pagy) %>
+  </div>
+<% else %>
+  <div class="my-10 mx-auto">まだストックされていません。</div>
+<% end %>
