@@ -34,3 +34,6 @@
         div
           = link_to_if product.user.active?, product.user.display_name, user_path(product.user.screen_name)
           = ' 他' if product.users.size > 1
+
+- if product_counter == 4
+  = render(RunteqAdComponent.new)
