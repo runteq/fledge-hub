@@ -1,29 +1,29 @@
 # frozen_string_literal: true
 
-# Pagy initializer file (4.10.1)
+# Pagy initializer file (5.2.2)
 # Customize only what you really need and notice that Pagy works also without any of the following lines.
 # Should you just cherry pick part of this file, please maintain the require-order of the extras
 
-# Pagy Variables
+# Pagy DEFAULT Variables
 # See https://ddnexus.github.io/pagy/api/pagy#variables
-# All the Pagy::VARS are set for all the Pagy instances but can be overridden
-# per instance by just passing them to Pagy.new or the #pagy controller method
+# All the Pagy::DEFAULT are set for all the Pagy instances but can be overridden per instance
+# by just passing them to Pagy.new|Pagy::Countless.new|Pagy::Calendar.new or the #pagy controller method
 
 # Instance variables
 # See https://ddnexus.github.io/pagy/api/pagy#instance-variables
-# Pagy::VARS[:page]   = 1                                  # default
-Pagy::VARS[:items] = 29
-# Pagy::VARS[:outset] = 0                                  # default
+# Pagy::DEFAULT[:page]   = 1                                  # default
+Pagy::DEFAULT[:items] = 29
+# Pagy::DEFAULT[:outset] = 0                                  # default
 
 # Other Variables
 # See https://ddnexus.github.io/pagy/api/pagy#other-variables
-# Pagy::VARS[:size]       = [1,4,4,1]                       # default
-# Pagy::VARS[:page_param] = :page                           # default
-# Pagy::VARS[:params]     = {}                              # default
-# Pagy::VARS[:fragment]   = '#fragment'                     # example
-# Pagy::VARS[:link_extra] = 'data-remote="true"'            # example
-# Pagy::VARS[:i18n_key]   = 'pagy.item_name'                # default
-# Pagy::VARS[:cycle]      = true                            # example
+# Pagy::DEFAULT[:size]       = [1,4,4,1]                       # default
+# Pagy::DEFAULT[:page_param] = :page                           # default
+# Pagy::DEFAULT[:params]     = {}                              # default
+# Pagy::DEFAULT[:fragment]   = '#fragment'                     # example
+# Pagy::DEFAULT[:link_extra] = 'data-remote="true"'            # example
+# Pagy::DEFAULT[:i18n_key]   = 'pagy.item_name'                # default
+# Pagy::DEFAULT[:cycle]      = true                            # example
 
 # Extras
 # See https://ddnexus.github.io/pagy/extras
@@ -34,22 +34,58 @@ Pagy::VARS[:items] = 29
 # See https://ddnexus.github.io/pagy/extras/array
 # require 'pagy/extras/array'
 
+# Calendar extra: Paginate a collection by calendar Time unit (year, month, week or day)
+# See https://ddnexus.github.io/pagy/extras/calendar
+# require 'pagy/extras/calendar'
+# Pagy::DEFAULT[:local_minmax] = []          # Min and max local Time period must be set by the user (better not not as default)
+# Pagy::DEFAULT[:unit]         = :month      # Time unit allowed %i[year month week day]
+# Pagy::DEFAULT[:week_offset]  = 0           # Day offset from Sunday (0: Sunday; 1: Monday;... 6: Saturday)
+# Pagy::DEFAULT[:order]         = :asc        # Time direction of pagination
+# Pagy::DEFAULT[:year_format]  = '%Y'        # strftime format for :year unit
+# Pagy::DEFAULT[:month_format] = '%Y-%m'     # strftime format for :month unit
+# Pagy::DEFAULT[:week_format]  = '%Y-%W'     # strftime format for :week unit
+# Pagy::DEFAULT[:day_format]   = '%Y-%m-%d'  # strftime format for :day unit
+
 # Countless extra: Paginate without any count, saving one query per rendering
 # See https://ddnexus.github.io/pagy/extras/countless
 # require 'pagy/extras/countless'
+# Pagy::DEFAULT[:countless_minimal] = false   # default (eager loading)
 
 # Elasticsearch Rails extra: Paginate `ElasticsearchRails::Results` objects
 # See https://ddnexus.github.io/pagy/extras/elasticsearch_rails
-# default :pagy_search method: change only if you use
-# also the searchkick extra that defines the same
-# VARS[:elasticsearch_rails_search_method] = :pagy_search
+# default :pagy_search method: change only if you use also
+# the searchkick or meilisearch extra that defines the same
+# Pagy::DEFAULT[:elasticsearch_rails_search_method] = :pagy_search
 # require 'pagy/extras/elasticsearch_rails'
+
+# Headers extra: http response headers (and other helpers) useful for API pagination
+# See http://ddnexus.github.io/pagy/extras/headers
+# require 'pagy/extras/headers'
+# Pagy::DEFAULT[:headers] = { page: 'Current-Page',
+#                            items: 'Page-Items',
+#                            count: 'Total-Count',
+#                            pages: 'Total-Pages' }     # default
+
+# Meilisearch extra: Paginate `Meilisearch` result objects
+# See https://ddnexus.github.io/pagy/extras/meilisearch
+# default :pagy_search method: change only if you use also
+# the elasticsearch_rails or searchkick extra that define the same method
+# Pagy::DEFAULT[:meilisearch_search_method] = :pagy_search
+# require 'pagy/extras/meilisearch'
+
+# Metadata extra: Provides the pagination metadata to Javascript frameworks like Vue.js, react.js, etc.
+# See https://ddnexus.github.io/pagy/extras/metadata
+# you must require the shared internal extra (BEFORE the metadata extra) ONLY if you need also the :sequels
+# require 'pagy/extras/shared'
+# require 'pagy/extras/metadata'
+# For performance reason, you should explicitly set ONLY the metadata you use in the frontend
+# Pagy::DEFAULT[:metadata] = %i[scaffold_url count page prev next last]   # example
 
 # Searchkick extra: Paginate `Searchkick::Results` objects
 # See https://ddnexus.github.io/pagy/extras/searchkick
-# default :pagy_search method: change only if you use
-# also the elasticsearch_rails extra that defines the same
-# VARS[:searchkick_search_method] = :pagy_search
+# default :pagy_search method: change only if you use also
+# the elasticsearch_rails or meilisearch extra that defines the same
+# DEFAULT[:searchkick_search_method] = :pagy_search
 # require 'pagy/extras/searchkick'
 # uncomment if you are going to use Searchkick.pagy_search
 # Searchkick.extend Pagy::Searchkick
@@ -76,7 +112,7 @@ Pagy::VARS[:items] = 29
 # Notice: the other frontend extras add their own framework-styled versions,
 # so require this extra only if you need the unstyled version
 # See https://ddnexus.github.io/pagy/extras/navs
-require 'pagy/extras/navs'
+# require 'pagy/extras/navs'
 
 # Semantic extra: Add nav, nav_js and combo_nav_js helpers for Semantic UI pagination
 # See https://ddnexus.github.io/pagy/extras/semantic
@@ -88,46 +124,44 @@ require 'pagy/extras/navs'
 
 # Multi size var used by the *_nav_js helpers
 # See https://ddnexus.github.io/pagy/extras/navs#steps
-# Pagy::VARS[:steps] = { 0 => [2,3,3,2], 540 => [3,5,5,3], 720 => [5,7,7,5] }   # example
+# Pagy::DEFAULT[:steps] = { 0 => [2,3,3,2], 540 => [3,5,5,3], 720 => [5,7,7,5] }   # example
 
 # Feature Extras
 
-# Headers extra: http response headers (and other helpers) useful for API pagination
-# See http://ddnexus.github.io/pagy/extras/headers
-# require 'pagy/extras/headers'
-# Pagy::VARS[:headers] = { page: 'Current-Page', items: 'Page-Items', count: 'Total-Count', pages: 'Total-Pages' }     # default
+# Gearbox extra: Automatically change the number of items per page depending on the page number
+# See https://ddnexus.github.io/pagy/extras/gearbox
+# require 'pagy/extras/gearbox'
+# set to false only if you want to make :gearbox_extra an opt-in variable
+# Pagy::DEFAULT[:gearbox_extra] = false               # default true
+# Pagy::DEFAULT[:gearbox_items] = [15, 30, 60, 100]   # default
+
+# Items extra: Allow the client to request a custom number of items per page with an optional selector UI
+# See https://ddnexus.github.io/pagy/extras/items
+# require 'pagy/extras/items'
+# set to false only if you want to make :items_extra an opt-in variable
+# Pagy::DEFAULT[:items_extra] = false    # default true
+# Pagy::DEFAULT[:items_param] = :items   # default
+# Pagy::DEFAULT[:max_items]   = 100      # default
+
+# Overflow extra: Allow for easy handling of overflowing pages
+# See https://ddnexus.github.io/pagy/extras/overflow
+# require 'pagy/extras/overflow'
+# Pagy::DEFAULT[:overflow] = :empty_page    # default  (other options: :last_page and :exception)
 
 # Support extra: Extra support for features like: incremental, infinite, auto-scroll pagination
 # See https://ddnexus.github.io/pagy/extras/support
 # require 'pagy/extras/support'
 
-# Items extra: Allow the client to request a custom number of items per page with an optional selector UI
-# See https://ddnexus.github.io/pagy/extras/items
-# require 'pagy/extras/items'
-# Pagy::VARS[:items_param] = :items    # default
-# Pagy::VARS[:max_items]   = 100       # default
-# set to false if you want to make :enable_items_extra an opt-in variable
-# Pagy::VARS[:enable_items_extra] = false    # default true
-
-# Overflow extra: Allow for easy handling of overflowing pages
-# See https://ddnexus.github.io/pagy/extras/overflow
-# require 'pagy/extras/overflow'
-# Pagy::VARS[:overflow] = :empty_page    # default  (other options: :last_page and :exception)
-
-# Metadata extra: Provides the pagination metadata to Javascript frameworks like Vue.js, react.js, etc.
-# See https://ddnexus.github.io/pagy/extras/metadata
-# you must require the shared internal extra (BEFORE the metadata extra) ONLY if you need also the :sequels
-# require 'pagy/extras/shared'
-# require 'pagy/extras/metadata'
-# For performance reason, you should explicitly set ONLY the metadata you use in the frontend
-# Pagy::VARS[:metadata] = [:scaffold_url, :count, :page, :prev, :next, :last]    # example
-
 # Trim extra: Remove the page=1 param from links
 # See https://ddnexus.github.io/pagy/extras/trim
 # require 'pagy/extras/trim'
-# after requiring it will trim by default
-# set to false if you want to make :enable_trim_extra an opt-in variable
-# Pagy::VARS[:enable_trim_extra] = false # default true
+# set to false only if you want to make :trim_extra an opt-in variable
+# Pagy::DEFAULT[:trim_extra] = false # default true
+
+# Standalone extra: Use pagy in non Rack environment/gem
+# See https://ddnexus.github.io/pagy/extras/standalone
+# require 'pagy/extras/standalone'
+# Pagy::DEFAULT[:url] = 'http://www.example.com/subdir'  # optional default
 
 # Rails
 
@@ -163,7 +197,7 @@ require 'pagy/extras/navs'
 #                 {locale: 'es', filepath: 'path/to/pagy-es.yml'},
 #                 {locale: 'xyz',  # not built-in
 #                  filepath: 'path/to/pagy-xyz.yml',
-#                  pluralize: lambda{|count| ... } )
+#                  pluralize: lambda{ |count| ... } )
 
 # I18n extra: uses the standard i18n gem which is ~18x slower using ~10x more memory
 # than the default pagy internal i18n (see above)
@@ -171,4 +205,8 @@ require 'pagy/extras/navs'
 # require 'pagy/extras/i18n'
 
 # Default i18n key
-# Pagy::VARS[:i18n_key] = 'pagy.item_name'   # default
+# Pagy::DEFAULT[:i18n_key] = 'pagy.item_name'   # default
+
+# When you are done setting your own defaults freeze it,
+# so it will not changed accidentally
+Pagy::DEFAULT.freeze
