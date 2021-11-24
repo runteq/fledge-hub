@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   def index
     @users = User.active.with_attached_avatar.order(created_at: :desc)
+    @product_count_hash = Product.joins(:user_products).group('user_products.user_id').count
   end
 
   def show
