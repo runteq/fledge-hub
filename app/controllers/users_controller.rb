@@ -1,7 +1,11 @@
 class UsersController < ApplicationController
   def index
-    @users = User.active.with_attached_avatar.order(created_at: :desc)
-    @product_count_hash = Product.joins(:user_products).group('user_products.user_id').count
+    @users = User.active
+                 .joins(:user_products)
+                 .with_attached_avatar
+                 .select('users.*, COUNT(user_products.id) AS count_of_products')
+                 .group(:id)
+                 .order(created_at: :desc)
   end
 
   def show
