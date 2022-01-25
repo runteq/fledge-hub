@@ -1,0 +1,20 @@
+- set_meta_tags title: 'イメージ画像編集', noindex: true
+
+h2 class='text-lg font-bold mb-1'
+  | 新規画像
+
+.mb-3
+  p サムネイルやスクリーンショットなど、イメージが伝わる画像を添付してください。
+  p 6×9のサイズだときれいにトリミングされます。
+
+= render 'form'
+
+h2 class='text-lg font-bold mb-2'
+  | 登録画像
+
+- @product.images.with_attached_product_image.each do |image|
+  .mb-2
+    = image_tag image.product_image, alt: @product.title, width: '100px'
+    = link_to '編集', edit_product_product_image_path(@product, image)
+
+= link_to 'Back', product_path(@product)

@@ -1,20 +1,25 @@
 {
-  "name": "runteq-senses",
+  "name": "fledge_hub",
   "private": true,
   "dependencies": {
-    "@rails/actioncable": "^6.0.0",
-    "@rails/activestorage": "^6.0.0",
-    "@rails/ujs": "^6.0.0",
-    "@rails/webpacker": "5.2.1",
-    "autoprefixer": "^9",
-    "postcss": "^7",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat",
-    "turbolinks": "^5.2.0"
+    "@hotwired/turbo-rails": "^7.0.0-beta.7",
+    "@rails/actioncable": "^6.1.4",
+    "@rails/activestorage": "^6.1.4",
+    "@rails/ujs": "^6.1.4",
+    "@rails/webpacker": "^5.4.0",
+    "autoprefixer": "^10.2.6",
+    "postcss": "^8.3.5",
+    "stimulus": "^2.0.0",
+    "tailwindcss": "^2.2.4",
+    "tailwindcss-stimulus-components": "^2.2.0"
   },
   "version": "0.1.0",
   "devDependencies": {
-    "eslint": "^7.21.0",
+    "eslint": "^7.29.0",
     "eslint-loader": "^4.0.2",
     "webpack-dev-server": "^3.11.2"
+  },
+  "scripts": {
+    "lint": "yarn run eslint --ext .js app/javascript"
   }
 }

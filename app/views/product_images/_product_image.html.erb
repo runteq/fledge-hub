@@ -1,0 +1,6 @@
+<%= image_tag product_thumbnail_url(product_image), class: "carousel-image absolute", onclick: "toggleModal('#{product_image.id}')" %>
+<div class="hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none bg-black bg-opacity-30" id="<%= product_image.id %>" onclick="toggleModal('<%= product_image.id %>')">
+  <div class="relative">
+    <%= image_tag product_image.product_image, alt: product_image.product.title, class: 'object-scale-down w-screen h-screen' %>
+  </div>
+</div>

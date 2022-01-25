@@ -1,0 +1,12 @@
+.js-medium-form.border.rounded.p-4.mb-3
+  = f.fields_for 'media_attributes[]', ProductMedium.new, {} do |ff|
+    = ff.hidden_field :id, value: medium.id
+    .form-group
+      = ff.label :title, class: 'form-label'
+      = ff.text_field :title, value: medium.title, class: 'text-field'
+    .form-group
+      = ff.label :url, class: 'form-label'
+      = ff.url_field :url, value: medium.url, class: 'text-field'
+  .text-right
+    span class='cursor-pointer underline hover:opacity-75' onclick='removeMediumForm(event)'
+      | 削除

@@ -1,0 +1,21 @@
+# リリース後はidの変更をしないでください
+
+- id: 0
+  position: 1000
+  icon: fas fa-link
+  name: その他リンク
+- id: 1
+  position: 999
+  name: ブログ
+  icon: fas fa-feather-alt
+  base_url: ""
+- id: 2
+  position: 1
+  name: GitHub
+  icon: fab fa-github
+  base_url: https://github.com/
+- id: 3
+  position: 2
+  name: Twitter
+  icon: fab fa-twitter
+  base_url: https://twitter.com/

@@ -1,0 +1,17 @@
+= form_with model: [@product, @image], class: 'form' do |f|
+  - if @image.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@image.errors.count, "error")} prohibited this image from being saved:"
+      ul
+        - @image.errors.full_messages.each do |message|
+          li = message
+  .form-group
+    .block.w-full
+      - if @image.product_image.attached? && @image.product_image.blob&.persisted?
+        = image_tag @image.product_image, class: 'w-48 mb-3'
+      = f.file_field :product_image, required: true, accept: 'image/jpg,image/jpeg,image/png,image/gif'
+  .form-group
+    = f.submit class: 'btn btn-indigo'
+    - if @image.persisted?
+      = link_to '削除', product_product_image_path(@product, @image), method: :delete,
+        data: { confirm: '画像を削除しますか？' }, class: 'btn btn-danger ml-1'

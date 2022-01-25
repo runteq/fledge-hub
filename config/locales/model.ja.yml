@@ -10,18 +10,49 @@ ja:
       id: ID
       created_at: 作成日時
       updated_at: 更新日時
-      user:
-        display_name: 名前
-        screen_name: ID
-        email: メールアドレス
       product:
         title: サービス名
         summary: 概要
         released_on: リリース日
         url: URL
         source_url: コードURL
+        technology_ids: 使用技術
+        product_category_id: カテゴリ
+        product_type_id: プロダクト形式
         users: 製作者
-      image:
+      product_image:
+        product_image: 画像
+      product_medium:
         title: 見出し
-        description: 説明
-        url: 画像URL
+        url: URL
+      social_service:
+        name: サービス名
+        icon: アイコンフォント用テキスト
+        base_url: URL
+      social_account:
+        identifer: アカウント名/URL
+      user:
+        display_name: 表示名
+        screen_name: ID
+        email: メールアドレス
+        avatar: プロフィール画像
+        study_started_on: 学習開始日
+
+  activemodel:
+    attributes:
+      product_form:
+        title: サービス名
+        summary: 概要
+        released_on: リリース日
+        url: URL
+        source_url: コードURL
+        technology_ids: 使用技術
+        product_category_id: カテゴリ
+        product_type_id: プロダクト形式
+        users: 製作者
+        media_attributes: メディア
+      inquiry_form:
+        name: お名前
+        email: メールアドレス
+        about: ご用件
+        description: 内容

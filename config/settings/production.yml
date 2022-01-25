@@ -1,0 +1,3 @@
+sorcery:
+  github:
+    callback_url: https://fledge-hub.com/oauth/callback?provider=github

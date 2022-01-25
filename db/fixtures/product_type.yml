@@ -1,0 +1,32 @@
+# リリース後はidの変更をしないでください
+
+- id: 0
+  position: 1000
+  name: その他
+- id: 1
+  position: 1
+  name: ゲーム
+- id: 2
+  position: 2
+  name: 投稿・共有サービス
+- id: 3
+  position: 3
+  name: SNS
+- id: 4
+  position: 4
+  name: 診断サービス
+- id: 5
+  position: 5
+  name: 効率化
+- id: 6
+  position: 6
+  name: 学習サービス
+- id: 7
+  position: 7
+  name: 管理ツール
+- id: 8
+  position: 8
+  name: Bot
+- id: 9
+  position: 9
+  name: コンテンツ

@@ -1,7 +1,7 @@
-h1 Editing product
+- set_meta_tags title: 'サービス編集', noindex: true
 
 = render 'form'
 
 = link_to 'Show', @product
-'|
-= link_to 'Back', products_path
+br
+= link_to '削除', product_path(@product), method: :delete, data: { confirm: 'Are you sure?' }

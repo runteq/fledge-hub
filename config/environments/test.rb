@@ -19,7 +19,7 @@ Rails.application.configure do
   # Configure public file server for tests with Cache-Control for performance.
   config.public_file_server.enabled = true
   config.public_file_server.headers = {
-    'Cache-Control' => "public, max-age=#{1.hour.to_i}"
+    'Cache-Control' => "public, max-age=#{1.hour.to_i}",
   }
 
   # Show full error reports and disable caching.
@@ -57,4 +57,9 @@ Rails.application.configure do
 
   # Annotate rendered view with file names.
   # config.action_view.annotate_rendered_view_with_filenames = true
+
+  # rspecが落ちてしまうのを回避する為、active_storageの処理を同期的に行う。
+  # 参考 https://qiita.com/ham0215/items/acccaf6023807a7518b6
+  # https://railsguides.jp/active_storage_overview.html#active-storage%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6
+  config.active_job.queue_adapter = :inline
 end

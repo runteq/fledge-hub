@@ -1,0 +1,28 @@
+- set_meta_tags title: 'ユーザー登録', noindex: true
+
+= form_with model: @user, url: registration_path, class: 'form' do |f|
+  - if @user.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved:"
+      ul
+        - @user.errors.full_messages.each do |message|
+          li = message
+
+  .form-group
+    = f.label :screen_name, class: 'form-label'
+    = f.text_field :screen_name, required: true, class: 'text-field'
+  .form-group
+    = f.label :display_name, class: 'form-label'
+    = f.text_field :display_name, required: true, class: 'text-field'
+  .form-group
+    = f.label :study_started_on, class: 'form-label'
+    = f.date_field :study_started_on, required: true, class: 'text-field'
+  .form-group
+    = f.label :email, class: 'form-label'
+    = f.email_field :email, required: true, class: 'text-field'
+  label.items-center.form-group
+    = check_box_tag :acceptable, true, false, class: "form-checkbox h-4 w-4 mr-1"
+    = link_to '利用規約', terms_path
+    | に同意する
+  .form-group
+    = f.submit 'ユーザー登録', class: 'btn btn-indigo'

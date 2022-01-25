@@ -1,0 +1,31 @@
+- set_meta_tags title: '退会', noindex: true
+
+= render 'settings/tabs'
+
+.mb-4
+  h2.text-lg.font-semibold
+    | 退会時に削除されるデータ
+  ul.list-disc.ml-6
+    li メールアドレス
+    li ユーザープロフィールのデータ
+    / li ブックマーク
+.mb-4
+  h2.text-lg.font-semibold
+    | 退会時に削除されないデータ
+  ul.list-disc.ml-6
+    li 連携GitHubアカウントのID
+    li 投稿したサービスのデータ
+
+- if @deactivated_product_sample
+  .mb-4
+    .mb-2
+      h2.text-lg.font-semibold
+        | 投稿済みサービスについて
+      p 投稿済みサービスは、退会によって自動的に削除されません。
+      p 以下のサービスは、退会後に製作者の表示が「退会済みユーザー」になります。
+      ul.list-disc.ml-8.mb-2
+        - current_user.products.each do |product|
+          li= product.title
+      p 退会後に投稿データの編集・削除はできません。
+
+= link_to '同意して退会する', user_deactivation_path, method: :delete, data: { confirm: '本当に退会しますか？' }

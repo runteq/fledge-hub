@@ -1,28 +1,31 @@
-<nav class="flex items-center justify-between flex-wrap bg-indigo-800 p-6">
-  <div class="flex items-center flex-no-shrink text-white mr-6">
-    <svg class="h-8 w-8 mr-2" width="54" height="54" viewBox="0 0 54 54" xmlns="http://www.w3.org/2000/svg"><path d="M13.5 22.1c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05zM0 38.3c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05z"/></svg>
-    <span class="font-semibold text-xl tracking-tight">
-      <%= link_to 'RUNTEQ senses', root_path, class: 'no-underline' %>
-    </span>
+<header class="flex	px-4 py-2 items-center justify-between flex-wrap bg-indigo-800">
+  <%= link_to root_path, class: "mr-6" do %>
+    <%= image_tag '/logo-white.png', class: 'object-scale-down h-10' %>
+  <% end %>
+  <div class="text-sm pt-1 text-indigo-50 tracking-tight hidden md:block">
+    個人開発者のための 技術を検索できる開発サービス投稿サイト
   </div>
-  <div class="block lg:hidden">
-    <button class="flex items-center px-3 py-2 border rounded text-indigo-100 border-indigo-400 hover:text-white hover:border-white">
-      <svg class="h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
-    </button>
+  <div class='ml-auto flex space-x-3 relative inline-block float-right items-center'>
+    <%= link_to 'Users', users_path, class: 'text-indigo-50 no-underline text-sm' %>
+    <% if logged_in? %>
+      <%= link_to 'Stocks', mypage_stocks_path, class: 'text-indigo-50 no-underline text-sm' %>
+      <div  class="relative text-sm text-gray-100" data-controller="dropdown">
+        <div data-action="click->dropdown#toggle click@window->dropdown#hide" role="button" data-dropdown-target="button" tabindex="0" class="inline-block select-none align-middle">
+          <%= image_tag current_user.avatar, alt: current_user.display_name, class: 'items-center focus:outline-none md:w-9 h-9 sm:w-6 h-6 rounded-full' %>
+        </div>
+        <div id="userMenu" data-dropdown-target="menu" class="absolute right-0 hidden z-10 bg-white shadow rounded border overflow-hidden">
+          <ul class="list-reset text-gray-900">
+            <li><%= link_to 'Mypage', user_path((current_user.screen_name)), class: 'px-4 py-2 block hover:bg-indigo-100 no-underline hover:no-underline' %></li>
+            <li><%= link_to 'Settings', settings_profile_path, class: 'px-4 py-2 block hover:bg-indigo-100 no-underline hover:no-underline' %></li>
+            <li>
+              <hr class="border-t mx-1 border-gray-300">
+            </li>
+            <li><%= link_to 'Logout', logout_path, method: :delete, class: 'px-4 py-2 block hover:bg-indigo-100 no-underline hover:no-underline' %></li>
+          </ul>
+        </div>
+      </div>
+    <% else %>
+      <%= link_to 'GitHub Login', auth_at_provider_path(provider: :github), class: 'btn px-3 py-2 bg-black text-white border border-white hover:border-white' %>
+    <% end %>
   </div>
-  <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
-    <div class="text-sm lg:flex-grow">
-      <% if logged_in? %>
-        <%= link_to 'Profile', profile_path, class: 'block mt-4 lg:inline-block lg:mt-0 text-indigo-100 hover:text-white mr-4 no-underline' %>
-        <%= link_to 'New Product', new_product_path, class: 'block mt-4 lg:inline-block lg:mt-0 text-indigo-100 hover:text-white mr-4 no-underline' %>
-        <%= link_to 'Logout', logout_path, method: :delete, class: 'block mt-4 lg:inline-block lg:mt-0 text-indigo-100 hover:text-white mr-4 no-underline' %>
-      <% else %>
-        <%= link_to 'Login with GitHub', auth_at_provider_path(provider: :github), class: 'block mt-4 lg:inline-block lg:mt-0 text-indigo-100 hover:text-white mr-4' %>
-      <% end %>
-    </div>
-    <div>
-      <a href="#" class="btn text-white hover:bg-white hover:text-indigo-800">Download</a>
-      <a href="#" class="btn">Button</a>
-    </div>
-  </div>
-</nav>
+</header>

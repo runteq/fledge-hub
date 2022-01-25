@@ -4,24 +4,24 @@ class OauthsController < ApplicationController
   end
 
   def callback
+    if auth_params[:error] == 'access_denied'  # GitHub認証キャンセル
+      redirect_to root_path, notice: 'ログインをキャンセルしました'
+      return
+    end
+
     provider = auth_params[:provider]
-    if (@user = login_from(provider))
-      redirect_to root_path, notice: "#{provider.titleize}でログインしました"
+    if login_from(provider)
+      redirect_back_or_to root_path, notice: "#{provider.titleize}でログインしました。"
     else
-      begin
-        @user = create_from(provider)
-        reset_session
-        auto_login(@user)
-        redirect_to root_path, notice: "#{provider.titleize}でログインしました"
-      rescue StandardError
-        redirect_to root_path, alert: "#{provider.titleize}でのログインに失敗しました"
-      end
+      # データをセッションに入れる
+      session[:user_info] = @user_hash[:user_info]
+      redirect_to new_registration_path
     end
   end
 
   private
 
   def auth_params
-    params.permit(:code, :provider)
+    params.permit(:code, :provider, :error)
   end
 end

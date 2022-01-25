@@ -1,0 +1,15 @@
+<turbo-frame id="stock-button">
+  <% if stocked %>
+    <%= link_to product_stock_path(product), method: :delete do %>
+      <button class="w-10 h-10 text-white bg-indigo-400 transform border-2 rounded-full border-indigo-400">
+        <i class="fas fa-folder"></i>
+      </button>
+    <% end %>
+  <% else %>
+    <%= link_to product_stock_path(product), method: :post do %>
+      <button class="w-10 h-10 text-gray-600 transform border-2 rounded-full hover:border-indigo-400">
+        <i class="far fa-folder"></i>
+      </button>
+    <% end %>
+  <% end %>
+</turbo-frame>

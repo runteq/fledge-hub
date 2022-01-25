@@ -1,0 +1,27 @@
+<% set_meta_tags @user %>
+
+<div class="mb-6">
+  <div class="text-center mb-5 opacity-90">
+    <%= image_tag @user.avatar, alt: @user.display_name, class: 'mx-auto object-cover rounded-full h-32 w-32' %>
+  </div>
+  <div class="text-center mb-4">
+    <p class="text-xl text-gray-800 dark:text-white">
+      <%= @user.display_name %>
+    </p>
+    <p class="text-l text-gray-500 dark:text-gray-200 font-light">
+      <%= @user.screen_name %>
+    </p>
+  </div>
+
+  <div class="pt-4 flex border-t border-gray-200 w-40 mx-auto px-2 text-gray-500 items-center <%= @user.social_accounts.size > 1 ? 'justify-between' : 'justify-center' %>">
+    <% @social_accounts.each do |social_account| %>
+      <%= link_to sanitize(social_account.url), target: :_blank, rel: 'noopener noreferrer', class: 'text-3xl' do %>
+        <i class="<%= social_account.icon %>"></i>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+<div class="my-3 grid md:grid-cols-3 grid-cols-1 gap-8">
+  <%= render(ProductComponent.with_collection(@products)) %>
+</div>

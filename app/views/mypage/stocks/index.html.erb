@@ -1,0 +1,12 @@
+<% set_meta_tags title: 'ストック一覧', noindex: true %>
+
+<% if @products.present? %>
+  <div class="grid md:grid-cols-3 grid-cols-1 gap-x-8 gap-y-12">
+    <%= render(ProductComponent.with_collection(@products)) %>
+  </div>
+  <div class="mt-10">
+    <%== pagy_nav(@pagy) %>
+  </div>
+<% else %>
+  <div class="my-10 mx-auto">まだストックされていません。</div>
+<% end %>

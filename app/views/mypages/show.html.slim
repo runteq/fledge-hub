@@ -1,0 +1,9 @@
+- set_meta_tags title: 'マイページ', noindex: true
+
+| マイページ
+br
+= link_to 'ユーザーページ', user_path((current_user.screen_name))
+br
+= link_to 'ストック一覧', mypage_stocks_path
+br
+= link_to 'プロフィール編集', settings_profile_path

@@ -11,26 +11,39 @@
   }
 
   .btn {
-    @apply inline-block cursor-pointer no-underline text-sm py-3 px-4 mt-4 leading-none rounded lg:mt-0 hover:border-transparent hover:opacity-100;
+    @apply inline-block cursor-pointer no-underline text-sm py-3 px-4 leading-none rounded hover:border-transparent hover:opacity-100;
   }
 
   .btn-indigo {
     @apply bg-indigo-700 text-white hover:opacity-75;
   }
 
+  .btn-danger {
+    @apply bg-red-700 text-white hover:opacity-75;
+  }
+
   .form {
     @apply w-full max-w-lg text-sm;
 
     .form-group {
-      @apply flex flex-wrap -mx-3 mb-6;
+      @apply flex flex-wrap mb-6;
     }
 
     .form-label {
-      @apply block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2;
+      @apply block tracking-wide text-gray-700 font-bold mb-2;
+
+      .required {
+        @apply bg-red-400 text-2xs text-white font-normal p-1 rounded ml-1;
+      }
     }
 
     .text-field {
-      @apply appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500;
+      @apply appearance-none block w-full bg-white text-gray-700 border border-gray-300 rounded py-3 px-4 leading-tight focus:outline-none;
+    }
+
+    .select-box {
+      position: relative;
+      @apply block bg-white border w-full border-gray-300 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none;
     }
 
     .field_with_errors {
@@ -41,8 +54,40 @@
       }
 
       .text-field {
-        @apply bg-red-200 border-red-200 focus:outline-none focus:bg-white focus:border-gray-500;
+        @apply border-red-500 focus:outline-none focus:bg-white;
       }
+    }
+  }
+}
+
+.pagy-nav {
+  @apply flex space-x-1;
+  a {
+    @apply no-underline;
+  }
+
+  .page a,
+  .page.active,
+  .page.prev.disabled,
+  .page.next.disabled {
+    @apply block rounded-lg px-3 py-1 text-sm font-semibold bg-gray-200;
+    &:hover {
+      @apply bg-gray-200;
+    }
+  }
+
+  .page.prev.disabled,
+  .page.next.disabled {
+    @apply text-gray-400 bg-gray-200 cursor-default;
+    &:hover {
+      @apply bg-gray-200;
+    }
+  }
+
+  .page.active {
+    @apply cursor-default bg-indigo-200 text-indigo-600;
+    &:hover {
+      @apply bg-indigo-200;
     }
   }
 }

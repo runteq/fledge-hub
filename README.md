@@ -1,57 +1,30 @@
-# RUNTEQ senses
+# Fledge Hub
 
 ## is 何？
 
 RUNTEQ生のポートフォリオ、どこで見れるんじゃ？<br>
 →ないなら作ろう
 
-そんな感じで始まりました。みんなでカスタマイズしていけたらいいなと思っています。
+そんな感じで始まりましたが、想定ユーザーはRUNTEQ生に限定しないことになりました。<br>
+みんなでカスタマイズしていけたらいいなと思っています。
+
 
 ## 参加したい！
 
 まずは[Mattermostのチャンネル](https://chat.runteq.jp/runteq/channels/c01rtlnl5qx)に入ってください。
 
-思いついた機能を[Issue](https://github.com/runteq/runteq_senses/issues)に投げるだけでも大丈夫です。<br>
+
+環境構築手順は[こちら](https://github.com/runteq/fledge-hub/wiki/%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89%E6%89%8B%E9%A0%86)から。
+
+思いついた機能を[Issue](https://github.com/runteq/fledge-hub/issues)に投げるだけでも大丈夫です。<br>
 実装できそうかも？と思った人は、環境構築からお願いします（ものによっては環境構築不要なものもありますが）
 
-### 環境構築
-
-困ったときは[先人の知恵](https://github.com/runteq/runteq_senses/issues/12)が役立つかもしれません。コマンドや記録などを残してくれると後進のためになります。
-
-- 事前に管理者からdevelopment.keyとtest.keyを取得してconfig/credentials配下に置いてください<br>
-配置しないとrails db:create で `NoMethodError: undefined method '[]' for nil:NilClass` になります
-
-#### ローカルで構築する場合
-```
-$ cp config/database.yml.default config/database.yml
-$ rbenv local 3.0.0
-$ nodenv local 14.16.1 # nodeのバージョンが14.16.1なら大丈夫です
-$ bundle install
-$ yarn install
-$ bundle exec rails db:create
-$ bundle exec rails db:migrate
-$ rake db:seed_fu
-$ bundle exec rails server
-```
-
-#### Dockerを使う場合
-```
-$ cp config/database.yml.docker config/database.yml
-$ docker-compose run --rm web bundle exec rails db:create
-$ docker-compose run --rm web bundle exec rails db:migrate
-$ docker-compose up -d
-```
-
-#### テスト実行
-```
-bundle exec rspec spec
-```
 
 ### タスクの進め方
 
 - Issueの追加
   - やりたいことがIssueにない場合は、自分で作ってください
-  - [New Issue](https://github.com/runteq/runteq_senses/issues/new)からタスクを追加する
+  - [New Issue](https://github.com/runteq/fledge-hub/issues/new)からタスクを追加する
 
 - Issueに取り掛かる
   - `Assignees`に自分を追加して「やります表明」をする
@@ -66,15 +39,17 @@ bundle exec rspec spec
 - Approveを受けたらマージする
   - コンフリクトの解消も経験です
 
+
 #### その他
 
-- 解答などが必要な場合はメンションをすると確実です
+- 回答などが必要な場合はメンションをすると確実です
 
 - 1つのIssueの規模が大きい場合、PRを複数に分けて出すことをおすすめします
   - PRの粒度が小さいと、レビュワーの負担が軽くなります
 
 - あなたのレビューも歓迎です！
   - LGTMを出すほどの自信がなくても、他人のコードを読んでコメントしてみましょう！
+
 
 ## 仕様
 
@@ -86,4 +61,12 @@ bundle exec rspec spec
 ### ER図
 
 ![ER図](./erd.png)
-詳細は https://github.com/runteq/runteq_senses/pull/1 だけど、若干内容が変わっている。
+https://drive.google.com/file/d/1lPhbCER0sW7sJMw0R_E0QcrDQB4JijEv/view?usp=sharing
+
+詳細は https://github.com/runteq/fledge-hub/pull/1 だけど、若干内容が変わっている。
+
+### 画面遷移図
+
+[画面遷移図](https://www.figma.com/file/AwHt66yEYV4qlvxi4Nv19F/Runteq-senses?node-id=0%3A88)
+イメージです。
+気づいたところがあれば、適宜いじって欲しい！！

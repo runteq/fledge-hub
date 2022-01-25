@@ -2,50 +2,61 @@ class ProductsController < ApplicationController
   before_action :require_login, only: %i[new edit create update destroy]
 
   def index
-    @products = Product.all
+    @q = Product.order(created_at: :desc).ransack(params[:q])
+    result = @q.result(distinct: true).includes_query
+    @pagy, @products = pagy(result)
   end
 
   def show
     @product = Product.find(params[:id])
+    @images = @product.images.with_attached_product_image
   end
 
   def new
-    @product = Product.new
+    @product = ProductForm.new
   end
 
   def edit
-    @product = current_user.products.find(params[:id])
+    @product = ProductForm.find(params[:id], current_user.id)
   end
 
   def create
-    # 一対多みたいな書き方をしている。user複数のときどうするかは後々
-    @product = current_user.products.build(product_params)
-    if @product.valid?
-      @product = current_user.products.create(product_params)
-      redirect_to @product, notice: 'Product was successfully created.'
+    @product = ProductForm.new(product_params.merge(user_ids: [current_user.id]))
+    if @product.save
+      redirect_to new_product_product_image_path(@product), notice: 'サービスを投稿しました！'
     else
-      render :new
+      render :new, status: :unprocessable_entity # 422errorを起こす
     end
   end
 
   def update
-    @product = current_user.products.find(params[:id])
+    @product = ProductForm.find(params[:id], current_user.id)
     if @product.update(product_params)
-      redirect_to @product, notice: 'Product was successfully updated.'
+      redirect_to product_path(@product), notice: 'データを更新しました！'
     else
-      render :edit
+      render :edit, status: :unprocessable_entity # 422errorを起こす
     end
   end
 
   def destroy
     @product = current_user.products.find(params[:id])
     @product.destroy!
-    redirect_to products_url, notice: 'Product was successfully destroyed.'
+    redirect_to root_url, notice: 'サービスを削除しました！'
   end
 
   private
 
   def product_params
-    params.require(:product).permit(:title, :summary, :url, :source_url, :released_on)
+    params.require(:product).permit(
+      :title,
+      :summary,
+      :url,
+      :source_url,
+      :released_on,
+      :product_category_id,
+      :product_type_id,
+      technology_ids: [],
+      media_attributes: %i[id title url],
+    )
   end
 end

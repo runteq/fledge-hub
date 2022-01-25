@@ -45,3 +45,10 @@ yarn-debug.log*
 
 # Ignore spec/examples
 /spec/examples.txt
+
+# RubyMine
+/.idea
+
+config/settings.local.yml
+config/settings/*.local.yml
+config/environments/*.local.yml
