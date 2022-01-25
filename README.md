@@ -13,6 +13,7 @@ RUNTEQ生のポートフォリオ、どこで見れるんじゃ？<br>
 
 まずは[Mattermostのチャンネル](https://chat.runteq.jp/runteq/channels/c01rtlnl5qx)に入ってください。
 
+
 環境構築手順は[こちら](https://github.com/runteq/fledge-hub/wiki/%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89%E6%89%8B%E9%A0%86)から。
 
 思いついた機能を[Issue](https://github.com/runteq/fledge-hub/issues)に投げるだけでも大丈夫です。<br>
