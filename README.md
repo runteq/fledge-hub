@@ -18,19 +18,12 @@ RUNTEQ生のポートフォリオ、どこで見れるんじゃ？<br>
 
 困ったときは[先人の知恵](https://github.com/runteq/runteq_senses/issues/12)が役立つかもしれません。コマンドや記録などを残してくれると後進のためになります。
 
-- 事前に管理者からmaster.keyを取得してconfig配下に置いてください<br>
+- 事前に管理者からdevelopment.keyとtest.keyを取得してconfig/credentials配下に置いてください<br>
 配置しないとrails db:create で `NoMethodError: undefined method '[]' for nil:NilClass` になります
 
-- config/database.yml の作成
-
+#### ローカルで構築する場合
 ```
 $ cp config/database.yml.default config/database.yml
-
-# Dockerを使う場合
-$ cp config/database.yml.docker config/database.yml
-```
-
-```
 $ rbenv local 3.0.0
 $ nodenv local 14.16.1 # nodeのバージョンが14.16.1なら大丈夫です
 $ bundle install
@@ -38,11 +31,15 @@ $ yarn install
 $ bundle exec rails db:create
 $ bundle exec rails db:migrate
 $ rake db:seed_fu
+$ bundle exec rails server
 ```
 
-#### サーバー起動
+#### Dockerを使う場合
 ```
-bundle exec rails server
+$ cp config/database.yml.docker config/database.yml
+$ docker-compose run --rm web bundle exec rails db:create
+$ docker-compose run --rm web bundle exec rails db:migrate
+$ docker-compose up -d
 ```
 
 #### テスト実行
