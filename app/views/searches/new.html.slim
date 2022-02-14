@@ -37,7 +37,7 @@
         .form-label
           = Product.human_attribute_name(:technology_ids)
         .flex.flex-wrap.items-center.gap-x-2.gap-y-1
-          = f.collection_check_boxes(:technologies_id_eq_any, Technology.all, :id, :name) do |t|
+          = f.collection_check_boxes(:technologies_id_eq_any, Technology.joins(:products).distinct, :id, :name) do |t|
             = t.label do
               = t.check_box(class: 'hidden')
               span class='btn bg-gray-300 bg-opacity-25 hover:opacity-70'
