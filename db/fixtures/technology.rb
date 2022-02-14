@@ -17,6 +17,31 @@ Technology.seed(:id,
     slug: 'rails'
   },
   {
+    id: 5,
+    name: 'PHP',
+    slug: 'php'
+  },
+  {
+    id: 6,
+    name: 'Laravel',
+    slug: 'laravel'
+  },
+  {
+    id: 7,
+    name: 'CakePHP',
+    slug: 'cake-php'
+  },
+  {
+    id: 10,
+    name: 'Python',
+    slug: 'python'
+  },
+  {
+    id: 11,
+    name: 'Django',
+    slug: 'django'
+  },
+  {
     id: 51,
     name: 'JavaScript',
     slug: 'javascript'
