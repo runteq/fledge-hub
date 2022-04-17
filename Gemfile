@@ -33,6 +33,7 @@ gem 'meta-tags'
 gem 'exception_notification', github: 'smartinez87/exception_notification'
 gem 'httparty'
 gem 'rambulance'
+gem 'twitter'
 
 # バリデーション
 gem 'valid_email2'

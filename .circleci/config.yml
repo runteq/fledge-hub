@@ -7,11 +7,11 @@ executors:
   default_executor:
     working_directory: ~/fledge-hub-circleci
     docker:
-      - image: circleci/ruby:3.0.2-node-browsers
+      - image: circleci/ruby:3.0.3-node-browsers
         environment:
           DB_HOST: 127.0.0.1
           RAILS_ENV: test
-          BUNDLER_VERSION: 2.2.3
+          BUNDLER_VERSION: 2.2.26
           TZ: "Japan"
       - image: circleci/mysql:8.0.19-ram
         command: [--default-authentication-plugin=mysql_native_password]

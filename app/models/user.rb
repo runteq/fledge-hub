@@ -94,4 +94,8 @@ class User < ApplicationRecord
   def active?
     !deactivated?
   end
+
+  def twitter_name
+    social_accounts.find_by(social_service_id: SocialService.twitter.id)&.identifier
+  end
 end
