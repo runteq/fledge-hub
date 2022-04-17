@@ -1,7 +1,7 @@
-<%= form_with model: @product, class: 'form' do |f| %>
+<%= form_with model: @product_form, class: 'form' do |f| %>
   <% if f.object.errors.any? %>
     <ul>
-      <% @product.errors.full_messages.each do |message| %>
+      <% @product_form.errors.full_messages.each do |message| %>
         <li>
           <%= message %>
         </li>
@@ -77,7 +77,7 @@
   <div id='js-media-form'>
     <h2 class='text-lg font-bold'>メディア</h2>
     <p class="mb-2">関連記事・公式アカウントなど</p>
-    <% @product.media.each do |medium| %>
+    <% @product_form.media.each do |medium| %>
       <%= render 'medium_form', f: f, medium: medium %>
     <% end %>
   </div>
@@ -90,7 +90,7 @@
   </div>
 
   <%# バリデーションエラー時に再度実行されるので、二重定義を回避する %>
-  <% if @product.errors.blank? %>
+  <% if @product_form.errors.blank? %>
     <script type="text/javascript">
       const addMediumForm = (e) => {
         const mediaForm = document.getElementById('js-media-form')
