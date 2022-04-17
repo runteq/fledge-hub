@@ -11,11 +11,12 @@ class InquiryForm
   def save
     return false if invalid?
 
-    MattermostNotifier.call(
+    form = MattermostNotificationForm.new(
       channel: 'fledge-hub',
       username: 'お問い合わせ',
       text: text,
     )
+    form.save!
     save_inquiry!
     true
   end
