@@ -15,7 +15,7 @@ RSpec.describe TweetForm do
         expect { subject }.to raise_error ActiveModel::ValidationError
         expect(form.errors.messages).to eq({
           text: ['は117文字以内で入力してください'],
-          url: ['を入力してください', 'は不正なURLです'],
+          url: %w[を入力してください は不正なURLです],
         })
       end
     end

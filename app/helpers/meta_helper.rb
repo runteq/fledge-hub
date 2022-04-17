@@ -1,5 +1,5 @@
 module MetaHelper
-  # rubocop:disable Metrics/MethodLength, Layout/LineLength
+  # rubocop:disable Metrics/MethodLength
   def default_meta_tags
     {
       site: 'Fledge Hub',
@@ -32,5 +32,5 @@ module MetaHelper
       },
     }
   end
-  # rubocop:enable Metrics/MethodLength, Layout/LineLength
+  # rubocop:enable Metrics/MethodLength
 end

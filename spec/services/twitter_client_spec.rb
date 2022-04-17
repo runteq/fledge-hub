@@ -15,7 +15,14 @@ RSpec.describe TwitterClient do
     end
 
     context 'Twitterアカウントが登録されている場合' do
-      let!(:twitter_account) { create(:social_account, identifier: 'fledge_hub', user: user, social_service_id: SocialService.twitter.id) }
+      let!(:twitter_account) do
+        create(
+          :social_account,
+          identifier: 'fledge_hub',
+          user: user,
+          social_service_id: SocialService.twitter.id,
+        )
+      end
       it 'Twitterアカウント名を含む' do
         expect(subject).to include('@fledge_hub')
       end
