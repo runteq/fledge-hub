@@ -162,8 +162,6 @@ GEM
       deep_merge (~> 1.2, >= 1.2.1)
       dry-validation (~> 1.0, >= 1.0.0)
     connection_pool (2.2.5)
-    crack (0.4.5)
-      rexml
     crass (1.0.6)
     date_validator (0.12.0)
       activemodel (>= 3)
@@ -241,7 +239,6 @@ GEM
     ffi (1.15.5)
     globalid (1.0.0)
       activesupport (>= 5.0)
-    hashdiff (1.0.1)
     hotwire-rails (0.1.3)
       rails (>= 6.0.0)
       stimulus-rails
@@ -512,10 +509,6 @@ GEM
       nokogiri (~> 1.6)
       rubyzip (>= 1.3.0)
       selenium-webdriver (~> 4.0)
-    webmock (3.14.0)
-      addressable (>= 2.8.0)
-      crack (>= 0.3.2)
-      hashdiff (>= 0.4.0, < 2.0.0)
     webpacker (5.4.3)
       activesupport (>= 5.2)
       rack-proxy (>= 0.6.1)
@@ -601,7 +594,6 @@ DEPENDENCIES
   view_component
   web-console
   webdrivers
-  webmock
   webpacker
 
 RUBY VERSION

@@ -38,11 +38,19 @@ RSpec.describe InquiryForm do
 
         it { expect(subject).to be true }
         it do
-          expect(MattermostNotifier).to receive(:call).with(
+          double = instance_double(MattermostNotificationForm)
+          allow(double).to receive(:save!)
+          expect(MattermostNotificationForm).to receive(:new).with(
             channel: 'fledge-hub',
             username: 'お問い合わせ',
-            text: "| name | name_test |\n | -- | -- |\n | email | test@example.com |\n | about | about_test |\n | user_agent | user_agent_test |\n\ndescription_test",
-          )
+            text: "| name | name_test |
+| -- | -- |
+| email | test@example.com |
+| about | about_test |
+| user_agent | user_agent_test |
+
+description_test",
+          ).and_return(double)
           subject
         end
         it 'レコードを作成する' do
@@ -64,11 +72,19 @@ RSpec.describe InquiryForm do
         end
 
         it do
-          expect(MattermostNotifier).to receive(:call).with(
+          double = instance_double(MattermostNotificationForm)
+          allow(double).to receive(:save!)
+          expect(MattermostNotificationForm).to receive(:new).with(
             channel: 'fledge-hub',
             username: 'お問い合わせ',
-            text: "| name | name_test（user_id: #{user.id}） |\n | -- | -- |\n | email | test@example.com |\n | about | about_test |\n | user_agent | user_agent_test |\n\ndescription_test",
-          )
+            text: "| name | name_test（user_id: #{user.id}） |
+| -- | -- |
+| email | test@example.com |
+| about | about_test |
+| user_agent | user_agent_test |
+
+description_test",
+          ).and_return(double)
           subject
         end
       end

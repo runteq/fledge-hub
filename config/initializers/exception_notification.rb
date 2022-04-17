@@ -24,7 +24,7 @@ ExceptionNotification.configure do |config|
   # }
 
   config.add_notifier :mattermost, {
-    webhook_url: MattermostNotifier::WEBHOOK_URL,
+    webhook_url: MattermostClient::WEBHOOK_URL,
     channel: 'fledge-hub_error_notifier',
   }
 

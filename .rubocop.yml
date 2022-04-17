@@ -32,8 +32,6 @@ Layout/LineLength:
     - '\A#.+'
   Exclude:
     - "config/initializers/*"
-    - "app/forms/inquiry_form.rb"
-    - "spec/forms/inquiry_form_spec.rb"
 
 # メソッドチェーンのインデントは自分で調整する
 Layout/MultilineMethodCallIndentation:
