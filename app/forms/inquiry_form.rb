@@ -24,7 +24,13 @@ class InquiryForm
   private
 
   def text
-    "| name | #{name}#{current_user_text} |\n | -- | -- |\n | email | #{email} |\n | about | #{about} |\n | user_agent | #{user_agent} |\n\n#{description}"
+    "| name | #{name}#{current_user_text} |
+| -- | -- |
+| email | #{email} |
+| about | #{about} |
+| user_agent | #{user_agent} |
+
+#{description}"
   end
 
   def current_user_text

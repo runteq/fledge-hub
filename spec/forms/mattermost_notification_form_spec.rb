@@ -14,7 +14,11 @@ RSpec.describe MattermostNotificationForm do
 
       it 'エラーメッセージを持つ' do
         expect { subject }.to raise_error ActiveModel::ValidationError
-        expect(form.errors.messages).to eq({ username: ['を入力してください'], channel: ['を入力してください'], text: ['を入力してください'] })
+        expect(form.errors.messages).to eq({
+          username: ['を入力してください'],
+          channel: ['を入力してください'],
+          text: ['を入力してください'],
+        })
       end
     end
 
@@ -33,7 +37,7 @@ RSpec.describe MattermostNotificationForm do
         end
         it 'Mattermostに通知する' do
           expect(MattermostClient).to receive(:post).with(
-            { username: '通知アカウント名', channel: 'チャンネル', text: 'テキスト' }
+            { username: '通知アカウント名', channel: 'チャンネル', text: 'テキスト' },
           )
           subject
         end
@@ -44,14 +48,15 @@ RSpec.describe MattermostNotificationForm do
         end
         it 'Mattermostに通知しない' do
           expect(MattermostClient).to_not receive(:post).with(
-            { username: '通知アカウント名', channel: 'チャンネル', text: 'テキスト' }
+            { username: '通知アカウント名', channel: 'チャンネル', text: 'テキスト' },
           )
           subject
         end
         it 'loggerに出力する' do
           logger_double = instance_double('Rails.logger')
           expect(logger_double).to receive(:info).with(
-            "Message to Mattermost.\n{:username=>\"通知アカウント名\", :channel=>\"チャンネル\", :text=>\"テキスト\"}"
+            "Message to Mattermost.
+{:username=>\"通知アカウント名\", :channel=>\"チャンネル\", :text=>\"テキスト\"}",
           )
           expect(Rails).to receive(:logger).and_return(logger_double)
           subject
