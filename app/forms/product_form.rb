@@ -109,7 +109,7 @@ class ProductForm
   def remained_medium_ids
     attr_medium_ids = media_attributes.map do |attr|
       attr.deep_symbolize_keys[:id]
-    end.reject(&:blank?).map(&:to_i)
+    end.compact_blank.map(&:to_i)
     attr_medium_ids & product.media.ids
   end
 
