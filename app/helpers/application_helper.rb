@@ -10,7 +10,7 @@ module ApplicationHelper
   end
 
   def product_thumbnail_url(product_image = nil)
-    return url_for(product_image.product_image.variant(resize_to_fill: [800, 450])) if product_image
+    return root_url + url_for(product_image.product_image.variant(resize_to_fill: [800, 450])) if product_image
 
     ProductImage::NO_IMAGE_URL
   end
