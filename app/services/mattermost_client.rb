@@ -14,7 +14,7 @@ class MattermostClient
 
     def post(payload)
       client.post do |req|
-        req.url = WEBHOOK_URL
+        req.url WEBHOOK_URL
         req.headers['Content-Type'] = 'application/json'
         req.body = payload.to_json
       end
