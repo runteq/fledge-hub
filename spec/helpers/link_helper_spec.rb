@@ -8,7 +8,9 @@ RSpec.describe LinkHelper, type: :helper do
       let!(:text) { 'テキスト' }
       let!(:url) { 'http://example.com/hoge' }
       specify do
-        is_expected.to eq '<a target="_blank" rel="noopener noreferrer" href="http://example.com/hoge">テキスト</a>' # rubocop:disable Layout/LineLength
+        is_expected.to eq(
+          '<a target="_blank" rel="noopener noreferrer" href="http://example.com/hoge">テキスト</a>',
+        )
       end
     end
 
@@ -16,7 +18,9 @@ RSpec.describe LinkHelper, type: :helper do
       let!(:text) { nil }
       let!(:url) { 'http://example.com/hoge' }
       specify do
-        is_expected.to eq '<a target="_blank" rel="noopener noreferrer" href="http://example.com/hoge">http://example.com/hoge</a>' # rubocop:disable Layout/LineLength
+        is_expected.to eq(
+          '<a target="_blank" rel="noopener noreferrer" href="http://example.com/hoge">http://example.com/hoge</a>',
+        )
       end
     end
 

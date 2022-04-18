@@ -13,26 +13,29 @@ class ProductsController < ApplicationController
   end
 
   def new
-    @product = ProductForm.new
+    @product_form = ProductForm.new
   end
 
   def edit
-    @product = ProductForm.find(params[:id], current_user.id)
+    @product_form = ProductForm.find(params[:id], current_user.id)
   end
 
   def create
-    @product = ProductForm.new(product_params.merge(user_ids: [current_user.id]))
-    if @product.save
-      redirect_to new_product_product_image_path(@product), notice: 'サービスを投稿しました！'
+    @product_form = ProductForm.new(product_params.merge(user_ids: [current_user.id]))
+    if @product_form.save
+      product = @product_form.to_model
+      text = TwitterClient.posted_notification_text(product)
+      TweetForm.new(text: text, url: product_url(product)).save!
+      redirect_to new_product_product_image_path(@product_form), notice: 'サービスを投稿しました！'
     else
       render :new, status: :unprocessable_entity # 422errorを起こす
     end
   end
 
   def update
-    @product = ProductForm.find(params[:id], current_user.id)
-    if @product.update(product_params)
-      redirect_to product_path(@product), notice: 'データを更新しました！'
+    @product_form = ProductForm.find(params[:id], current_user.id)
+    if @product_form.update(product_params)
+      redirect_to product_path(@product_form), notice: 'データを更新しました！'
     else
       render :edit, status: :unprocessable_entity # 422errorを起こす
     end
