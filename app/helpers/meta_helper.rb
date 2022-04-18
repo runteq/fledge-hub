@@ -3,6 +3,7 @@ module MetaHelper
   def default_meta_tags
     {
       site: 'Fledge Hub',
+      title: 'Fledge Hub',
       reverse: true,
       charset: 'utf-8',
       description: '個人開発者のための 技術を検索できる開発サービス投稿サイト',
