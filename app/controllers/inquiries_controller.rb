@@ -13,7 +13,7 @@ class InquiriesController < ApplicationController
       if recaptcha_reply
         error_codes = recaptcha_reply['error-codes'].join(', ')
         Rails.logger.warn("
-          An inquiry from #{@inquiry_form.name} was denied because of a recaptcha error-codes: #{error_codes}
+          An inquiry from #{@inquiry_form.name} was denied because of recaptcha error-codes: #{error_codes}
         ")
       end
       render :new, status: :unprocessable_entity
