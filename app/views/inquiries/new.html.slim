@@ -30,4 +30,5 @@
           | 必須
     = f.text_area :description, class: 'text-field h-24'
   .form-group
+    = recaptcha_v3(action: 'inquiry', site_key: Recaptcha.configuration.site_key)
     = f.submit '送信する', class: 'btn btn-indigo'
