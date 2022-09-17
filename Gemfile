@@ -40,6 +40,7 @@ gem 'valid_email2'
 gem 'date_validator'
 gem 'validate_url'
 gem 'active_storage_validations'
+gem 'recaptcha'
 
 # AWS
 gem 'aws-sdk-s3', require: false
