@@ -5,13 +5,16 @@ class InquiriesController < ApplicationController
 
   def create
     @inquiry_form = InquiryForm.new(inquiry_params)
-    recaptcha_valid = verify_recaptcha(action: 'inquiry', minimum_score: 0.3, secret_key: Recaptcha.configuration.secret_key)
+    recaptcha_valid = verify_recaptcha(action: 'inquiry', minimum_score: 0.3,
+                                       secret_key: Recaptcha.configuration.secret_key)
     if recaptcha_valid && @inquiry_form.save
       redirect_to root_path, notice: '送信しました！'
     else
       if recaptcha_reply
         error_codes = recaptcha_reply['error-codes'].join(', ')
-        Rails.logger.warn("An inquiry from #{@inquiry_form.name} was denied because of a recaptcha error-codes: #{error_codes}")
+        Rails.logger.warn("
+          An inquiry from #{@inquiry_form.name} was denied because of a recaptcha error-codes: #{error_codes}
+        ")
       end
       render :new, status: :unprocessable_entity
     end
