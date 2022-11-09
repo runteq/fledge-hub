@@ -13,6 +13,9 @@
   .btn {
     @apply inline-block cursor-pointer no-underline text-sm py-3 px-4 leading-none rounded hover:border-transparent hover:opacity-100;
   }
+  .btn:disabled {
+    @apply cursor-default bg-gray-200 text-gray-400 hover:opacity-100;
+  }
 
   .btn-indigo {
     @apply bg-indigo-700 text-white hover:opacity-75;
