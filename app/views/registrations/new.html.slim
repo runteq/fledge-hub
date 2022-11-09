@@ -25,4 +25,11 @@
     = link_to '利用規約', terms_path
     | に同意する
   .form-group
-    = f.submit 'ユーザー登録', class: 'btn btn-indigo'
+    = f.submit 'ユーザー登録', class: 'btn btn-indigo', disabled: true
+
+javascript:
+  const acceptable = document.getElementsByName('acceptable')[0]
+  acceptable.addEventListener("change", () => {
+    const submit = document.getElementsByName('commit')[0]
+    submit.disabled = !acceptable.checked
+  })
