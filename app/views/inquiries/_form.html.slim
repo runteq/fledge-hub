@@ -28,7 +28,7 @@
           p.required
             | 必須
       = f.text_area :description, class: 'text-field h-24'
+    = turbo_frame_tag 'recaptcha' do
+      = recaptcha_v3(action: 'inquiry', site_key: Recaptcha.configuration.site_key)
     .form-group
-      = turbo_frame_tag 'recaptcha' do
-        = recaptcha_v3(action: 'inquiry', site_key: Recaptcha.configuration.site_key, turbolinks: true)
       = f.submit '送信する', class: 'btn btn-indigo'

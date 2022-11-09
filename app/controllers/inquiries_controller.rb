@@ -7,8 +7,9 @@ class InquiriesController < ApplicationController
 
   def create
     @inquiry_form = InquiryForm.new(inquiry_params)
-    recaptcha_valid = verify_recaptcha_v3('inquiry') || verify_recaptcha_v2
-    if @inquiry_form.valid? && recaptcha_valid
+    @recaptcha_valid = verify_recaptcha_v3('inquiry') || verify_recaptcha_v2
+
+    if @recaptcha_valid && @inquiry_form.valid?
       @inquiry_form.save
       redirect_to root_path, notice: '送信しました！'
     else
