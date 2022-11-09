@@ -4,7 +4,7 @@ class ProductsController < ApplicationController
   def index
     @q = Product.order(created_at: :desc).ransack(params[:q])
     result = @q.result(distinct: true).includes_query
-    @pagy, @products = pagy(result)
+    @pagy, @products = pagy(result, items: 29)
   end
 
   def show

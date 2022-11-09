@@ -1,11 +1,12 @@
 class UsersController < ApplicationController
   def index
-    @users = User.active
-                 .joins(:user_products)
-                 .with_attached_avatar
-                 .select('users.*, COUNT(user_products.id) AS count_of_products')
-                 .group(:id)
-                 .order(created_at: :desc)
+    users = User.active
+                .joins(:user_products)
+                .with_attached_avatar
+                .select('users.*, COUNT(user_products.id) AS count_of_products')
+                .group(:id)
+                .order(created_at: :desc)
+    @pagy, @users = pagy(users, items: 30)
   end
 
   def show
