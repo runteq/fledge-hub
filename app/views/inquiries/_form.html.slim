@@ -1,0 +1,34 @@
+= turbo_frame_tag inquiry_form do |f|
+  = form_with model: inquiry_form, url: inquiry_path, class: 'form' do |f|
+    - if f.object.errors.any?
+      ul
+        - @inquiry_form.errors.full_messages.each do |message|
+          li= message
+    .form-group
+      .form-label
+        .flex.items-center
+          = f.label :name
+          p.required
+            | 必須
+      = f.text_field :name, required: true, class: 'text-field'
+    .form-group
+      = f.label :email, class: 'form-label'
+      = f.email_field :email, class: 'text-field'
+    .form-group
+      .form-label
+        .flex.items-center
+          = f.label :about
+          p.required
+            | 必須
+      = f.select :about, ['ご意見・ご要望', '不具合・バグ', 'その他'], { required: true, prompt: 'お問い合わせ内容を選択してください' }, class: 'select-box'
+    .form-group
+      .form-label
+        .flex.items-center
+          = f.label :description
+          p.required
+            | 必須
+      = f.text_area :description, class: 'text-field h-24'
+    .form-group
+      = turbo_frame_tag 'recaptcha' do
+        = recaptcha_v3(action: 'inquiry', site_key: Recaptcha.configuration.site_key, turbolinks: true)
+      = f.submit '送信する', class: 'btn btn-indigo'

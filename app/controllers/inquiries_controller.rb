@@ -1,12 +1,13 @@
 class InquiriesController < ApplicationController
+  include VerifyRecaptcha
+
   def new
     @inquiry_form = InquiryForm.new
   end
 
   def create
     @inquiry_form = InquiryForm.new(inquiry_params)
-    recaptcha_valid = verify_recaptcha(action: 'inquiry', minimum_score: 0.3,
-                                       secret_key: Recaptcha.configuration.secret_key)
+    recaptcha_valid = verify_recaptcha_v3('inquiry') || verify_recaptcha_v2
     if @inquiry_form.valid? && recaptcha_valid
       @inquiry_form.save
       redirect_to root_path, notice: '送信しました！'
