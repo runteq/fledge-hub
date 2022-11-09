@@ -187,7 +187,7 @@ RSpec.describe ProductForm do
       end
       it 'エラーメッセージを持つ' do
         subject
-        expect(form.errors.messages).to eq({ released_on: ['を入力してください'] })
+        expect(form.errors.messages).to eq({ released_on: %w[を入力してください は日付ではありません] })
       end
     end
 
