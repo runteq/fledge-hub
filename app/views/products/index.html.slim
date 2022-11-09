@@ -1,4 +1,6 @@
 - if @products.present?
+  = sort_link(@q, :released_on, 'リリース日順')
+
   .my-3.grid.md:grid-cols-3.grid-cols-1.gap-x-8.gap-y-12
     = render(ProductComponent.with_collection(@products, ad_flag: true))
 
