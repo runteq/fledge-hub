@@ -1,5 +1,5 @@
 = turbo_frame_tag inquiry_form do |f|
-  = form_with model: inquiry_form, url: inquiry_path, class: 'form', data: { turbo: false } do |f|
+  = form_with model: inquiry_form, url: inquiry_path, class: 'form' do |f|
     - if f.object.errors.any?
       ul
         - @inquiry_form.errors.full_messages.each do |message|
