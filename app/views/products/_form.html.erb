@@ -26,7 +26,7 @@
         <span class='required'>必須</span>
       </div>
     </div>
-    <%= f.date_field :released_on, required: true, class: 'text-field' %>
+    <%= f.date_field :released_on, required: true, min: '2000-01-01', max: Time.zone.today, class: 'text-field' %>
   </div>
 
   <div class='form-group'>

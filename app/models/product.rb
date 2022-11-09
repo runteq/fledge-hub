@@ -29,9 +29,11 @@ class Product < ApplicationRecord
 
   validates :title, presence: true, length: { maximum: 100 }
   validates :url, url: { allow_blank: true, schemes: %w[https http] }, length: { maximum: 500 }
-  validates :source_url, presence: true, url: { allow_blank: true, schemes: %w[https http] },
+  validates :source_url, presence: true,
+                         url: { allow_blank: true, schemes: %w[https http] },
                          length: { maximum: 500 }
-  validates :released_on, presence: true
+  validates :released_on, presence: true,
+                          date: { before_or_equal_to: proc { Time.zone.today }, after: Date.parse('2000-01-01') }
   validates :summary, length: { maximum: 500 }
   validates :product_type_id, presence: true
   validates :product_category_id, presence: true
