@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe ProductForm do
-  def create_form(product)
+  def build_form(product)
     # .findの後の状態
     ProductForm.new(
       id: product.id,
@@ -91,6 +91,10 @@ RSpec.describe ProductForm do
                           .and change(UserProduct, :count).by(1)
                           .and change(ProductTechnology, :count).by(1)
       end
+      it 'formのidに product#id を適用する' do
+        subject
+        expect(form.id).to eq(Product.last.id)
+      end
     end
 
     describe 'メディアについて' do
@@ -157,14 +161,14 @@ RSpec.describe ProductForm do
 
   describe '#to_model' do
     subject { form.to_model }
-    let!(:form) { create_form(create(:product)) }
+    let!(:form) { build_form(create(:product)) }
 
     it { is_expected.to be_a Product }
   end
 
   describe '#update' do
     subject { form.update(**attributes) }
-    let!(:form) { create_form(product) }
+    let!(:form) { build_form(product) }
     let!(:user) { create(:user) }
     let!(:product) { create(:product, title: '旧タイトル', users: [user]) }
 
@@ -307,7 +311,7 @@ RSpec.describe ProductForm do
 
   describe '#media' do
     subject { form.media }
-    let!(:form) { create_form(product) }
+    let!(:form) { build_form(product) }
     let!(:product) { create(:product) }
 
     context '該当IDのProductMediumが既に存在するとき' do

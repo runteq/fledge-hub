@@ -14,7 +14,7 @@ class ProductForm
   attribute :user_ids, default: []
   attribute :media_attributes, default: []
 
-  validates :id, presence: true, if: -> { product.persisted? }
+  validates :id, presence: true, if: :persisted?
   validates :title, presence: true, length: { maximum: 100 }
   validates :url, url: { allow_blank: true, schemes: %w[https http] }, length: { maximum: 500 }
   validates :source_url, presence: true, url: { allow_blank: true, schemes: %w[https http] },
@@ -25,7 +25,7 @@ class ProductForm
   validates :summary, length: { maximum: 500 }
   validates :product_category_id, presence: true
   validates :product_type_id, presence: true
-  validates :user_ids, presence: true, if: -> { product.new_record? }
+  validates :user_ids, presence: true, if: :new_record?
   validate :url_validity
   validate :media_validity
 
@@ -55,7 +55,7 @@ class ProductForm
         {
           technology_ids: product.technology_ids,
           user_ids: product.user_ids,
-          # #mediaで使うidしか使用しない↓
+          # created_at, updated_at は使わない
           media_attributes: product.media.map(&:attributes),
         },
       )
@@ -83,14 +83,18 @@ class ProductForm
   end
 
   def media
-    media_attributes.map(&:deep_symbolize_keys).map do |attributes|
+    return @media if defined?(@media)
+
+    present_media = product.media.index_by(&:id)
+    @media = media_attributes.map(&:deep_symbolize_keys).map do |attributes|
       if attributes[:id].present?
-        medium = product.media.find(attributes[:id])
+        medium = present_media[attributes[:id].to_i]
         medium.assign_attributes(**attributes.slice(:title, :url))
         medium
       else
         # product.mediaでは取得できないようにする
-        ProductMedium.new(**attributes, product: product)
+        product.media.build(**attributes)
+        # ProductMedium.new(**attributes, product: product)
       end
     end
   end
@@ -128,6 +132,7 @@ class ProductForm
   rescue SocketError => e
     raise e
   rescue StandardError
+    # OGPが拾えなかった場合も、処理を完了させるためにraiseしないようにする
     ExceptionNotifier.notify_exception(e)
     nil
   end
