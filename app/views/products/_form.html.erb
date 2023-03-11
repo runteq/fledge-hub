@@ -69,6 +69,7 @@
   </div>
   <div class='form-group'>
     <%= f.label :technology_ids, class: 'form-label' %>
+    <%= render 'products/multiple_selector', all_object_hash: Technology.order(:id).pluck(:id, :name).to_h, selected_ids: f.object.technology_ids %>
     （commandキーを押しながら複数選択可能）
     <%= f.select :technology_ids, Technology.order(:id).pluck(:name, :id), { include_blank: 'なし' }, { multiple: true, class: 'text-field' } %>
     <p class="mt-1">リクエストは<%= link_to 'お問い合わせフォーム', inquiry_path %>からお願いします。</p>

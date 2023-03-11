@@ -1,0 +1,70 @@
+<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+<div class="appearance-none block w-full bg-white text-gray-700 border border-gray-300 rounded"
+     x-data="{
+            search: '',
+            showSelector: false,
+            selected: <%= all_object_hash.slice(*selected_ids).to_json %>,
+            options: [],
+            clearOpts() {
+                this.search = '';
+                this.showSelector = false;
+                this.options = []
+            },
+            select(id, name) {
+                this.selected[id] = name;
+                this.clearOpts();
+                $dispatch('selected', Object.keys(this.selected));
+            },
+            remove(id) {
+                delete this.selected[id]
+                $dispatch('selected', Object.keys(this.selected));
+            },
+            goSearch() {
+                if (this.search) {
+                    this.options = <%= all_object_hash.to_json %>;
+                    this.showSelector = true;
+                } else {
+                    this.showSelector = false;
+                }
+            },
+        }">
+    <div class="relative bg-white rounded-md p-2 flex gap-1 flex-wrap" @click="$refs.search_input.focus()"
+         @click.outside="showSelector=false">
+        <template x-for="(name, id) in selected">
+            <div class="bg-indigo-100 rounded-md flex items-center">
+                <div class="px-1 pl-2" x-text="name"></div>
+                <div @click="remove(id)"
+                     class="px-1 pr-2 select-none rounded-r-md cursor-pointer hover:bg-magma-orange-clear">
+                    <svg width="9" height="9" viewBox="0 0 14 14" stroke="#777" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12.5745 1L1 12.5745" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M1.00024 1L12.5747 12.5745" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+            </div>
+        </template>
+        <div class="flex-1">
+            <input type="text" x-model="search" x-ref="search_input"
+                   @input.debounce.400ms="goSearch();" placeholder="Search"
+                   class="w-full border-0 focus:border-0 focus:outline-none focus:ring-0 py-1 px-0">
+            <div x-show="showSelector" class="absolute left-0 top-11 z-10 bg-white rounded border overflow-hidden">
+                <div class="p-2 space-y-1">
+                    <template x-for="(name, id) in options">
+                        <div>
+                            <template x-if="!selected[id]">
+                                <div @click="select(id, name)"
+                                     class="cursor-pointer xp-1 hover:bg-indigo-50"
+                                     x-text="name"></div>
+                            </template>
+                        </div>
+                    </template>
+                    <template x-if="options.length === 0">
+                        <div class="text-gray-500">
+                            No result
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
