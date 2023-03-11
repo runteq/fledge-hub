@@ -93,8 +93,7 @@ class ProductForm
         medium
       else
         # product.mediaでは取得できないようにする
-        product.media.build(**attributes)
-        # ProductMedium.new(**attributes, product: product)
+        ProductMedium.new(**attributes, product: product)
       end
     end
   end
