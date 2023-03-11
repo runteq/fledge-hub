@@ -1,3 +1,11 @@
+<% content_for :css do %>
+  <style type="text/css">
+    label input[type="checkbox"]:checked + span {
+      --tw-bg-opacity: 1;
+    }
+  </style>
+<% end %>
+
 <%= form_with model: @product_form, class: 'form' do |f| %>
   <% if f.object.errors.any? %>
     <ul>
@@ -33,6 +41,7 @@
     <%= f.label :url, class: 'form-label' %>
     <%= f.url_field :url, class: 'text-field' %>
   </div>
+
   <div class='form-group'>
     <div class='form-label'>
       <div style='flex items-center'>
@@ -43,10 +52,12 @@
     <%= f.url_field :source_url, class: 'text-field' %>
     GitHubなどのURL
   </div>
+
   <div class='form-group'>
     <%= f.label :summary, class: 'form-label' %>
     <%= f.text_area :summary, class: 'text-field h-24' %>
   </div>
+
   <div class='form-group'>
     <div class='form-group inline-flex w-1/2 px-1'>
       <div class='form-label'>
@@ -57,6 +68,7 @@
       </div>
       <%= f.select :product_type_id, ProductType.asc.pluck(:name, :id), { required: true, prompt: '選択してください' }, class: 'select-box' %>
     </div>
+
     <div class='form-group inline-flex w-1/2 px-1'>
       <div class='form-label'>
         <div class='flex items-center'>
@@ -67,11 +79,20 @@
       <%= f.select :product_category_id, ProductCategory.asc.pluck(:name, :id), { required: true, prompt: '選択してください' }, class: 'select-box' %>
     </div>
   </div>
+
   <div class='form-group'>
     <%= f.label :technology_ids, class: 'form-label' %>
-    （commandキーを押しながら複数選択可能）
-    <%= f.select :technology_ids, Technology.order(:id).pluck(:name, :id), { include_blank: 'なし' }, { multiple: true, class: 'text-field' } %>
-    <p class="mt-1">リクエストは<%= link_to 'お問い合わせフォーム', inquiry_path %>からお願いします。</p>
+    <div class='flex flex-wrap items-center gap-x-2 gap-y-1'>
+      <%= f.collection_check_boxes(:technology_ids, Technology.all, :id, :name) do |t| %>
+        <%= t.label do %>
+          <%= t.check_box(class: 'hidden') %>
+          <span class='btn bg-gray-300 bg-opacity-25 hover:opacity-70'>
+            <%= t.text %>
+          </span>
+        <% end %>
+      <% end %>
+    </div>
+    <p class="mt-2">リクエストは<%= link_to 'お問い合わせフォーム', inquiry_path %>からお願いします。</p>
   </div>
 
   <div id='js-media-form'>
