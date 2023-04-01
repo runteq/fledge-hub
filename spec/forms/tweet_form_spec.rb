@@ -32,10 +32,10 @@ RSpec.describe TweetForm do
         before do
           allow(Rails).to receive(:env).and_return(ActiveSupport::StringInquirer.new('production'))
         end
-        xit 'ツイートする' do
+        it 'ツイートする' do
           client_double = instance_double(TwitterClient)
-          allow(TwitterClient).to receive(:client).and_return(client_double)
-          expect(client_double).to receive(:update).with('テキスト')
+          allow(TwitterClient).to receive(:new).and_return(client_double)
+          expect(client_double).to receive(:post).with("テキスト\nhttps://example.com")
           subject
         end
       end
@@ -44,7 +44,7 @@ RSpec.describe TweetForm do
           allow(Rails).to receive(:env).and_return(ActiveSupport::StringInquirer.new('development'))
         end
         it 'ツイートしない' do
-          expect(TwitterClient).to_not receive(:client)
+          expect(TwitterClient).to_not receive(:new)
           subject
         end
         it 'loggerに出力する' do

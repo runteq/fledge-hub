@@ -10,7 +10,7 @@ class TweetForm
     validate!
 
     if Rails.env.production?
-      TwitterClient.client.update("#{text}\n#{url}")
+      TwitterClient.new.post("#{text}\n#{url}")
     else
       Rails.logger.info "Post to twitter.\n#{text}"
     end

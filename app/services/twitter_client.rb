@@ -3,18 +3,15 @@ class TwitterClient
 
   def initialize
     self.default_url_options = ApplicationMailer.default_url_options
+    @client = Twitter::REST::Client.new do |config|
+      config.consumer_key = Rails.application.credentials.config[:twitter][:consumer_key]
+      config.consumer_secret = Rails.application.credentials.config[:twitter][:consumer_secret]
+      config.access_token = Rails.application.credentials.config[:twitter][:access_token]
+      config.access_token_secret = Rails.application.credentials.config[:twitter][:access_token_secret]
+    end
   end
 
   class << self
-    def client
-      Twitter::REST::Client.new do |config|
-        config.consumer_key = Rails.application.credentials.config[:twitter][:consumer_key]
-        config.consumer_secret = Rails.application.credentials.config[:twitter][:consumer_secret]
-        config.access_token = Rails.application.credentials.config[:twitter][:access_token]
-        config.access_token_secret = Rails.application.credentials.config[:twitter][:access_token_secret]
-      end
-    end
-
     # ツイートするテキストを整形する
     def posted_notification_text(product)
       names_text = product.users.map do |u|
@@ -24,5 +21,9 @@ class TwitterClient
       summary = product.summary[0..summary_length]
       "#FledgeHub に新規投稿されました！「#{product.title}」by #{names_text}\n#{summary}"
     end
+  end
+
+  def post(text)
+    @client.update(text)
   end
 end
