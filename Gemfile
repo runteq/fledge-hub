@@ -24,7 +24,6 @@ gem 'view_component'
 gem 'ransack'
 gem 'active_decorator'
 gem 'sorcery'
-gem 'faraday'
 gem 'pagy'
 gem 'config'
 gem 'mechanize'
@@ -33,7 +32,11 @@ gem 'meta-tags'
 gem 'exception_notification', github: 'smartinez87/exception_notification'
 gem 'httparty'
 gem 'rambulance'
-gem 'twitter'
+
+# 外部サービス
+gem 'faraday'
+gem 'faraday_middleware' # Oauthのため
+gem 'simple_oauth'
 
 # バリデーション
 gem 'valid_email2'
