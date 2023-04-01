@@ -24,7 +24,7 @@ class ProductsController < ApplicationController
     @product_form = ProductForm.new(product_params.merge(user_ids: [current_user.id]))
     if @product_form.save
       product = @product_form.to_model
-      text = External::TwitterClient.posted_notification_text(product)
+      text = TweetForm.posted_notification_text(product)
       TweetForm.new(text: text, url: product_url(product)).save!
       redirect_to new_product_product_image_path(@product_form), notice: 'サービスを投稿しました！'
     else

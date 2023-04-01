@@ -19,18 +19,6 @@ module External
       end
     end
 
-    class << self
-      # ツイートするテキストを整形する
-      def posted_notification_text(product)
-        names_text = product.users.map do |u|
-          u.twitter_name ? "@#{u.twitter_name}" : u.display_name
-        end.join(' ')
-        summary_length = 110 - (product.title.length + names_text.length + 26) # 余裕を持って文字数調整
-        summary = product.summary[0..summary_length]
-        "#FledgeHub に新規投稿されました！「#{product.title}」by #{names_text}\n#{summary}"
-      end
-    end
-
     def post(text)
       payload = { text: text }.to_json
       @client.post do |request|
