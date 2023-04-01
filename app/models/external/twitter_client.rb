@@ -30,12 +30,12 @@ module External
         "#FledgeHub に新規投稿されました！「#{product.title}」by #{names_text}\n#{summary}"
       end
     end
-  end
 
-  def post(text)
-    payload = { text: text }.to_json
-    @client.post do |request|
-      request.body = payload
+    def post(text)
+      payload = { text: text }.to_json
+      @client.post do |request|
+        request.body = payload
+      end
     end
   end
 end
