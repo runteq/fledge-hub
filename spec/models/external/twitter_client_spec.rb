@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe TwitterClient do
+RSpec.describe External::TwitterClient do
   describe '.posted_notification_text' do
-    subject { TwitterClient.posted_notification_text(product) }
+    subject { External::TwitterClient.posted_notification_text(product) }
     let!(:product) { create(:product, title: 'プロダクト名', summary: '*' * 200) }
     let!(:user) { create(:user, display_name: 'Fledge Hub') }
     let!(:_user_product) { create(:user_product, user: user, product: product) }

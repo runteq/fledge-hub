@@ -36,7 +36,7 @@ RSpec.describe MattermostNotificationForm do
           allow(Rails).to receive(:env).and_return(ActiveSupport::StringInquirer.new('production'))
         end
         it 'Mattermostに通知する' do
-          expect(MattermostClient).to receive(:post).with(
+          expect(External::MattermostClient).to receive(:post).with(
             { username: '通知アカウント名', channel: 'チャンネル', text: 'テキスト' },
           )
           subject
@@ -47,7 +47,7 @@ RSpec.describe MattermostNotificationForm do
           allow(Rails).to receive(:env).and_return(ActiveSupport::StringInquirer.new('development'))
         end
         it 'Mattermostに通知しない' do
-          expect(MattermostClient).to_not receive(:post).with(
+          expect(External::MattermostClient).to_not receive(:post).with(
             { username: '通知アカウント名', channel: 'チャンネル', text: 'テキスト' },
           )
           subject

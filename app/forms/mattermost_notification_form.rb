@@ -19,7 +19,7 @@ class MattermostNotificationForm
     post_payload = { username: username, channel: channel, text: text }
 
     if Rails.env.production?
-      MattermostClient.post(post_payload)
+      External::MattermostClient.post(post_payload)
     else
       Rails.logger.info "Message to Mattermost.\n#{post_payload}"
     end
