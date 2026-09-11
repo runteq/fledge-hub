@@ -1,16 +1,19 @@
 class InquiriesController < ApplicationController
+  include VerifyRecaptcha
+
   def new
     @inquiry_form = InquiryForm.new
   end
 
   def create
     @inquiry_form = InquiryForm.new(inquiry_params)
-    recaptcha_valid = verify_recaptcha(action: 'inquiry', minimum_score: 0.3,
-                                       secret_key: Recaptcha.configuration.secret_key)
-    if @inquiry_form.valid? && recaptcha_valid
+    @recaptcha_valid = verify_recaptcha_v3('inquiry') || verify_recaptcha_v2(@inquiry_form)
+
+    if @recaptcha_valid && @inquiry_form.valid?
       @inquiry_form.save
-      redirect_to root_path, notice: '送信しました！'
+      redirect_to notice: '送信しました！'
     else
+
       if recaptcha_reply&.dig('error-codes')
         error_codes = recaptcha_reply['error-codes'].join(', ')
         Rails.logger.warn("
@@ -18,7 +21,7 @@ class InquiriesController < ApplicationController
         ")
         flash.now[:alert] = error_codes
       end
-      render :new, status: :unprocessable_entity
+      # render :new, status: :unprocessable_entity
     end
   end
 

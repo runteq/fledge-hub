@@ -1,0 +1,11 @@
+<%= turbo_stream.replace dom_id(@inquiry_form), partial: 'inquiries/form', locals: { inquiry_form: @inquiry_form } %>
+
+<% unless @recaptcha_valid %>
+  <%= turbo_stream.replace 'recaptcha' do %>
+    <div
+      class='mb-2'
+      id='recaptchaV2'
+      data-controller='recaptcha-v2'
+      data-recaptcha-v2-site-key-value="<%= Rails.application.credentials.recaptcha_v2[:secret_key] %>"></div>
+  <% end %>
+<% end %>
